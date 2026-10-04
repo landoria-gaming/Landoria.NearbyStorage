@@ -30,15 +30,23 @@ namespace Landoria.SuperStorage
                 List<Container> chests = StorageLocator.Nearby(player);
                 Container current = StorageLocator.CurrentContainer();
                 float radius = Plugin.Instance.Settings.Radius.Value;
-                if (chests.Count > 0)
-                {
-                    GroundStack.RequestOwnership(player, radius);
+                var sourceNames = new HashSet<string>();
+                foreach (ItemDrop.ItemData item in player.GetInventory().GetAllItems())
+                    if (CanMove(item) && !player.IsItemEquiped(item)) sourceNames.Add(item.m_shared.m_name);
+                if (chests.Count > 0 && GroundStack.AddSourceNames(player, radius, sourceNames))
                     yield return new WaitForSeconds(0.35f);
-                }
 
                 foreach (Container chest in chests)
                 {
                     if (!StorageLocator.Eligible(chest, player, current, radius)) continue;
+                    bool hasMatch = false;
+                    foreach (ItemDrop.ItemData item in chest.GetInventory().GetAllItems())
+                    {
+                        if (!sourceNames.Contains(item.m_shared.m_name)) continue;
+                        hasMatch = true;
+                        break;
+                    }
+                    if (!hasMatch) continue;
                     if (chest == current)
                     {
                         InStackCall = true;
@@ -125,18 +133,22 @@ namespace Landoria.SuperStorage
     // Moves ground pickups directly to matching stacks in an accessible chest.
     internal static class GroundStack
     {
-        // Requests ownership before the transfer pass so one click can reach remote drops.
-        internal static void RequestOwnership(Player player, float radius)
+        // Collects nearby pickup types and requests ownership before the transfer pass.
+        internal static bool AddSourceNames(Player player, float radius, HashSet<string> names)
         {
+            bool found = false;
             foreach (ItemDrop drop in UnityEngine.Object.FindObjectsByType<ItemDrop>(FindObjectsSortMode.None))
             {
                 if (drop != null && !drop.IsPiece() && SuperStack.CanMove(drop.m_itemData) &&
                     (drop.transform.position - player.transform.position).sqrMagnitude <= radius * radius)
                 {
+                    found = true;
+                    names.Add(drop.m_itemData.m_shared.m_name);
                     ZNetView view = drop.GetComponent<ZNetView>();
                     if (view != null && view.IsValid() && !view.IsOwner()) drop.RequestOwn();
                 }
             }
+            return found;
         }
 
         // Scans ground pickups inside the configured player radius.
