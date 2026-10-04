@@ -8,7 +8,7 @@ Stack a selected inventory item into nearby chests, and craft from nearby chest 
 
 Open your inventory and hold Left Alt while clicking an item. That item, regardless of its type, is moved into nearby accessible chests that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same chest, then another matching chest. No chest needs to be open. **Place Stacks** keeps its normal Valheim behavior.
 
-Each chest that receives items gets one local chat line with the moved count, item name, chest type, and the nearest sign within 2 meters. If no sign is nearby, the line shows the chest's X/Z coordinates. If no matching chest exists, the item stays in your inventory and an on-screen message appears.
+Each chest that receives items gets one local chat line in the form `Item x amount → Sign`, using the nearest sign within 2 meters. If no sign is nearby, the line shows the chest type and its X/Z coordinates instead. If no matching chest exists, the item stays in your inventory and an on-screen message appears.
 
 ### Super Craft
 
