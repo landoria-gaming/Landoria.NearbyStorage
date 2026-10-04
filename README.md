@@ -18,7 +18,7 @@ Changes to this file reload automatically while the game is running. Deleting it
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| `SearchRadius` | `60` | Search radius in meters around the player for chests and ground items; accepts 1 to 120. |
+| `SearchRadius` | `60` | Search radius in meters around the player for chests and ground items; accepts 20 to 100. |
 
 ## Compatibility
 
