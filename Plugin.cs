@@ -45,6 +45,7 @@ namespace Landoria.SuperStorage
             CraftState.Reset();
             RecipeListRefreshPatch.Reset();
             TargetedStack.Reset();
+            RefuelContext.Reset();
             _harmony?.UnpatchSelf();
             _harmony = null;
             Instance = null;

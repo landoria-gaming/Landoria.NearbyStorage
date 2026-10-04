@@ -33,8 +33,9 @@ namespace Landoria.SuperStorage
             rect.anchorMax = new Vector2(0f, 1f);
             rect.pivot = new Vector2(0f, 1f);
             TextMeshProUGUI text = line.GetComponent<TextMeshProUGUI>();
-            text.font = _gui.m_containerName.font;
-            text.fontSharedMaterial = _gui.m_containerName.fontSharedMaterial;
+            text.font = _gui.m_recipeDecription.font;
+            text.fontSharedMaterial = _gui.m_recipeDecription.fontSharedMaterial;
+            text.fontStyle = FontStyles.Normal;
             text.fontSize = 18f;
             text.color = Color.white;
             text.alignment = TextAlignmentOptions.TopLeft;
@@ -79,7 +80,7 @@ namespace Landoria.SuperStorage
         private static bool EnsureRoot()
         {
             InventoryGui gui = InventoryGui.instance;
-            if (gui == null || gui.m_inventoryRoot == null || gui.m_containerName == null) return false;
+            if (gui == null || gui.m_inventoryRoot == null || gui.m_recipeDecription == null) return false;
             if (_root != null && _gui == gui) return true;
             Dispose();
             _gui = gui;
