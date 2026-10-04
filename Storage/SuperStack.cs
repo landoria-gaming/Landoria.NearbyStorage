@@ -81,6 +81,13 @@ namespace Landoria.SuperStorage
             if (Running) _moved += Mathf.Max(0, amount);
         }
 
+        // Keeps single-slot gear, weapons, and tools out of Super Stack.
+        internal static bool CanMove(ItemDrop.ItemData item)
+        {
+            return item?.m_shared != null && item.m_shared.m_maxStackSize > 1 &&
+                !item.m_shared.m_questItem;
+        }
+
         // Suppresses rejected or expired native responses from this pass.
         internal static bool AllowResponse(Container chest, bool granted)
         {
@@ -116,7 +123,7 @@ namespace Landoria.SuperStorage
         {
             foreach (ItemDrop drop in UnityEngine.Object.FindObjectsByType<ItemDrop>(FindObjectsSortMode.None))
             {
-                if (drop != null && !drop.IsPiece() &&
+                if (drop != null && !drop.IsPiece() && SuperStack.CanMove(drop.m_itemData) &&
                     (drop.transform.position - player.transform.position).sqrMagnitude <= radius * radius)
                 {
                     ZNetView view = drop.GetComponent<ZNetView>();
@@ -138,8 +145,7 @@ namespace Landoria.SuperStorage
             chestView.ClaimOwnership();
             foreach (ItemDrop drop in UnityEngine.Object.FindObjectsByType<ItemDrop>(FindObjectsSortMode.None))
             {
-                if (drop == null || drop.IsPiece() || drop.m_itemData?.m_shared == null ||
-                    drop.m_itemData.m_shared.m_questItem ||
+                if (drop == null || drop.IsPiece() || !SuperStack.CanMove(drop.m_itemData) ||
                     (drop.transform.position - player.transform.position).sqrMagnitude > radius * radius)
                 {
                     continue;
@@ -228,27 +234,28 @@ namespace Landoria.SuperStorage
         }
     }
 
-    // Replaces only this pass's per-chest messages with a moved-item count.
+    // Keeps vanilla Stack All for normal clicks, but filters Super Stack sources.
     [HarmonyPatch(typeof(Inventory), nameof(Inventory.StackAll))]
     internal static class StackCountPatch
     {
-        // Disables vanilla's per-call message and remembers the chest's old count.
-        private static void Prefix(Inventory __instance, Inventory fromInventory,
-            ref bool message, out int __state)
+        private static bool Prefix(Inventory __instance, Inventory fromInventory, ref int __result)
         {
-            __state = -1;
             if (!SuperStack.InStackCall || Player.m_localPlayer == null ||
-                fromInventory != Player.m_localPlayer.GetInventory()) return;
-            __state = __instance.CountItems(null);
-            message = false;
-        }
+                fromInventory != Player.m_localPlayer.GetInventory()) return true;
 
-        // Restores the actual moved count for vanilla effects and the final sum.
-        private static void Postfix(Inventory __instance, int __state, ref int __result)
-        {
-            if (__state < 0) return;
-            __result = Mathf.Max(0, __instance.CountItems(null) - __state);
+            int before = __instance.CountItems(null);
+            var items = new List<ItemDrop.ItemData>(fromInventory.GetAllItems());
+            foreach (ItemDrop.ItemData item in items)
+            {
+                if (!SuperStack.CanMove(item) || !__instance.ContainsItemByName(item.m_shared.m_name) ||
+                    Player.m_localPlayer.IsItemEquiped(item)) continue;
+                if (__instance.AddItem(item)) fromInventory.RemoveItem(item);
+            }
+
+            __result = Mathf.Max(0, __instance.CountItems(null) - before);
             SuperStack.AddMoved(__result);
+            Game.instance.IncrementPlayerStat(PlayerStatType.PlaceStacks);
+            return false;
         }
     }
 
