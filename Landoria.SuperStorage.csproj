@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Landoria.SuperStorage</RootNamespace>
+    <AssemblyName>Landoria.SuperStorage</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <ValheimGamePath Condition="'$(ValheimGamePath)' == ''">$(VALHEIM_PATH)</ValheimGamePath>
+    <BepInExPath Condition="'$(BepInExPath)' == ''">$(BEPINEX_PATH)</BepInExPath>
+    <ValheimManagedPath Condition="'$(ValheimManagedPath)' == ''">$(ValheimGamePath)/valheim_Data/Managed</ValheimManagedPath>
+    <ModDeployPath Condition="'$(ModDeployPath)' == ''">$(BepInExPath)/plugins/Landoria.SuperStorage</ModDeployPath>
+    <DeployOnBuild Condition="'$(DeployOnBuild)' == ''">false</DeployOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="HarmonyValidator" Version="1.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BepInEx"><HintPath>$(BepInExPath)/core/BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(BepInExPath)/core/0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="assembly_valheim"><HintPath>$(ValheimManagedPath)/assembly_valheim.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="assembly_utils"><HintPath>$(ValheimManagedPath)/assembly_utils.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="assembly_guiutils"><HintPath>$(ValheimManagedPath)/assembly_guiutils.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(ValheimManagedPath)/UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ValheimManagedPath)/UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(ValheimManagedPath)/UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.TextMeshPro"><HintPath>$(ValheimManagedPath)/Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <Target Name="ValidateModPaths" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(ValheimManagedPath)/assembly_valheim.dll')" Text="Set VALHEIM_PATH to the Valheim game root." />
+    <Error Condition="!Exists('$(BepInExPath)/core/BepInEx.dll')" Text="Set BEPINEX_PATH to a BepInEx profile." />
+  </Target>
+  <Target Name="DeployMod" AfterTargets="Build" Condition="'$(Configuration)' == 'Release' and '$(DeployOnBuild)' == 'true'">
+    <MakeDir Directories="$(ModDeployPath)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModDeployPath)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

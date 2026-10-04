@@ -1,0 +1,14 @@
+{
+  "name": "SuperStorage",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/landoria-gaming/Landoria.SuperStorage",
+  "description": "Stack nearby inventory and ground items into chests, and craft from nearby chest supplies.",
+  "dependencies": ["denikson-BepInExPack_Valheim-5.4.2351"],
+  "categories": [
+    "deep-north-update",
+    "ai-generated",
+    "mods",
+    "client-side",
+    "utility"
+  ]
+}
