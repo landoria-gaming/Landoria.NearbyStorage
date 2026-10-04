@@ -6,7 +6,7 @@ Stack nearby inventory and ground items into chests, and craft from nearby chest
 
 ### Super Stack
 
-With a chest open, hold Left Alt and click **Place Stacks**. Non-equipable, non-consumable items in your inventory and pickup items on the ground are sent to nearby chests that already contain the same item type. Raw fish can be stacked; food and potions that can be consumed directly stay where they are, along with weapons, tools, armor, shields, ammunition, utility items, and trinkets. A full stack can continue in a free chest slot. Items without a matching chest stay where they are.
+With a chest open, hold Left Alt and click **Place Stacks**. Non-equipable, non-consumable items and raspberries in your inventory and pickup items on the ground are sent to nearby chests that already contain the same item type. Raw fish can be stacked; other food and potions that can be consumed directly stay where they are, along with weapons, tools, armor, shields, ammunition, utility items, and trinkets. A full stack can continue in a free chest slot. Items without a matching chest stay where they are.
 
 ### Super Craft
 
