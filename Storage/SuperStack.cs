@@ -81,7 +81,7 @@ namespace Landoria.SuperStorage
             if (Running) _moved += Mathf.Max(0, amount);
         }
 
-        // Leaves equipped gear categories and ammunition in place, including stackable ammo.
+        // Leaves equipment, ammunition, and food or potions in place.
         internal static bool CanMove(ItemDrop.ItemData item)
         {
             if (item?.m_shared == null || item.m_shared.m_questItem || item.IsEquipable())
@@ -90,6 +90,8 @@ namespace Landoria.SuperStorage
             switch (item.m_shared.m_itemType)
             {
                 case ItemDrop.ItemData.ItemType.AmmoNonEquipable:
+                case ItemDrop.ItemData.ItemType.Consumable:
+                case ItemDrop.ItemData.ItemType.Fish:
                 case ItemDrop.ItemData.ItemType.Hands:
                 case ItemDrop.ItemData.ItemType.Attach_Atgeir:
                 case ItemDrop.ItemData.ItemType.None:
