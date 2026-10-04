@@ -106,6 +106,9 @@ namespace Landoria.SuperStorage
             }
             source.RemoveItem(_item, moved);
             _moved += moved;
+            InventoryGui gui = InventoryGui.instance;
+            if (gui != null)
+                gui.m_moveItemEffects.Create(gui.transform.position, Quaternion.identity);
             ChestChatLog.Report(chest, _item, moved);
         }
 
