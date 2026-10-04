@@ -14,9 +14,9 @@ Super Stack shows one result message after the pass: the total number of items m
 
 Hold Left Ctrl and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. Hold **Shift + Left Ctrl** for Valheim's multicraft amount. Ground items are not used for crafting.
 
-```
-Private chests, ward-protected chests you cannot access, and chests in use by another player are excluded. Only built chest prefabs are scanned; vehicle storage, barrels, wardrobes, and world loot chests are excluded.
-```
+- Private chests are excluded.
+- Chests protected by a ward you cannot access, or in use by another player, are excluded.
+- Only built chest prefabs are scanned; vehicle storage, barrels, wardrobes, and world loot chests are excluded.
 
 ## Controls
 
