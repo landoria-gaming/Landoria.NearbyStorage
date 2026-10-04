@@ -28,7 +28,7 @@ namespace Landoria.SuperStorage
             Logger.LogInfo($"{PluginName} {PluginVersion} loaded.");
         }
 
-        // Keeps the button highlights in sync with the configured Super shortcut.
+        // Keeps the Craft highlight in sync with the configured Super shortcut.
         private void Update()
         {
             ConfigWatcher.Update();
@@ -41,7 +41,7 @@ namespace Landoria.SuperStorage
             ConfigWatcher.Dispose();
             ButtonHalo.Dispose();
             CraftState.Reset();
-            SuperStack.Reset();
+            TargetedStack.Reset();
             _harmony?.UnpatchSelf();
             _harmony = null;
             Instance = null;

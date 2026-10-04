@@ -15,11 +15,11 @@ namespace Landoria.SuperStorage
         internal ModConfigFile(ConfigFile config)
         {
             Radius = config.Bind("General", "SearchRadius", DefaultRadius,
-                new ConfigDescription("Radius around the player for nearby chests and ground items, in meters.",
+                new ConfigDescription("Radius around the player for nearby chests, in meters.",
                     new AcceptableValueRange<float>(20f, 100f)));
             SuperActionShortcut = config.Bind("Controls", "SuperActionShortcut",
                 new KeyboardShortcut(KeyCode.LeftAlt),
-                "Hold this shortcut while clicking Place Stacks or Craft to use the Super action.");
+                "Hold this shortcut while clicking an inventory item or Craft to use the Super action.");
         }
 
         internal void RestoreDefaults(ConfigFile config)

@@ -3,14 +3,13 @@ using UnityEngine.UI;
 
 namespace Landoria.SuperStorage
 {
-    // Tints Valheim's own button_glow sprite for the two Super actions.
+    // Tints Valheim's own button_glow sprite for Super Craft.
     internal static class ButtonHalo
     {
-        private static Image _stack;
         private static Image _craft;
         private static Sprite _glowSprite;
 
-        // Updates both highlights from the current UI and keyboard state.
+        // Updates the Craft highlight from the current UI and keyboard state.
         internal static void Update()
         {
             bool active = InventoryGui.IsVisible() && Player.m_localPlayer != null &&
@@ -22,21 +21,17 @@ namespace Landoria.SuperStorage
                 return;
             }
 
-            Set(ref _stack, gui.m_stackAllButton, active && gui.IsContainerOpen());
             Set(ref _craft, gui.m_craftButton, active && gui.m_craftButton.interactable);
         }
 
         internal static void Clear()
         {
-            if (_stack != null) _stack.enabled = false;
             if (_craft != null) _craft.enabled = false;
         }
 
         internal static void Dispose()
         {
-            if (_stack != null) Object.Destroy(_stack.gameObject);
             if (_craft != null) Object.Destroy(_craft.gameObject);
-            _stack = null;
             _craft = null;
             _glowSprite = null;
         }
