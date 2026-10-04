@@ -19,9 +19,3 @@ Changes to this file reload automatically while the game is running. Deleting it
 | Setting | Default | Description |
 | --- | --- | --- |
 | `SearchRadius` | `60` | Search radius in meters around the player for chests and ground items; accepts 20 to 100. |
-
-## Compatibility
-
-This is a client-side BepInEx mod. Other players and the server do not need it. Multiplayer chest changes are handled on a best-effort basis; a craft is silently cancelled if supplies are insufficient at the final check. Unloaded chests are outside the search. The mod does not alter normal button actions when Left Ctrl is released.
-
-Valheim must be restarted after installing or updating the DLL.
