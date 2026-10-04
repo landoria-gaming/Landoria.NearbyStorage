@@ -32,3 +32,7 @@ Changes to this file reload automatically while the game is running. Deleting it
 | Setting | Default | Description |
 | --- | --- | --- |
 | `SearchRadius` | `60` | Search radius in meters around the player for chests and ground items; accepts 20 to 100. |
+
+## Contact
+
+Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.SuperStorage/issues).
