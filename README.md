@@ -6,7 +6,7 @@ Stack nearby inventory and ground items into chests, and craft from nearby chest
 
 ### Super Stack
 
-With a chest open, hold Left Ctrl and click **Place Stacks**. Stackable items in your inventory and pickup items on the ground are sent to nearby chests that already contain the same item type. Tools, weapons, and other single-slot items stay where they are. A full stack can continue in a free chest slot. Items without a matching chest stay where they are.
+With a chest open, hold Left Ctrl and click **Place Stacks**. Stackable supplies in your inventory and pickup items on the ground are sent to nearby chests that already contain the same item type. Tools, weapons, ammunition, and other equipment stay where they are. A full stack can continue in a free chest slot. Items without a matching chest stay where they are.
 
 ### Super Craft
 

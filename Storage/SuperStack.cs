@@ -81,11 +81,23 @@ namespace Landoria.SuperStorage
             if (Running) _moved += Mathf.Max(0, amount);
         }
 
-        // Keeps single-slot gear, weapons, and tools out of Super Stack.
+        // Limits Super Stack to ordinary supplies, never weapons, tools, or ammunition.
         internal static bool CanMove(ItemDrop.ItemData item)
         {
-            return item?.m_shared != null && item.m_shared.m_maxStackSize > 1 &&
-                !item.m_shared.m_questItem;
+            if (item?.m_shared == null || item.m_shared.m_maxStackSize <= 1 ||
+                item.m_shared.m_questItem) return false;
+
+            switch (item.m_shared.m_itemType)
+            {
+                case ItemDrop.ItemData.ItemType.Material:
+                case ItemDrop.ItemData.ItemType.Consumable:
+                case ItemDrop.ItemData.ItemType.Trophy:
+                case ItemDrop.ItemData.ItemType.Fish:
+                case ItemDrop.ItemData.ItemType.Misc:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         // Suppresses rejected or expired native responses from this pass.
