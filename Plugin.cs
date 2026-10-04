@@ -43,6 +43,7 @@ namespace Landoria.SuperStorage
             ButtonHalo.Dispose();
             InventoryMoveFeed.Dispose();
             CraftState.Reset();
+            RecipeListRefreshPatch.Reset();
             TargetedStack.Reset();
             _harmony?.UnpatchSelf();
             _harmony = null;
