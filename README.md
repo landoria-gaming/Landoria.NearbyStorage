@@ -8,8 +8,6 @@ Stack nearby inventory and ground items into chests, and craft from nearby chest
 
 With a chest open, hold Left Alt and click **Place Stacks**. Non-equipable, non-consumable items in your inventory and pickup items on the ground are sent to nearby chests that already contain the same item type. Raw fish can be stacked; food and potions that can be consumed directly stay where they are, along with weapons, tools, armor, shields, ammunition, utility items, and trinkets. A full stack can continue in a free chest slot. Items without a matching chest stay where they are.
 
-Hold Left Alt + Ctrl and click an item in your inventory to stack only that item into matching nearby chests. This action has no item type filter, so it also works for equipment and consumables. The currently open chest is excluded from this action.
-
 ### Super Craft
 
 Hold Left Alt and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. Hold **Shift + Left Alt** for Valheim's multicraft amount. Ground items are not used for crafting.
@@ -26,7 +24,6 @@ Hold Left Alt and click **Craft** to use ingredients from your inventory and nea
 | Control | Action |
 |---|---|
 | `Left Alt` + click **Place Stacks** | Stack matching inventory and ground items into nearby chests |
-| `Left Alt` + `Ctrl` + click an inventory item | Stack only that item into matching nearby chests, excluding the open chest |
 | `Left Alt` + click **Craft** | Craft using ingredients from nearby chests |
 | `Left Alt` + `Shift` + click **Craft x N** | Craft using ingredients from nearby chests (N times) |
 
