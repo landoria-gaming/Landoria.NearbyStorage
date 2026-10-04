@@ -94,7 +94,8 @@ namespace Landoria.SuperStorage
             {
                 case ItemDrop.ItemData.ItemType.AmmoNonEquipable:
                 case ItemDrop.ItemData.ItemType.Consumable:
-                    return item.m_shared.m_name == "$item_raspberries";
+                    return item.m_shared.m_name == "$item_raspberries" ||
+                        item.m_shared.m_name == "$item_honey";
                 case ItemDrop.ItemData.ItemType.Hands:
                 case ItemDrop.ItemData.ItemType.Attach_Atgeir:
                 case ItemDrop.ItemData.ItemType.None:
