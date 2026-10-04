@@ -49,21 +49,16 @@ namespace Landoria.SuperStorage
                     {
                         Pending.Add(chest);
                         chest.StackAll();
-                        yield return new WaitForSeconds(0.2f);
+                        float responseDeadline = Time.realtimeSinceStartup + 10f;
+                        while (Pending.Contains(chest) && Time.realtimeSinceStartup < responseDeadline)
+                            yield return new WaitForSecondsRealtime(0.1f);
+                        if (Pending.Remove(chest)) Expired.Add(chest);
                     }
 
                     if (StorageLocator.Eligible(chest, player, current, radius))
                         _moved += GroundStack.Store(chest, player, radius);
                 }
 
-                float deadline = Time.realtimeSinceStartup + 5f;
-                while (Pending.Count > 0 && Time.realtimeSinceStartup < deadline)
-                {
-                    yield return new WaitForSeconds(0.1f);
-                }
-
-                foreach (Container chest in Pending) Expired.Add(chest);
-                Pending.Clear();
                 if (player != null)
                     player.Message(MessageHud.MessageType.Center,
                         _moved > 0 ? "$msg_stackall " + _moved : "$msg_stackall_none");
