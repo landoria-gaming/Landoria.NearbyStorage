@@ -17,7 +17,7 @@ namespace Landoria.SuperStorage
                 Vector3 position = chest.transform.position;
                 destination = $"{chestName} · ({Mathf.RoundToInt(position.x)}, {Mathf.RoundToInt(position.z)})";
             }
-            Chat.instance.AddString($"{itemName} x {amount} → {destination}");
+            Chat.instance.AddString($"<color=#FFB75B>{itemName} x {amount} → {destination}</color>");
         }
 
         // Chooses the nearest nonempty sign within two meters of the chest.
