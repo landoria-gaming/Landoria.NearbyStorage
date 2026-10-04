@@ -81,22 +81,21 @@ namespace Landoria.SuperStorage
             if (Running) _moved += Mathf.Max(0, amount);
         }
 
-        // Limits Super Stack to ordinary supplies, never weapons, tools, or ammunition.
+        // Leaves equipped gear categories and ammunition in place, including stackable ammo.
         internal static bool CanMove(ItemDrop.ItemData item)
         {
-            if (item?.m_shared == null || item.m_shared.m_maxStackSize <= 1 ||
-                item.m_shared.m_questItem) return false;
+            if (item?.m_shared == null || item.m_shared.m_questItem || item.IsEquipable())
+                return false;
 
             switch (item.m_shared.m_itemType)
             {
-                case ItemDrop.ItemData.ItemType.Material:
-                case ItemDrop.ItemData.ItemType.Consumable:
-                case ItemDrop.ItemData.ItemType.Trophy:
-                case ItemDrop.ItemData.ItemType.Fish:
-                case ItemDrop.ItemData.ItemType.Misc:
-                    return true;
-                default:
+                case ItemDrop.ItemData.ItemType.AmmoNonEquipable:
+                case ItemDrop.ItemData.ItemType.Hands:
+                case ItemDrop.ItemData.ItemType.Attach_Atgeir:
+                case ItemDrop.ItemData.ItemType.None:
                     return false;
+                default:
+                    return true;
             }
         }
 
