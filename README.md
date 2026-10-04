@@ -25,7 +25,7 @@ Hold Left Ctrl and click **Craft** to use ingredients from your inventory and ne
 |---|---|
 | `Left Ctrl` + click **Place Stacks** | Stack matching inventory and ground items into nearby chests |
 | `Left Ctrl` + click **Craft** | Craft using ingredients from nearby chests |
-| `Left Ctrl` + `Shift` + click **Craft** | Super Craft the selected multicraft amount |
+| `Left Ctrl` + `Shift` + click **Craft x N** | Craft using ingredients from nearby chests (N times) |
 
 ## Configuration
 
