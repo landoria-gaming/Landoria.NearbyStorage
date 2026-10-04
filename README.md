@@ -4,8 +4,6 @@ Stack nearby inventory and ground items into chests, and craft from nearby chest
 
 ## Features
 
-The chest you have open is included. Private chests, ward-protected chests you cannot access, and chests in use by another player are excluded. Only built chest prefabs are scanned; vehicle storage, barrels, wardrobes, and world loot chests are excluded.
-
 ### Super Stack
 
 With a chest open, hold Left Ctrl and click **Place Stacks**. Items in your inventory and pickup items on the ground are sent to nearby chests that already contain the same item type. A full stack can continue in a free chest slot. Items without a matching chest stay where they are.
@@ -15,6 +13,8 @@ Super Stack shows one result message after the pass: the total number of items m
 ### Super Craft
 
 Hold Left Ctrl and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. Hold **Shift + Left Ctrl** for Valheim's multicraft amount. Ground items are not used for crafting.
+
+> The chest you have open is included. Private chests, ward-protected chests you cannot access, and chests in use by another player are excluded. Only built chest prefabs are scanned; vehicle storage, barrels, wardrobes, and world loot chests are excluded.
 
 ## Controls
 
