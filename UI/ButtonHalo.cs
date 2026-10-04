@@ -14,7 +14,7 @@ namespace Landoria.SuperStorage
         internal static void Update()
         {
             bool active = InventoryGui.IsVisible() && Player.m_localPlayer != null &&
-                ZInput.GetKey(KeyCode.LeftControl);
+                SuperActionInput.IsHeld();
             InventoryGui gui = InventoryGui.instance;
             if (gui == null)
             {

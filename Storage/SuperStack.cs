@@ -12,25 +12,33 @@ namespace Landoria.SuperStorage
         private static readonly HashSet<Container> Expired = new HashSet<Container>();
         internal static bool Running { get; private set; }
         internal static bool InStackCall { get; private set; }
+        internal static ItemDrop.ItemData SelectedItem { get; private set; }
         private static int _moved;
 
         // Starts one best-effort stacking pass.
-        internal static IEnumerator Run()
+        internal static IEnumerator Run() => RunCore(null);
+
+        // Stacks only the item selected with the Super shortcut and Ctrl.
+        internal static IEnumerator RunItem(ItemDrop.ItemData item) => RunCore(item);
+
+        private static IEnumerator RunCore(ItemDrop.ItemData selectedItem)
         {
             Player player = Player.m_localPlayer;
-            if (player == null || Running)
+            if (player == null || Running ||
+                (selectedItem != null && !player.GetInventory().ContainsItem(selectedItem)))
             {
                 yield break;
             }
 
             Running = true;
+            SelectedItem = selectedItem;
             _moved = 0;
             try
             {
                 List<Container> chests = StorageLocator.Nearby(player);
                 Container current = StorageLocator.CurrentContainer();
                 float radius = Plugin.Instance.Settings.Radius.Value;
-                if (chests.Count > 0)
+                if (selectedItem == null && chests.Count > 0)
                 {
                     GroundStack.RequestOwnership(player, radius);
                     yield return new WaitForSeconds(0.35f);
@@ -38,7 +46,12 @@ namespace Landoria.SuperStorage
 
                 foreach (Container chest in chests)
                 {
+                    if (selectedItem != null && chest == current) continue;
                     if (!StorageLocator.Eligible(chest, player, current, radius)) continue;
+                    if (selectedItem != null &&
+                        (!player.GetInventory().ContainsItem(selectedItem) ||
+                         !chest.GetInventory().ContainsItemByName(selectedItem.m_shared.m_name)))
+                        continue;
                     if (chest == current)
                     {
                         InStackCall = true;
@@ -50,9 +63,16 @@ namespace Landoria.SuperStorage
                         Pending.Add(chest);
                         chest.StackAll();
                         yield return new WaitForSeconds(0.2f);
+                        if (selectedItem != null)
+                        {
+                            float responseDeadline = Time.realtimeSinceStartup + 5f;
+                            while (Pending.Contains(chest) && Time.realtimeSinceStartup < responseDeadline)
+                                yield return new WaitForSeconds(0.1f);
+                            if (Pending.Remove(chest)) Expired.Add(chest);
+                        }
                     }
 
-                    if (StorageLocator.Eligible(chest, player, current, radius))
+                    if (selectedItem == null && StorageLocator.Eligible(chest, player, current, radius))
                         _moved += GroundStack.Store(chest, player, radius);
                 }
 
@@ -72,6 +92,7 @@ namespace Landoria.SuperStorage
             {
                 Running = false;
                 InStackCall = false;
+                SelectedItem = null;
             }
         }
 
@@ -121,6 +142,7 @@ namespace Landoria.SuperStorage
         {
             Running = false;
             InStackCall = false;
+            SelectedItem = null;
             Pending.Clear();
             Expired.Clear();
             _moved = 0;
@@ -229,19 +251,43 @@ namespace Landoria.SuperStorage
         }
     }
 
-    // Replaces the native Stack All click only while Left Ctrl is held.
+    // Replaces the native Stack All click only while the Super shortcut is held.
     [HarmonyPatch(typeof(InventoryGui), "OnStackAll")]
     internal static class StackButtonPatch
     {
         // Starts Super Stack and leaves normal clicks to Valheim.
         private static bool Prefix()
         {
-            if (!ZInput.GetKey(KeyCode.LeftControl) || Plugin.Instance == null)
+            if (!SuperActionInput.IsHeld())
             {
                 return true;
             }
 
             if (!SuperStack.Running) Plugin.Instance.StartCoroutine(SuperStack.Run());
+            return false;
+        }
+    }
+
+    // Extends vanilla Ctrl-click on a player item to matching nearby chests.
+    [HarmonyPatch(typeof(InventoryGui), "OnSelectedItem")]
+    internal static class StackSelectedItemPatch
+    {
+        private static readonly System.Reflection.FieldInfo DragField =
+            AccessTools.Field(typeof(InventoryGui), "m_dragGo");
+
+        private static bool Prefix(InventoryGui __instance, InventoryGrid grid,
+            ItemDrop.ItemData item, InventoryGrid.Modifier mod)
+        {
+            Player player = Player.m_localPlayer;
+            if (mod != InventoryGrid.Modifier.Move || item?.m_shared == null ||
+                player == null || player.IsTeleporting() ||
+                !SuperActionInput.IsHeld() ||
+                !(ZInput.GetKey(KeyCode.LeftControl) || ZInput.GetKey(KeyCode.RightControl)) ||
+                StorageLocator.CurrentContainer() == null ||
+                grid.GetInventory() != player.GetInventory() || DragField.GetValue(__instance) != null)
+                return true;
+
+            if (!SuperStack.Running) Plugin.Instance.StartCoroutine(SuperStack.RunItem(item));
             return false;
         }
     }
@@ -259,8 +305,14 @@ namespace Landoria.SuperStorage
             var items = new List<ItemDrop.ItemData>(fromInventory.GetAllItems());
             foreach (ItemDrop.ItemData item in items)
             {
-                if (!SuperStack.CanMove(item) || !__instance.ContainsItemByName(item.m_shared.m_name) ||
-                    Player.m_localPlayer.IsItemEquiped(item)) continue;
+                if (SuperStack.SelectedItem != null ? item != SuperStack.SelectedItem :
+                    !SuperStack.CanMove(item) || Player.m_localPlayer.IsItemEquiped(item)) continue;
+                if (!__instance.ContainsItemByName(item.m_shared.m_name)) continue;
+                if (SuperStack.SelectedItem != null && Player.m_localPlayer.IsItemEquiped(item))
+                {
+                    Player.m_localPlayer.RemoveEquipAction(item);
+                    Player.m_localPlayer.UnequipItem(item);
+                }
                 if (__instance.AddItem(item)) fromInventory.RemoveItem(item);
             }
 

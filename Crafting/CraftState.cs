@@ -27,15 +27,15 @@ namespace Landoria.SuperStorage
         internal static bool Consuming { get; private set; }
         internal static CraftPlan Plan { get; private set; }
 
-        // Enables resource checks while Ctrl is held or a craft is in progress.
+        // Enables resource checks while the Super shortcut is held or a craft is in progress.
         internal static bool Checking => Plugin.Instance != null && InventoryGui.IsVisible() &&
-            (ZInput.GetKey(KeyCode.LeftControl) || Armed);
+            (SuperActionInput.IsHeld() || Armed);
 
         // Stops a click silently if nearby resources have already disappeared.
         internal static bool Arm(InventoryGui gui)
         {
             Reset();
-            if (!ZInput.GetKey(KeyCode.LeftControl)) return true;
+            if (!SuperActionInput.IsHeld()) return true;
             object selected = SelectedField.GetValue(gui);
             Recipe recipe = SelectedRecipe.GetValue(selected) as Recipe;
             ItemDrop.ItemData item = SelectedItem.GetValue(selected) as ItemDrop.ItemData;

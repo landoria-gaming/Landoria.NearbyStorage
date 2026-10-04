@@ -65,7 +65,7 @@ namespace Landoria.SuperStorage
         }
     }
 
-    // Remembers Ctrl at the initial Craft click, including through the craft timer.
+    // Remembers the Super shortcut at the initial Craft click and through the timer.
     [HarmonyPatch(typeof(InventoryGui), "OnCraftPressed")]
     internal static class CraftClickPatch
     {

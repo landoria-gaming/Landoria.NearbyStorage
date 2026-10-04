@@ -1,5 +1,6 @@
 using BepInEx.Configuration;
 using Landoria.Shared;
+using UnityEngine;
 
 namespace Landoria.SuperStorage
 {
@@ -8,6 +9,7 @@ namespace Landoria.SuperStorage
     {
         private const float DefaultRadius = 60f;
         internal ConfigEntry<float> Radius { get; }
+        internal ConfigEntry<KeyboardShortcut> SuperActionShortcut { get; }
 
         // Binds the search radius in meters.
         internal ModConfigFile(ConfigFile config)
@@ -15,11 +17,25 @@ namespace Landoria.SuperStorage
             Radius = config.Bind("General", "SearchRadius", DefaultRadius,
                 new ConfigDescription("Radius around the player for nearby chests and ground items, in meters.",
                     new AcceptableValueRange<float>(20f, 100f)));
+            SuperActionShortcut = config.Bind("Controls", "SuperActionShortcut",
+                new KeyboardShortcut(KeyCode.LeftAlt),
+                "Hold this shortcut while clicking Place Stacks or Craft to use the Super action.");
         }
 
         internal void RestoreDefaults(ConfigFile config)
         {
-            Radius.Value = DefaultRadius;
+            bool saveOnConfigSet = config.SaveOnConfigSet;
+            config.SaveOnConfigSet = false;
+            try
+            {
+                Radius.Value = DefaultRadius;
+                SuperActionShortcut.Value = new KeyboardShortcut(KeyCode.LeftAlt);
+            }
+            finally
+            {
+                config.SaveOnConfigSet = saveOnConfigSet;
+            }
+
             config.Save();
             ConfigWatcher.IgnoreCurrentFileVersion();
         }

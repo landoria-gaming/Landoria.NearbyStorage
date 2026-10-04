@@ -28,7 +28,7 @@ namespace Landoria.SuperStorage
             Logger.LogInfo($"{PluginName} {PluginVersion} loaded.");
         }
 
-        // Keeps the button highlights in sync with Left Ctrl.
+        // Keeps the button highlights in sync with the configured Super shortcut.
         private void Update()
         {
             ConfigWatcher.Update();
