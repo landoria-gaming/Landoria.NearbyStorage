@@ -1,6 +1,6 @@
 # Super Storage
 
-Stack nearby inventory and ground items into chests, and craft from nearby chest supplies. Hold **Left Ctrl** to select the Super action.
+Stack nearby inventory and ground items into chests, and craft from nearby chest supplies.
 
 ## Features
 
