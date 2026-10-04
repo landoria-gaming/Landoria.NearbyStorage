@@ -12,9 +12,12 @@ With a chest open, hold Left Ctrl and click **Place Stacks**. Items in your inve
 
 Hold Left Ctrl and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. Hold **Shift + Left Ctrl** for Valheim's multicraft amount. Ground items are not used for crafting.
 
+### Are excluded
+
 - Private chests are excluded.
 - Chests protected by a ward you cannot access, or in use by another player, are excluded.
 - Only built chest prefabs are scanned; vehicle storage, barrels, wardrobes, and world loot chests are excluded.
+
 
 ## Controls
 
