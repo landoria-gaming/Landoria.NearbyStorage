@@ -11,6 +11,14 @@ Super Storage extends Valheim's inventory buttons to work with nearby chests. Ho
 
 Only built chest prefabs are scanned; vehicle storage, barrels, wardrobes, and world loot chests are excluded. Ground items count for Super Stack only, not Super Craft.
 
+## Controls
+
+| Control | Action |
+|---|---|
+| `Left Ctrl` + click **Place Stacks** | Stack matching inventory and ground items into nearby chests |
+| `Left Ctrl` + click **Craft** | Craft using ingredients from nearby chests |
+| `Left Ctrl` + `Shift` + click **Craft** | Super Craft the selected multicraft amount |
+
 ## Configuration
 
 BepInEx creates `Landoria.SuperStorage.cfg` in the active profile's config folder.
