@@ -6,9 +6,9 @@ Stack a selected inventory item into nearby chests, craft from nearby chest supp
 
 ### Super Stack
 
-Open your inventory and hold Left Alt while clicking an item. That item, regardless of its type, is moved into nearby accessible chests that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same chest, then another matching chest. No chest needs to be open. **Place Stacks** keeps its normal Valheim behavior.
+Open your inventory and hold Left Alt while clicking an item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible chests that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same chest, then another matching chest. No chest needs to be open. **Place Stacks** keeps its normal Valheim behavior.
 
-Each chest that receives items gets one local chat line in the form `Item x amount → Sign`, using the nearest sign within 2 meters. If no sign is nearby, the line shows the chest type and its X/Z coordinates instead. If no matching chest exists, the item stays in your inventory and an on-screen message appears.
+Each chest that receives items gets one local chat line with the total moved from your inventory and the ground, in the form `Item x amount → Sign`, using the nearest sign within 2 meters. If no sign is nearby, the line shows the chest type and its X/Z coordinates instead. If no matching chest exists, the item stays in your inventory and an on-screen message appears.
 
 The same transfer lines appear in white below the player inventory, with each new line underneath the previous one. Each line stays for 5 seconds, then fades out.
 
@@ -31,7 +31,7 @@ Hold Left Alt while using a fuelable object to draw one fuel item from a nearby 
 
 | Control | Action |
 |---|---|
-| `Left Alt` + click an inventory item | Stack that item into nearby chests that already contain its type |
+| `Left Alt` + click an inventory item | Stack that item and matching ground items into nearby chests that already contain its type |
 | Click **Place Stacks** | Use Valheim's normal stack action |
 | `Left Alt` + click **Craft** | Craft using ingredients from nearby chests |
 | `Left Alt` + `Shift` + click **Craft x N** | Craft using ingredients from nearby chests (N times) |

@@ -5,12 +5,16 @@ using UnityEngine;
 
 namespace Landoria.SuperStorage
 {
-    // Moves one clicked inventory stack into matching nearby chests.
+    // Moves the clicked item and matching ground drops into nearby chests.
     internal static class TargetedStack
     {
         private static readonly HashSet<Container> Expired = new HashSet<Container>();
+        private static readonly Dictionary<Container, int> MovedByChest = new Dictionary<Container, int>();
+        private static readonly List<Container> ReportOrder = new List<Container>();
         private static Container _pending;
         private static ItemDrop.ItemData _item;
+        private static ItemDrop.ItemData _selectedItem;
+        private static ItemDrop _drop;
         private static Player _player;
         private static int _moved;
         private static bool _foundMatch;
@@ -25,44 +29,81 @@ namespace Landoria.SuperStorage
             Running = true;
             _player = player;
             _item = item;
+            _selectedItem = item;
             _moved = 0;
             _foundMatch = false;
+            MovedByChest.Clear();
+            ReportOrder.Clear();
             try
             {
-                List<Container> chests = StorageLocator.Nearby(player);
+                string selectedName = item.m_shared.m_name;
+                yield return MoveToChests(StorageLocator.Nearby(player));
                 float radius = Plugin.Instance.Settings.Radius.Value;
-                foreach (Container chest in chests)
+                foreach (ItemDrop drop in UnityEngine.Object.FindObjectsByType<ItemDrop>(FindObjectsSortMode.None))
                 {
-                    if (!player.GetInventory().ContainsItem(item)) break;
-                    Container current = StorageLocator.CurrentContainer();
-                    if (!StorageLocator.Eligible(chest, player, current, radius)) continue;
-                    if (!chest.GetInventory().ContainsItemByName(item.m_shared.m_name)) continue;
-                    _foundMatch = true;
-                    if (Capacity(chest.GetInventory(), item) == 0) continue;
-
-                    if (chest == current) Store(chest);
-                    else
-                    {
-                        _pending = chest;
-                        chest.StackAll();
-                        float deadline = Time.realtimeSinceStartup + 10f;
-                        while (_pending == chest && Time.realtimeSinceStartup < deadline)
-                            yield return new WaitForSecondsRealtime(0.1f);
-                        if (_pending == chest)
-                        {
-                            Expired.Add(chest);
-                            _pending = null;
-                        }
-                    }
+                    if (drop == null) continue;
+                    drop.Load();
+                    if (drop.IsPiece() || drop.InTar() ||
+                        drop.m_itemData?.m_shared?.m_name != selectedName ||
+                        (drop.transform.position - player.transform.position).sqrMagnitude > radius * radius)
+                        continue;
+                    ZNetView view = drop.GetComponent<ZNetView>();
+                    if (view == null || !view.IsValid()) continue;
+                    drop.RequestOwn();
+                    float deadline = Time.realtimeSinceStartup + 2f;
+                    while (drop != null && !drop.CanPickup(false) && Time.realtimeSinceStartup < deadline)
+                        yield return new WaitForSecondsRealtime(0.1f);
+                    if (drop == null || !drop.CanPickup(false)) continue;
+                    drop.Load();
+                    if (drop.m_itemData.m_shared.m_name != selectedName) continue;
+                    _drop = drop;
+                    _item = drop.m_itemData;
+                    yield return MoveToChests(StorageLocator.Nearby(player));
+                    _drop = null;
                 }
+                ReportMoves();
                 if (_moved == 0) ShowNoDestination(player);
             }
             finally
             {
                 _pending = null;
                 _item = null;
+                _selectedItem = null;
+                _drop = null;
                 _player = null;
+                MovedByChest.Clear();
+                ReportOrder.Clear();
                 Running = false;
+            }
+        }
+
+        // Requests each matching chest and waits for its normal access response.
+        private static IEnumerator MoveToChests(List<Container> chests)
+        {
+            float radius = Plugin.Instance.Settings.Radius.Value;
+            foreach (Container chest in chests)
+            {
+                if (_drop == null && !_player.GetInventory().ContainsItem(_item)) break;
+                if (_drop != null && _drop.m_itemData.m_stack <= 0) break;
+                Container current = StorageLocator.CurrentContainer();
+                if (!StorageLocator.Eligible(chest, _player, current, radius)) continue;
+                if (!chest.GetInventory().ContainsItemByName(_item.m_shared.m_name)) continue;
+                _foundMatch = true;
+                if (Capacity(chest.GetInventory(), _item) == 0) continue;
+                if (chest == current) Store(chest);
+                else
+                {
+                    _pending = chest;
+                    chest.StackAll();
+                    float deadline = Time.realtimeSinceStartup + 10f;
+                    while (_pending == chest && Time.realtimeSinceStartup < deadline)
+                        yield return new WaitForSecondsRealtime(0.1f);
+                    if (_pending == chest)
+                    {
+                        Expired.Add(chest);
+                        _pending = null;
+                    }
+                }
             }
         }
 
@@ -81,11 +122,12 @@ namespace Landoria.SuperStorage
             return false;
         }
 
-        // Copies the amount that fits, then debits precisely that amount from the player.
+        // Copies the amount that fits, then debits the selected source.
         private static void Store(Container chest)
         {
             Inventory source = _player.GetInventory();
-            if (!source.ContainsItem(_item)) return;
+            if (_drop == null && !source.ContainsItem(_item)) return;
+            if (_drop != null && (!_drop.CanPickup(false) || _drop.m_itemData != _item)) return;
             Inventory destination = chest.GetInventory();
             if (!destination.ContainsItemByName(_item.m_shared.m_name)) return;
             int amount = Mathf.Min(_item.m_stack, Capacity(destination, _item));
@@ -99,17 +141,31 @@ namespace Landoria.SuperStorage
             int moved = destination.NrOfItemsIncludingStacks() - before;
             if (moved <= 0) return;
 
-            if (moved == _item.m_stack && _player.IsItemEquiped(_item))
+            if (_drop == null && moved == _item.m_stack && _player.IsItemEquiped(_item))
             {
                 _player.RemoveEquipAction(_item);
                 _player.UnequipItem(_item);
             }
-            source.RemoveItem(_item, moved);
+            if (_drop == null) source.RemoveItem(_item, moved);
+            else if (moved == _item.m_stack) _drop.GetComponent<ZNetView>().Destroy();
+            else _drop.SetStack(_item.m_stack - moved);
             _moved += moved;
+            if (!MovedByChest.ContainsKey(chest))
+            {
+                MovedByChest[chest] = 0;
+                ReportOrder.Add(chest);
+            }
+            MovedByChest[chest] += moved;
             InventoryGui gui = InventoryGui.instance;
             if (gui != null)
                 gui.m_moveItemEffects.Create(gui.transform.position, Quaternion.identity);
-            ChestChatLog.Report(chest, _item, moved);
+        }
+
+        // Reports one total per destination after all matching sources are processed.
+        private static void ReportMoves()
+        {
+            foreach (Container chest in ReportOrder)
+                if (chest != null) ChestChatLog.Report(chest, _selectedItem, MovedByChest[chest]);
         }
 
         // Counts compatible partial stacks and all free slots in one matching chest.
@@ -137,9 +193,13 @@ namespace Landoria.SuperStorage
         {
             _pending = null;
             _item = null;
+            _selectedItem = null;
+            _drop = null;
             _player = null;
             _moved = 0;
             _foundMatch = false;
+            MovedByChest.Clear();
+            ReportOrder.Clear();
             Expired.Clear();
             Running = false;
         }
