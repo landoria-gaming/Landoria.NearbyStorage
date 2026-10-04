@@ -1,6 +1,6 @@
 # Super Storage
 
-Super Storage extends Valheim's inventory buttons to work with nearby chests. Hold **Left Ctrl** to select the Super action; an amber glow highlights the active button.
+Super Storage extends Valheim's inventory buttons to work with nearby chests. Hold **Left Ctrl** to select the Super action.
 
 ## Features
 
