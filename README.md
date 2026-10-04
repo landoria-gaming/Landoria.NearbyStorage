@@ -12,7 +12,7 @@ Each chest that receives items gets one local chat line with the moved count, it
 
 ### Super Craft
 
-Hold Left Alt and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. Hold **Shift + Left Alt** for Valheim's multicraft amount. Ground items are not used for crafting.
+Hold Left Alt and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. By default, Super Craft leaves one of each ingredient type in every chest so Super Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount. Ground items are not used for crafting.
 
 ### Are excluded
 
@@ -38,6 +38,7 @@ Changes to this file reload automatically while the game is running. Deleting it
 | Setting | Default | Description |
 | --- | --- | --- |
 | `SearchRadius` | `60` | Search radius in meters around the player for chests; accepts 20 to 100. |
+| `KeepOneIngredientPerChest` | `true` | Leave one of each ingredient type in every chest during Super Craft. |
 | `SuperActionShortcut` | `LeftAlt` | Hold this shortcut while clicking an inventory item or Craft. |
 
 ## Contact

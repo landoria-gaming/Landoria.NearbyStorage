@@ -18,7 +18,7 @@ namespace Landoria.SuperStorage
             int available = player.GetInventory().CountItems(name);
             foreach (Container chest in StorageLocator.Nearby(player))
             {
-                available += chest.GetInventory().CountItems(name);
+                available += CraftPlan.DisplayAvailable(chest, name);
             }
 
             if (available >= req.GetAmount(quality) * craftMultiplier)

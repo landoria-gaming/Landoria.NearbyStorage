@@ -9,6 +9,7 @@ namespace Landoria.SuperStorage
     {
         private const float DefaultRadius = 60f;
         internal ConfigEntry<float> Radius { get; }
+        internal ConfigEntry<bool> KeepOneIngredientPerChest { get; }
         internal ConfigEntry<KeyboardShortcut> SuperActionShortcut { get; }
 
         // Binds the search radius in meters.
@@ -17,6 +18,8 @@ namespace Landoria.SuperStorage
             Radius = config.Bind("General", "SearchRadius", DefaultRadius,
                 new ConfigDescription("Radius around the player for nearby chests, in meters.",
                     new AcceptableValueRange<float>(20f, 100f)));
+            KeepOneIngredientPerChest = config.Bind("General", "KeepOneIngredientPerChest", true,
+                "Keep at least one of each ingredient type in every chest during Super Craft.");
             SuperActionShortcut = config.Bind("Controls", "SuperActionShortcut",
                 new KeyboardShortcut(KeyCode.LeftAlt),
                 "Hold this shortcut while clicking an inventory item or Craft to use the Super action.");
@@ -29,6 +32,7 @@ namespace Landoria.SuperStorage
             try
             {
                 Radius.Value = DefaultRadius;
+                KeepOneIngredientPerChest.Value = true;
                 SuperActionShortcut.Value = new KeyboardShortcut(KeyCode.LeftAlt);
             }
             finally

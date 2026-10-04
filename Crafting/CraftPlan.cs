@@ -75,10 +75,10 @@ namespace Landoria.SuperStorage
             int maxQuality = requirement.m_resItem.m_itemData.m_shared.m_maxQuality;
             for (int quality = 1; quality <= maxQuality; quality++)
             {
-                int available = Available(plan, player.GetInventory(), name, quality);
+                int available = Available(plan, player.GetInventory(), null, name, quality);
                 foreach (Container chest in chests)
                 {
-                    available += Available(plan, chest.GetInventory(), name, quality);
+                    available += Available(plan, chest.GetInventory(), chest, name, quality);
                 }
 
                 if (available < need)
@@ -105,25 +105,34 @@ namespace Landoria.SuperStorage
         }
 
         // Counts remaining stock after earlier requirements in the same recipe.
-        private static int Available(CraftPlan plan, Inventory inventory, string name, int quality)
+        private static int Available(CraftPlan plan, Inventory inventory, Container chest,
+            string name, int quality)
         {
             int count = inventory.CountItems(name, quality);
+            int plannedForName = 0;
             foreach (Withdrawal step in plan.Withdrawals)
             {
-                if (step.Inventory == inventory && step.Name == name && step.Quality == quality)
+                if (step.Inventory == inventory && step.Name == name)
                 {
-                    count -= step.Amount;
+                    plannedForName += step.Amount;
+                    if (step.Quality == quality) count -= step.Amount;
                 }
             }
 
-            return count;
+            if (chest != null && Plugin.Instance.Settings.KeepOneIngredientPerChest.Value)
+            {
+                int remaining = inventory.CountItems(name, -1, false) - plannedForName;
+                count = System.Math.Min(count, remaining - 1);
+            }
+
+            return System.Math.Max(0, count);
         }
 
         // Reserves as much as possible from one source inventory.
         private static int Allocate(CraftPlan plan, Inventory inventory, Container chest,
             string name, int quality, int left)
         {
-            int take = System.Math.Min(left, Available(plan, inventory, name, quality));
+            int take = System.Math.Min(left, Available(plan, inventory, chest, name, quality));
             if (take > 0)
             {
                 plan.Withdrawals.Add(new Withdrawal
@@ -202,9 +211,33 @@ namespace Landoria.SuperStorage
                         other.Quality == step.Quality) needed += other.Amount;
                 }
                 if (step.Inventory.CountItems(step.Name, step.Quality) < needed) return false;
+                if (step.Chest != null && Plugin.Instance.Settings.KeepOneIngredientPerChest.Value &&
+                    step.Inventory.CountItems(step.Name, -1, false) - PlannedForName(step) < 1)
+                    return false;
             }
 
             return true;
+        }
+
+        // Counts all withdrawals of one item type from the same chest.
+        private int PlannedForName(Withdrawal step)
+        {
+            int total = 0;
+            foreach (Withdrawal other in Withdrawals)
+            {
+                if (other.Inventory == step.Inventory && other.Name == step.Name) total += other.Amount;
+            }
+            return total;
+        }
+
+        // Reports chest stock available to the ingredient display after the reserve.
+        internal static int DisplayAvailable(Container chest, string name)
+        {
+            Inventory inventory = chest.GetInventory();
+            int count = inventory.CountItems(name);
+            if (!Plugin.Instance.Settings.KeepOneIngredientPerChest.Value) return count;
+            return System.Math.Max(0,
+                System.Math.Min(count, inventory.CountItems(name, -1, false) - 1));
         }
 
         // Removes the committed amounts after vanilla creates the result.
