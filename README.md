@@ -10,6 +10,8 @@ Open your inventory and hold Left Alt while clicking an item. That item, regardl
 
 Each chest that receives items gets one local chat line in the form `Item x amount → Sign`, using the nearest sign within 2 meters. If no sign is nearby, the line shows the chest type and its X/Z coordinates instead. If no matching chest exists, the item stays in your inventory and an on-screen message appears.
 
+The same transfer lines appear in white below the player inventory, with each new line underneath the previous one. Each line stays for 5 seconds, then fades out.
+
 ### Super Craft
 
 Hold Left Alt and click **Craft** to use ingredients from your inventory and nearby chests. Your inventory is used first, then chests from nearest to farthest. By default, Super Craft leaves one of each ingredient type in every chest so Super Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount. Ground items are not used for crafting.

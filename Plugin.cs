@@ -33,6 +33,7 @@ namespace Landoria.SuperStorage
         {
             ConfigWatcher.Update();
             ButtonHalo.Update();
+            InventoryMoveFeed.Update();
         }
 
         // Cleans up patches and transient UI state.
@@ -40,6 +41,7 @@ namespace Landoria.SuperStorage
         {
             ConfigWatcher.Dispose();
             ButtonHalo.Dispose();
+            InventoryMoveFeed.Dispose();
             CraftState.Reset();
             TargetedStack.Reset();
             _harmony?.UnpatchSelf();

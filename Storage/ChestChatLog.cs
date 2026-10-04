@@ -8,7 +8,6 @@ namespace Landoria.SuperStorage
         // Reports item and count, using the chest type only when no sign is nearby.
         internal static void Report(Container chest, ItemDrop.ItemData item, int amount)
         {
-            if (Chat.instance == null) return;
             string itemName = Localization.instance.Localize(item.m_shared.m_name);
             string destination = ClosestSign(chest);
             if (destination == null)
@@ -17,7 +16,8 @@ namespace Landoria.SuperStorage
                 Vector3 position = chest.transform.position;
                 destination = $"{chestName} · ({Mathf.RoundToInt(position.x)}, {Mathf.RoundToInt(position.z)})";
             }
-            Chat.instance.AddString($"<color=#FFB75B>{itemName}</color><color=white> x {amount} → </color><color=#FFB75B>{destination}</color>");
+            InventoryMoveFeed.Add($"{itemName} x {amount} → {destination}");
+            Chat.instance?.AddString($"<color=#FFB75B>{itemName}</color><color=white> x {amount} → </color><color=#FFB75B>{destination}</color>");
         }
 
         // Chooses the nearest nonempty sign within two meters of the chest.
