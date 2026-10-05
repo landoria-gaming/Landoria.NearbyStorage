@@ -12,20 +12,18 @@ namespace Landoria.SuperStorage
         private const float FadeDuration = 1f;
         private const float Gap = 3f;
 
-        private sealed class Entry
-        {
-            internal TextMeshProUGUI Text;
-            internal float Started;
-        }
-
-        private static readonly List<Entry> Entries = new List<Entry>();
+        private static readonly List<InventoryMoveEntry> Entries = new List<InventoryMoveEntry>();
         private static RectTransform _root;
         private static InventoryGui _gui;
 
         // Adds one line for a chest that actually received items.
         internal static void Add(string message)
         {
-            if (!EnsureRoot()) return;
+            if (!EnsureRoot())
+            {
+                return;
+            }
+
             GameObject line = new GameObject("SuperStorageMove", typeof(RectTransform), typeof(TextMeshProUGUI));
             line.transform.SetParent(_root, false);
             RectTransform rect = (RectTransform)line.transform;
@@ -42,27 +40,39 @@ namespace Landoria.SuperStorage
             text.textWrappingMode = TextWrappingModes.Normal;
             text.raycastTarget = false;
             text.text = message;
-            Entries.Add(new Entry { Text = text, Started = Time.unscaledTime });
+            Entries.Add(new InventoryMoveEntry { Text = text, Started = Time.unscaledTime });
             Update();
         }
 
         // Tracks the inventory panel and fades each line over its final second.
         internal static void Update()
         {
-            if (_root == null || _gui == null) return;
+            if (_root == null || _gui == null)
+            {
+                return;
+            }
+
             for (int i = Entries.Count - 1; i >= 0; i--)
             {
                 float age = Time.unscaledTime - Entries[i].Started;
-                if (age < HoldDuration + FadeDuration) continue;
+                if (age < HoldDuration + FadeDuration)
+                {
+                    continue;
+                }
+
                 Object.Destroy(Entries[i].Text.gameObject);
                 Entries.RemoveAt(i);
             }
 
             _root.gameObject.SetActive(InventoryGui.IsVisible() && Entries.Count > 0);
-            if (!_root.gameObject.activeSelf) return;
+            if (!_root.gameObject.activeSelf)
+            {
+                return;
+            }
+
             PositionRoot();
             float offset = 0f;
-            foreach (Entry entry in Entries)
+            foreach (InventoryMoveEntry entry in Entries)
             {
                 float age = Time.unscaledTime - entry.Started;
                 entry.Text.color = new Color(1f, 1f, 1f,
@@ -80,8 +90,16 @@ namespace Landoria.SuperStorage
         private static bool EnsureRoot()
         {
             InventoryGui gui = InventoryGui.instance;
-            if (gui == null || gui.m_inventoryRoot == null || gui.m_recipeDecription == null) return false;
-            if (_root != null && _gui == gui) return true;
+            if (gui == null || gui.m_inventoryRoot == null || gui.m_recipeDecription == null)
+            {
+                return false;
+            }
+
+            if (_root != null && _gui == gui)
+            {
+                return true;
+            }
+
             Dispose();
             _gui = gui;
             GameObject overlay = new GameObject("SuperStorageMoveFeed", typeof(RectTransform), typeof(LayoutElement));
@@ -101,7 +119,11 @@ namespace Landoria.SuperStorage
         // Places the first line just below the player inventory panel.
         private static void PositionRoot()
         {
-            if (_root == null || _gui.m_player == null) return;
+            if (_root == null || _gui.m_player == null)
+            {
+                return;
+            }
+
             Vector3[] corners = new Vector3[4];
             _gui.m_player.GetWorldCorners(corners);
             Vector3 bottomLeft = _root.parent.InverseTransformPoint(corners[0]);
@@ -112,7 +134,11 @@ namespace Landoria.SuperStorage
         // Removes transient UI when the plugin unloads or the inventory is replaced.
         internal static void Dispose()
         {
-            if (_root != null) Object.Destroy(_root.gameObject);
+            if (_root != null)
+            {
+                Object.Destroy(_root.gameObject);
+            }
+
             _root = null;
             _gui = null;
             Entries.Clear();

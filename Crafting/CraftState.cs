@@ -35,17 +35,29 @@ namespace Landoria.SuperStorage
         internal static bool Arm(InventoryGui gui)
         {
             Reset();
-            if (!SuperActionInput.IsHeld()) return true;
+            if (!SuperActionInput.IsHeld())
+            {
+                return true;
+            }
+
             object selected = SelectedField.GetValue(gui);
             Recipe recipe = SelectedRecipe.GetValue(selected) as Recipe;
             ItemDrop.ItemData item = SelectedItem.GetValue(selected) as ItemDrop.ItemData;
-            if (recipe == null || Player.m_localPlayer == null) return false;
+            if (recipe == null || Player.m_localPlayer == null)
+            {
+                return false;
+            }
+
             bool multi = item == null && (ZInput.GetButton("AltPlace") ||
                 ZInput.GetButton("JoyLStick") || (bool)TouchField.GetValue(gui));
             int amount = multi ? gui.m_multiCraftAmount : 1;
             int quality = item == null ? 1 : item.m_quality + 1;
             if ((recipe.m_requireOnlyOneIngredient || !FreeCraft(Player.m_localPlayer)) &&
-                CraftPlan.Build(Player.m_localPlayer, recipe, quality, amount) == null) return false;
+                CraftPlan.Build(Player.m_localPlayer, recipe, quality, amount) == null)
+            {
+                return false;
+            }
+
             Armed = true;
             return true;
         }
@@ -53,7 +65,11 @@ namespace Landoria.SuperStorage
         // Claims source chests and fixes the withdrawal plan before result creation.
         internal static bool Prepare(InventoryGui gui, Player player)
         {
-            if (!Armed) return true;
+            if (!Armed)
+            {
+                return true;
+            }
+
             Recipe recipe = RecipeField.GetValue(gui) as Recipe;
             ItemDrop.ItemData item = UpgradeField.GetValue(gui) as ItemDrop.ItemData;
             int quality = item == null ? 1 : item.m_quality + 1;
@@ -64,7 +80,11 @@ namespace Landoria.SuperStorage
                     CraftPlan.Build(player, recipe, quality, amount) != null);
             }
             Plan = CraftPlan.Build(player, recipe, quality, amount);
-            if (Plan == null || !Plan.ClaimChests(player)) return false;
+            if (Plan == null || !Plan.ClaimSources(player))
+            {
+                return false;
+            }
+
             Plan = CraftPlan.Build(player, recipe, quality, amount);
             return Plan != null && Plan.StillAvailable(player);
         }
@@ -72,7 +92,11 @@ namespace Landoria.SuperStorage
         // Consumes the recorded ingredients instead of vanilla's player-only stock.
         internal static void Consume()
         {
-            if (Plan == null || Consuming) return;
+            if (Plan == null || Consuming)
+            {
+                return;
+            }
+
             Consuming = true;
             try
             {
@@ -88,7 +112,10 @@ namespace Landoria.SuperStorage
         // Clears state if the click did not start a craft timer.
         internal static void ResetIfNoTimer(InventoryGui gui)
         {
-            if ((float)TimerField.GetValue(gui) < 0f) Reset();
+            if ((float)TimerField.GetValue(gui) < 0f)
+            {
+                Reset();
+            }
         }
 
         // Clears transient state on completion, cancellation, or UI close.

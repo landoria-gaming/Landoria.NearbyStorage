@@ -1,0 +1,186 @@
+using System;
+using System.Collections.Generic;
+
+namespace Landoria.SuperStorage
+{
+    // Borrows one input item from nearby storage or a ground drop.
+    internal static class FeedContext
+    {
+        private static Player _player;
+        private static Container _chest;
+        private static ItemDrop _drop;
+        private static ItemDrop.ItemData _item;
+
+        // Starts a context for an eligible local interaction.
+        internal static void Begin(Humanoid user)
+        {
+            Reset();
+            if (user == Player.m_localPlayer && SuperActionInput.IsHeld())
+            {
+                _player = Player.m_localPlayer;
+            }
+        }
+
+        // Finds the first usable item in nearby chests.
+        internal static ItemDrop.ItemData Find(Inventory inventory, IEnumerable<string> names)
+        {
+            if (names == null)
+            {
+                return null;
+            }
+
+            var candidates = new List<string>(names);
+            return FindStored(inventory, source =>
+            {
+                foreach (string name in candidates)
+                {
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        continue;
+                    }
+
+                    ItemDrop.ItemData item = source.GetItem(name);
+                    if (item != null)
+                    {
+                        return item;
+                    }
+                }
+                return null;
+            }, candidate => candidates.Contains(candidate.m_shared.m_name));
+        }
+
+        // Finds an input listed by a station's item conversions.
+        internal static ItemDrop.ItemData FindConversion<T>(Inventory inventory,
+            IEnumerable<T> conversions, Func<T, ItemDrop> sourceItem)
+        {
+            var names = new List<string>();
+            foreach (T conversion in conversions)
+            {
+                ItemDrop item = sourceItem(conversion);
+                if (item != null)
+                {
+                    names.Add(item.m_itemData.m_shared.m_name);
+                }
+            }
+
+            return Find(inventory, names);
+        }
+
+        // Finds matching turret ammunition in nearby chests.
+        internal static ItemDrop.ItemData FindAmmo(Inventory inventory, string ammoType, string prefab)
+        {
+            return FindStored(inventory, source => source.GetAmmoItem(ammoType, prefab), candidate =>
+                (candidate.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Ammo ||
+                 candidate.m_shared.m_itemType == ItemDrop.ItemData.ItemType.AmmoNonEquipable ||
+                 candidate.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Consumable) &&
+                candidate.m_shared.m_ammoType == ammoType &&
+                (prefab == null || candidate.m_dropPrefab.name == prefab));
+        }
+
+        // Selects the highest-priority carried or stored item.
+        internal static ItemDrop.ItemData FindByPriority(Inventory inventory,
+            IEnumerable<string> names)
+        {
+            if (_player == null || inventory != _player.GetInventory() || names == null)
+            {
+                return null;
+            }
+
+            foreach (string name in names)
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                    continue;
+                }
+
+                ItemDrop.ItemData carried = inventory.GetItem(name);
+                if (carried != null)
+                {
+                    return carried;
+                }
+
+                ItemDrop.ItemData item = FindStored(inventory, source => source.GetItem(name),
+                    candidate => candidate.m_shared.m_name == name);
+                if (item != null)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        // Checks whether the item belongs to the active chest context.
+        internal static bool IsBorrowed(Inventory inventory, ItemDrop.ItemData item)
+        {
+            return _player != null && inventory == _player.GetInventory() && item == _item;
+        }
+
+        // Redirects a borrowed item's debit to its source chest.
+        internal static bool RemoveBorrowed(Inventory inventory, ItemDrop.ItemData item,
+            int amount, ref bool result)
+        {
+            if (!IsBorrowed(inventory, item))
+            {
+                return true;
+            }
+
+            result = Withdraw(amount);
+            return false;
+        }
+
+        // Removes the selected item from its chest or ground drop.
+        internal static bool Withdraw(int amount)
+        {
+            if (_drop != null)
+            {
+                return amount == 1 && GroundSource.RemoveOne(_drop, _player, _item);
+            }
+
+            if (_chest == null || _item == null || amount != 1 ||
+                !StorageLocator.Eligible(_chest, _player, StorageLocator.CurrentContainer(),
+                    Plugin.Instance.Settings.Radius.Value))
+            {
+                return false;
+            }
+
+            ZNetView view = StorageLocator.View(_chest);
+            if (view == null || !view.IsOwner() || !_chest.GetInventory().ContainsItem(_item))
+            {
+                return false;
+            }
+
+            return _chest.GetInventory().RemoveOneItem(_item);
+        }
+
+        // Clears the active context.
+        internal static void Reset()
+        {
+            _player = null;
+            _chest = null;
+            _drop = null;
+            _item = null;
+        }
+
+        // Selects one accessible chest or ground item for the active interaction.
+        private static ItemDrop.ItemData FindStored(Inventory inventory,
+            Func<Inventory, ItemDrop.ItemData> selectChest,
+            Func<ItemDrop.ItemData, bool> matchesGround)
+        {
+            if (_player == null || inventory != _player.GetInventory())
+            {
+                return null;
+            }
+
+            Withdrawal source = new StorageSupply(_player).FindStored(selectChest, matchesGround);
+            if (source == null)
+            {
+                return null;
+            }
+
+            _chest = source.Chest;
+            _drop = source.Drop;
+            _item = source.SelectedItem;
+            return _item;
+        }
+    }
+}

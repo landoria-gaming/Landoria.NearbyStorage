@@ -16,15 +16,16 @@ namespace Landoria.SuperStorage
         internal ModConfigFile(ConfigFile config)
         {
             Radius = config.Bind("General", "SearchRadius", DefaultRadius,
-                new ConfigDescription("Radius around the player for nearby chests, in meters.",
+                new ConfigDescription("Radius around the player for nearby chests and ground items, in meters.",
                     new AcceptableValueRange<float>(20f, 100f)));
             KeepOneIngredientPerChest = config.Bind("General", "KeepOneIngredientPerChest", true,
-                "Keep at least one of each ingredient type in every chest during Super Craft.");
+                "Keep at least one of each ingredient type in every chest during Super Craft and Super Build.");
             SuperActionShortcut = config.Bind("Controls", "SuperActionShortcut",
                 new KeyboardShortcut(KeyCode.LeftAlt),
-                "Hold this shortcut while clicking an inventory item or Craft to use the Super action.");
+                "Hold this shortcut for Super Stack, Craft, Refuel, Feed, or Build.");
         }
 
+        // Restores the default configuration values.
         internal void RestoreDefaults(ConfigFile config)
         {
             bool saveOnConfigSet = config.SaveOnConfigSet;

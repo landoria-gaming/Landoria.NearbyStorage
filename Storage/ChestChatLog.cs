@@ -28,11 +28,23 @@ namespace Landoria.SuperStorage
             float bestDistance = 4f;
             foreach (Sign sign in Object.FindObjectsByType<Sign>(FindObjectsSortMode.None))
             {
-                if (sign == null) continue;
+                if (sign == null)
+                {
+                    continue;
+                }
+
                 float distance = (sign.transform.position - chest.transform.position).sqrMagnitude;
-                if (distance > bestDistance) continue;
+                if (distance > bestDistance)
+                {
+                    continue;
+                }
+
                 string text = SignText(sign);
-                if (string.IsNullOrWhiteSpace(text)) continue;
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    continue;
+                }
+
                 closest = sign;
                 bestDistance = distance;
             }

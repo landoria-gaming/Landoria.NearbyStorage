@@ -33,6 +33,7 @@ namespace Landoria.SuperStorage
         {
             ConfigWatcher.Update();
             ButtonHalo.Update();
+            BuildingUiRefresh.Update();
             InventoryMoveFeed.Update();
         }
 
@@ -45,7 +46,11 @@ namespace Landoria.SuperStorage
             CraftState.Reset();
             RecipeListRefreshPatch.Reset();
             TargetedStack.Reset();
+            GroundSource.Reset();
             RefuelContext.Reset();
+            FeedContext.Reset();
+            BuildingState.Reset();
+            BuildingUiRefresh.Reset();
             _harmony?.UnpatchSelf();
             _harmony = null;
             Instance = null;

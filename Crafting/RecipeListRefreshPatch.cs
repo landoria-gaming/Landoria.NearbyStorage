@@ -23,9 +23,16 @@ namespace Landoria.SuperStorage
             }
 
             bool checking = CraftState.Checking;
-            if (checking == _lastChecking) return;
+            if (checking == _lastChecking)
+            {
+                return;
+            }
+
             _lastChecking = checking;
-            if (!InventoryGui.IsVisible() || UpdatePanel == null) return;
+            if (!InventoryGui.IsVisible() || UpdatePanel == null)
+            {
+                return;
+            }
 
             try { UpdatePanel.Invoke(__instance, new object[] { false }); }
             catch (Exception error) { Debug.LogError("Super Storage recipe refresh failed: " + error); }

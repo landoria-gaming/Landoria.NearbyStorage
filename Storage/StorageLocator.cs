@@ -10,6 +10,8 @@ namespace Landoria.SuperStorage
     {
         private static readonly System.Reflection.FieldInfo CurrentContainerField =
             AccessTools.Field(typeof(InventoryGui), "m_currentContainer");
+        private static readonly System.Reflection.MethodInfo LoadContainer =
+            AccessTools.Method(typeof(Container), "Load");
         private static readonly List<Container> Cached = new List<Container>();
         private static float _nextScan;
         private static Player _cachedPlayer;
@@ -42,7 +44,10 @@ namespace Landoria.SuperStorage
 
             foreach (Container chest in Cached)
             {
-                if (Eligible(chest, player, current, radius)) result.Add(chest);
+                if (Eligible(chest, player, current, radius))
+                {
+                    result.Add(chest);
+                }
             }
 
             result.Sort((a, b) =>
@@ -84,6 +89,42 @@ namespace Landoria.SuperStorage
             return root.GetComponent<ZNetView>();
         }
 
+        // Claims an eligible chest and refreshes its inventory before withdrawal.
+        internal static bool TryClaimAndLoad(Container chest, Player player)
+        {
+            if (player == null || Plugin.Instance == null || LoadContainer == null ||
+                !Eligible(chest, player, CurrentContainer(), Plugin.Instance.Settings.Radius.Value))
+            {
+                return false;
+            }
+
+            try
+            {
+                ZNetView view = View(chest);
+                if (view == null || !view.IsValid())
+                {
+                    return false;
+                }
+
+                view.ClaimOwnership();
+                if (!view.IsOwner())
+                {
+                    return false;
+                }
+
+                if (chest != CurrentContainer())
+                {
+                    LoadContainer.Invoke(chest, null);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         // Restricts storage to built chest prefabs, excluding private storage.
         private static bool IsChest(Container chest)
         {
@@ -95,7 +136,7 @@ namespace Landoria.SuperStorage
             }
 
             return name.StartsWith("piece_chest", StringComparison.OrdinalIgnoreCase) &&
-                !name.Contains("private") && !name.Contains("barrel") && !name.Contains("warderobe");
+                !name.Contains("private") && !name.Contains("warderobe");
         }
     }
 }

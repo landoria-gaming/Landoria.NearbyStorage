@@ -19,9 +19,15 @@ namespace Landoria.SuperStorage
                 !SuperActionInput.MatchesItemClick(mod) ||
                 grid.GetInventory() != player.GetInventory() ||
                 DragField.GetValue(__instance) != null)
+            {
                 return true;
+            }
 
-            if (!TargetedStack.Running) Plugin.Instance.StartCoroutine(TargetedStack.Run(item));
+            if (!TargetedStack.Running)
+            {
+                Plugin.Instance.StartCoroutine(TargetedStack.Run(item));
+            }
+
             return false;
         }
     }
