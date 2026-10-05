@@ -91,7 +91,10 @@ namespace Landoria.SuperStorage
         {
             if (_drop != null)
             {
-                return GroundSource.RemoveOne(_drop, _player, _groundItem);
+                string source = StorageUseLog.Source(null, _drop);
+                bool removed = GroundSource.RemoveOne(_drop, _player, _groundItem);
+                if (removed) { StorageUseLog.Report(source, _fuel, 1); }
+                return removed;
             }
 
             if (_chest == null || _player == null ||
@@ -107,7 +110,9 @@ namespace Landoria.SuperStorage
                 return false;
             }
 
+            string label = StorageUseLog.Source(_chest, null);
             _chest.GetInventory().RemoveItem(_fuel, 1);
+            StorageUseLog.Report(label, _fuel, 1);
             return true;
         }
 

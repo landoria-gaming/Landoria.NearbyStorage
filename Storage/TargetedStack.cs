@@ -287,11 +287,17 @@ namespace Landoria.SuperStorage
         // Reports one total per destination after all matching sources are processed.
         private static void ReportMoves()
         {
+            if (ReportOrder.Count == 0)
+            {
+                return;
+            }
+
+            int remaining = StorageUseLog.Remaining(_player, _selectedItem.m_shared.m_name);
             foreach (Container chest in ReportOrder)
             {
                 if (chest != null)
                 {
-                    ChestChatLog.Report(chest, _selectedItem, MovedByChest[chest]);
+                    ChestChatLog.Report(chest, _selectedItem, MovedByChest[chest], remaining);
                 }
             }
         }

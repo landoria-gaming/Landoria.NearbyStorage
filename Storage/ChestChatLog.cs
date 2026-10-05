@@ -2,13 +2,20 @@ using UnityEngine;
 
 namespace Landoria.SuperStorage
 {
-    // Writes one local chat line for each chest that receives clicked items.
+    // Formats one movement notification for each container receiving items.
     internal static class ChestChatLog
     {
         // Reports item and count, using the chest type only when no sign is nearby.
-        internal static void Report(Container chest, ItemDrop.ItemData item, int amount)
+        internal static void Report(Container chest, ItemDrop.ItemData item, int amount, int total)
         {
             string itemName = Localization.instance.Localize(item.m_shared.m_name);
+            string destination = Label(chest);
+            MovementNotification.Add($"{destination} : +{amount} {itemName} ({total})");
+        }
+
+        // Names a container by its nearest sign or its type and map position.
+        internal static string Label(Container chest)
+        {
             string destination = ClosestSign(chest);
             if (destination == null)
             {
@@ -16,9 +23,13 @@ namespace Landoria.SuperStorage
                 Vector3 position = chest.transform.position;
                 destination = $"{chestName} · ({Mathf.RoundToInt(position.x)}, {Mathf.RoundToInt(position.z)})";
             }
-            string quantity = amount == 1 ? "" : $" x {amount}";
-            InventoryMoveFeed.Add($"{itemName}{quantity} → {destination}");
-            Chat.instance?.AddString($"<color=#FFB75B>{itemName}</color><color=white>{quantity} → </color><color=#FFB75B>{destination}</color>");
+            return destination;
+        }
+
+        // Names a container for the browser without showing map coordinates.
+        internal static string ShortLabel(Container chest)
+        {
+            return ClosestSign(chest) ?? Localization.instance.Localize(chest.GetHoverName());
         }
 
         // Chooses the nearest nonempty sign within two meters of the chest.

@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 namespace Landoria.SuperStorage
 {
-    // Shows recent storage transfers in white below the player's inventory panel.
-    internal static class InventoryMoveFeed
+    // Shows short-lived storage moves below the player's inventory panel.
+    internal static class MovementNotification
     {
         private const float HoldDuration = 5f;
         private const float FadeDuration = 1f;
         private const float Gap = 3f;
 
-        private static readonly List<InventoryMoveEntry> Entries = new List<InventoryMoveEntry>();
+        private static readonly List<MovementNotificationEntry> Entries = new List<MovementNotificationEntry>();
         private static RectTransform _root;
         private static InventoryGui _gui;
 
-        // Adds one line for a chest that actually received items.
+        // Adds one temporary line for a committed storage move.
         internal static void Add(string message)
         {
             if (!EnsureRoot())
@@ -24,7 +24,7 @@ namespace Landoria.SuperStorage
                 return;
             }
 
-            GameObject line = new GameObject("SuperStorageMove", typeof(RectTransform), typeof(TextMeshProUGUI));
+            GameObject line = new GameObject("MovementNotificationLine", typeof(RectTransform), typeof(TextMeshProUGUI));
             line.transform.SetParent(_root, false);
             RectTransform rect = (RectTransform)line.transform;
             rect.anchorMin = new Vector2(0f, 1f);
@@ -40,7 +40,7 @@ namespace Landoria.SuperStorage
             text.textWrappingMode = TextWrappingModes.Normal;
             text.raycastTarget = false;
             text.text = message;
-            Entries.Add(new InventoryMoveEntry { Text = text, Started = Time.unscaledTime });
+            Entries.Add(new MovementNotificationEntry { Text = text, Started = Time.unscaledTime });
             Update();
         }
 
@@ -64,7 +64,7 @@ namespace Landoria.SuperStorage
                 Entries.RemoveAt(i);
             }
 
-            _root.gameObject.SetActive(InventoryGui.IsVisible() && Entries.Count > 0);
+            _root.gameObject.SetActive(Entries.Count > 0);
             if (!_root.gameObject.activeSelf)
             {
                 return;
@@ -72,7 +72,7 @@ namespace Landoria.SuperStorage
 
             PositionRoot();
             float offset = 0f;
-            foreach (InventoryMoveEntry entry in Entries)
+            foreach (MovementNotificationEntry entry in Entries)
             {
                 float age = Time.unscaledTime - entry.Started;
                 entry.Text.color = new Color(1f, 1f, 1f,
@@ -102,7 +102,7 @@ namespace Landoria.SuperStorage
 
             Dispose();
             _gui = gui;
-            GameObject overlay = new GameObject("SuperStorageMoveFeed", typeof(RectTransform), typeof(LayoutElement));
+            GameObject overlay = new GameObject("MovementNotifications", typeof(RectTransform), typeof(LayoutElement));
             Transform parent = gui.m_inventoryRoot.parent != null ?
                 gui.m_inventoryRoot.parent : gui.transform;
             overlay.transform.SetParent(parent, false);

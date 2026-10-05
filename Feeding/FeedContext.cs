@@ -133,7 +133,10 @@ namespace Landoria.SuperStorage
         {
             if (_drop != null)
             {
-                return amount == 1 && GroundSource.RemoveOne(_drop, _player, _item);
+                string source = StorageUseLog.Source(null, _drop);
+                bool removed = amount == 1 && GroundSource.RemoveOne(_drop, _player, _item);
+                if (removed) { StorageUseLog.Report(source, _item.m_shared.m_name, 1); }
+                return removed;
             }
 
             if (_chest == null || _item == null || amount != 1 ||
@@ -149,7 +152,10 @@ namespace Landoria.SuperStorage
                 return false;
             }
 
-            return _chest.GetInventory().RemoveOneItem(_item);
+            string label = StorageUseLog.Source(_chest, null);
+            bool result = _chest.GetInventory().RemoveOneItem(_item);
+            if (result) { StorageUseLog.Report(label, _item.m_shared.m_name, 1); }
+            return result;
         }
 
         // Clears the active context.

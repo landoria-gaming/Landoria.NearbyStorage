@@ -1,53 +1,59 @@
 # Super Storage
 
-Stack a selected inventory item into nearby chests, and craft, build, refuel, or feed nearby objects from nearby supplies.
+Stack a selected inventory item into nearby storage, and craft, build, refuel, or feed nearby objects from nearby supplies.
 
 ## Features
 
 ### Super Stack
 
-Open your inventory and hold Left Alt while clicking an item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible chests that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same chest, then another matching chest. No chest needs to be open. **Place Stacks** keeps its normal Valheim behavior.
+Open your inventory and hold Left Alt while clicking an item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible storage containers that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same container, then another matching container. No container needs to be open. **Place Stacks** keeps its normal Valheim behavior.
 
-Each chest that receives items gets one local chat line with the total moved from your inventory and the ground, in the form `Item x amount → Sign`, using the nearest sign within 2 meters. If no sign is nearby, the line shows the chest type and its X/Z coordinates instead. If no matching chest exists, the item stays in your inventory and an on-screen message appears.
-
-The same transfer lines appear in white below the player inventory, with each new line underneath the previous one. Each line stays for 5 seconds, then fades out.
+Movement notifications show each container that receives items as `Sign : +5 Wood (420)`. The number in parentheses is the nearby stock after the move. If no sign is within 2 meters, the line shows the container type and its X/Z coordinates. If no matching container exists, the item stays in your inventory and an on-screen message appears.
 
 ### Super Craft
 
-Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby chests, and ground drops, in that order. Chests are checked from nearest to farthest. By default, Super Craft leaves one of each ingredient type in every chest so Super Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount.
+Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby storage containers, and ground drops, in that order. Containers are checked from nearest to farthest. By default, Super Craft leaves one of each ingredient type in every container so Super Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount.
+
+Withdrawal notifications show `Sign : -4 Wood (416)`. Ground items use their X/Z position as the source. Each notification fades out after a few seconds.
+
+### Nearby Stock
+
+Opening the inventory also shows nearby accessible container contents below the player inventory. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Ctrl-click to move it directly to your inventory, or Shift-click to split it. Hovering an item lists each contributing container by its nearest sign, or its container type, followed by distance and quantity. Choose a category on the left, filter by name, and sort by name or quantity in either direction.
 
 ### Super Refuel
 
-Hold Left Alt while using a fuelable object to draw one fuel item from a nearby chest or ground drop when your inventory has none. Chests are checked before ground drops. This covers fireplaces, torches, braziers, smelters, cooking stations, and shield generators. The object's normal capacity checks, messages, and effects still apply.
+Hold Left Alt while using a fuelable object to draw one fuel item from a nearby storage container or ground drop when your inventory has none. Containers are checked before ground drops. This covers fireplaces, torches, braziers, smelters, cooking stations, and shield generators. The object's normal capacity checks, messages, and effects still apply.
 
 ### Super Feed
 
-Hold Left Alt and use an input point to supply one item from a nearby chest or ground drop when your inventory has no suitable item. Chests are checked before ground drops. This covers ore and other inputs for smelters, charcoal kilns, blast furnaces, windmills, and spinning wheels; food for cooking stations; ingredients for fermenters; and ammunition for turrets. The object's normal capacity and item type checks still apply.
+Hold Left Alt and use an input point to supply one item from a nearby storage container or ground drop when your inventory has no suitable item. Containers are checked before ground drops. This covers ore and other inputs for smelters, charcoal kilns, blast furnaces, windmills, and spinning wheels; food for cooking stations; ingredients for fermenters; and ammunition for turrets. The object's normal capacity and item type checks still apply.
 
-For a charcoal kiln, wood is chosen in this order across your inventory, nearby chests, and ground drops: wood, core wood, then fine wood. For each type, your inventory is used before chests and ground drops.
+For a charcoal kiln, wood is chosen in this order across your inventory, nearby storage containers, and ground drops: wood, core wood, then fine wood. For each type, your inventory is used before containers and ground drops.
 
 ### Super Build
 
-Hold Left Alt while placing with the hammer or planting with the cultivator to use materials and seeds from your inventory, nearby chests, and ground drops. Resources are removed only after a successful placement. The `KeepOneIngredientPerChest` setting leaves one of each resource type in every chest.
+Hold Left Alt while placing with the hammer or planting with the cultivator to use materials and seeds from your inventory, nearby storage containers, and ground drops. Resources are removed only after a successful placement. The `KeepOneIngredientPerChest` setting leaves one of each resource type in every container.
 
 ### Are excluded
 
-- Private chests are excluded.
-- Chests protected by a ward you cannot access, or in use by another player, are excluded.
-- Only built chest prefabs, including storage barrels, are scanned; vehicle storage, wardrobes, and world loot chests are excluded.
+- Private storage belonging to another player is excluded; your own private chests are included.
+- Storage protected by a ward you cannot access, or in use by another player, is excluded.
+- Storage on carts and boats is included. Item stands, armor stands, and tombstones are excluded.
 
 
 ## Controls
 
 | Control | Action |
 |---|---|
-| `Left Alt` + click an inventory item | Stack that item and matching ground items into nearby chests that already contain its type |
+| `Left Alt` + click an inventory item | Stack that item and matching ground items into nearby containers that already contain its type |
 | Click **Place Stacks** | Use Valheim's normal stack action |
-| `Left Alt` + click **Craft** | Craft using ingredients from nearby chests and ground drops |
-| `Left Alt` + `Shift` + click **Craft x N** | Craft using ingredients from nearby chests and ground drops (N times) |
-| `Left Alt` + use a fuelable object | Refuel from a nearby chest or ground drop if your inventory has no fuel |
-| `Left Alt` + use a machine input | Add a suitable item from a nearby chest or ground drop if your inventory has none |
-| `Left Alt` + place with the hammer or cultivator | Build or plant using your inventory, nearby chests, and ground drops |
+| `Left Alt` + click **Craft** | Craft using ingredients from nearby containers and ground drops |
+| `Left Alt` + `Shift` + click **Craft x N** | Craft using ingredients from nearby containers and ground drops (N times) |
+| `Left Alt` + use a fuelable object | Refuel from a nearby container or ground drop if your inventory has no fuel |
+| `Left Alt` + use a machine input | Add a suitable item from a nearby container or ground drop if your inventory has none |
+| `Left Alt` + place with the hammer or cultivator | Build or plant using your inventory, nearby containers, and ground drops |
+| `Tab` | Open the inventory and Nearby Stock browser |
+| Click, `Ctrl` + click, or `Shift` + click a Nearby Stock item | Pick up, transfer, or split one real stack |
 
 ## Configuration
 
@@ -56,8 +62,8 @@ Changes to this file reload automatically while the game is running. Deleting it
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| `SearchRadius` | `60` | Search radius in meters around the player for chests and ground drops; accepts 20 to 100. |
-| `KeepOneIngredientPerChest` | `true` | Leave one of each resource type in every chest during Super Craft and Super Build. |
+| `SearchRadius` | `60` | Search radius in meters around the player for storage and ground drops; accepts 20 to 100. |
+| `KeepOneIngredientPerChest` | `true` | Leave one of each resource type in every container during Super Craft and Super Build. |
 | `SuperActionShortcut` | `LeftAlt` | Hold this shortcut while clicking an inventory item or Craft, or using a fuelable object or machine input. |
 
 ## Contact

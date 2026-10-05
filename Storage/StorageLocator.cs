@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Landoria.SuperStorage
 {
-    // Finds player-accessible chest instances near the local player.
+    // Finds accessible storage containers near the local player.
     internal static class StorageLocator
     {
         private static readonly System.Reflection.FieldInfo CurrentContainerField =
@@ -16,14 +16,14 @@ namespace Landoria.SuperStorage
         private static float _nextScan;
         private static Player _cachedPlayer;
 
-        // Returns the chest currently open in the inventory UI.
+        // Returns the container currently open in the inventory UI.
         internal static Container CurrentContainer()
         {
             return InventoryGui.instance == null ? null :
                 CurrentContainerField?.GetValue(InventoryGui.instance) as Container;
         }
 
-        // Returns eligible chests ordered by distance from the player.
+        // Returns eligible containers ordered by distance from the player.
         internal static List<Container> Nearby(Player player)
         {
             var result = new List<Container>();
@@ -56,16 +56,16 @@ namespace Landoria.SuperStorage
             return result;
         }
 
-        // Checks the chest type, range, privacy, ward, and network use state.
+        // Checks the container type, range, access, ward, and use state.
         internal static bool Eligible(Container chest, Player player, Container current, float radius)
         {
-            if (chest == null || player == null || !IsChest(chest))
+            if (chest == null || player == null || IsExcluded(chest))
             {
                 return false;
             }
 
             if ((chest.transform.position - player.transform.position).sqrMagnitude > radius * radius ||
-                chest.m_privacy != Container.PrivacySetting.Public ||
+                !CanAccess(chest) ||
                 (chest.m_checkGuardStone && !PrivateArea.CheckAccess(chest.transform.position, 0f, false)))
             {
                 return false;
@@ -77,8 +77,29 @@ namespace Landoria.SuperStorage
                 return false;
             }
 
-            bool inUse = chest.IsInUse() || view.GetZDO().GetInt(ZDOVars.s_inUse) == 1;
+            bool wagonInUse = chest.m_wagon != null && chest.m_wagon.InUse() &&
+                !chest.m_wagon.IsAttached(player);
+            bool inUse = chest.IsInUse() || view.GetZDO().GetInt(ZDOVars.s_inUse) == 1 ||
+                wagonInUse;
             return !inUse || chest == current;
+        }
+
+        // Mirrors vanilla access for public and player-owned private containers.
+        private static bool CanAccess(Container chest)
+        {
+            if (chest.m_privacy == Container.PrivacySetting.Public)
+            {
+                return true;
+            }
+
+            if (chest.m_privacy != Container.PrivacySetting.Private || Game.instance == null)
+            {
+                return false;
+            }
+
+            PlayerProfile profile = Game.instance.GetPlayerProfile();
+            Piece piece = chest.GetComponent<Piece>();
+            return profile != null && piece != null && piece.GetCreator() == profile.GetPlayerID();
         }
 
         // Gets the network view used by this container.
@@ -89,7 +110,7 @@ namespace Landoria.SuperStorage
             return root.GetComponent<ZNetView>();
         }
 
-        // Claims an eligible chest and refreshes its inventory before withdrawal.
+        // Claims an eligible container and refreshes its inventory before withdrawal.
         internal static bool TryClaimAndLoad(Container chest, Player player)
         {
             if (player == null || Plugin.Instance == null || LoadContainer == null ||
@@ -125,18 +146,12 @@ namespace Landoria.SuperStorage
             }
         }
 
-        // Restricts storage to built chest prefabs, excluding private storage.
-        private static bool IsChest(Container chest)
+        // Keeps stands and tombstones outside shared storage.
+        private static bool IsExcluded(Container chest)
         {
-            string name = chest.gameObject.name;
-            int clone = name.IndexOf("(Clone)", StringComparison.Ordinal);
-            if (clone >= 0)
-            {
-                name = name.Substring(0, clone);
-            }
-
-            return name.StartsWith("piece_chest", StringComparison.OrdinalIgnoreCase) &&
-                !name.Contains("private") && !name.Contains("warderobe");
+            return chest.GetComponentInParent<ItemStand>() != null ||
+                chest.GetComponentInParent<ArmorStand>() != null ||
+                chest.GetComponentInParent<TombStone>() != null;
         }
     }
 }
