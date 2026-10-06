@@ -28,7 +28,7 @@ namespace Landoria.NearbyStorage
             Logger.LogInfo($"{PluginName} {PluginVersion} loaded.");
         }
 
-        // Keeps the Craft highlight in sync with the configured Super shortcut.
+        // Keeps the Craft highlight in sync with the configured Nearby Storage shortcut.
         private void Update()
         {
             ConfigWatcher.Update();

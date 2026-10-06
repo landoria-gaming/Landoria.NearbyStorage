@@ -57,7 +57,7 @@ namespace Landoria.NearbyStorage
             return player != null && recipe != null && multiplier >= 1;
         }
 
-        // Finds one quality with sufficient combined stock, then allocates sources.
+        // Finds one quality with sufficient combined supply, then allocates sources.
         private static bool TryRequirement(CraftPlan plan, StorageSupply supply,
             Piece.Requirement requirement, int need, bool single)
         {

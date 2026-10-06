@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Landoria.NearbyStorage
 {
-    // Creates the stock browser's frame, controls, and scroll areas.
+    // Creates the nearby storage panel's frame, controls, and scroll areas.
     internal static partial class NearbyStorageDialog
     {
         private const float GridTopPadding = 6f;
@@ -105,7 +105,7 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Keeps the native field aligned with the stock grid.
+        // Keeps the native field aligned with the item grid.
         private static void PlaceFilter(RectTransform box)
         {
             box.anchorMin = new Vector2(0f, 1f);
@@ -195,7 +195,7 @@ namespace Landoria.NearbyStorage
             CreateScrollbar(scroll);
         }
 
-        // Captures a second click anywhere on the stock panel during a nearby drag.
+        // Captures a second click anywhere on the nearby storage panel during a nearby drag.
         private static void CreateDragCancelOverlay()
         {
             _dragCancelOverlay = Rect("Cancel nearby drag", _root, Vector2.zero);

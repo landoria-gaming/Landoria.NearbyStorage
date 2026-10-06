@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Refreshes build icons when the Super shortcut changes state.
+    // Refreshes build icons when the Nearby Storage shortcut changes state.
     internal static class BuildingUiRefresh
     {
         private static readonly System.Reflection.MethodInfo RefreshHudIcons =
             AccessTools.Method(typeof(Hud), "UpdatePieceBuildStatusAll");
         private static bool _lastHeld;
 
-        // Refreshes the UI when the Super shortcut changes.
+        // Refreshes the UI when the Nearby Storage shortcut changes.
         internal static void Update()
         {
             Player player = Player.m_localPlayer;
@@ -20,7 +20,7 @@ namespace Landoria.NearbyStorage
                 _lastHeld = false;
                 return;
             }
-            bool held = SuperActionInput.IsHeld();
+            bool held = NearbyStorageActionInput.IsHeld();
             if (held == _lastHeld)
             {
                 return;

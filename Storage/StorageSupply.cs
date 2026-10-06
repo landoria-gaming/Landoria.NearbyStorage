@@ -130,7 +130,7 @@ namespace Landoria.NearbyStorage
             return need;
         }
 
-        // Counts unreserved inventory stock and leaves one of each chest item.
+        // Counts unreserved inventory items and leaves one of each chest item.
         internal static int AvailableInventory(CraftPlan plan, Inventory inventory, Container chest,
             string name, int quality)
         {

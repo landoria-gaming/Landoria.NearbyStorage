@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Adds nearby chest stock to vanilla's crafting requirement check.
+    // Adds items in nearby chests to vanilla's crafting requirement check.
     [HarmonyPatch(typeof(Player), nameof(Player.HaveRequirements),
         new[] { typeof(Recipe), typeof(bool), typeof(int), typeof(int) })]
     internal static class RequirementPatch

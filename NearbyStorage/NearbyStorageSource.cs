@@ -1,6 +1,6 @@
 namespace Landoria.NearbyStorage
 {
-    // Records one container's contribution to an aggregated stock item.
+    // Records one container's contribution to an aggregated nearby item.
     internal sealed class NearbyStorageSource
     {
         internal Container Chest;

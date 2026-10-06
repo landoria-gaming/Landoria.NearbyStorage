@@ -99,7 +99,7 @@ namespace Landoria.NearbyStorage
             target.fontStyle = source.fontStyle;
         }
 
-        // Applies the native item-slot background to one stock card.
+        // Applies the native item-slot background to one nearby item card.
         private static void StyleSlot(Image image)
         {
             InventoryElement element = SlotElement();

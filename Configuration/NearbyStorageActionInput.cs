@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Handles super action input.
-    internal static class SuperActionInput
+    // Handles nearby storage action input.
+    internal static class NearbyStorageActionInput
     {
         // Checks the configured key and all configured modifiers.
         internal static bool IsHeld()
@@ -14,7 +14,7 @@ namespace Landoria.NearbyStorage
                 return false;
             }
 
-            KeyboardShortcut shortcut = Plugin.Instance.Settings.SuperActionShortcut.Value;
+            KeyboardShortcut shortcut = Plugin.Instance.Settings.NearbyStorageShortcut.Value;
             if (shortcut.MainKey == KeyCode.None || !ZInput.GetKey(shortcut.MainKey))
             {
                 return false;

@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace Landoria.NearbyStorage
 {
-    // Keeps a stock browser drag alive when no vanilla container is open.
+    // Keeps a nearby storage panel drag alive when no vanilla container is open.
     [HarmonyPatch(typeof(InventoryGui), "UpdateContainer")]
     internal static class NearbyStorageDragPatch
     {

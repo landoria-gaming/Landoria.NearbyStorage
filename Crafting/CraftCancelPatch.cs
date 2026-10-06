@@ -8,7 +8,7 @@ namespace Landoria.NearbyStorage
     [HarmonyPatch(typeof(InventoryGui), "OnCraftCancelPressed")]
     internal static class CraftCancelPatch
     {
-        // Clears a pending Super Craft.
+        // Clears a pending Nearby Storage Craft.
         private static void Postfix()
         {
             CraftState.Reset();

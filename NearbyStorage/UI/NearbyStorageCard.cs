@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Landoria.NearbyStorage
 {
-    // Forwards pointer hover from a stock card to its tooltip.
+    // Forwards pointer hover from a nearby item card to its tooltip.
     internal sealed class NearbyStorageCard : MonoBehaviour, IPointerDownHandler,
         IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
@@ -25,7 +25,7 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Accepts a held inventory drag over the same stock item.
+        // Accepts a held inventory drag over the same nearby item.
         public void OnDrop(PointerEventData eventData)
         {
             if (NearbyStorageTransfer.TryDropOn(Item)) { eventData.Use(); }

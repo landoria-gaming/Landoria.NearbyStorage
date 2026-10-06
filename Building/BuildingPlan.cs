@@ -3,7 +3,7 @@ namespace Landoria.NearbyStorage
     // Allocates a build piece's resources through the shared storage supply.
     internal static class BuildingPlan
     {
-        // Checks whether the selected piece can use Super Build.
+        // Checks whether the selected piece can use Nearby Storage Build.
         internal static bool IsBuildPiece(Player player, Piece piece)
         {
             return player != null && player.InPlaceMode() && piece != null;

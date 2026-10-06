@@ -15,7 +15,7 @@ namespace Landoria.NearbyStorage
         internal static void Begin(Humanoid user, IEnumerable<ItemDrop> fuels)
         {
             Reset();
-            if (!SuperActionInput.IsHeld() || user == null || user != Player.m_localPlayer ||
+            if (!NearbyStorageActionInput.IsHeld() || user == null || user != Player.m_localPlayer ||
                 fuels == null)
             {
                 return;
@@ -50,7 +50,7 @@ namespace Landoria.NearbyStorage
             _fuel = source.Name;
         }
 
-        // Lists allowed fuels while keeping carried fuel ahead of chest stock.
+        // Lists allowed fuels while keeping carried fuel ahead of items in chests.
         private static List<string> AvailableFuelNames(Inventory inventory, IEnumerable<ItemDrop> fuels)
         {
             var names = new List<string>();

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Landoria.NearbyStorage
 {
-    // Renders aggregated item cards in the stock browser.
+    // Renders aggregated item cards in the nearby storage panel.
     internal static partial class NearbyStorageDialog
     {
         // Replaces the cards with the current filtered snapshot.

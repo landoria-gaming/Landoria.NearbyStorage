@@ -10,7 +10,7 @@ namespace Landoria.NearbyStorage
         private const float DefaultRadius = 60f;
         internal ConfigEntry<float> Radius { get; }
         internal ConfigEntry<bool> KeepOneIngredientPerChest { get; }
-        internal ConfigEntry<KeyboardShortcut> SuperActionShortcut { get; }
+        internal ConfigEntry<KeyboardShortcut> NearbyStorageShortcut { get; }
 
         // Binds the search radius in meters.
         internal ModConfigFile(ConfigFile config)
@@ -19,10 +19,10 @@ namespace Landoria.NearbyStorage
                 new ConfigDescription("Radius around the player for nearby storage and ground items, in meters.",
                     new AcceptableValueRange<float>(20f, 100f)));
             KeepOneIngredientPerChest = config.Bind("General", "KeepOneIngredientPerChest", true,
-                "Keep at least one of each ingredient type in every storage container during Super Craft and Super Build.");
-            SuperActionShortcut = config.Bind("Controls", "SuperActionShortcut",
+                "Keep at least one of each ingredient type in every storage container during Nearby Storage Craft and Nearby Storage Build.");
+            NearbyStorageShortcut = config.Bind("Controls", "NearbyStorageShortcut",
                 new KeyboardShortcut(KeyCode.LeftAlt),
-                "Hold this shortcut for Super Craft, Refuel, Feed, or Build.");
+                "Hold this shortcut to use nearby storage while crafting, building, refueling, or feeding.");
         }
 
         // Restores the default configuration values.
@@ -34,7 +34,7 @@ namespace Landoria.NearbyStorage
             {
                 Radius.Value = DefaultRadius;
                 KeepOneIngredientPerChest.Value = true;
-                SuperActionShortcut.Value = new KeyboardShortcut(KeyCode.LeftAlt);
+                NearbyStorageShortcut.Value = new KeyboardShortcut(KeyCode.LeftAlt);
             }
             finally
             {

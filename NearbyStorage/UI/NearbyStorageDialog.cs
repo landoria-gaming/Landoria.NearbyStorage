@@ -20,7 +20,7 @@ namespace Landoria.NearbyStorage
         private static int _category;
         private static string _fingerprint;
         private static bool _dirtyView = true;
-        private static bool _hasStock;
+        private static bool _hasNearbyItems;
         private static string _dragKey;
         private static string _scrollToDragKey;
         private static bool _scrollCategoryToSelection;
@@ -29,9 +29,9 @@ namespace Landoria.NearbyStorage
 
         internal static bool FilterFocused => _root != null && _root.gameObject.activeInHierarchy &&
             _filter != null && _filter.isActiveAndEnabled && _filter.isFocused;
-        internal static bool IsOpen => _root != null && _root.gameObject.activeInHierarchy && _hasStock;
+        internal static bool IsOpen => _root != null && _root.gameObject.activeInHierarchy && _hasNearbyItems;
 
-        // Creates, positions, and refreshes the stock browser while Tab is open.
+        // Creates, positions, and refreshes nearby storage while Tab is open.
         internal static void Update()
         {
             InventoryGui gui = InventoryGui.instance;
@@ -56,8 +56,8 @@ namespace Landoria.NearbyStorage
             Position();
             UpdateDragFocus();
             if (Time.unscaledTime >= _nextRefresh) { Refresh(); }
-            _root.gameObject.SetActive(_hasStock);
-            if (_hasStock) { UpdateVisibleDialog(gui); }
+            _root.gameObject.SetActive(_hasNearbyItems);
+            if (_hasNearbyItems) { UpdateVisibleDialog(gui); }
         }
 
         // Tracks inventory and nearby storage drags for the visible grid.
@@ -89,7 +89,7 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Keeps stock clickable while placing the split dialog in front.
+        // Keeps nearby items clickable while placing the split dialog in front.
         private static void UpdateVisibleDialog(InventoryGui gui)
         {
             if (_dragCancelOverlay != null)
@@ -97,10 +97,10 @@ namespace Landoria.NearbyStorage
                 _dragCancelOverlay.gameObject.SetActive(_nearbyDragKey != null);
             }
             int inventoryIndex = gui.m_inventoryRoot.GetSiblingIndex();
-            int stockIndex = _root.GetSiblingIndex();
+            int dialogIndex = _root.GetSiblingIndex();
             bool splitOpen = gui.m_splitDialog?.IsActive == true;
-            if ((splitOpen && stockIndex > inventoryIndex) ||
-                (!splitOpen && stockIndex < inventoryIndex))
+            if ((splitOpen && dialogIndex > inventoryIndex) ||
+                (!splitOpen && dialogIndex < inventoryIndex))
             {
                 _root.SetSiblingIndex(inventoryIndex);
             }
@@ -125,7 +125,7 @@ namespace Landoria.NearbyStorage
             _nextRefresh = Time.unscaledTime + 0.5f;
             if (_cards == null || Player.m_localPlayer == null) { return; }
             List<NearbyStorageItem> items = NearbyStorageCatalog.Read(Player.m_localPlayer);
-            _hasStock = items.Count > 0;
+            _hasNearbyItems = items.Count > 0;
             bool unmatchedDrag = _dragKey != null &&
                 !items.Exists(item => item.Key == _dragKey);
             bool categoryHasItems = _category >= 0 && items.Exists(item =>
@@ -216,7 +216,7 @@ namespace Landoria.NearbyStorage
             _gui = null;
             _fingerprint = null;
             _dirtyView = true;
-            _hasStock = false;
+            _hasNearbyItems = false;
             _dragKey = null;
             _scrollToDragKey = null;
             _scrollCategoryToSelection = false;

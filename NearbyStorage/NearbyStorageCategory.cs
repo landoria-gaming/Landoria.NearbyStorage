@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Landoria.NearbyStorage
 {
-    // Maps Valheim item types to the stock browser's fixed categories.
+    // Maps Valheim item types to the nearby storage panel's fixed categories.
     internal static class NearbyStorageCategory
     {
         private static readonly HashSet<string> Valuables = new HashSet<string>(StringComparer.Ordinal)

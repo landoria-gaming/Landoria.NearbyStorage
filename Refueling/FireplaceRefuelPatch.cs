@@ -9,7 +9,7 @@ namespace Landoria.NearbyStorage
         // Handles the FireplaceRefuelPatch action before Valheim runs it.
         private static void Prefix(Fireplace __instance, Humanoid user, ref bool alt)
         {
-            if (!SuperActionInput.IsHeld() || user != Player.m_localPlayer ||
+            if (!NearbyStorageActionInput.IsHeld() || user != Player.m_localPlayer ||
                 !__instance.m_canRefill || __instance.m_infiniteFuel)
             {
                 return;

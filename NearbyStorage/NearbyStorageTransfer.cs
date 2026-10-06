@@ -69,7 +69,7 @@ namespace Landoria.NearbyStorage
             NearbyStorageDialog.RefreshSoon();
         }
 
-        // Runs the targeted Super Stack when an inventory item lands on its stock card.
+        // Runs the targeted Nearby Storage Stack when an inventory item lands on its nearby item card.
         internal static bool TryDropOn(NearbyStorageItem target)
         {
             Player player = Player.m_localPlayer;
@@ -108,7 +108,7 @@ namespace Landoria.NearbyStorage
             SetupDrag?.Invoke(InventoryGui.instance, new object[] { null, null, 1 });
         }
 
-        // Recognizes a drag started by the aggregate stock browser.
+        // Recognizes a drag started by the aggregate nearby storage panel.
         internal static bool IsTracked(Inventory inventory, ItemDrop.ItemData item)
         {
             return inventory != null && inventory == _trackedInventory &&

@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace Landoria.NearbyStorage
 {
-    // Adds nearby chest stock to vanilla's building requirement check.
+    // Adds items in nearby chests to vanilla's building requirement check.
     [HarmonyPatch(typeof(Player), nameof(Player.HaveRequirements),
         typeof(Piece), typeof(Player.RequirementMode))]
     internal static class BuildingRequirementsPatch
@@ -14,7 +14,7 @@ namespace Landoria.NearbyStorage
         {
             if (!__result && (mode == Player.RequirementMode.CanBuild ||
                     mode == Player.RequirementMode.CanAlmostBuild) &&
-                __instance == Player.m_localPlayer && SuperActionInput.IsHeld() &&
+                __instance == Player.m_localPlayer && NearbyStorageActionInput.IsHeld() &&
                 BuildingPlan.IsBuildPiece(__instance, piece))
             {
                 __result = BuildingPlan.Build(__instance, piece) != null;

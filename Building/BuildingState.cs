@@ -21,7 +21,7 @@ namespace Landoria.NearbyStorage
         internal static bool Prepare(Player player, Piece piece)
         {
             Reset();
-            if (player != Player.m_localPlayer || !SuperActionInput.IsHeld() ||
+            if (player != Player.m_localPlayer || !NearbyStorageActionInput.IsHeld() ||
                 !BuildingPlan.IsBuildPiece(player, piece) || player.NoCostCheat() ||
                 ZoneSystem.instance.GetGlobalKey(piece.FreeBuildKey()))
             {

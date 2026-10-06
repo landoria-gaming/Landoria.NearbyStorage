@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Tracks one Super Craft from button click through recipe completion.
+    // Tracks one Nearby Storage Craft from button click through recipe completion.
     internal static class CraftState
     {
         private static readonly System.Reflection.FieldInfo SelectedField =
@@ -27,15 +27,15 @@ namespace Landoria.NearbyStorage
         internal static bool Consuming { get; private set; }
         internal static CraftPlan Plan { get; private set; }
 
-        // Enables resource checks while the Super shortcut is held or a craft is in progress.
+        // Enables resource checks while the Nearby Storage shortcut is held or a craft is in progress.
         internal static bool Checking => Plugin.Instance != null && InventoryGui.IsVisible() &&
-            (SuperActionInput.IsHeld() || Armed);
+            (NearbyStorageActionInput.IsHeld() || Armed);
 
         // Stops a click silently if nearby resources have already disappeared.
         internal static bool Arm(InventoryGui gui)
         {
             Reset();
-            if (!SuperActionInput.IsHeld())
+            if (!NearbyStorageActionInput.IsHeld())
             {
                 return true;
             }
@@ -89,7 +89,7 @@ namespace Landoria.NearbyStorage
             return Plan != null && Plan.StillAvailable(player);
         }
 
-        // Consumes the recorded ingredients instead of vanilla's player-only stock.
+        // Consumes the recorded ingredients instead of vanilla's player inventory.
         internal static void Consume()
         {
             if (Plan == null || Consuming)

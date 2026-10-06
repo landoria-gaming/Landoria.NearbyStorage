@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Rebuilds vanilla's recipe list when Super Craft availability changes.
+    // Rebuilds vanilla's recipe list when Nearby Storage Craft availability changes.
     [HarmonyPatch(typeof(InventoryGui), "Update")]
     internal static class RecipeListRefreshPatch
     {

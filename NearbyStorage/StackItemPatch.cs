@@ -14,13 +14,13 @@ namespace Landoria.NearbyStorage
             ItemDrop.ItemData item, InventoryGrid.Modifier mod)
         {
             Player player = Player.m_localPlayer;
-            bool stockControlClick = NearbyStorageDialog.IsOpen &&
+            bool storageControlClick = NearbyStorageDialog.IsOpen &&
                 mod == InventoryGrid.Modifier.Move &&
                 (ZInput.GetKey(UnityEngine.KeyCode.LeftControl) ||
                  ZInput.GetKey(UnityEngine.KeyCode.RightControl));
             if (item?.m_shared == null ||
                 player == null || player.IsTeleporting() || !InventoryGui.IsVisible() ||
-                !stockControlClick ||
+                !storageControlClick ||
                 grid.GetInventory() != player.GetInventory() ||
                 DragField.GetValue(__instance) != null)
             {
@@ -29,7 +29,7 @@ namespace Landoria.NearbyStorage
 
             if (!TargetedStack.Running && !NearbyStorageDeposit.Running)
             {
-                Plugin.Instance.StartCoroutine(TargetedStack.Run(item, stockControlClick));
+                Plugin.Instance.StartCoroutine(TargetedStack.Run(item, storageControlClick));
             }
 
             return false;

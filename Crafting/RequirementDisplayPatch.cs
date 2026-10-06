@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Shows nearby chest stock in vanilla's ingredient availability indicator.
+    // Shows items in nearby chests in vanilla's ingredient availability indicator.
     [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.SetupRequirement))]
     internal static class RequirementDisplayPatch
     {
@@ -17,9 +17,9 @@ namespace Landoria.NearbyStorage
                 return;
             }
 
-            bool superCraft = craft && CraftState.Checking;
-            bool superBuild = player.InPlaceMode() && SuperActionInput.IsHeld();
-            if (!superCraft && !superBuild)
+            bool nearbyCraft = craft && CraftState.Checking;
+            bool nearbyBuild = player.InPlaceMode() && NearbyStorageActionInput.IsHeld();
+            if (!nearbyCraft && !nearbyBuild)
             {
                 return;
             }

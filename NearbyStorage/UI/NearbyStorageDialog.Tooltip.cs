@@ -16,7 +16,7 @@ namespace Landoria.NearbyStorage
         // Creates a native-looking popup without intercepting inventory input.
         private static void CreateTooltip()
         {
-            _tooltip = Rect("Stock tooltip", _root, new Vector2(TooltipWidth, 100f));
+            _tooltip = Rect("Storage tooltip", _root, new Vector2(TooltipWidth, 100f));
             Image background = _tooltip.gameObject.AddComponent<Image>();
             background.color = new Color(0f, 0f, 0f, 0.947f);
             background.raycastTarget = false;

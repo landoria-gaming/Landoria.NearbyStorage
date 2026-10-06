@@ -4,32 +4,32 @@ Stack a selected inventory item into nearby storage, and craft, build, refuel, o
 
 ## Features
 
-### Super Stack
+### Nearby Storage Stack
 
 With Nearby Storage visible, Ctrl-click an inventory item or drop it onto the matching Nearby Storage item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible storage containers that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same container, then another matching container. No container needs to be open. **Place Stacks** keeps its normal Valheim behavior.
 
 A Ctrl-click with no matching destination leaves the item in your inventory without a message.
 
-### Super Craft
+### Nearby Storage Craft
 
-Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby storage containers, and ground drops, in that order. Containers are checked from nearest to farthest. By default, Super Craft leaves one of each ingredient type in every container so Super Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount.
+Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby storage containers, and ground drops, in that order. Containers are checked from nearest to farthest. By default, Nearby Storage Craft leaves one of each ingredient type in every container so Nearby Storage Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount.
 
 
 ### Nearby Storage
 
 Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Storage hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Shift-click to split it, or Ctrl-click to transfer it directly when it is the only stack. Ctrl-click also opens the split dialog when multiple stacks contribute to the displayed quantity. Hovering an item shows its description and each contributing container's icon, nearest sign or container type, distance, and quantity. Choose a category on the left and filter by name. Items appear in name order.
 
-### Super Refuel
+### Nearby Storage Refuel
 
 Hold Left Alt while using a fuelable object to draw one fuel item from a nearby storage container or ground drop when your inventory has none. Containers are checked before ground drops. This covers fireplaces, torches, braziers, smelters, cooking stations, and shield generators. The object's normal capacity checks, messages, and effects still apply.
 
-### Super Feed
+### Nearby Storage Feed
 
 Hold Left Alt and use an input point to supply one item from a nearby storage container or ground drop when your inventory has no suitable item. Containers are checked before ground drops. This covers ore and other inputs for smelters, charcoal kilns, blast furnaces, windmills, and spinning wheels; food for cooking stations; ingredients for fermenters; and ammunition for turrets. The object's normal capacity and item type checks still apply.
 
 For a charcoal kiln, wood is chosen in this order across your inventory, nearby storage containers, and ground drops: wood, core wood, then fine wood. For each type, your inventory is used before containers and ground drops.
 
-### Super Build
+### Nearby Storage Build
 
 Hold Left Alt while placing with the hammer or planting with the cultivator to use materials and seeds from your inventory, nearby storage containers, and ground drops. Resources are removed only after a successful placement. The `KeepOneIngredientPerChest` setting leaves one of each resource type in every container.
 
@@ -63,8 +63,8 @@ Changes to this file reload automatically while the game is running. Deleting it
 | Setting | Default | Description |
 | --- | --- | --- |
 | `SearchRadius` | `60` | Search radius in meters around the player for storage and ground drops; accepts 20 to 100. |
-| `KeepOneIngredientPerChest` | `true` | Leave one of each resource type in every container during Super Craft and Super Build. |
-| `SuperActionShortcut` | `LeftAlt` | Hold this shortcut while clicking Craft, building, or using a fuelable object or machine input. |
+| `KeepOneIngredientPerChest` | `true` | Leave one of each resource type in every container during Nearby Storage Craft and Nearby Storage Build. |
+| `NearbyStorageShortcut` | `LeftAlt` | Hold this shortcut while clicking Craft, building, or using a fuelable object or machine input. |
 
 ## Contact
 

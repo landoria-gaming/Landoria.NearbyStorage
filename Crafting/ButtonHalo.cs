@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Landoria.NearbyStorage
 {
-    // Tints Valheim's own button_glow sprite for Super Craft.
+    // Tints Valheim's own button_glow sprite for Nearby Storage Craft.
     internal static class ButtonHalo
     {
         private static Image _craft;
@@ -13,7 +13,7 @@ namespace Landoria.NearbyStorage
         internal static void Update()
         {
             bool active = InventoryGui.IsVisible() && Player.m_localPlayer != null &&
-                SuperActionInput.IsHeld();
+                NearbyStorageActionInput.IsHeld();
             InventoryGui gui = InventoryGui.instance;
             if (gui == null)
             {
@@ -101,11 +101,11 @@ namespace Landoria.NearbyStorage
         }
 
         // Adds a glow image behind the button graphic.
-        private static Image CreateGlow(Image oldGlow, Button button)
+        private static Image CreateGlow(Image existingGlow, Button button)
         {
-            if (oldGlow != null)
+            if (existingGlow != null)
             {
-                Object.Destroy(oldGlow.gameObject);
+                Object.Destroy(existingGlow.gameObject);
             }
 
             GameObject overlay = new GameObject("NearbyStorageGlow", typeof(RectTransform), typeof(Image));

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Deposits a dragged inventory item into chests represented by another stock item.
+    // Deposits a dragged inventory item into chests represented by another nearby item.
     internal static class NearbyStorageDeposit
     {
         private static readonly HashSet<Container> Expired = new HashSet<Container>();

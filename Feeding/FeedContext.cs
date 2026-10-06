@@ -15,7 +15,7 @@ namespace Landoria.NearbyStorage
         internal static void Begin(Humanoid user)
         {
             Reset();
-            if (user == Player.m_localPlayer && SuperActionInput.IsHeld())
+            if (user == Player.m_localPlayer && NearbyStorageActionInput.IsHeld())
             {
                 _player = Player.m_localPlayer;
             }

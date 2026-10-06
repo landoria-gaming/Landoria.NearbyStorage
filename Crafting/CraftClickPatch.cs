@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Remembers the Super shortcut at the initial Craft click and through the timer.
+    // Remembers the Nearby Storage shortcut at the initial Craft click and through the timer.
     [HarmonyPatch(typeof(InventoryGui), "OnCraftPressed")]
     internal static class CraftClickPatch
     {

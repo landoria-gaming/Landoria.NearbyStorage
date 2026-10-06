@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Routes Super Craft resource debits through the prepared plan.
+    // Routes Nearby Storage Craft resource debits through the prepared plan.
     [HarmonyPatch(typeof(Player), nameof(Player.ConsumeResources),
         new[] { typeof(Piece.Requirement[]), typeof(int), typeof(int), typeof(int) })]
     internal static class ResourceDebitPatch
