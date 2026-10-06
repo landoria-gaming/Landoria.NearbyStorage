@@ -207,21 +207,11 @@ namespace Landoria.SuperStorage
         // Removes the committed amounts after vanilla creates the result.
         internal void Consume()
         {
-            var consumed = new Dictionary<System.Tuple<string, string>, int>();
             foreach (Withdrawal step in Withdrawals)
             {
-                string source = step.Chest != null || step.Drop != null ?
-                    StorageUseLog.Source(step.Chest, step.Drop) : null;
                 if (step.Drop == null)
                 {
-                    int before = step.Chest == null ? 0 :
-                        step.Inventory.CountItems(step.Name, step.Quality);
                     step.Inventory.RemoveItem(step.Name, step.Amount, step.Quality);
-                    if (step.Chest != null)
-                    {
-                        int removed = before - step.Inventory.CountItems(step.Name, step.Quality);
-                        AddConsumed(consumed, source, step.Name, removed);
-                    }
                 }
                 else
                 {
@@ -229,22 +219,9 @@ namespace Landoria.SuperStorage
                     {
                         if (!GroundSource.RemoveOne(step.Drop, Player.m_localPlayer,
                             step.GroundItem)) { break; }
-                        AddConsumed(consumed, source, step.Name, 1);
                     }
                 }
             }
-            foreach (KeyValuePair<System.Tuple<string, string>, int> entry in consumed)
-            {
-                StorageUseLog.Report(entry.Key.Item1, entry.Key.Item2, entry.Value);
-            }
-        }
-
-        // Groups withdrawals by their actual source and item type.
-        private static void AddConsumed(Dictionary<System.Tuple<string, string>, int> totals,
-            string source, string name, int amount)
-        {
-            var key = System.Tuple.Create(source, name);
-            totals[key] = totals.TryGetValue(key, out int count) ? count + amount : amount;
         }
 
         // Tracks whether a selected ingredient came from a cheated item.

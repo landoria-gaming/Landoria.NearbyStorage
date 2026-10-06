@@ -22,7 +22,7 @@ namespace Landoria.SuperStorage
                 "Keep at least one of each ingredient type in every storage container during Super Craft and Super Build.");
             SuperActionShortcut = config.Bind("Controls", "SuperActionShortcut",
                 new KeyboardShortcut(KeyCode.LeftAlt),
-                "Hold this shortcut for Super Stack, Craft, Refuel, Feed, or Build.");
+                "Hold this shortcut for Super Craft, Refuel, Feed, or Build.");
         }
 
         // Restores the default configuration values.

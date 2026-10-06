@@ -2,21 +2,25 @@ using HarmonyLib;
 
 namespace Landoria.SuperStorage
 {
-    // Intercepts the inventory's native left-click handler for the Super item action.
+    // Intercepts Ctrl-click when the nearby stock browser is visible.
     [HarmonyPatch(typeof(InventoryGui), "OnSelectedItem")]
     internal static class StackItemPatch
     {
         private static readonly System.Reflection.FieldInfo DragField =
             AccessTools.Field(typeof(InventoryGui), "m_dragGo");
 
-        // Leaves normal, split, Ctrl-click, and container-grid actions to Valheim.
+        // Uses Ctrl-click for targeted stacking while nearby stock is visible.
         private static bool Prefix(InventoryGui __instance, InventoryGrid grid,
             ItemDrop.ItemData item, InventoryGrid.Modifier mod)
         {
             Player player = Player.m_localPlayer;
+            bool stockControlClick = NearbyStockDialog.IsOpen &&
+                mod == InventoryGrid.Modifier.Move &&
+                (ZInput.GetKey(UnityEngine.KeyCode.LeftControl) ||
+                 ZInput.GetKey(UnityEngine.KeyCode.RightControl));
             if (item?.m_shared == null ||
                 player == null || player.IsTeleporting() || !InventoryGui.IsVisible() ||
-                !SuperActionInput.MatchesItemClick(mod) ||
+                !stockControlClick ||
                 grid.GetInventory() != player.GetInventory() ||
                 DragField.GetValue(__instance) != null)
             {
@@ -25,7 +29,7 @@ namespace Landoria.SuperStorage
 
             if (!TargetedStack.Running)
             {
-                Plugin.Instance.StartCoroutine(TargetedStack.Run(item));
+                Plugin.Instance.StartCoroutine(TargetedStack.Run(item, stockControlClick));
             }
 
             return false;

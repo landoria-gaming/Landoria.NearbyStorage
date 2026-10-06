@@ -7,6 +7,9 @@ namespace Landoria.SuperStorage
     // Creates the stock browser's frame, controls, and scroll areas.
     internal static partial class NearbyStockDialog
     {
+        private const float GridTopPadding = 6f;
+        private const float GridLeftPadding = 6f;
+
         // Builds the browser beside Valheim's inventory UI hierarchy.
         private static void Create(InventoryGui gui)
         {
@@ -19,110 +22,170 @@ namespace Landoria.SuperStorage
             _root.anchorMin = _root.anchorMax = Vector2.zero;
             Image background = _root.gameObject.AddComponent<Image>();
             background.color = new Color(0.17f, 0.12f, 0.13f, 0.96f);
-            _root.SetAsLastSibling();
-            Label("Title", _root, "Nearby Stock", 22f, new Vector2(12f, -8f),
-                new Vector2(310f, 30f));
+            StylePanel(background);
+            _root.SetSiblingIndex(gui.m_inventoryRoot.GetSiblingIndex() + 1);
+            TextMeshProUGUI title = Label("Title", _root, "Nearby Stock", 25f,
+                new Vector2(10f, -9f), new Vector2(180f, 36f));
+            title.font = gui.m_containerName.font;
+            title.fontSharedMaterial = gui.m_containerName.fontSharedMaterial;
+            title.color = gui.m_containerName.color;
+            title.alignment = TextAlignmentOptions.Center;
             CreateFilter();
-            CreateSort();
             CreateCategories();
             CreateGrid();
             CreateTooltip();
-            PutSortOnTop();
             Position();
             RefreshSoon();
         }
 
-        // Keeps the expanded sorting menu above item cards.
-        private static void PutSortOnTop()
-        {
-            _root.Find("Sort")?.SetAsLastSibling();
-        }
-
-        // Aligns the dialog directly below the player inventory panel.
+        // Aligns the dialog with the visible inventory frame above it.
         private static void Position()
         {
             if (_root == null || _gui?.m_player == null) { return; }
+            RectTransform frame = _gui.m_player.Find("Bkg") as RectTransform ?? _gui.m_player;
             Vector3[] corners = new Vector3[4];
-            _gui.m_player.GetWorldCorners(corners);
+            frame.GetWorldCorners(corners);
             Vector3 bottomLeft = _root.parent.InverseTransformPoint(corners[0]);
+            Vector3 bottomRight = _root.parent.InverseTransformPoint(corners[3]);
             _root.localPosition = bottomLeft + new Vector3(0f, -8f, 0f);
-            _root.sizeDelta = new Vector2(Mathf.Max(500f, _gui.m_player.rect.width), 350f);
+            _root.sizeDelta = new Vector2(bottomRight.x - bottomLeft.x,
+                59f + GridTopPadding + 4f * SlotStep());
         }
 
         // Adds the localized free-text item filter.
         private static void CreateFilter()
         {
-            RectTransform box = Rect("Filter", _root, new Vector2(170f, 32f));
-            box.anchoredPosition = new Vector2(10f, -46f);
-            box.gameObject.AddComponent<Image>().color = new Color(0f, 0f, 0f, 0.48f);
+            BuildUi ui = Hud.instance?.m_buildUi;
+            Component source = ui == null ? null : SearchField?.GetValue(ui) as Component;
+            TMP_InputField native = source?.GetComponent<TMP_InputField>();
+            if (native != null)
+            {
+                GameObject clone = UnityEngine.Object.Instantiate(source.gameObject, _root, false);
+                clone.name = "Filter";
+                PlaceFilter(clone.transform as RectTransform);
+                _filter = clone.GetComponent<TMP_InputField>();
+                _filter.onValueChanged = new TMP_InputField.OnChangeEvent();
+                _filter.onEndEdit = new TMP_InputField.SubmitEvent();
+                _filter.onSubmit = new TMP_InputField.SubmitEvent();
+                _filter.SetTextWithoutNotify("");
+                if (_filter.placeholder is TMP_Text hint)
+                {
+                    hint.text = IsFrench() ? "FILTRE" : "FILTER";
+                }
+                _filter.onValueChanged.AddListener(_ => RefreshSoon());
+                HideFilterShortcutBadge(clone);
+                clone.SetActive(true);
+                return;
+            }
+            CreateFallbackFilter();
+        }
+
+        // Hides the native F badge while retaining the keyboard shortcut.
+        private static void HideFilterShortcutBadge(GameObject clone)
+        {
+            foreach (TMP_Text label in clone.GetComponentsInChildren<TMP_Text>(true))
+            {
+                if (label == _filter.textComponent || label == _filter.placeholder ||
+                    label.text.Trim() != "F") { continue; }
+                Transform badge = label.transform.parent == clone.transform ?
+                    label.transform : label.transform.parent;
+                badge.gameObject.SetActive(false);
+            }
+            foreach (Text label in clone.GetComponentsInChildren<Text>(true))
+            {
+                if (label.text.Trim() != "F") { continue; }
+                Transform badge = label.transform.parent == clone.transform ?
+                    label.transform : label.transform.parent;
+                badge.gameObject.SetActive(false);
+            }
+        }
+
+        // Keeps the native field aligned with the stock grid.
+        private static void PlaceFilter(RectTransform box)
+        {
+            box.anchorMin = new Vector2(0f, 1f);
+            box.anchorMax = new Vector2(1f, 1f);
+            box.pivot = new Vector2(0f, 1f);
+            box.offsetMin = new Vector2(200f, -45f);
+            box.offsetMax = new Vector2(-34f, -9f);
+        }
+
+        // Supplies a local field if the build menu has not created its search box.
+        private static void CreateFallbackFilter()
+        {
+            RectTransform box = Rect("Filter", _root, Vector2.zero);
+            PlaceFilter(box);
+            Image background = box.gameObject.AddComponent<Image>();
+            background.color = new Color(0f, 0f, 0f, 0.48f);
+            StyleFilter(background);
             _filter = box.gameObject.AddComponent<TMP_InputField>();
-            TextMeshProUGUI value = Label("Input", box, "", 15f,
-                new Vector2(7f, -5f), new Vector2(156f, 24f));
+            StyleFilterInteraction(_filter, background);
+            _filter.customCaretColor = true;
+            _filter.caretColor = Color.white;
+            _filter.caretWidth = 2;
+            RectTransform textArea = Rect("Text Area", box, Vector2.zero);
+            textArea.anchorMin = Vector2.zero;
+            textArea.anchorMax = Vector2.one;
+            textArea.offsetMin = Vector2.zero;
+            textArea.offsetMax = Vector2.zero;
+            textArea.gameObject.AddComponent<RectMask2D>();
+            _filter.textViewport = textArea;
+            TextMeshProUGUI value = Label("Input", textArea, "", 15f,
+                new Vector2(7f, -4f), new Vector2(146f, 24f));
+            StretchFilterText(value.rectTransform);
+            value.alignment = TextAlignmentOptions.MidlineLeft;
             value.raycastTarget = true;
             _filter.textComponent = value;
-            TextMeshProUGUI hint = Label("Hint", box, IsFrench() ? "Filtrer…" : "Filter…",
-                15f, new Vector2(7f, -5f), new Vector2(156f, 24f));
-            hint.color = new Color(1f, 1f, 1f, 0.55f);
+            TextMeshProUGUI hint = Label("Hint", textArea, IsFrench() ? "FILTRE" : "FILTER",
+                15f, new Vector2(7f, -4f), new Vector2(146f, 24f));
+            StretchFilterText(hint.rectTransform);
+            StyleFilterHint(hint);
+            hint.alignment = TextAlignmentOptions.MidlineLeft;
             _filter.placeholder = hint;
             _filter.onValueChanged.AddListener(_ => RefreshSoon());
         }
 
-        // Adds one button that opens the four sorting choices.
-        private static void CreateSort()
+        // Keeps filter text inside its width as the panel changes size.
+        private static void StretchFilterText(RectTransform rect)
         {
-            RectTransform box = Rect("Sort", _root, new Vector2(150f, 30f));
-            box.anchorMin = box.anchorMax = new Vector2(1f, 1f);
-            box.pivot = new Vector2(1f, 1f);
-            box.anchoredPosition = new Vector2(-10f, -48f);
-            box.gameObject.AddComponent<Image>().color = new Color(0f, 0f, 0f, 0.6f);
-            _sortText = Label("Sort label", box, SortLabel(_sort) + " ▾", 15f,
-                new Vector2(6f, -4f), new Vector2(138f, 24f));
-            box.gameObject.AddComponent<Button>().onClick.AddListener(() =>
-                _sortOptions.SetActive(!_sortOptions.activeSelf));
-            _sortOptions = new GameObject("Sort options", typeof(RectTransform));
-            _sortOptions.transform.SetParent(box, false);
-            RectTransform options = (RectTransform)_sortOptions.transform;
-            options.anchorMin = options.anchorMax = new Vector2(0f, 0f);
-            options.pivot = new Vector2(0f, 1f);
-            options.anchoredPosition = new Vector2(0f, -2f);
-            options.sizeDelta = new Vector2(150f, 120f);
-            for (int i = 0; i < 4; i++) { CreateSortOption(options, i); }
-            _sortOptions.SetActive(false);
-        }
-
-        // Adds a single choice to the sort dropdown.
-        private static void CreateSortOption(RectTransform parent, int index)
-        {
-            RectTransform row = Rect("Sort " + index, parent, new Vector2(150f, 30f));
-            row.anchoredPosition = new Vector2(0f, -index * 30f);
-            row.gameObject.AddComponent<Image>().color = new Color(0.13f, 0.1f, 0.1f, 0.98f);
-            Label("Text", row, SortLabel(index), 15f,
-                new Vector2(6f, -4f), new Vector2(138f, 24f));
-            row.gameObject.AddComponent<Button>().onClick.AddListener(() =>
-            {
-                _sort = index;
-                _sortText.text = SortLabel(index) + " ▾";
-                _sortOptions.SetActive(false);
-                RefreshSoon();
-            });
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.offsetMin = new Vector2(7f, 2f);
+            rect.offsetMax = new Vector2(-7f, -2f);
         }
 
         // Creates an inventory-style list of categories on the left.
         private static void CreateCategories()
         {
-            RectTransform list = Rect("Categories", _root, new Vector2(180f, 255f));
-            list.anchoredPosition = new Vector2(10f, -86f);
+            RectTransform list = Rect("Categories", _root, Vector2.zero);
+            list.anchorMin = new Vector2(0f, 0f);
+            list.anchorMax = new Vector2(0f, 1f);
+            list.offsetMin = new Vector2(10f, 10f);
+            list.offsetMax = new Vector2(190f, -49f);
+            Image listBackground = list.gameObject.AddComponent<Image>();
+            listBackground.color = new Color(0f, 0f, 0f, 0.72f);
+            listBackground.raycastTarget = false;
             for (int i = 0; i < NearbyStockCategory.French.Length; i++)
             {
                 int index = i;
                 RectTransform row = Rect("Category " + i, list, new Vector2(180f, 25f));
                 row.anchoredPosition = new Vector2(0f, -i * 25f);
-                row.gameObject.AddComponent<Image>().color = i == 0 ?
-                    new Color(0.25f, 0.43f, 0.6f, 0.9f) : new Color(0f, 0f, 0f, 0.3f);
+                Image image = row.gameObject.AddComponent<Image>();
+                image.color = Color.clear;
+                RectTransform selected = Rect("Selected", row, Vector2.zero);
+                selected.anchorMin = Vector2.zero;
+                selected.anchorMax = Vector2.one;
+                selected.offsetMin = selected.offsetMax = Vector2.zero;
+                StyleCategorySelection(selected.gameObject.AddComponent<Image>());
                 Label("Text", row, NearbyStockCategory.Label(i), 14f,
                     new Vector2(5f, -3f), new Vector2(174f, 22f));
-                row.gameObject.AddComponent<Button>().onClick.AddListener(() => SelectCategory(index));
+                Button button = row.gameObject.AddComponent<Button>();
+                button.transition = Selectable.Transition.None;
+                row.gameObject.AddComponent<NearbyStockCategoryHover>().Index = index;
+                button.onClick.AddListener(() => SelectCategory(index));
             }
+            SelectCategory(_category);
         }
 
         // Highlights the selected category and refreshes matching items.
@@ -132,10 +195,20 @@ namespace Landoria.SuperStorage
             Transform list = _root.Find("Categories");
             for (int i = 0; i < list.childCount; i++)
             {
-                list.GetChild(i).GetComponent<Image>().color = i == index ?
-                    new Color(0.25f, 0.43f, 0.6f, 0.9f) : new Color(0f, 0f, 0f, 0.3f);
+                SetCategoryHover(i, false);
             }
             RefreshSoon();
+        }
+
+        // Applies the selected or hovered color directly without button tinting.
+        internal static void SetCategoryHover(int index, bool hovered)
+        {
+            Transform row = _root?.Find("Categories")?.Find("Category " + index);
+            if (row == null) { return; }
+            row.Find("Selected")?.gameObject.SetActive(index == _category);
+            row.GetComponent<Image>().color = hovered && index != _category ?
+                new Color(0.45f, 0.44f, 0.44f, 0.9f) :
+                Color.clear;
         }
 
         // Creates the clipped card viewport with a drag-only scrollbar.
@@ -145,7 +218,9 @@ namespace Landoria.SuperStorage
             viewport.anchorMin = new Vector2(0f, 0f);
             viewport.anchorMax = new Vector2(1f, 1f);
             viewport.offsetMin = new Vector2(200f, 10f);
-            viewport.offsetMax = new Vector2(-25f, -85f);
+            viewport.offsetMax = new Vector2(-34f, -49f);
+            Image background = viewport.gameObject.AddComponent<Image>();
+            background.color = new Color(0.07f, 0.05f, 0.06f, 0.75f);
             viewport.gameObject.AddComponent<RectMask2D>();
             _cards = Rect("Items", viewport, Vector2.zero);
             _cards.anchorMin = new Vector2(0f, 1f);
@@ -156,7 +231,7 @@ namespace Landoria.SuperStorage
             scroll.viewport = viewport;
             scroll.content = _cards;
             scroll.horizontal = false;
-            scroll.scrollSensitivity = 20f;
+            scroll.scrollSensitivity = 640f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
             CreateScrollbar(scroll);
         }
@@ -167,14 +242,16 @@ namespace Landoria.SuperStorage
             RectTransform track = Rect("Items scrollbar", _root, Vector2.zero);
             track.anchorMin = new Vector2(1f, 0f);
             track.anchorMax = new Vector2(1f, 1f);
-            track.offsetMin = new Vector2(-20f, 10f);
-            track.offsetMax = new Vector2(-8f, -85f);
-            track.gameObject.AddComponent<Image>().color = new Color(0f, 0f, 0f, 0.4f);
+            track.offsetMin = new Vector2(-29f, 10f);
+            track.offsetMax = new Vector2(-8f, -49f);
+            Image trackImage = track.gameObject.AddComponent<Image>();
+            trackImage.color = new Color(0f, 0f, 0f, 0.4f);
             RectTransform handle = Rect("Handle", track, Vector2.zero);
             handle.anchorMin = Vector2.zero;
             handle.anchorMax = Vector2.one;
             Image image = handle.gameObject.AddComponent<Image>();
             image.color = new Color(1f, 0.65f, 0.2f, 0.9f);
+            StyleScrollbar(trackImage, image);
             Scrollbar bar = track.gameObject.AddComponent<Scrollbar>();
             bar.handleRect = handle;
             bar.targetGraphic = image;
@@ -201,8 +278,14 @@ namespace Landoria.SuperStorage
         {
             RectTransform rect = Rect(name, parent, dimensions);
             rect.anchoredPosition = position;
+            rect.gameObject.SetActive(false);
             TextMeshProUGUI label = rect.gameObject.AddComponent<TextMeshProUGUI>();
-            TMP_Text native = InventoryGui.instance?.m_recipeDecription;
+            TMP_Text native = name == "Quantity" ? SlotElement()?.m_amount :
+                InventoryGui.instance?.m_recipeDecription;
+            if (native == null || native.font == null)
+            {
+                native = InventoryGui.instance?.m_containerName;
+            }
             if (native != null)
             {
                 label.font = native.font;
@@ -213,6 +296,7 @@ namespace Landoria.SuperStorage
             label.color = Color.white;
             label.raycastTarget = false;
             label.textWrappingMode = TextWrappingModes.NoWrap;
+            rect.gameObject.SetActive(true);
             return label;
         }
 

@@ -35,7 +35,6 @@ namespace Landoria.SuperStorage
             ButtonHalo.Update();
             BuildingUiRefresh.Update();
             NearbyStockDialog.Update();
-            MovementNotification.Update();
         }
 
         // Cleans up patches and transient UI state.
@@ -44,7 +43,6 @@ namespace Landoria.SuperStorage
             ConfigWatcher.Dispose();
             ButtonHalo.Dispose();
             NearbyStockDialog.Dispose();
-            MovementNotification.Dispose();
             CraftState.Reset();
             RecipeListRefreshPatch.Reset();
             TargetedStack.Reset();

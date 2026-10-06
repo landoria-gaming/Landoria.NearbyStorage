@@ -9,19 +9,16 @@ namespace Landoria.SuperStorage
     internal static class TargetedStack
     {
         private static readonly HashSet<Container> Expired = new HashSet<Container>();
-        private static readonly Dictionary<Container, int> MovedByChest = new Dictionary<Container, int>();
-        private static readonly List<Container> ReportOrder = new List<Container>();
         private static Container _pending;
         private static ItemDrop.ItemData _item;
-        private static ItemDrop.ItemData _selectedItem;
         private static ItemDrop _drop;
         private static Player _player;
         private static int _moved;
         private static bool _foundMatch;
         internal static bool Running { get; private set; }
 
-        // Runs one pass after the Super shortcut was held at the item click.
-        internal static IEnumerator Run(ItemDrop.ItemData item)
+        // Runs one targeted stack pass for a selected inventory item.
+        internal static IEnumerator Run(ItemDrop.ItemData item, bool silentIfNoDestination = false)
         {
             Player player = Player.m_localPlayer;
             if (Running || player == null || !player.GetInventory().ContainsItem(item))
@@ -32,18 +29,14 @@ namespace Landoria.SuperStorage
             Running = true;
             _player = player;
             _item = item;
-            _selectedItem = item;
             _moved = 0;
             _foundMatch = false;
-            MovedByChest.Clear();
-            ReportOrder.Clear();
             try
             {
                 string selectedName = item.m_shared.m_name;
                 yield return MoveToChests(StorageLocator.Nearby(player));
                 yield return MoveGroundDrops(player, selectedName);
-                ReportMoves();
-                if (_moved == 0)
+                if (_moved == 0 && !silentIfNoDestination)
                 {
                     ShowNoDestination(player);
                 }
@@ -52,11 +45,8 @@ namespace Landoria.SuperStorage
             {
                 _pending = null;
                 _item = null;
-                _selectedItem = null;
                 _drop = null;
                 _player = null;
-                MovedByChest.Clear();
-                ReportOrder.Clear();
                 Running = false;
             }
         }
@@ -241,7 +231,7 @@ namespace Landoria.SuperStorage
             }
 
             DebitSource(source, moved);
-            RecordMove(chest, moved);
+            RecordMove(moved);
         }
 
         // Removes only the amount accepted by the destination chest.
@@ -268,37 +258,13 @@ namespace Landoria.SuperStorage
         }
 
         // Tracks the transfer and plays the normal inventory move effect.
-        private static void RecordMove(Container chest, int moved)
+        private static void RecordMove(int moved)
         {
             _moved += moved;
-            if (!MovedByChest.ContainsKey(chest))
-            {
-                MovedByChest[chest] = 0;
-                ReportOrder.Add(chest);
-            }
-            MovedByChest[chest] += moved;
             InventoryGui gui = InventoryGui.instance;
             if (gui != null)
             {
                 gui.m_moveItemEffects.Create(gui.transform.position, Quaternion.identity);
-            }
-        }
-
-        // Reports one total per destination after all matching sources are processed.
-        private static void ReportMoves()
-        {
-            if (ReportOrder.Count == 0)
-            {
-                return;
-            }
-
-            int remaining = StorageUseLog.Remaining(_player, _selectedItem.m_shared.m_name);
-            foreach (Container chest in ReportOrder)
-            {
-                if (chest != null)
-                {
-                    ChestChatLog.Report(chest, _selectedItem, MovedByChest[chest], remaining);
-                }
             }
         }
 
@@ -329,13 +295,10 @@ namespace Landoria.SuperStorage
         {
             _pending = null;
             _item = null;
-            _selectedItem = null;
             _drop = null;
             _player = null;
             _moved = 0;
             _foundMatch = false;
-            MovedByChest.Clear();
-            ReportOrder.Clear();
             Expired.Clear();
             Running = false;
         }
