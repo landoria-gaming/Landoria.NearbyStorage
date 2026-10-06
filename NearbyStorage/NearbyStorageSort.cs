@@ -7,6 +7,46 @@ namespace Landoria.NearbyStorage
     // Keeps items with a shared name word together within a category.
     internal static class NearbyStorageSort
     {
+        // Treats names sharing a meaningful word as one item family.
+        internal static bool Similar(string left, string right)
+        {
+            var words = new HashSet<string>(Words(left));
+            foreach (string word in Words(right))
+            {
+                if (words.Contains(word)) { return true; }
+            }
+            return false;
+        }
+
+        // Finds the nearest name when the clicked item is absent from storage.
+        internal static int ClosestIndex(List<NearbyStorageItem> items, string name)
+        {
+            if (items.Count == 0) { return -1; }
+            var words = new HashSet<string>(Words(name));
+            int bestIndex = 0;
+            int bestScore = -1;
+            for (int i = 0; i < items.Count; i++)
+            {
+                int score = 0;
+                foreach (string word in Words(items[i].Name))
+                {
+                    if (words.Contains(word)) { score += 100; }
+                }
+                int prefix = 0;
+                while (prefix < name.Length && prefix < items[i].Name.Length &&
+                    char.ToLowerInvariant(name[prefix]) ==
+                    char.ToLowerInvariant(items[i].Name[prefix]))
+                {
+                    prefix++;
+                }
+                score += prefix;
+                if (score <= bestScore) { continue; }
+                bestScore = score;
+                bestIndex = i;
+            }
+            return bestScore > 0 ? bestIndex : -1;
+        }
+
         internal static void Sort(List<NearbyStorageItem> items)
         {
             var frequency = new Dictionary<string, int>();

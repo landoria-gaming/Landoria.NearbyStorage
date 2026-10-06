@@ -6,18 +6,18 @@ Stack a selected inventory item into nearby storage, and craft, build, refuel, o
 
 ### Nearby Storage Stack
 
-With Nearby Storage visible, Ctrl-click an inventory item or drop it onto the matching Nearby Storage item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible storage containers that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same container, then another matching container. No container needs to be open. **Place Stacks** keeps its normal Valheim behavior.
+With Nearby Storage visible, Ctrl-click an inventory item or drag it anywhere onto the Nearby Storage panel. Both actions move that inventory stack into accessible nearby containers. The mod prefers containers holding the most identical items, then similar items, then items in the same category. Ties go to the nearest container. If no related items exist, it uses the nearest container with room. A full container is skipped and remaining items continue to the next destination. No container needs to be open. **Place Stacks** keeps its normal Valheim behavior.
 
-A Ctrl-click with no matching destination leaves the item in your inventory without a message.
+A Ctrl-click with no available space leaves the item in your inventory without a message.
 
 ### Nearby Storage Craft
 
-Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby storage containers, and ground drops, in that order. Containers are checked from nearest to farthest. By default, Nearby Storage Craft leaves one of each ingredient type in every container so Nearby Storage Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount.
+Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby storage containers, and ground drops, in that order. Containers are checked from nearest to farthest. By default, Nearby Storage Craft leaves one of each ingredient type in every container. Hold **Shift + Left Alt** for Valheim's multicraft amount.
 
 
 ### Nearby Storage
 
-Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Storage hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Shift-click to split it, or Ctrl-click to transfer it directly when it is the only stack. Ctrl-click also opens the split dialog when multiple stacks contribute to the displayed quantity. Hovering an item shows its description and each contributing container's icon, nearest sign or container type, distance, and quantity. Choose a category on the left and filter by name. Items appear in name order.
+Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Storage hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Shift-click to choose a quantity, or Ctrl-click to transfer one stack directly. Hovering an item shows its description and each contributing container's icon, nearest sign or container type, distance, and quantity. Choose a category on the left and filter by name. Items appear in name order.
 
 ### Nearby Storage Refuel
 
@@ -44,8 +44,8 @@ Hold Left Alt while placing with the hammer or planting with the cultivator to u
 
 | Control | Action |
 |---|---|
-| `Ctrl` + click an inventory item while Nearby Storage is visible | Stack that item and matching ground items into nearby containers that already contain its type |
-| Drop an inventory item onto the matching Nearby Storage item | Run the same targeted stack action |
+| `Ctrl` + click an inventory item while Nearby Storage is visible | Move it into the best available nearby container |
+| Drop an inventory item anywhere in Nearby Storage | Run the same transfer action |
 | Click **Place Stacks** | Use Valheim's normal stack action |
 | `Left Alt` + click **Craft** | Craft using ingredients from nearby containers and ground drops |
 | `Left Alt` + `Shift` + click **Craft x N** | Craft using ingredients from nearby containers and ground drops (N times) |

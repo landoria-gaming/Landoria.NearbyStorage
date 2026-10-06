@@ -47,7 +47,12 @@ namespace Landoria.NearbyStorage
         {
             if (_scrollToDragKey == null) { return; }
             int index = items.FindIndex(item => item.Key == _scrollToDragKey);
+            if (index < 0 && _scrollToSimilarName != null)
+            {
+                index = NearbyStorageSort.ClosestIndex(items, _scrollToSimilarName);
+            }
             _scrollToDragKey = null;
+            _scrollToSimilarName = null;
             if (index < 0) { return; }
             RectTransform viewport = _cards.parent as RectTransform;
             float viewHeight = viewport.rect.height;

@@ -25,6 +25,8 @@ namespace Landoria.NearbyStorage
             Image background = _root.gameObject.AddComponent<Image>();
             background.color = new Color(0.17f, 0.12f, 0.13f, 0.96f);
             StylePanel(background);
+            background.raycastTarget = true;
+            _root.gameObject.AddComponent<NearbyStoragePanelDrop>();
             _root.SetSiblingIndex(gui.m_inventoryRoot.GetSiblingIndex() + 1);
             TextMeshProUGUI title = Label("Title", _root, "Nearby Storage", 32f,
                 new Vector2(10f, -16f), new Vector2(570f, 35f));

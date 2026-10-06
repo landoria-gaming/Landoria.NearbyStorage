@@ -69,13 +69,13 @@ namespace Landoria.NearbyStorage
             NearbyStorageDialog.RefreshSoon();
         }
 
-        // Runs the targeted Nearby Storage Stack when an inventory item lands on its nearby item card.
-        internal static bool TryDropOn(NearbyStorageItem target)
+        // Sends an inventory drag to the same transfer used by Ctrl-click.
+        internal static bool TryDropInPanel()
         {
             Player player = Player.m_localPlayer;
             InventoryGui gui = InventoryGui.instance;
-            if (target == null || player == null || gui == null || player.IsTeleporting() ||
-                TargetedStack.Running || NearbyStorageDeposit.Running ||
+            if (player == null || gui == null || player.IsTeleporting() ||
+                NearbyStorageDeposit.Running ||
                 Plugin.Instance == null || SetupDrag == null)
             {
                 return false;
@@ -87,19 +87,8 @@ namespace Landoria.NearbyStorage
             {
                 return false;
             }
-            if (item.m_dropPrefab.name != target.Key)
-            {
-                if (NearbyStorageCatalog.Read(player).Exists(entry => entry.Key == item.m_dropPrefab.name))
-                {
-                    return false;
-                }
-                int amount = (int)(DragAmount?.GetValue(gui) ?? item.m_stack);
-                return NearbyStorageDeposit.TryStart(item, target, amount);
-            }
-            SetupDrag.Invoke(gui, new object[] { null, null, 1 });
-            Plugin.Instance.StartCoroutine(TargetedStack.Run(item));
-            NearbyStorageDialog.RefreshSoon();
-            return true;
+            int amount = (int)(DragAmount?.GetValue(gui) ?? item.m_stack);
+            return NearbyStorageDeposit.TryStart(item, amount, true);
         }
 
         // Releases the inventory drag after a destination has been selected.
@@ -140,7 +129,7 @@ namespace Landoria.NearbyStorage
                 {
                     continue;
                 }
-                Act(gui, player, source.Chest, inventory, item, entry.Count);
+                Act(gui, player, source.Chest, inventory, item);
                 NearbyStorageDialog.RefreshSoon();
                 return;
             }
@@ -161,11 +150,11 @@ namespace Landoria.NearbyStorage
 
         // Dispatches Ctrl, Shift, or plain click through vanilla inventory methods.
         private static void Act(InventoryGui gui, Player player, Container chest,
-            Inventory inventory, ItemDrop.ItemData item, int totalCount)
+            Inventory inventory, ItemDrop.ItemData item)
         {
             bool shift = ZInput.GetKey(KeyCode.LeftShift) || ZInput.GetKey(KeyCode.RightShift);
             bool control = ZInput.GetKey(KeyCode.LeftControl) || ZInput.GetKey(KeyCode.RightControl);
-            if (shift || (control && totalCount > item.m_stack && item.m_stack > 1))
+            if (shift)
             {
                 if (item.m_stack > 1)
                 {

@@ -18,17 +18,17 @@ namespace Landoria.NearbyStorage
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (!NearbyStorageTransfer.TryDropOn(Item))
+                if (!NearbyStorageTransfer.TryDropInPanel())
                 {
                     NearbyStorageTransfer.Select(Item);
                 }
             }
         }
 
-        // Accepts a held inventory drag over the same nearby item.
+        // Accepts an inventory drag over any nearby item.
         public void OnDrop(PointerEventData eventData)
         {
-            if (NearbyStorageTransfer.TryDropOn(Item)) { eventData.Use(); }
+            if (NearbyStorageTransfer.TryDropInPanel()) { eventData.Use(); }
         }
 
         // Shows the contributing containers while the pointer is over this card.

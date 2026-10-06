@@ -45,7 +45,6 @@ namespace Landoria.NearbyStorage
             NearbyStorageDialog.Dispose();
             CraftState.Reset();
             RecipeListRefreshPatch.Reset();
-            TargetedStack.Reset();
             NearbyStorageDeposit.Reset();
             GroundSource.Reset();
             RefuelContext.Reset();

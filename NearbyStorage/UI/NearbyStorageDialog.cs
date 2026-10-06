@@ -23,6 +23,7 @@ namespace Landoria.NearbyStorage
         private static bool _hasNearbyItems;
         private static string _dragKey;
         private static string _scrollToDragKey;
+        private static string _scrollToSimilarName;
         private static bool _scrollCategoryToSelection;
         private static string _nearbyDragKey;
         private static int _nearbyDragAmount;
@@ -30,6 +31,16 @@ namespace Landoria.NearbyStorage
         internal static bool FilterFocused => _root != null && _root.gameObject.activeInHierarchy &&
             _filter != null && _filter.isActiveAndEnabled && _filter.isFocused;
         internal static bool IsOpen => _root != null && _root.gameObject.activeInHierarchy && _hasNearbyItems;
+
+        // Selects and reveals the item targeted by an inventory Ctrl-click.
+        internal static void FocusInventoryItem(ItemDrop.ItemData item)
+        {
+            if (item?.m_shared == null || _root == null) { return; }
+            SelectCategory(NearbyStorageCategory.For(item));
+            _scrollToDragKey = item.m_dropPrefab?.name;
+            _scrollToSimilarName = Localization.instance.Localize(item.m_shared.m_name);
+            RefreshSoon();
+        }
 
         // Creates, positions, and refreshes nearby storage while Tab is open.
         internal static void Update()
@@ -76,7 +87,11 @@ namespace Landoria.NearbyStorage
                     }
                 }
                 _dragKey = dragKey;
-                _scrollToDragKey = dragKey;
+                if (dragKey != null)
+                {
+                    _scrollToDragKey = dragKey;
+                    _scrollToSimilarName = null;
+                }
                 RefreshSoon();
             }
             string nearbyDragKey = NearbyStorageTransfer.DraggedNearbyItemKey();
@@ -219,6 +234,7 @@ namespace Landoria.NearbyStorage
             _hasNearbyItems = false;
             _dragKey = null;
             _scrollToDragKey = null;
+            _scrollToSimilarName = null;
             _scrollCategoryToSelection = false;
             _nearbyDragKey = null;
             _nearbyDragAmount = 0;

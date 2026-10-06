@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Deposits a dragged inventory item into chests represented by another nearby item.
+    // Moves a selected inventory stack into the best nearby containers.
     internal static class NearbyStorageDeposit
     {
         private static readonly HashSet<Container> Expired = new HashSet<Container>();
@@ -16,65 +16,33 @@ namespace Landoria.NearbyStorage
         private static int _moved;
         internal static bool Running { get; private set; }
 
-        // Selects chests with room, prioritizing the dragged item's category.
-        internal static bool TryStart(ItemDrop.ItemData item, NearbyStorageItem target, int amount)
+        // Starts the same transfer for Ctrl-click and inventory drag-and-drop.
+        internal static bool TryStart(ItemDrop.ItemData item, int amount, bool clearDrag)
         {
             Player player = Player.m_localPlayer;
-            if (Running || TargetedStack.Running || player == null || target == null ||
+            if (Running || player == null ||
                 item == null || amount <= 0 || !player.GetInventory().ContainsItem(item))
             {
                 return false;
             }
-            List<Container> chests = Candidates(item, target, player);
+            NearbyStorageDialog.FocusInventoryItem(item);
+            List<Container> chests = Candidates(item, player);
             if (chests.Count == 0) { return false; }
-            NearbyStorageTransfer.ClearPlayerDrag();
+            if (clearDrag) { NearbyStorageTransfer.ClearPlayerDrag(); }
             Plugin.Instance.StartCoroutine(Run(item, player, amount, chests));
             return true;
         }
 
-        // Ranks only the containers that hold the card's item and have room.
-        private static List<Container> Candidates(ItemDrop.ItemData item, NearbyStorageItem target,
-            Player player)
+        // Ranks every eligible container that can accept the selected item.
+        private static List<Container> Candidates(ItemDrop.ItemData item, Player player)
         {
             var chests = new List<Container>();
-            float radius = Plugin.Instance.Settings.Radius.Value;
-            foreach (NearbyStorageSource source in target.Sources)
+            foreach (Container chest in StorageLocator.Nearby(player))
             {
-                Container chest = source.Chest;
-                if (StorageLocator.Eligible(chest, player, StorageLocator.CurrentContainer(), radius) &&
-                    Capacity(chest.GetInventory(), item) > 0 && !chests.Contains(chest))
-                {
-                    chests.Add(chest);
-                }
+                if (Capacity(chest.GetInventory(), item) > 0) { chests.Add(chest); }
             }
-            chests.Sort((a, b) => CompareChests(a, b, item, player));
+            chests.Sort((a, b) => NearbyStorageDestination.Compare(a, b, item, player));
             return chests;
-        }
-
-        // Uses total item count in the same category, then distance for ties.
-        private static int CompareChests(Container a, Container b, ItemDrop.ItemData item,
-            Player player)
-        {
-            int category = NearbyStorageCategory.For(item);
-            int count = CategoryCount(b, category).CompareTo(CategoryCount(a, category));
-            if (count != 0) { return count; }
-            float distanceA = (a.transform.position - player.transform.position).sqrMagnitude;
-            float distanceB = (b.transform.position - player.transform.position).sqrMagnitude;
-            return distanceA.CompareTo(distanceB);
-        }
-
-        // Counts units, including existing stacks, in the dragged item's category.
-        private static int CategoryCount(Container chest, int category)
-        {
-            int count = 0;
-            foreach (ItemDrop.ItemData item in chest.GetInventory().GetAllItems())
-            {
-                if (item != null && NearbyStorageCategory.For(item) == category)
-                {
-                    count += item.m_stack;
-                }
-            }
-            return count;
         }
 
         // Requests each chest through Valheim's normal ownership handshake.
@@ -94,11 +62,11 @@ namespace Landoria.NearbyStorage
                     if (!StorageLocator.Eligible(chest, player, StorageLocator.CurrentContainer(),
                         Plugin.Instance.Settings.Radius.Value)) { continue; }
                     yield return RequestChest(chest);
-                    if (_moved > 0) { break; }
                 }
             }
             finally
             {
+                if (_moved > 0) { NearbyStorageDialog.FocusInventoryItem(item); }
                 _pending = null;
                 _item = null;
                 _player = null;
@@ -167,7 +135,7 @@ namespace Landoria.NearbyStorage
         }
 
         // Counts free slots and compatible partial stacks.
-        private static int Capacity(Inventory inventory, ItemDrop.ItemData item)
+        internal static int Capacity(Inventory inventory, ItemDrop.ItemData item)
         {
             int capacity = inventory.GetEmptySlots() * item.m_shared.m_maxStackSize;
             foreach (ItemDrop.ItemData existing in inventory.GetAllItems())

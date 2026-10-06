@@ -27,10 +27,7 @@ namespace Landoria.NearbyStorage
                 return true;
             }
 
-            if (!TargetedStack.Running && !NearbyStorageDeposit.Running)
-            {
-                Plugin.Instance.StartCoroutine(TargetedStack.Run(item, storageControlClick));
-            }
+            NearbyStorageDeposit.TryStart(item, item.m_stack, false);
 
             return false;
         }
