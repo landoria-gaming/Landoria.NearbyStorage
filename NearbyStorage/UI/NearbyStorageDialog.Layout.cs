@@ -16,6 +16,7 @@ namespace Landoria.NearbyStorage
         private static void Create(InventoryGui gui)
         {
             _gui = gui;
+            _category = -1;
             Transform parent = gui.m_inventoryRoot.parent != null ?
                 gui.m_inventoryRoot.parent : gui.transform;
             _root = Rect("Nearby Storage", parent, new Vector2(590f, 350f));

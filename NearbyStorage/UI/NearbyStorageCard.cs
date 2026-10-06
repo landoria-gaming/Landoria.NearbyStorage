@@ -31,11 +31,11 @@ namespace Landoria.NearbyStorage
             if (NearbyStorageTransfer.TryDropInPanel()) { eventData.Use(); }
         }
 
-        // Shows the contributing containers while the pointer is over this card.
+        // Highlights immediately and schedules the tooltip after a pause.
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (Background != null) { Background.color = HoverColor; }
-            NearbyStorageDialog.ShowTooltip(Item);
+            NearbyStorageDialog.ScheduleTooltip(Item);
         }
 
         // Hides the card's contribution tooltip.

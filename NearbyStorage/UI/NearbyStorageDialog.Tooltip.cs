@@ -9,9 +9,13 @@ namespace Landoria.NearbyStorage
     {
         private const float TooltipWidth = 340f;
         private const float SourceRowHeight = 36f;
+        private const float TooltipDelay = 1f;
         private static TextMeshProUGUI _tooltipTitle;
         private static TextMeshProUGUI _tooltipDescription;
         private static RectTransform _tooltipSources;
+        private static NearbyStorageItem _hoverItem;
+        private static Vector3 _hoverPointerPosition;
+        private static float _hoverReadyAt;
 
         // Creates a native-looking popup without intercepting inventory input.
         private static void CreateTooltip()
@@ -33,14 +37,40 @@ namespace Landoria.NearbyStorage
             _tooltip.gameObject.SetActive(false);
         }
 
+        // Starts a new delay for the item under the pointer.
+        internal static void ScheduleTooltip(NearbyStorageItem item)
+        {
+            _hoverItem = item;
+            _hoverPointerPosition = ZInput.pointerPosition;
+            _hoverReadyAt = Time.unscaledTime + TooltipDelay;
+            if (_tooltip != null) { _tooltip.gameObject.SetActive(false); }
+        }
+
+        // Waits for one second without pointer movement before showing the item.
+        private static void UpdateTooltipHover()
+        {
+            if (_hoverItem == null || _tooltip == null) { return; }
+            Vector3 pointer = ZInput.pointerPosition;
+            if ((pointer - _hoverPointerPosition).sqrMagnitude > 1f)
+            {
+                _hoverPointerPosition = pointer;
+                _hoverReadyAt = Time.unscaledTime + TooltipDelay;
+                _tooltip.gameObject.SetActive(false);
+            }
+            if (!_tooltip.gameObject.activeSelf && Time.unscaledTime >= _hoverReadyAt)
+            {
+                ShowTooltip(_hoverItem);
+            }
+        }
+
         // Builds the description and all contributing storage rows.
-        internal static void ShowTooltip(NearbyStorageItem item)
+        private static void ShowTooltip(NearbyStorageItem item)
         {
             if (_tooltip == null || item?.Sample == null || Player.m_localPlayer == null) { return; }
             ClearTooltipSources();
             _tooltipTitle.text = item.Name;
             _tooltipDescription.text = Localization.instance.Localize(
-                item.Sample.m_shared.m_description);
+                item.Sample.GetTooltip());
             float descriptionHeight = Mathf.Max(26f, _tooltipDescription.GetPreferredValues(
                 _tooltipDescription.text, TooltipWidth - 24f, Mathf.Infinity).y);
             _tooltipDescription.rectTransform.sizeDelta =
@@ -142,6 +172,7 @@ namespace Landoria.NearbyStorage
 
         internal static void HideTooltip()
         {
+            _hoverItem = null;
             if (_tooltip != null) { _tooltip.gameObject.SetActive(false); }
         }
     }

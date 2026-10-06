@@ -22,7 +22,7 @@ namespace Landoria.NearbyStorage
         // Identifies an item currently carried from the player's inventory UI.
         internal static string DraggedPlayerItemKey()
         {
-            return DraggedPlayerItem()?.m_dropPrefab?.name;
+            return NearbyStorageItemKey.For(DraggedPlayerItem());
         }
 
         // Returns the item currently dragged from the player's inventory.
@@ -42,20 +42,13 @@ namespace Landoria.NearbyStorage
         internal static string DraggedNearbyItemKey()
         {
             InventoryGui gui = InventoryGui.instance;
-            if (gui == null || _trackedItem == null ||
+            if (gui == null || _trackedItem == null || _trackedChest == null ||
                 DragItem?.GetValue(gui) != _trackedItem ||
                 DragInventory?.GetValue(gui) != _trackedInventory)
             {
                 return null;
             }
-            return _trackedItem.m_dropPrefab?.name;
-        }
-
-        // Returns the number of items held from the nearby stack.
-        internal static int DraggedNearbyAmount()
-        {
-            return DraggedNearbyItemKey() == null ? 0 :
-                (int)(DragAmount?.GetValue(InventoryGui.instance) ?? 0);
+            return NearbyStorageItemKey.For(_trackedItem, _trackedChest);
         }
 
         // Cancels a nearby drag without moving anything from its source container.
@@ -117,30 +110,48 @@ namespace Landoria.NearbyStorage
             {
                 return;
             }
+            if (SelectStack(entry, player, gui, true)) { return; }
+            SelectStack(entry, player, gui, false);
+        }
+
+        // Looks across every source before falling back to partial stacks.
+        private static bool SelectStack(NearbyStorageItem entry, Player player,
+            InventoryGui gui, bool fullOnly)
+        {
             foreach (NearbyStorageSource source in entry.Sources)
             {
+                if (source.Chest == null ||
+                    FindStack(source.Chest.GetInventory(), source.Chest,
+                        entry.Key, fullOnly) == null)
+                {
+                    continue;
+                }
                 if (!StorageLocator.TryClaimAndLoad(source.Chest, player))
                 {
                     continue;
                 }
                 Inventory inventory = source.Chest.GetInventory();
-                ItemDrop.ItemData item = FindStack(inventory, entry.Key);
+                ItemDrop.ItemData item = FindStack(inventory, source.Chest,
+                    entry.Key, fullOnly);
                 if (item == null)
                 {
                     continue;
                 }
                 Act(gui, player, source.Chest, inventory, item);
                 NearbyStorageDialog.RefreshSoon();
-                return;
+                return true;
             }
+            return false;
         }
 
-        // Finds one live stack after claiming and reloading its container.
-        private static ItemDrop.ItemData FindStack(Inventory inventory, string key)
+        // Finds a full stack first, then any remaining partial stack.
+        private static ItemDrop.ItemData FindStack(Inventory inventory, Container chest,
+            string key, bool fullOnly)
         {
             foreach (ItemDrop.ItemData item in inventory.GetAllItems())
             {
-                if (item?.m_dropPrefab != null && item.m_dropPrefab.name == key && item.m_stack > 0)
+                if (NearbyStorageItemKey.For(item, chest) == key &&
+                    item.m_stack > 0 && (!fullOnly || item.m_stack >= item.m_shared.m_maxStackSize))
                 {
                     return item;
                 }

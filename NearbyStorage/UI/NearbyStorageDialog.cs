@@ -25,8 +25,8 @@ namespace Landoria.NearbyStorage
         private static string _scrollToDragKey;
         private static string _scrollToSimilarName;
         private static bool _scrollCategoryToSelection;
+        private static bool _selectFirstCategory = true;
         private static string _nearbyDragKey;
-        private static int _nearbyDragAmount;
 
         internal static bool FilterFocused => _root != null && _root.gameObject.activeInHierarchy &&
             _filter != null && _filter.isActiveAndEnabled && _filter.isFocused;
@@ -37,7 +37,7 @@ namespace Landoria.NearbyStorage
         {
             if (item?.m_shared == null || _root == null) { return; }
             SelectCategory(NearbyStorageCategory.For(item));
-            _scrollToDragKey = item.m_dropPrefab?.name;
+            _scrollToDragKey = NearbyStorageItemKey.For(item);
             _scrollToSimilarName = Localization.instance.Localize(item.m_shared.m_name);
             RefreshSoon();
         }
@@ -50,6 +50,7 @@ namespace Landoria.NearbyStorage
                 StorageLocator.CurrentContainer() != null)
             {
                 if (_root != null) { _root.gameObject.SetActive(false); }
+                HideTooltip();
                 _nextRefresh = 0f;
                 return;
             }
@@ -95,11 +96,9 @@ namespace Landoria.NearbyStorage
                 RefreshSoon();
             }
             string nearbyDragKey = NearbyStorageTransfer.DraggedNearbyItemKey();
-            int nearbyDragAmount = NearbyStorageTransfer.DraggedNearbyAmount();
-            if (_nearbyDragKey != nearbyDragKey || _nearbyDragAmount != nearbyDragAmount)
+            if (_nearbyDragKey != nearbyDragKey)
             {
                 _nearbyDragKey = nearbyDragKey;
-                _nearbyDragAmount = nearbyDragAmount;
                 RefreshSoon();
             }
         }
@@ -119,6 +118,7 @@ namespace Landoria.NearbyStorage
             {
                 _root.SetSiblingIndex(inventoryIndex);
             }
+            UpdateTooltipHover();
             PositionTooltip();
             if (_filter != null && !_filter.isFocused && ZInput.GetKeyDown(KeyCode.F))
             {
@@ -174,15 +174,29 @@ namespace Landoria.NearbyStorage
         {
             Transform list = _categoryContent;
             if (list == null) { return; }
-            int position = 0;
-            for (int pass = 0; pass < 2; pass++)
+            var order = new List<int>(occupied.Length);
+            for (int i = 0; i < occupied.Length; i++) { order.Add(i); }
+            order.Sort((a, b) =>
             {
-                for (int i = 0; i < occupied.Length; i++)
+                if (occupied[a] != occupied[b]) { return occupied[a] ? -1 : 1; }
+                return string.Compare(NearbyStorageCategory.Label(a),
+                    NearbyStorageCategory.Label(b), StringComparison.CurrentCultureIgnoreCase);
+            });
+            for (int position = 0; position < order.Count; position++)
+            {
+                RectTransform row = list.Find("Category " + order[position]) as RectTransform;
+                if (row != null)
                 {
-                    if (occupied[i] != (pass == 0)) { continue; }
-                    RectTransform row = list.Find("Category " + i) as RectTransform;
-                    if (row != null) { row.anchoredPosition = new Vector2(0f, -position++ * CategoryRowHeight); }
+                    row.anchoredPosition = new Vector2(0f, -position * CategoryRowHeight);
                 }
+            }
+            if (_selectFirstCategory && order.Count > 0 && occupied[order[0]])
+            {
+                _category = order[0];
+                _categoryContent.anchoredPosition = Vector2.zero;
+                _scrollCategoryToSelection = false;
+                _selectFirstCategory = false;
+                for (int i = 0; i < occupied.Length; i++) { SetCategoryHover(i, false); }
             }
             for (int i = 0; i < occupied.Length; i++)
             {
@@ -202,7 +216,8 @@ namespace Landoria.NearbyStorage
             var value = new StringBuilder();
             foreach (NearbyStorageItem item in items)
             {
-                value.Append(item.Key).Append(':').Append(item.Count).Append('|');
+                value.Append(item.Key).Append(':').Append(item.Count).Append(':')
+                    .Append(item.Sample.m_quality).Append('|');
                 foreach (NearbyStorageSource source in item.Sources)
                 {
                     if (source.Chest != null)
@@ -223,6 +238,7 @@ namespace Landoria.NearbyStorage
             _cards = null;
             _categoryContent = null;
             _tooltip = null;
+            _hoverItem = null;
             _dragCancelOverlay = null;
             _tooltipTitle = null;
             _tooltipDescription = null;
@@ -236,8 +252,8 @@ namespace Landoria.NearbyStorage
             _scrollToDragKey = null;
             _scrollToSimilarName = null;
             _scrollCategoryToSelection = false;
+            _selectFirstCategory = true;
             _nearbyDragKey = null;
-            _nearbyDragAmount = 0;
         }
     }
 }

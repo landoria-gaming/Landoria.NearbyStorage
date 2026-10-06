@@ -4,7 +4,7 @@ namespace Landoria.NearbyStorage
     // Builds an inventory-only snapshot of accessible nearby containers.
     internal static class NearbyStorageCatalog
     {
-        // Combines stacks of each prefab while retaining their actual sources.
+        // Combines stackable items by prefab and quality, but keeps unique items apart.
         internal static List<NearbyStorageItem> Read(Player player)
         {
             var byKey = new Dictionary<string, NearbyStorageItem>();
@@ -16,12 +16,17 @@ namespace Landoria.NearbyStorage
                     {
                         continue;
                     }
-                    string key = item.m_dropPrefab.name;
+                    string key = NearbyStorageItemKey.For(item, chest);
                     if (!byKey.TryGetValue(key, out NearbyStorageItem entry))
                     {
                         entry = new NearbyStorageItem { Key = key, Sample = item,
                             Name = Localization.instance.Localize(item.m_shared.m_name) };
                         byKey.Add(key, entry);
+                    }
+                    else if (entry.Sample.m_stack < entry.Sample.m_shared.m_maxStackSize &&
+                        item.m_stack >= item.m_shared.m_maxStackSize)
+                    {
+                        entry.Sample = item;
                     }
                     entry.Count += item.m_stack;
                     AddSource(entry, chest, item);

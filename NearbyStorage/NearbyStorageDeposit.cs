@@ -21,7 +21,8 @@ namespace Landoria.NearbyStorage
         {
             Player player = Player.m_localPlayer;
             if (Running || player == null ||
-                item == null || amount <= 0 || !player.GetInventory().ContainsItem(item))
+                item?.m_dropPrefab == null || amount <= 0 ||
+                !player.GetInventory().ContainsItem(item))
             {
                 return false;
             }

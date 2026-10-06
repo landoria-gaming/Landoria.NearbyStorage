@@ -30,7 +30,7 @@ namespace Landoria.NearbyStorage
             foreach (ItemDrop.ItemData item in chest.GetInventory().GetAllItems())
             {
                 if (item?.m_shared == null || item.m_stack <= 0) { continue; }
-                if (item.m_dropPrefab?.name == selected.m_dropPrefab?.name)
+                if (NearbyStorageItemKey.For(item) == NearbyStorageItemKey.For(selected))
                 {
                     identical += item.m_stack;
                 }
