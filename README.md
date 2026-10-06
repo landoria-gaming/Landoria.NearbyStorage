@@ -15,4 +15,10 @@ The panel hides while a container is open. Ground drops do not appear in its ite
 
 The mod searches within **60 m** by default. You can change `SearchRadius`, `NearbyStorageShortcut` (Left Alt by default), and `KeepOneIngredientPerChest` in `Landoria.NearbyStorage.cfg`. Configuration changes reload while the game is running.
 
+## Screenshot
+
+![Nearby Storage panel open alongside the Valheim inventory and crafting menu](Assets/screenshot.jpg)
+
+## Contact
+
 Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.NearbyStorage/issues).
