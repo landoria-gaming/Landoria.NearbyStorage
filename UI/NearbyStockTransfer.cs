@@ -12,6 +12,7 @@ namespace Landoria.SuperStorage
         private static readonly MethodInfo ShowSplit = AccessTools.Method(typeof(InventoryGui),
             "ShowSplitDialog", new[] { typeof(ItemDrop.ItemData), typeof(Inventory) });
         private static readonly FieldInfo DragItem = AccessTools.Field(typeof(InventoryGui), "m_dragItem");
+        private static readonly FieldInfo DragAmount = AccessTools.Field(typeof(InventoryGui), "m_dragAmount");
         private static readonly FieldInfo DragInventory =
             AccessTools.Field(typeof(InventoryGui), "m_dragInventory");
         private static Inventory _trackedInventory;
@@ -21,6 +22,12 @@ namespace Landoria.SuperStorage
         // Identifies an item currently carried from the player's inventory UI.
         internal static string DraggedPlayerItemKey()
         {
+            return DraggedPlayerItem()?.m_dropPrefab?.name;
+        }
+
+        // Returns the item currently dragged from the player's inventory.
+        internal static ItemDrop.ItemData DraggedPlayerItem()
+        {
             InventoryGui gui = InventoryGui.instance;
             Player player = Player.m_localPlayer;
             if (gui == null || player == null ||
@@ -28,8 +35,38 @@ namespace Landoria.SuperStorage
             {
                 return null;
             }
-            ItemDrop.ItemData item = DragItem?.GetValue(gui) as ItemDrop.ItemData;
-            return item?.m_dropPrefab?.name;
+            return DragItem?.GetValue(gui) as ItemDrop.ItemData;
+        }
+
+        // Identifies the real nearby stack currently held by the inventory GUI.
+        internal static string DraggedNearbyItemKey()
+        {
+            InventoryGui gui = InventoryGui.instance;
+            if (gui == null || _trackedItem == null ||
+                DragItem?.GetValue(gui) != _trackedItem ||
+                DragInventory?.GetValue(gui) != _trackedInventory)
+            {
+                return null;
+            }
+            return _trackedItem.m_dropPrefab?.name;
+        }
+
+        // Returns the number of items held from the nearby stack.
+        internal static int DraggedNearbyAmount()
+        {
+            return DraggedNearbyItemKey() == null ? 0 :
+                (int)(DragAmount?.GetValue(InventoryGui.instance) ?? 0);
+        }
+
+        // Cancels a nearby drag without moving anything from its source container.
+        internal static void CancelNearbyDrag()
+        {
+            if (DraggedNearbyItemKey() == null || SetupDrag == null) { return; }
+            SetupDrag.Invoke(InventoryGui.instance, new object[] { null, null, 1 });
+            _trackedInventory = null;
+            _trackedItem = null;
+            _trackedChest = null;
+            NearbyStockDialog.RefreshSoon();
         }
 
         // Runs the targeted Super Stack when an inventory item lands on its stock card.
@@ -38,21 +75,37 @@ namespace Landoria.SuperStorage
             Player player = Player.m_localPlayer;
             InventoryGui gui = InventoryGui.instance;
             if (target == null || player == null || gui == null || player.IsTeleporting() ||
-                TargetedStack.Running || Plugin.Instance == null || SetupDrag == null)
+                TargetedStack.Running || NearbyStockDeposit.Running ||
+                Plugin.Instance == null || SetupDrag == null)
             {
                 return false;
             }
             ItemDrop.ItemData item = DragItem?.GetValue(gui) as ItemDrop.ItemData;
             Inventory source = DragInventory?.GetValue(gui) as Inventory;
             if (source != player.GetInventory() || item?.m_dropPrefab == null ||
-                item.m_dropPrefab.name != target.Key || !source.ContainsItem(item))
+                !source.ContainsItem(item))
             {
                 return false;
+            }
+            if (item.m_dropPrefab.name != target.Key)
+            {
+                if (NearbyStockCatalog.Read(player).Exists(entry => entry.Key == item.m_dropPrefab.name))
+                {
+                    return false;
+                }
+                int amount = (int)(DragAmount?.GetValue(gui) ?? item.m_stack);
+                return NearbyStockDeposit.TryStart(item, target, amount);
             }
             SetupDrag.Invoke(gui, new object[] { null, null, 1 });
             Plugin.Instance.StartCoroutine(TargetedStack.Run(item));
             NearbyStockDialog.RefreshSoon();
             return true;
+        }
+
+        // Releases the inventory drag after a destination has been selected.
+        internal static void ClearPlayerDrag()
+        {
+            SetupDrag?.Invoke(InventoryGui.instance, new object[] { null, null, 1 });
         }
 
         // Recognizes a drag started by the aggregate stock browser.
@@ -87,7 +140,7 @@ namespace Landoria.SuperStorage
                 {
                     continue;
                 }
-                Act(gui, player, source.Chest, inventory, item);
+                Act(gui, player, source.Chest, inventory, item, entry.Count);
                 NearbyStockDialog.RefreshSoon();
                 return;
             }
@@ -108,9 +161,11 @@ namespace Landoria.SuperStorage
 
         // Dispatches Ctrl, Shift, or plain click through vanilla inventory methods.
         private static void Act(InventoryGui gui, Player player, Container chest,
-            Inventory inventory, ItemDrop.ItemData item)
+            Inventory inventory, ItemDrop.ItemData item, int totalCount)
         {
-            if (ZInput.GetKey(KeyCode.LeftShift) || ZInput.GetKey(KeyCode.RightShift))
+            bool shift = ZInput.GetKey(KeyCode.LeftShift) || ZInput.GetKey(KeyCode.RightShift);
+            bool control = ZInput.GetKey(KeyCode.LeftControl) || ZInput.GetKey(KeyCode.RightControl);
+            if (shift || (control && totalCount > item.m_stack && item.m_stack > 1))
             {
                 if (item.m_stack > 1)
                 {
@@ -120,7 +175,7 @@ namespace Landoria.SuperStorage
                     ShowSplit?.Invoke(gui, new object[] { item, inventory });
                 }
             }
-            else if (ZInput.GetKey(KeyCode.LeftControl) || ZInput.GetKey(KeyCode.RightControl))
+            else if (control)
             {
                 if (!item.m_shared.m_questItem)
                 {

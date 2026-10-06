@@ -8,7 +8,7 @@ namespace Landoria.SuperStorage
     internal sealed class NearbyStockCard : MonoBehaviour, IPointerDownHandler,
         IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
-        internal static readonly Color IdleColor = new Color(0.16f, 0.12f, 0.13f, 0.85f);
+        internal Color IdleColor;
         private static readonly Color HoverColor = new Color(0.42f, 0.36f, 0.32f, 0.96f);
         internal NearbyStockItem Item;
         internal Image Background;

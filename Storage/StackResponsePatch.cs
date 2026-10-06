@@ -9,7 +9,8 @@ namespace Landoria.SuperStorage
         // Uses the granted ownership to move only the clicked inventory item.
         private static bool Prefix(Container __instance, bool granted)
         {
-            return TargetedStack.AllowResponse(__instance, granted);
+            return NearbyStockDeposit.AllowResponse(__instance, granted) &&
+                TargetedStack.AllowResponse(__instance, granted);
         }
     }
 }

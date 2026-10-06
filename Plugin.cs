@@ -46,6 +46,7 @@ namespace Landoria.SuperStorage
             CraftState.Reset();
             RecipeListRefreshPatch.Reset();
             TargetedStack.Reset();
+            NearbyStockDeposit.Reset();
             GroundSource.Reset();
             RefuelContext.Reset();
             FeedContext.Reset();

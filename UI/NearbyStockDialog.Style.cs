@@ -84,11 +84,28 @@ namespace Landoria.SuperStorage
             target.raycastTarget = false;
         }
 
+        // Matches the text size and font of a vanilla crafting recipe row.
+        private static void StyleCategoryText(TextMeshProUGUI target)
+        {
+            TMP_Text source = _gui?.m_recipeElementPrefab?.transform.Find("name")?
+                .GetComponent<TMP_Text>();
+            if (source == null || source.font == null) { return; }
+            target.font = source.font;
+            target.fontSharedMaterial = source.fontSharedMaterial;
+            target.fontSize = source.fontSize;
+            target.enableAutoSizing = source.enableAutoSizing;
+            target.fontSizeMin = source.fontSizeMin;
+            target.fontSizeMax = source.fontSizeMax;
+            target.fontStyle = source.fontStyle;
+        }
+
         // Applies the native item-slot background to one stock card.
         private static void StyleSlot(Image image)
         {
             InventoryElement element = SlotElement();
             CopyImage(element?.m_button.targetGraphic as Image, image);
+            image.color = element?.m_button != null ? element.m_button.colors.normalColor :
+                new Color(0.13235295f, 0.13235295f, 0.13235295f, 0.5019608f);
         }
 
         // Matches the native item icon's inset and image settings inside a slot.

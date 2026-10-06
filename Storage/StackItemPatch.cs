@@ -27,7 +27,7 @@ namespace Landoria.SuperStorage
                 return true;
             }
 
-            if (!TargetedStack.Running)
+            if (!TargetedStack.Running && !NearbyStockDeposit.Running)
             {
                 Plugin.Instance.StartCoroutine(TargetedStack.Run(item, stockControlClick));
             }

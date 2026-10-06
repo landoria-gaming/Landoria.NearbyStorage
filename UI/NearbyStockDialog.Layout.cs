@@ -9,6 +9,8 @@ namespace Landoria.SuperStorage
     {
         private const float GridTopPadding = 6f;
         private const float GridLeftPadding = 6f;
+        private const float HeaderHeight = 106f;
+        private const float CategoryRowHeight = 23f;
 
         // Builds the browser beside Valheim's inventory UI hierarchy.
         private static void Create(InventoryGui gui)
@@ -24,16 +26,19 @@ namespace Landoria.SuperStorage
             background.color = new Color(0.17f, 0.12f, 0.13f, 0.96f);
             StylePanel(background);
             _root.SetSiblingIndex(gui.m_inventoryRoot.GetSiblingIndex() + 1);
-            TextMeshProUGUI title = Label("Title", _root, "Nearby Stock", 25f,
-                new Vector2(10f, -9f), new Vector2(180f, 36f));
+            TextMeshProUGUI title = Label("Title", _root, "Nearby Storage", 32f,
+                new Vector2(10f, -16f), new Vector2(570f, 35f));
             title.font = gui.m_containerName.font;
             title.fontSharedMaterial = gui.m_containerName.fontSharedMaterial;
             title.color = gui.m_containerName.color;
             title.alignment = TextAlignmentOptions.Center;
+            title.rectTransform.anchorMax = new Vector2(1f, 1f);
+            title.rectTransform.offsetMax = new Vector2(-10f, -16f);
             CreateFilter();
             CreateCategories();
             CreateGrid();
             CreateTooltip();
+            CreateDragCancelOverlay();
             Position();
             RefreshSoon();
         }
@@ -49,7 +54,7 @@ namespace Landoria.SuperStorage
             Vector3 bottomRight = _root.parent.InverseTransformPoint(corners[3]);
             _root.localPosition = bottomLeft + new Vector3(0f, -8f, 0f);
             _root.sizeDelta = new Vector2(bottomRight.x - bottomLeft.x,
-                59f + GridTopPadding + 4f * SlotStep());
+                HeaderHeight + 10f + GridTopPadding + 4f * SlotStep());
         }
 
         // Adds the localized free-text item filter.
@@ -72,7 +77,7 @@ namespace Landoria.SuperStorage
                 {
                     hint.text = IsFrench() ? "FILTRE" : "FILTER";
                 }
-                _filter.onValueChanged.AddListener(_ => RefreshSoon());
+                _filter.onValueChanged.AddListener(OnFilterChanged);
                 HideFilterShortcutBadge(clone);
                 clone.SetActive(true);
                 return;
@@ -106,8 +111,8 @@ namespace Landoria.SuperStorage
             box.anchorMin = new Vector2(0f, 1f);
             box.anchorMax = new Vector2(1f, 1f);
             box.pivot = new Vector2(0f, 1f);
-            box.offsetMin = new Vector2(200f, -45f);
-            box.offsetMax = new Vector2(-34f, -9f);
+            box.offsetMin = new Vector2(16f, -96f);
+            box.offsetMax = new Vector2(-34f, -60f);
         }
 
         // Supplies a local field if the build menu has not created its search box.
@@ -142,7 +147,17 @@ namespace Landoria.SuperStorage
             StyleFilterHint(hint);
             hint.alignment = TextAlignmentOptions.MidlineLeft;
             _filter.placeholder = hint;
-            _filter.onValueChanged.AddListener(_ => RefreshSoon());
+            _filter.onValueChanged.AddListener(OnFilterChanged);
+        }
+
+        // A text search spans every category.
+        private static void OnFilterChanged(string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value) && _category >= 0)
+            {
+                SelectCategory(-1);
+            }
+            RefreshSoon();
         }
 
         // Keeps filter text inside its width as the panel changes size.
@@ -155,62 +170,6 @@ namespace Landoria.SuperStorage
             rect.offsetMax = new Vector2(-7f, -2f);
         }
 
-        // Creates an inventory-style list of categories on the left.
-        private static void CreateCategories()
-        {
-            RectTransform list = Rect("Categories", _root, Vector2.zero);
-            list.anchorMin = new Vector2(0f, 0f);
-            list.anchorMax = new Vector2(0f, 1f);
-            list.offsetMin = new Vector2(10f, 10f);
-            list.offsetMax = new Vector2(190f, -49f);
-            Image listBackground = list.gameObject.AddComponent<Image>();
-            listBackground.color = new Color(0f, 0f, 0f, 0.72f);
-            listBackground.raycastTarget = false;
-            for (int i = 0; i < NearbyStockCategory.French.Length; i++)
-            {
-                int index = i;
-                RectTransform row = Rect("Category " + i, list, new Vector2(180f, 25f));
-                row.anchoredPosition = new Vector2(0f, -i * 25f);
-                Image image = row.gameObject.AddComponent<Image>();
-                image.color = Color.clear;
-                RectTransform selected = Rect("Selected", row, Vector2.zero);
-                selected.anchorMin = Vector2.zero;
-                selected.anchorMax = Vector2.one;
-                selected.offsetMin = selected.offsetMax = Vector2.zero;
-                StyleCategorySelection(selected.gameObject.AddComponent<Image>());
-                Label("Text", row, NearbyStockCategory.Label(i), 14f,
-                    new Vector2(5f, -3f), new Vector2(174f, 22f));
-                Button button = row.gameObject.AddComponent<Button>();
-                button.transition = Selectable.Transition.None;
-                row.gameObject.AddComponent<NearbyStockCategoryHover>().Index = index;
-                button.onClick.AddListener(() => SelectCategory(index));
-            }
-            SelectCategory(_category);
-        }
-
-        // Highlights the selected category and refreshes matching items.
-        private static void SelectCategory(int index)
-        {
-            _category = index;
-            Transform list = _root.Find("Categories");
-            for (int i = 0; i < list.childCount; i++)
-            {
-                SetCategoryHover(i, false);
-            }
-            RefreshSoon();
-        }
-
-        // Applies the selected or hovered color directly without button tinting.
-        internal static void SetCategoryHover(int index, bool hovered)
-        {
-            Transform row = _root?.Find("Categories")?.Find("Category " + index);
-            if (row == null) { return; }
-            row.Find("Selected")?.gameObject.SetActive(index == _category);
-            row.GetComponent<Image>().color = hovered && index != _category ?
-                new Color(0.45f, 0.44f, 0.44f, 0.9f) :
-                Color.clear;
-        }
-
         // Creates the clipped card viewport with a drag-only scrollbar.
         private static void CreateGrid()
         {
@@ -218,9 +177,9 @@ namespace Landoria.SuperStorage
             viewport.anchorMin = new Vector2(0f, 0f);
             viewport.anchorMax = new Vector2(1f, 1f);
             viewport.offsetMin = new Vector2(200f, 10f);
-            viewport.offsetMax = new Vector2(-34f, -49f);
+            viewport.offsetMax = new Vector2(-34f, -HeaderHeight);
             Image background = viewport.gameObject.AddComponent<Image>();
-            background.color = new Color(0.07f, 0.05f, 0.06f, 0.75f);
+            background.color = Color.clear;
             viewport.gameObject.AddComponent<RectMask2D>();
             _cards = Rect("Items", viewport, Vector2.zero);
             _cards.anchorMin = new Vector2(0f, 1f);
@@ -236,14 +195,28 @@ namespace Landoria.SuperStorage
             CreateScrollbar(scroll);
         }
 
+        // Captures a second click anywhere on the stock panel during a nearby drag.
+        private static void CreateDragCancelOverlay()
+        {
+            _dragCancelOverlay = Rect("Cancel nearby drag", _root, Vector2.zero);
+            _dragCancelOverlay.anchorMin = Vector2.zero;
+            _dragCancelOverlay.anchorMax = Vector2.one;
+            _dragCancelOverlay.offsetMin = Vector2.zero;
+            _dragCancelOverlay.offsetMax = Vector2.zero;
+            Image image = _dragCancelOverlay.gameObject.AddComponent<Image>();
+            image.color = Color.clear;
+            _dragCancelOverlay.gameObject.AddComponent<NearbyStockDragCancel>();
+            _dragCancelOverlay.gameObject.SetActive(false);
+        }
+
         // Adds a visible vertical scrollbar beside the item grid.
         private static void CreateScrollbar(ScrollRect scroll)
         {
             RectTransform track = Rect("Items scrollbar", _root, Vector2.zero);
             track.anchorMin = new Vector2(1f, 0f);
             track.anchorMax = new Vector2(1f, 1f);
-            track.offsetMin = new Vector2(-29f, 10f);
-            track.offsetMax = new Vector2(-8f, -49f);
+            track.offsetMin = new Vector2(-24f, 10f);
+            track.offsetMax = new Vector2(-8f, -HeaderHeight);
             Image trackImage = track.gameObject.AddComponent<Image>();
             trackImage.color = new Color(0f, 0f, 0f, 0.4f);
             RectTransform handle = Rect("Handle", track, Vector2.zero);
@@ -257,7 +230,7 @@ namespace Landoria.SuperStorage
             bar.targetGraphic = image;
             bar.direction = Scrollbar.Direction.BottomToTop;
             scroll.verticalScrollbar = bar;
-            scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.Permanent;
+            scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
         }
 
         // Makes a top-left anchored UI rectangle.

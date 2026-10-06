@@ -261,6 +261,7 @@ namespace Landoria.SuperStorage
         private static void RecordMove(int moved)
         {
             _moved += moved;
+            NearbyStockDialog.RefreshSoon();
             InventoryGui gui = InventoryGui.instance;
             if (gui != null)
             {

@@ -17,7 +17,7 @@ Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby
 
 ### Nearby Stock
 
-Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Stock hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Ctrl-click to move it directly to your inventory, or Shift-click to split it. Hovering an item lists each contributing container by its nearest sign, or its container type, followed by distance and quantity. Choose a category on the left and filter by name. Items appear in name order.
+Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Stock hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Shift-click to split it, or Ctrl-click to transfer it directly when it is the only stack. Ctrl-click also opens the split dialog when multiple stacks contribute to the displayed quantity. Hovering an item shows its description and each contributing container's icon, nearest sign or container type, distance, and quantity. Choose a category on the left and filter by name. Items appear in name order.
 
 ### Super Refuel
 

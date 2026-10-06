@@ -11,8 +11,9 @@ namespace Landoria.SuperStorage
     {
         private static RectTransform _root;
         private static RectTransform _cards;
+        private static RectTransform _categoryContent;
         private static RectTransform _tooltip;
-        private static TextMeshProUGUI _tooltipText;
+        private static RectTransform _dragCancelOverlay;
         private static TMP_InputField _filter;
         private static InventoryGui _gui;
         private static float _nextRefresh;
@@ -21,6 +22,10 @@ namespace Landoria.SuperStorage
         private static bool _dirtyView = true;
         private static bool _hasStock;
         private static string _dragKey;
+        private static string _scrollToDragKey;
+        private static bool _scrollCategoryToSelection;
+        private static string _nearbyDragKey;
+        private static int _nearbyDragAmount;
 
         internal static bool FilterFocused => _root != null && _root.gameObject.activeInHierarchy &&
             _filter != null && _filter.isActiveAndEnabled && _filter.isFocused;
@@ -42,34 +47,68 @@ namespace Landoria.SuperStorage
                 Dispose();
                 Create(gui);
             }
+            if (!_root.gameObject.activeSelf && _filter != null &&
+                !string.IsNullOrEmpty(_filter.text))
+            {
+                _filter.SetTextWithoutNotify("");
+                RefreshSoon();
+            }
             Position();
+            UpdateDragFocus();
+            if (Time.unscaledTime >= _nextRefresh) { Refresh(); }
+            _root.gameObject.SetActive(_hasStock);
+            if (_hasStock) { UpdateVisibleDialog(gui); }
+        }
+
+        // Tracks inventory and nearby-stock drags for the visible grid.
+        private static void UpdateDragFocus()
+        {
             string dragKey = NearbyStockTransfer.DraggedPlayerItemKey();
             if (_dragKey != dragKey)
             {
+                if (dragKey != null)
+                {
+                    ItemDrop.ItemData dragged = NearbyStockTransfer.DraggedPlayerItem();
+                    if (dragged != null)
+                    {
+                        _filter?.SetTextWithoutNotify("");
+                        SelectCategory(NearbyStockCategory.For(dragged), false);
+                    }
+                }
                 _dragKey = dragKey;
+                _scrollToDragKey = dragKey;
                 RefreshSoon();
             }
-            if (Time.unscaledTime >= _nextRefresh)
+            string nearbyDragKey = NearbyStockTransfer.DraggedNearbyItemKey();
+            int nearbyDragAmount = NearbyStockTransfer.DraggedNearbyAmount();
+            if (_nearbyDragKey != nearbyDragKey || _nearbyDragAmount != nearbyDragAmount)
             {
-                Refresh();
+                _nearbyDragKey = nearbyDragKey;
+                _nearbyDragAmount = nearbyDragAmount;
+                RefreshSoon();
             }
-            _root.gameObject.SetActive(_hasStock);
-            if (_hasStock)
+        }
+
+        // Keeps stock clickable while placing the split dialog in front.
+        private static void UpdateVisibleDialog(InventoryGui gui)
+        {
+            if (_dragCancelOverlay != null)
             {
-                int inventoryIndex = gui.m_inventoryRoot.GetSiblingIndex();
-                int stockIndex = _root.GetSiblingIndex();
-                bool splitOpen = gui.m_splitDialog?.IsActive == true;
-                if ((splitOpen && stockIndex > inventoryIndex) ||
-                    (!splitOpen && stockIndex < inventoryIndex))
-                {
-                    _root.SetSiblingIndex(inventoryIndex);
-                }
-                PositionTooltip();
-                if (_filter != null && !_filter.isFocused && ZInput.GetKeyDown(KeyCode.F))
-                {
-                    _filter.Select();
-                    _filter.ActivateInputField();
-                }
+                _dragCancelOverlay.gameObject.SetActive(_nearbyDragKey != null);
+            }
+            int inventoryIndex = gui.m_inventoryRoot.GetSiblingIndex();
+            int stockIndex = _root.GetSiblingIndex();
+            bool splitOpen = gui.m_splitDialog?.IsActive == true;
+            if ((splitOpen && stockIndex > inventoryIndex) ||
+                (!splitOpen && stockIndex < inventoryIndex))
+            {
+                _root.SetSiblingIndex(inventoryIndex);
+            }
+            PositionTooltip();
+            if (_filter != null && !_filter.isFocused && ZInput.GetKeyDown(KeyCode.F))
+            {
+                _filter.Select();
+                _filter.ActivateInputField();
             }
         }
 
@@ -87,23 +126,26 @@ namespace Landoria.SuperStorage
             if (_cards == null || Player.m_localPlayer == null) { return; }
             List<NearbyStockItem> items = NearbyStockCatalog.Read(Player.m_localPlayer);
             _hasStock = items.Count > 0;
-            string filter = _dragKey != null || _filter == null ? "" : _filter.text.Trim();
+            bool unmatchedDrag = _dragKey != null &&
+                !items.Exists(item => item.Key == _dragKey);
+            bool categoryHasItems = _category >= 0 && items.Exists(item =>
+                NearbyStockCategory.For(item.Sample) == _category);
+            string filter = _filter == null ? "" : _filter.text.Trim();
             bool[] occupied = new bool[NearbyStockCategory.French.Length];
             foreach (NearbyStockItem item in items)
             {
-                if ((_dragKey != null && item.Key != _dragKey) ||
-                    item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0)
+                if (item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0)
                 {
                     continue;
                 }
-                occupied[0] = true;
-                occupied[NearbyStockCategory.For(item.Sample.m_shared.m_itemType)] = true;
+                occupied[NearbyStockCategory.For(item.Sample)] = true;
             }
             UpdateCategoryOpacity(occupied);
-            items.RemoveAll(item => _dragKey != null ? item.Key != _dragKey :
-                (_category != 0 && NearbyStockCategory.For(item.Sample.m_shared.m_itemType) != _category) ||
+            items.RemoveAll(item =>
+                (_category >= 0 && (!unmatchedDrag || categoryHasItems) &&
+                    NearbyStockCategory.For(item.Sample) != _category) ||
                 item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0);
-            items.Sort(CompareByName);
+            NearbyStockSort.Sort(items);
             string fingerprint = Fingerprint(items);
             if (!_dirtyView && fingerprint == _fingerprint) { return; }
             _fingerprint = fingerprint;
@@ -115,7 +157,7 @@ namespace Landoria.SuperStorage
         // Dims categories with no matching nearby items.
         private static void UpdateCategoryOpacity(bool[] occupied)
         {
-            Transform list = _root?.Find("Categories");
+            Transform list = _categoryContent;
             if (list == null) { return; }
             int position = 0;
             for (int pass = 0; pass < 2; pass++)
@@ -124,7 +166,7 @@ namespace Landoria.SuperStorage
                 {
                     if (occupied[i] != (pass == 0)) { continue; }
                     RectTransform row = list.Find("Category " + i) as RectTransform;
-                    if (row != null) { row.anchoredPosition = new Vector2(0f, -position++ * 25f); }
+                    if (row != null) { row.anchoredPosition = new Vector2(0f, -position++ * CategoryRowHeight); }
                 }
             }
             for (int i = 0; i < occupied.Length; i++)
@@ -136,6 +178,7 @@ namespace Landoria.SuperStorage
                 color.a = occupied[i] ? 1f : 0.4f;
                 label.color = color;
             }
+            ScrollToSelectedCategory();
         }
 
         // Tracks visible quantities and source locations to avoid redraw flicker.
@@ -157,27 +200,28 @@ namespace Landoria.SuperStorage
             return value.ToString();
         }
 
-        // Keeps item order predictable without a sorting control.
-        private static int CompareByName(NearbyStockItem a, NearbyStockItem b)
-        {
-            int names = string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase);
-            return names != 0 ? names : string.CompareOrdinal(a.Key, b.Key);
-        }
-
         // Destroys the transient UI without changing stored items.
         internal static void Dispose()
         {
             if (_root != null) { UnityEngine.Object.Destroy(_root.gameObject); }
             _root = null;
             _cards = null;
+            _categoryContent = null;
             _tooltip = null;
-            _tooltipText = null;
+            _dragCancelOverlay = null;
+            _tooltipTitle = null;
+            _tooltipDescription = null;
+            _tooltipSources = null;
             _filter = null;
             _gui = null;
             _fingerprint = null;
             _dirtyView = true;
             _hasStock = false;
             _dragKey = null;
+            _scrollToDragKey = null;
+            _scrollCategoryToSelection = false;
+            _nearbyDragKey = null;
+            _nearbyDragAmount = 0;
         }
     }
 }
