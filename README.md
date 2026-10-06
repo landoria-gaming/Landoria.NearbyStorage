@@ -13,7 +13,7 @@ The panel hides while a container is open. Ground drops do not appear in its ite
 
 ## Settings
 
-The mod searches within **60 m** by default. You can change `SearchRadius`, `NearbyStorageShortcut` (Left Alt by default), and `KeepOneIngredientPerChest` in `Landoria.NearbyStorage.cfg`. Configuration changes reload while the game is running.
+The mod searches within **30 m** by default. You can set `SearchRadius` from **5 m to 60 m**, and change `NearbyStorageShortcut` (Left Alt by default) and `KeepOneIngredientPerChest` in `Landoria.NearbyStorage.cfg`. Configuration changes reload while the game is running.
 
 ## Screenshot
 
