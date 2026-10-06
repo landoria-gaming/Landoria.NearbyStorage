@@ -2,7 +2,7 @@ using BepInEx.Configuration;
 using Landoria.Shared;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Holds the local search radius setting.
     internal sealed class ModConfigFile

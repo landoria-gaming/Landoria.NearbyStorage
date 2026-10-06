@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Copies Valheim's live inventory graphics and slot dimensions.
-    internal static partial class NearbyStockDialog
+    internal static partial class NearbyStorageDialog
     {
         private static readonly FieldInfo SearchField = AccessTools.Field(typeof(BuildUi), "m_searchField");
         private static readonly FieldInfo TagScroll = AccessTools.Field(typeof(BuildUi), "m_tagListScrollRect");

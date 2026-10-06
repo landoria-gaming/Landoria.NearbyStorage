@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Drops transient state when inventory closes.
     [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.Hide))]

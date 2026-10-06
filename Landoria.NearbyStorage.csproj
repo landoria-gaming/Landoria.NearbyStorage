@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>Landoria.SuperStorage</RootNamespace>
-    <AssemblyName>Landoria.SuperStorage</AssemblyName>
+    <RootNamespace>Landoria.NearbyStorage</RootNamespace>
+    <AssemblyName>Landoria.NearbyStorage</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>false</Deterministic>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -11,7 +11,7 @@
     <ValheimGamePath Condition="'$(ValheimGamePath)' == ''">$(VALHEIM_PATH)</ValheimGamePath>
     <BepInExPath Condition="'$(BepInExPath)' == ''">$(BEPINEX_PATH)</BepInExPath>
     <ValheimManagedPath Condition="'$(ValheimManagedPath)' == ''">$(ValheimGamePath)/valheim_Data/Managed</ValheimManagedPath>
-    <ModDeployPath Condition="'$(ModDeployPath)' == ''">$(BepInExPath)/plugins/Landoria.SuperStorage</ModDeployPath>
+    <ModDeployPath Condition="'$(ModDeployPath)' == ''">$(BepInExPath)/plugins/Landoria.NearbyStorage</ModDeployPath>
     <DeployOnBuild Condition="'$(DeployOnBuild)' == ''">false</DeployOnBuild>
   </PropertyGroup>
   <ItemGroup>

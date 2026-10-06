@@ -1,7 +1,7 @@
 using BepInEx.Configuration;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Handles super action input.
     internal static class SuperActionInput

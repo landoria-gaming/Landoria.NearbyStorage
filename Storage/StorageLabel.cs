@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Names a container by its nearest sign or its localized type.
     internal static class StorageLabel

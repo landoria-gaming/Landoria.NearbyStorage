@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Supplies one vanilla refuel interaction from nearby storage or ground items.
     internal static class RefuelContext

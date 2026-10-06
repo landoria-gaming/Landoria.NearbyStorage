@@ -1,20 +1,20 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
-    // Intercepts Ctrl-click when the nearby stock browser is visible.
+    // Intercepts Ctrl-click when the nearby storage browser is visible.
     [HarmonyPatch(typeof(InventoryGui), "OnSelectedItem")]
     internal static class StackItemPatch
     {
         private static readonly System.Reflection.FieldInfo DragField =
             AccessTools.Field(typeof(InventoryGui), "m_dragGo");
 
-        // Uses Ctrl-click for targeted stacking while nearby stock is visible.
+        // Uses Ctrl-click for targeted stacking while nearby storage is visible.
         private static bool Prefix(InventoryGui __instance, InventoryGrid grid,
             ItemDrop.ItemData item, InventoryGrid.Modifier mod)
         {
             Player player = Player.m_localPlayer;
-            bool stockControlClick = NearbyStockDialog.IsOpen &&
+            bool stockControlClick = NearbyStorageDialog.IsOpen &&
                 mod == InventoryGrid.Modifier.Move &&
                 (ZInput.GetKey(UnityEngine.KeyCode.LeftControl) ||
                  ZInput.GetKey(UnityEngine.KeyCode.RightControl));
@@ -27,7 +27,7 @@ namespace Landoria.SuperStorage
                 return true;
             }
 
-            if (!TargetedStack.Running && !NearbyStockDeposit.Running)
+            if (!TargetedStack.Running && !NearbyStorageDeposit.Running)
             {
                 Plugin.Instance.StartCoroutine(TargetedStack.Run(item, stockControlClick));
             }

@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Remembers the Super shortcut at the initial Craft click and through the timer.
     [HarmonyPatch(typeof(InventoryGui), "OnCraftPressed")]

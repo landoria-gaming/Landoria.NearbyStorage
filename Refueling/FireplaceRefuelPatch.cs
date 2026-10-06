@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the FireplaceRefuelPatch Harmony patch.
     [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.Interact))]

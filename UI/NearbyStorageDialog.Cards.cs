@@ -3,13 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Renders aggregated item cards in the stock browser.
-    internal static partial class NearbyStockDialog
+    internal static partial class NearbyStorageDialog
     {
         // Replaces the cards with the current filtered snapshot.
-        private static void DrawCards(List<NearbyStockItem> items)
+        private static void DrawCards(List<NearbyStorageItem> items)
         {
             foreach (Transform child in _cards)
             {
@@ -42,7 +42,7 @@ namespace Landoria.SuperStorage
         }
 
         // Reveals the dragged item without changing the order of the grid.
-        private static void ScrollToDraggedItem(List<NearbyStockItem> items, int columns,
+        private static void ScrollToDraggedItem(List<NearbyStorageItem> items, int columns,
             float step)
         {
             if (_scrollToDragKey == null) { return; }
@@ -76,12 +76,12 @@ namespace Landoria.SuperStorage
         }
 
         // Draws one clickable icon and aggregate quantity.
-        private static void DrawCard(NearbyStockItem item, int column, int row, float step,
+        private static void DrawCard(NearbyStorageItem item, int column, int row, float step,
             int visibleCount)
         {
             RectTransform card = CreateCardBackground(item.Key, column, row, step);
             float size = SlotSize();
-            NearbyStockCard hover = card.gameObject.AddComponent<NearbyStockCard>();
+            NearbyStorageCard hover = card.gameObject.AddComponent<NearbyStorageCard>();
             hover.Item = item;
             hover.Background = card.GetComponent<Image>();
             hover.IdleColor = hover.Background.color;

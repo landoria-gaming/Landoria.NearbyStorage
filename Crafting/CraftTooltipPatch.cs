@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Refreshes the visible Craft tooltip when Valheim changes its text.
     [HarmonyPatch(typeof(InventoryGui), "UpdateRecipe")]

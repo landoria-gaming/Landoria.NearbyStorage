@@ -2,15 +2,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Forwards pointer hover from a stock card to its tooltip.
-    internal sealed class NearbyStockCard : MonoBehaviour, IPointerDownHandler,
+    internal sealed class NearbyStorageCard : MonoBehaviour, IPointerDownHandler,
         IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         internal Color IdleColor;
         private static readonly Color HoverColor = new Color(0.42f, 0.36f, 0.32f, 0.96f);
-        internal NearbyStockItem Item;
+        internal NearbyStorageItem Item;
         internal Image Background;
 
         // Matches Valheim's inventory slots by acting when the mouse is pressed.
@@ -18,9 +18,9 @@ namespace Landoria.SuperStorage
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (!NearbyStockTransfer.TryDropOn(Item))
+                if (!NearbyStorageTransfer.TryDropOn(Item))
                 {
-                    NearbyStockTransfer.Select(Item);
+                    NearbyStorageTransfer.Select(Item);
                 }
             }
         }
@@ -28,21 +28,21 @@ namespace Landoria.SuperStorage
         // Accepts a held inventory drag over the same stock item.
         public void OnDrop(PointerEventData eventData)
         {
-            if (NearbyStockTransfer.TryDropOn(Item)) { eventData.Use(); }
+            if (NearbyStorageTransfer.TryDropOn(Item)) { eventData.Use(); }
         }
 
         // Shows the contributing containers while the pointer is over this card.
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (Background != null) { Background.color = HoverColor; }
-            NearbyStockDialog.ShowTooltip(Item);
+            NearbyStorageDialog.ShowTooltip(Item);
         }
 
         // Hides the card's contribution tooltip.
         public void OnPointerExit(PointerEventData eventData)
         {
             if (Background != null) { Background.color = IdleColor; }
-            NearbyStockDialog.HideTooltip();
+            NearbyStorageDialog.HideTooltip();
         }
     }
 }

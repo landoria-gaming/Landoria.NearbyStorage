@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Adds nearby chest stock to vanilla's building requirement check.
     [HarmonyPatch(typeof(Player), nameof(Player.HaveRequirements),

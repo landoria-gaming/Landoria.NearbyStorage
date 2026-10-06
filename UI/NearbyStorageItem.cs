@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Groups matching items from nearby containers for display.
-    internal sealed class NearbyStockItem
+    internal sealed class NearbyStorageItem
     {
         internal string Key;
         internal string Name;
         internal ItemDrop.ItemData Sample;
         internal int Count;
-        internal readonly List<NearbyStockSource> Sources = new List<NearbyStockSource>();
+        internal readonly List<NearbyStorageSource> Sources = new List<NearbyStorageSource>();
     }
 }

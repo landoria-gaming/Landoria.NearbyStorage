@@ -2,10 +2,10 @@ using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Starts vanilla inventory drags or moves one real nearby stack.
-    internal static class NearbyStockTransfer
+    internal static class NearbyStorageTransfer
     {
         private static readonly MethodInfo SetupDrag = AccessTools.Method(typeof(InventoryGui),
             "SetupDragItem", new[] { typeof(ItemDrop.ItemData), typeof(Inventory), typeof(int) });
@@ -66,16 +66,16 @@ namespace Landoria.SuperStorage
             _trackedInventory = null;
             _trackedItem = null;
             _trackedChest = null;
-            NearbyStockDialog.RefreshSoon();
+            NearbyStorageDialog.RefreshSoon();
         }
 
         // Runs the targeted Super Stack when an inventory item lands on its stock card.
-        internal static bool TryDropOn(NearbyStockItem target)
+        internal static bool TryDropOn(NearbyStorageItem target)
         {
             Player player = Player.m_localPlayer;
             InventoryGui gui = InventoryGui.instance;
             if (target == null || player == null || gui == null || player.IsTeleporting() ||
-                TargetedStack.Running || NearbyStockDeposit.Running ||
+                TargetedStack.Running || NearbyStorageDeposit.Running ||
                 Plugin.Instance == null || SetupDrag == null)
             {
                 return false;
@@ -89,16 +89,16 @@ namespace Landoria.SuperStorage
             }
             if (item.m_dropPrefab.name != target.Key)
             {
-                if (NearbyStockCatalog.Read(player).Exists(entry => entry.Key == item.m_dropPrefab.name))
+                if (NearbyStorageCatalog.Read(player).Exists(entry => entry.Key == item.m_dropPrefab.name))
                 {
                     return false;
                 }
                 int amount = (int)(DragAmount?.GetValue(gui) ?? item.m_stack);
-                return NearbyStockDeposit.TryStart(item, target, amount);
+                return NearbyStorageDeposit.TryStart(item, target, amount);
             }
             SetupDrag.Invoke(gui, new object[] { null, null, 1 });
             Plugin.Instance.StartCoroutine(TargetedStack.Run(item));
-            NearbyStockDialog.RefreshSoon();
+            NearbyStorageDialog.RefreshSoon();
             return true;
         }
 
@@ -119,7 +119,7 @@ namespace Landoria.SuperStorage
         }
 
         // Applies the same click modifiers as a container grid to one real stack.
-        internal static void Select(NearbyStockItem entry)
+        internal static void Select(NearbyStorageItem entry)
         {
             Player player = Player.m_localPlayer;
             InventoryGui gui = InventoryGui.instance;
@@ -128,7 +128,7 @@ namespace Landoria.SuperStorage
             {
                 return;
             }
-            foreach (NearbyStockSource source in entry.Sources)
+            foreach (NearbyStorageSource source in entry.Sources)
             {
                 if (!StorageLocator.TryClaimAndLoad(source.Chest, player))
                 {
@@ -141,7 +141,7 @@ namespace Landoria.SuperStorage
                     continue;
                 }
                 Act(gui, player, source.Chest, inventory, item, entry.Count);
-                NearbyStockDialog.RefreshSoon();
+                NearbyStorageDialog.RefreshSoon();
                 return;
             }
         }

@@ -1,4 +1,4 @@
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Allocates a build piece's resources through the shared storage supply.
     internal static class BuildingPlan

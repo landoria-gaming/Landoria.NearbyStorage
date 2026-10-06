@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Shows nearby chest stock in vanilla's ingredient availability indicator.
     [HarmonyPatch(typeof(InventoryGui), nameof(InventoryGui.SetupRequirement))]

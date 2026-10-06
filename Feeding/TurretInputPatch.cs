@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the TurretInputPatch Harmony patch.
     [HarmonyPatch(typeof(Turret), "FindAmmoItem")]

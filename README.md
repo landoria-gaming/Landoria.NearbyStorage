@@ -1,4 +1,4 @@
-# Super Storage
+# Nearby Storage
 
 Stack a selected inventory item into nearby storage, and craft, build, refuel, or feed nearby objects from nearby supplies.
 
@@ -6,7 +6,7 @@ Stack a selected inventory item into nearby storage, and craft, build, refuel, o
 
 ### Super Stack
 
-With Nearby Stock visible, Ctrl-click an inventory item or drop it onto the matching Nearby Stock item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible storage containers that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same container, then another matching container. No container needs to be open. **Place Stacks** keeps its normal Valheim behavior.
+With Nearby Storage visible, Ctrl-click an inventory item or drop it onto the matching Nearby Storage item. That inventory stack and matching items on the ground within the configured radius, regardless of type, are moved into nearby accessible storage containers that already contain the same item type. Existing stacks are filled first; remaining items can use any free slot in the same container, then another matching container. No container needs to be open. **Place Stacks** keeps its normal Valheim behavior.
 
 A Ctrl-click with no matching destination leaves the item in your inventory without a message.
 
@@ -15,9 +15,9 @@ A Ctrl-click with no matching destination leaves the item in your inventory with
 Hold Left Alt and click **Craft** to use ingredients from your inventory, nearby storage containers, and ground drops, in that order. Containers are checked from nearest to farthest. By default, Super Craft leaves one of each ingredient type in every container so Super Stack can still find it later. Hold **Shift + Left Alt** for Valheim's multicraft amount.
 
 
-### Nearby Stock
+### Nearby Storage
 
-Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Stock hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Shift-click to split it, or Ctrl-click to transfer it directly when it is the only stack. Ctrl-click also opens the split dialog when multiple stacks contribute to the displayed quantity. Hovering an item shows its description and each contributing container's icon, nearest sign or container type, distance, and quantity. Choose a category on the left and filter by name. Items appear in name order.
+Opening the inventory with Tab shows nearby accessible container contents below the player inventory when at least one item is available. Nearby Storage hides while a container is open. Items on the ground are excluded. The item grid shows the combined quantity across containers; each click acts on one actual stack. Click to pick up a stack, Shift-click to split it, or Ctrl-click to transfer it directly when it is the only stack. Ctrl-click also opens the split dialog when multiple stacks contribute to the displayed quantity. Hovering an item shows its description and each contributing container's icon, nearest sign or container type, distance, and quantity. Choose a category on the left and filter by name. Items appear in name order.
 
 ### Super Refuel
 
@@ -44,20 +44,20 @@ Hold Left Alt while placing with the hammer or planting with the cultivator to u
 
 | Control | Action |
 |---|---|
-| `Ctrl` + click an inventory item while Nearby Stock is visible | Stack that item and matching ground items into nearby containers that already contain its type |
-| Drop an inventory item onto the matching Nearby Stock item | Run the same targeted stack action |
+| `Ctrl` + click an inventory item while Nearby Storage is visible | Stack that item and matching ground items into nearby containers that already contain its type |
+| Drop an inventory item onto the matching Nearby Storage item | Run the same targeted stack action |
 | Click **Place Stacks** | Use Valheim's normal stack action |
 | `Left Alt` + click **Craft** | Craft using ingredients from nearby containers and ground drops |
 | `Left Alt` + `Shift` + click **Craft x N** | Craft using ingredients from nearby containers and ground drops (N times) |
 | `Left Alt` + use a fuelable object | Refuel from a nearby container or ground drop if your inventory has no fuel |
 | `Left Alt` + use a machine input | Add a suitable item from a nearby container or ground drop if your inventory has none |
 | `Left Alt` + place with the hammer or cultivator | Build or plant using your inventory, nearby containers, and ground drops |
-| `Tab` | Open the inventory and Nearby Stock browser when no container is open |
-| Click, `Ctrl` + click, or `Shift` + click a Nearby Stock item | Pick up, transfer, or split one real stack |
+| `Tab` | Open the inventory and Nearby Storage browser when no container is open |
+| Click, `Ctrl` + click, or `Shift` + click a Nearby Storage item | Pick up, transfer, or split one real stack |
 
 ## Configuration
 
-BepInEx creates `Landoria.SuperStorage.cfg` in the active profile's config folder.
+BepInEx creates `Landoria.NearbyStorage.cfg` in the active profile's config folder.
 Changes to this file reload automatically while the game is running. Deleting it restores the default settings.
 
 | Setting | Default | Description |
@@ -68,4 +68,4 @@ Changes to this file reload automatically while the game is running. Deleting it
 
 ## Contact
 
-Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.SuperStorage/issues).
+Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.NearbyStorage/issues).

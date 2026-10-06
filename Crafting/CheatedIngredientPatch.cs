@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Includes selected chest items in the cheated-ingredient result.
     [HarmonyPatch(typeof(Inventory), nameof(Inventory.ItemCheated),

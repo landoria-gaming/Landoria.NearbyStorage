@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Replaces native Stack All only for this mod's targeted chest request.
     [HarmonyPatch(typeof(Container), "RPC_StackResponse")]
@@ -9,7 +9,7 @@ namespace Landoria.SuperStorage
         // Uses the granted ownership to move only the clicked inventory item.
         private static bool Prefix(Container __instance, bool granted)
         {
-            return NearbyStockDeposit.AllowResponse(__instance, granted) &&
+            return NearbyStorageDeposit.AllowResponse(__instance, granted) &&
                 TargetedStack.AllowResponse(__instance, granted);
         }
     }

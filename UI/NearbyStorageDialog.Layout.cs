@@ -2,10 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Creates the stock browser's frame, controls, and scroll areas.
-    internal static partial class NearbyStockDialog
+    internal static partial class NearbyStorageDialog
     {
         private const float GridTopPadding = 6f;
         private const float GridLeftPadding = 6f;
@@ -18,7 +18,7 @@ namespace Landoria.SuperStorage
             _gui = gui;
             Transform parent = gui.m_inventoryRoot.parent != null ?
                 gui.m_inventoryRoot.parent : gui.transform;
-            _root = Rect("Nearby Stock", parent, new Vector2(590f, 350f));
+            _root = Rect("Nearby Storage", parent, new Vector2(590f, 350f));
             _root.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             _root.pivot = new Vector2(0f, 1f);
             _root.anchorMin = _root.anchorMax = Vector2.zero;
@@ -205,7 +205,7 @@ namespace Landoria.SuperStorage
             _dragCancelOverlay.offsetMax = Vector2.zero;
             Image image = _dragCancelOverlay.gameObject.AddComponent<Image>();
             image.color = Color.clear;
-            _dragCancelOverlay.gameObject.AddComponent<NearbyStockDragCancel>();
+            _dragCancelOverlay.gameObject.AddComponent<NearbyStorageDragCancel>();
             _dragCancelOverlay.gameObject.SetActive(false);
         }
 

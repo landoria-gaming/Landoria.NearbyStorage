@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the FermenterInputPatch Harmony patch.
     [HarmonyPatch(typeof(Fermenter), "FindCookableItem")]

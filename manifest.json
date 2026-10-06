@@ -1,7 +1,7 @@
 {
-  "name": "SuperStorage",
+  "name": "NearbyStorage",
   "version_number": "1.0.0",
-  "website_url": "https://github.com/landoria-gaming/Landoria.SuperStorage",
+  "website_url": "https://github.com/landoria-gaming/Landoria.NearbyStorage",
   "description": "Stack a selected inventory item into nearby chests, and craft from nearby chest supplies.",
   "dependencies": ["denikson-BepInExPack_Valheim-5.4.2351"],
   "categories": [

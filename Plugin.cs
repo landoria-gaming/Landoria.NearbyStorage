@@ -2,14 +2,14 @@ using BepInEx;
 using HarmonyLib;
 using Landoria.Shared;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Owns the local UI, configuration, and Harmony patches.
     [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
     public sealed class Plugin : BaseUnityPlugin
     {
-        private const string PluginGuid = "Landoria.SuperStorage";
-        private const string PluginName = "Landoria.SuperStorage";
+        private const string PluginGuid = "Landoria.NearbyStorage";
+        private const string PluginName = "Nearby Storage";
         private const string PluginVersion = "1.0.0";
 
         internal static Plugin Instance { get; private set; }
@@ -21,7 +21,7 @@ namespace Landoria.SuperStorage
         {
             Instance = this;
             Settings = new ModConfigFile(Config);
-            ConfigWatcher.Initialize(Config, Logger, "Super Storage",
+            ConfigWatcher.Initialize(Config, Logger, "Nearby Storage",
                 () => Settings.RestoreDefaults(Config));
             _harmony = new Harmony(PluginGuid);
             _harmony.PatchAll();
@@ -34,7 +34,7 @@ namespace Landoria.SuperStorage
             ConfigWatcher.Update();
             ButtonHalo.Update();
             BuildingUiRefresh.Update();
-            NearbyStockDialog.Update();
+            NearbyStorageDialog.Update();
         }
 
         // Cleans up patches and transient UI state.
@@ -42,11 +42,11 @@ namespace Landoria.SuperStorage
         {
             ConfigWatcher.Dispose();
             ButtonHalo.Dispose();
-            NearbyStockDialog.Dispose();
+            NearbyStorageDialog.Dispose();
             CraftState.Reset();
             RecipeListRefreshPatch.Reset();
             TargetedStack.Reset();
-            NearbyStockDeposit.Reset();
+            NearbyStorageDeposit.Reset();
             GroundSource.Reset();
             RefuelContext.Reset();
             FeedContext.Reset();

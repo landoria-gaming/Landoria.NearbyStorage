@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Moves the clicked item and matching ground drops into nearby chests.
     internal static class TargetedStack
@@ -188,7 +188,7 @@ namespace Landoria.SuperStorage
             if (granted)
             {
                 try { Store(chest); }
-                catch (Exception error) { Debug.LogError("Super Storage transfer failed: " + error); }
+                catch (Exception error) { Debug.LogError("Nearby Storage transfer failed: " + error); }
             }
             return false;
         }
@@ -261,7 +261,7 @@ namespace Landoria.SuperStorage
         private static void RecordMove(int moved)
         {
             _moved += moved;
-            NearbyStockDialog.RefreshSoon();
+            NearbyStorageDialog.RefreshSoon();
             InventoryGui gui = InventoryGui.instance;
             if (gui != null)
             {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Resolves recipe requirements into exact nearby resource withdrawals.
     internal sealed class CraftPlan

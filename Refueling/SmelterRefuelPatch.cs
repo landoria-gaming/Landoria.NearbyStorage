@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the SmelterRefuelPatch Harmony patch.
     [HarmonyPatch(typeof(Smelter), "OnAddFuel")]

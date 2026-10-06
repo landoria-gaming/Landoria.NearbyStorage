@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Routes Super Build resource debits through the prepared plan.
     [HarmonyPatch(typeof(Player), nameof(Player.ConsumeResources),

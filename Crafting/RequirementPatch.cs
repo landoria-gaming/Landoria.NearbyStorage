@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Adds nearby chest stock to vanilla's crafting requirement check.
     [HarmonyPatch(typeof(Player), nameof(Player.HaveRequirements),

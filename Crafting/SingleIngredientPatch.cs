@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Lets one-ingredient recipes select an item held in an eligible chest.
     [HarmonyPatch(typeof(Player), nameof(Player.GetFirstRequiredItem))]

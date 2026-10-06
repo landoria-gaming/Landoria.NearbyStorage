@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Routes Super Craft resource debits through the prepared plan.
     [HarmonyPatch(typeof(Player), nameof(Player.ConsumeResources),

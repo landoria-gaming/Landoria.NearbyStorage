@@ -2,7 +2,7 @@ using System;
 using HarmonyLib;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Rebuilds vanilla's recipe list when Super Craft availability changes.
     [HarmonyPatch(typeof(InventoryGui), "Update")]
@@ -35,7 +35,7 @@ namespace Landoria.SuperStorage
             }
 
             try { UpdatePanel.Invoke(__instance, new object[] { false }); }
-            catch (Exception error) { Debug.LogError("Super Storage recipe refresh failed: " + error); }
+            catch (Exception error) { Debug.LogError("Nearby Storage recipe refresh failed: " + error); }
         }
 
         // Drops the cached transition when the plugin unloads.

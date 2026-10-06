@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the CookingRefuelPatch Harmony patch.
     [HarmonyPatch(typeof(CookingStation), "OnAddFuelSwitch")]

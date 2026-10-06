@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Borrows one input item from nearby storage or a ground drop.
     internal static class FeedContext

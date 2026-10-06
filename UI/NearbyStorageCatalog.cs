@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Builds an inventory-only snapshot of accessible nearby containers.
-    internal static class NearbyStockCatalog
+    internal static class NearbyStorageCatalog
     {
         // Combines stacks of each prefab while retaining their actual sources.
-        internal static List<NearbyStockItem> Read(Player player)
+        internal static List<NearbyStorageItem> Read(Player player)
         {
-            var byKey = new Dictionary<string, NearbyStockItem>();
+            var byKey = new Dictionary<string, NearbyStorageItem>();
             foreach (Container chest in StorageLocator.Nearby(player))
             {
                 foreach (ItemDrop.ItemData item in chest.GetInventory().GetAllItems())
@@ -17,9 +17,9 @@ namespace Landoria.SuperStorage
                         continue;
                     }
                     string key = item.m_dropPrefab.name;
-                    if (!byKey.TryGetValue(key, out NearbyStockItem entry))
+                    if (!byKey.TryGetValue(key, out NearbyStorageItem entry))
                     {
-                        entry = new NearbyStockItem { Key = key, Sample = item,
+                        entry = new NearbyStorageItem { Key = key, Sample = item,
                             Name = Localization.instance.Localize(item.m_shared.m_name) };
                         byKey.Add(key, entry);
                     }
@@ -27,13 +27,13 @@ namespace Landoria.SuperStorage
                     AddSource(entry, chest, item);
                 }
             }
-            return new List<NearbyStockItem>(byKey.Values);
+            return new List<NearbyStorageItem>(byKey.Values);
         }
 
         // Adds an actual stack to its container's tooltip total.
-        private static void AddSource(NearbyStockItem entry, Container chest, ItemDrop.ItemData item)
+        private static void AddSource(NearbyStorageItem entry, Container chest, ItemDrop.ItemData item)
         {
-            foreach (NearbyStockSource source in entry.Sources)
+            foreach (NearbyStorageSource source in entry.Sources)
             {
                 if (source.Chest != chest)
                 {
@@ -42,7 +42,7 @@ namespace Landoria.SuperStorage
                 source.Count += item.m_stack;
                 return;
             }
-            entry.Sources.Add(new NearbyStockSource { Chest = chest, Item = item,
+            entry.Sources.Add(new NearbyStorageSource { Chest = chest, Item = item,
                 Count = item.m_stack });
         }
     }

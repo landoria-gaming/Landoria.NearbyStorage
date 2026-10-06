@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Keeps items with a shared name word together within a category.
-    internal static class NearbyStockSort
+    internal static class NearbyStorageSort
     {
-        internal static void Sort(List<NearbyStockItem> items)
+        internal static void Sort(List<NearbyStorageItem> items)
         {
             var frequency = new Dictionary<string, int>();
-            foreach (NearbyStockItem item in items)
+            foreach (NearbyStorageItem item in items)
             {
                 foreach (string word in Words(item.Name))
                 {
@@ -18,14 +18,14 @@ namespace Landoria.SuperStorage
                 }
             }
             var groups = new Dictionary<string, string>();
-            foreach (NearbyStockItem item in items)
+            foreach (NearbyStorageItem item in items)
             {
                 groups[item.Key] = GroupKey(item.Name, frequency);
             }
             items.Sort((a, b) => Compare(a, b, groups));
         }
 
-        private static int Compare(NearbyStockItem a, NearbyStockItem b,
+        private static int Compare(NearbyStorageItem a, NearbyStorageItem b,
             Dictionary<string, string> groups)
         {
             if (a.Key == b.Key) { return 0; }

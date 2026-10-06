@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Prevents creation when a final source check fails.
     [HarmonyPatch(typeof(InventoryGui), "DoCrafting")]

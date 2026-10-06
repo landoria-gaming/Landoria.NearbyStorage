@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Cancels a held nearby stack when the stock panel is clicked again.
-    internal sealed class NearbyStockDragCancel : MonoBehaviour, IPointerDownHandler
+    internal sealed class NearbyStorageDragCancel : MonoBehaviour, IPointerDownHandler
     {
         public void OnPointerDown(PointerEventData eventData)
         {
             if (eventData.button != PointerEventData.InputButton.Left) { return; }
-            NearbyStockTransfer.CancelNearbyDrag();
+            NearbyStorageTransfer.CancelNearbyDrag();
             eventData.Use();
         }
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Tints Valheim's own button_glow sprite for Super Craft.
     internal static class ButtonHalo
@@ -108,7 +108,7 @@ namespace Landoria.SuperStorage
                 Object.Destroy(oldGlow.gameObject);
             }
 
-            GameObject overlay = new GameObject("SuperStorageGlow", typeof(RectTransform), typeof(Image));
+            GameObject overlay = new GameObject("NearbyStorageGlow", typeof(RectTransform), typeof(Image));
             overlay.transform.SetParent(button.targetGraphic.transform, false);
             overlay.transform.SetAsFirstSibling();
             RectTransform rect = (RectTransform)overlay.transform;

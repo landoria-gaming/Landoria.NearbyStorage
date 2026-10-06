@@ -4,10 +4,10 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Shows nearby container contents below the player's inventory.
-    internal static partial class NearbyStockDialog
+    internal static partial class NearbyStorageDialog
     {
         private static RectTransform _root;
         private static RectTransform _cards;
@@ -60,27 +60,27 @@ namespace Landoria.SuperStorage
             if (_hasStock) { UpdateVisibleDialog(gui); }
         }
 
-        // Tracks inventory and nearby-stock drags for the visible grid.
+        // Tracks inventory and nearby storage drags for the visible grid.
         private static void UpdateDragFocus()
         {
-            string dragKey = NearbyStockTransfer.DraggedPlayerItemKey();
+            string dragKey = NearbyStorageTransfer.DraggedPlayerItemKey();
             if (_dragKey != dragKey)
             {
                 if (dragKey != null)
                 {
-                    ItemDrop.ItemData dragged = NearbyStockTransfer.DraggedPlayerItem();
+                    ItemDrop.ItemData dragged = NearbyStorageTransfer.DraggedPlayerItem();
                     if (dragged != null)
                     {
                         _filter?.SetTextWithoutNotify("");
-                        SelectCategory(NearbyStockCategory.For(dragged), false);
+                        SelectCategory(NearbyStorageCategory.For(dragged), false);
                     }
                 }
                 _dragKey = dragKey;
                 _scrollToDragKey = dragKey;
                 RefreshSoon();
             }
-            string nearbyDragKey = NearbyStockTransfer.DraggedNearbyItemKey();
-            int nearbyDragAmount = NearbyStockTransfer.DraggedNearbyAmount();
+            string nearbyDragKey = NearbyStorageTransfer.DraggedNearbyItemKey();
+            int nearbyDragAmount = NearbyStorageTransfer.DraggedNearbyAmount();
             if (_nearbyDragKey != nearbyDragKey || _nearbyDragAmount != nearbyDragAmount)
             {
                 _nearbyDragKey = nearbyDragKey;
@@ -124,28 +124,28 @@ namespace Landoria.SuperStorage
         {
             _nextRefresh = Time.unscaledTime + 0.5f;
             if (_cards == null || Player.m_localPlayer == null) { return; }
-            List<NearbyStockItem> items = NearbyStockCatalog.Read(Player.m_localPlayer);
+            List<NearbyStorageItem> items = NearbyStorageCatalog.Read(Player.m_localPlayer);
             _hasStock = items.Count > 0;
             bool unmatchedDrag = _dragKey != null &&
                 !items.Exists(item => item.Key == _dragKey);
             bool categoryHasItems = _category >= 0 && items.Exists(item =>
-                NearbyStockCategory.For(item.Sample) == _category);
+                NearbyStorageCategory.For(item.Sample) == _category);
             string filter = _filter == null ? "" : _filter.text.Trim();
-            bool[] occupied = new bool[NearbyStockCategory.French.Length];
-            foreach (NearbyStockItem item in items)
+            bool[] occupied = new bool[NearbyStorageCategory.French.Length];
+            foreach (NearbyStorageItem item in items)
             {
                 if (item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0)
                 {
                     continue;
                 }
-                occupied[NearbyStockCategory.For(item.Sample)] = true;
+                occupied[NearbyStorageCategory.For(item.Sample)] = true;
             }
             UpdateCategoryOpacity(occupied);
             items.RemoveAll(item =>
                 (_category >= 0 && (!unmatchedDrag || categoryHasItems) &&
-                    NearbyStockCategory.For(item.Sample) != _category) ||
+                    NearbyStorageCategory.For(item.Sample) != _category) ||
                 item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0);
-            NearbyStockSort.Sort(items);
+            NearbyStorageSort.Sort(items);
             string fingerprint = Fingerprint(items);
             if (!_dirtyView && fingerprint == _fingerprint) { return; }
             _fingerprint = fingerprint;
@@ -182,13 +182,13 @@ namespace Landoria.SuperStorage
         }
 
         // Tracks visible quantities and source locations to avoid redraw flicker.
-        private static string Fingerprint(List<NearbyStockItem> items)
+        private static string Fingerprint(List<NearbyStorageItem> items)
         {
             var value = new StringBuilder();
-            foreach (NearbyStockItem item in items)
+            foreach (NearbyStorageItem item in items)
             {
                 value.Append(item.Key).Append(':').Append(item.Count).Append('|');
-                foreach (NearbyStockSource source in item.Sources)
+                foreach (NearbyStorageSource source in item.Sources)
                 {
                     if (source.Chest != null)
                     {

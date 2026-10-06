@@ -2,7 +2,7 @@ using HarmonyLib;
 using TMPro;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Routes one-ingredient crafting debits through the prepared plan.
     [HarmonyPatch(typeof(Inventory), nameof(Inventory.RemoveItem),

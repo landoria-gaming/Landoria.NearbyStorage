@@ -2,7 +2,7 @@ using System;
 using HarmonyLib;
 using UnityEngine;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Refreshes build icons when the Super shortcut changes state.
     internal static class BuildingUiRefresh
@@ -47,7 +47,7 @@ namespace Landoria.SuperStorage
             }
             catch (Exception error)
             {
-                Debug.LogError("Super Storage build icon refresh failed: " + error);
+                Debug.LogError("Nearby Storage build icon refresh failed: " + error);
             }
         }
 

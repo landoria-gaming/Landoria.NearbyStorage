@@ -2,10 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Shows item details and one inventory row per contributing container.
-    internal static partial class NearbyStockDialog
+    internal static partial class NearbyStorageDialog
     {
         private const float TooltipWidth = 340f;
         private const float SourceRowHeight = 36f;
@@ -34,7 +34,7 @@ namespace Landoria.SuperStorage
         }
 
         // Builds the description and all contributing storage rows.
-        internal static void ShowTooltip(NearbyStockItem item)
+        internal static void ShowTooltip(NearbyStorageItem item)
         {
             if (_tooltip == null || item?.Sample == null || Player.m_localPlayer == null) { return; }
             ClearTooltipSources();
@@ -48,7 +48,7 @@ namespace Landoria.SuperStorage
             float rowsTop = 52f + descriptionHeight + 10f;
             _tooltipSources.anchoredPosition = new Vector2(10f, -rowsTop);
             int row = 0;
-            foreach (NearbyStockSource source in item.Sources)
+            foreach (NearbyStorageSource source in item.Sources)
             {
                 if (source.Chest != null) { CreateSourceRow(source, row++); }
             }
@@ -84,7 +84,7 @@ namespace Landoria.SuperStorage
         }
 
         // Draws an icon, container name and distance, and right-aligned amount.
-        private static void CreateSourceRow(NearbyStockSource source, int index)
+        private static void CreateSourceRow(NearbyStorageSource source, int index)
         {
             float width = TooltipWidth - 20f;
             RectTransform row = Rect("Container", _tooltipSources,

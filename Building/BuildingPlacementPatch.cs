@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the BuildingPlacementPatch Harmony patch.
     [HarmonyPatch(typeof(Player), nameof(Player.TryPlacePiece))]

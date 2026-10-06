@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Describes one ingredient withdrawal from inventory, a chest, or the ground.
     internal sealed class Withdrawal

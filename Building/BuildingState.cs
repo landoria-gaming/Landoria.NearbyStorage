@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Implements the BuildingState Harmony patch.
     internal static class BuildingState

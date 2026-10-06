@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Allocates ingredients from the player, nearby chests, and ground drops.
     internal sealed class StorageSupply

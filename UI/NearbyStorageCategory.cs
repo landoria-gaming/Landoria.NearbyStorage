@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Maps Valheim item types to the stock browser's fixed categories.
-    internal static class NearbyStockCategory
+    internal static class NearbyStorageCategory
     {
         private static readonly HashSet<string> Valuables = new HashSet<string>(StringComparer.Ordinal)
         {

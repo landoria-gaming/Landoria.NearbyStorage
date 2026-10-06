@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Debits one fuel item from its selected chest.
     [HarmonyPatch(typeof(Inventory), nameof(Inventory.RemoveItem),

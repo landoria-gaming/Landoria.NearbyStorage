@@ -2,10 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
-    // Builds and scrolls the nearby stock category list.
-    internal static partial class NearbyStockDialog
+    // Builds and scrolls the nearby storage category list.
+    internal static partial class NearbyStorageDialog
     {
         // Creates an inventory-style list of categories on the left.
         private static void CreateCategories()
@@ -20,14 +20,14 @@ namespace Landoria.SuperStorage
             listBackground.raycastTarget = false;
             list.gameObject.AddComponent<RectMask2D>();
             _categoryContent = Rect("Category content", list,
-                new Vector2(164f, NearbyStockCategory.French.Length * CategoryRowHeight));
+                new Vector2(164f, NearbyStorageCategory.French.Length * CategoryRowHeight));
             ScrollRect scroll = list.gameObject.AddComponent<ScrollRect>();
             scroll.viewport = list;
             scroll.content = _categoryContent;
             scroll.horizontal = false;
             scroll.scrollSensitivity = 100f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            for (int i = 0; i < NearbyStockCategory.French.Length; i++)
+            for (int i = 0; i < NearbyStorageCategory.French.Length; i++)
             {
                 int index = i;
                 RectTransform row = Rect("Category " + i, _categoryContent,
@@ -40,12 +40,12 @@ namespace Landoria.SuperStorage
                 selected.anchorMax = Vector2.one;
                 selected.offsetMin = selected.offsetMax = Vector2.zero;
                 StyleCategorySelection(selected.gameObject.AddComponent<Image>());
-                TextMeshProUGUI text = Label("Text", row, NearbyStockCategory.Label(i), 14f,
+                TextMeshProUGUI text = Label("Text", row, NearbyStorageCategory.Label(i), 14f,
                     new Vector2(5f, -3f), new Vector2(158f, 22f));
                 StyleCategoryText(text);
                 Button button = row.gameObject.AddComponent<Button>();
                 button.transition = Selectable.Transition.None;
-                row.gameObject.AddComponent<NearbyStockCategoryHover>().Index = index;
+                row.gameObject.AddComponent<NearbyStorageCategoryHover>().Index = index;
                 button.onClick.AddListener(() => SelectCategory(
                     _category == index ? -1 : index));
             }
@@ -86,7 +86,7 @@ namespace Landoria.SuperStorage
             }
             _category = index;
             _scrollCategoryToSelection = index >= 0;
-            for (int i = 0; i < NearbyStockCategory.French.Length; i++)
+            for (int i = 0; i < NearbyStorageCategory.French.Length; i++)
             {
                 SetCategoryHover(i, false);
             }

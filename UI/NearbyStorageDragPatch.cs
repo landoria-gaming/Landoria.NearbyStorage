@@ -1,11 +1,11 @@
 using System.Reflection;
 using HarmonyLib;
 
-namespace Landoria.SuperStorage
+namespace Landoria.NearbyStorage
 {
     // Keeps a stock browser drag alive when no vanilla container is open.
     [HarmonyPatch(typeof(InventoryGui), "UpdateContainer")]
-    internal static class NearbyStockDragPatch
+    internal static class NearbyStorageDragPatch
     {
         private static readonly FieldInfo DragInventory =
             AccessTools.Field(typeof(InventoryGui), "m_dragInventory");
@@ -18,7 +18,7 @@ namespace Landoria.SuperStorage
             __state = null;
             Inventory source = DragInventory?.GetValue(__instance) as Inventory;
             ItemDrop.ItemData item = DragItem?.GetValue(__instance) as ItemDrop.ItemData;
-            if (!NearbyStockTransfer.IsTracked(source, item) || Player.m_localPlayer == null)
+            if (!NearbyStorageTransfer.IsTracked(source, item) || Player.m_localPlayer == null)
             {
                 return;
             }
@@ -34,7 +34,7 @@ namespace Landoria.SuperStorage
                 return;
             }
             ItemDrop.ItemData item = DragItem?.GetValue(__instance) as ItemDrop.ItemData;
-            if (NearbyStockTransfer.IsTracked(__state, item) &&
+            if (NearbyStorageTransfer.IsTracked(__state, item) &&
                 DragInventory.GetValue(__instance) == Player.m_localPlayer.GetInventory())
             {
                 DragInventory.SetValue(__instance, __state);
