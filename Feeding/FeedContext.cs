@@ -40,7 +40,7 @@ namespace Landoria.NearbyStorage
                     }
 
                     ItemDrop.ItemData item = source.GetItem(name);
-                    if (item != null)
+                    if (StorageSupply.CanWithdrawOne(source, item))
                     {
                         return item;
                     }
@@ -69,12 +69,25 @@ namespace Landoria.NearbyStorage
         // Finds matching turret ammunition in nearby chests.
         internal static ItemDrop.ItemData FindAmmo(Inventory inventory, string ammoType, string prefab)
         {
-            return FindStored(inventory, source => source.GetAmmoItem(ammoType, prefab), candidate =>
+            Func<ItemDrop.ItemData, bool> matches = candidate =>
                 (candidate.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Ammo ||
                  candidate.m_shared.m_itemType == ItemDrop.ItemData.ItemType.AmmoNonEquipable ||
                  candidate.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Consumable) &&
                 candidate.m_shared.m_ammoType == ammoType &&
-                (prefab == null || candidate.m_dropPrefab.name == prefab));
+                (prefab == null || candidate.m_dropPrefab.name == prefab);
+            return FindStored(inventory, source =>
+            {
+                ItemDrop.ItemData item = source.GetAmmoItem(ammoType, prefab);
+                if (StorageSupply.CanWithdrawOne(source, item)) { return item; }
+                foreach (ItemDrop.ItemData candidate in source.GetAllItems())
+                {
+                    if (matches(candidate) && StorageSupply.CanWithdrawOne(source, candidate))
+                    {
+                        return candidate;
+                    }
+                }
+                return null;
+            }, matches);
         }
 
         // Selects the highest-priority carried or stored item.
@@ -99,7 +112,11 @@ namespace Landoria.NearbyStorage
                     return carried;
                 }
 
-                ItemDrop.ItemData item = FindStored(inventory, source => source.GetItem(name),
+                ItemDrop.ItemData item = FindStored(inventory, source =>
+                {
+                    ItemDrop.ItemData candidate = source.GetItem(name);
+                    return StorageSupply.CanWithdrawOne(source, candidate) ? candidate : null;
+                },
                     candidate => candidate.m_shared.m_name == name);
                 if (item != null)
                 {
@@ -144,7 +161,8 @@ namespace Landoria.NearbyStorage
             }
 
             ZNetView view = StorageLocator.View(_chest);
-            if (view == null || !view.IsOwner() || !_chest.GetInventory().ContainsItem(_item))
+            if (view == null || !view.IsOwner() || !_chest.GetInventory().ContainsItem(_item) ||
+                !StorageSupply.CanWithdrawOne(_chest.GetInventory(), _item))
             {
                 return false;
             }

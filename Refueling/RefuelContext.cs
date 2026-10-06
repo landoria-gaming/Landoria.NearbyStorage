@@ -34,7 +34,7 @@ namespace Landoria.NearbyStorage
                 foreach (string name in names)
                 {
                     ItemDrop.ItemData item = inventorySource.GetItem(name);
-                    if (item != null) { return item; }
+                    if (StorageSupply.CanWithdrawOne(inventorySource, item)) { return item; }
                 }
                 return null;
             }, item => names.Contains(item.m_shared.m_name));
@@ -102,7 +102,8 @@ namespace Landoria.NearbyStorage
             }
 
             ZNetView view = StorageLocator.View(_chest);
-            if (view == null || !view.IsOwner() || !_chest.GetInventory().HaveItem(_fuel))
+            if (view == null || !view.IsOwner() || !StorageSupply.CanWithdrawOne(
+                _chest.GetInventory(), _chest.GetInventory().GetItem(_fuel)))
             {
                 return false;
             }

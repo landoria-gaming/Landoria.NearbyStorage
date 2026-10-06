@@ -14,7 +14,6 @@ namespace Landoria.NearbyStorage
         private static TextMeshProUGUI _tooltipDescription;
         private static RectTransform _tooltipSources;
         private static NearbyStorageItem _hoverItem;
-        private static Vector3 _hoverPointerPosition;
         private static float _hoverReadyAt;
 
         // Creates a native-looking popup without intercepting inventory input.
@@ -41,22 +40,14 @@ namespace Landoria.NearbyStorage
         internal static void ScheduleTooltip(NearbyStorageItem item)
         {
             _hoverItem = item;
-            _hoverPointerPosition = ZInput.pointerPosition;
             _hoverReadyAt = Time.unscaledTime + TooltipDelay;
             if (_tooltip != null) { _tooltip.gameObject.SetActive(false); }
         }
 
-        // Waits for one second without pointer movement before showing the item.
+        // Shows the item one second after the pointer enters its card.
         private static void UpdateTooltipHover()
         {
             if (_hoverItem == null || _tooltip == null) { return; }
-            Vector3 pointer = ZInput.pointerPosition;
-            if ((pointer - _hoverPointerPosition).sqrMagnitude > 1f)
-            {
-                _hoverPointerPosition = pointer;
-                _hoverReadyAt = Time.unscaledTime + TooltipDelay;
-                _tooltip.gameObject.SetActive(false);
-            }
             if (!_tooltip.gameObject.activeSelf && Time.unscaledTime >= _hoverReadyAt)
             {
                 ShowTooltip(_hoverItem);

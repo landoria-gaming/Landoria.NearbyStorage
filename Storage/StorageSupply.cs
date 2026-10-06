@@ -32,13 +32,14 @@ namespace Landoria.NearbyStorage
         {
             foreach (Container chest in _chests)
             {
-                if (selectChest(chest.GetInventory()) == null ||
+                ItemDrop.ItemData candidate = selectChest(chest.GetInventory());
+                if (!CanWithdrawOne(chest.GetInventory(), candidate) ||
                     !StorageLocator.TryClaimAndLoad(chest, _player))
                 {
                     continue;
                 }
                 ItemDrop.ItemData item = selectChest(chest.GetInventory());
-                if (item != null)
+                if (CanWithdrawOne(chest.GetInventory(), item))
                 {
                     return new Withdrawal
                     {
@@ -52,6 +53,13 @@ namespace Landoria.NearbyStorage
                 }
             }
             return null;
+        }
+
+        // Keeps the last item of each type in a chest when configured.
+        internal static bool CanWithdrawOne(Inventory inventory, ItemDrop.ItemData item)
+        {
+            return item != null && (!Plugin.Instance.Settings.KeepOneIngredientPerChest.Value ||
+                inventory.CountItems(item.m_shared.m_name, -1, false) > 1);
         }
 
         // Claims the first matching ground drop.
