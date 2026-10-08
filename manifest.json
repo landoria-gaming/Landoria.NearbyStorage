@@ -1,6 +1,6 @@
 {
   "name": "NearbyStorage",
-  "version_number": "1.0.0",
+  "version_number": "1.0.1",
   "website_url": "https://github.com/landoria-gaming/Landoria.NearbyStorage",
   "description": "See and use items in nearby containers without opening them one by one. Nearby Storage also lets you craft, build, refuel, and feed machines using nearby supplies.",
   "dependencies": ["denikson-BepInExPack_Valheim-5.4.2351"],
