@@ -147,7 +147,7 @@ namespace Landoria.NearbyStorage
         }
 
         // Keeps stands and tombstones outside shared storage.
-        private static bool IsExcluded(Container chest)
+        internal static bool IsExcluded(Container chest)
         {
             return chest.GetComponentInParent<ItemStand>() != null ||
                 chest.GetComponentInParent<ArmorStand>() != null ||

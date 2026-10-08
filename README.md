@@ -8,6 +8,7 @@ See and use items in nearby containers without opening them one by one. Nearby S
 - Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory, nearby containers, and, where applicable, ground drops. **Shift + Left Alt** works with Valheim's multicraft amount.
 
 The panel hides while a container is open. Ground drops do not appear in its item list. Containers you cannot access, item stands, armor stands, and tombstones are excluded.
+A sign within 4 m names the closest container only.
 
 ## Settings
 
