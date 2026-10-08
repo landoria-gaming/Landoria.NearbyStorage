@@ -27,7 +27,7 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 
 ## Screenshot
 
-![Nearby Storage panel open alongside the Valheim inventory and crafting menu](Assets/screenshot.jpg)
+![Nearby Storage panel open alongside the Valheim inventory and crafting menu](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/refs/heads/main/Assets/screenshot.jpg)
 
 ## Contact
 
