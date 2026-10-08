@@ -10,7 +10,13 @@ namespace Landoria.NearbyStorage
         // Returns the nearest sign assigned to this container.
         internal static string ShortLabel(Container chest)
         {
-            return ClosestSign(chest) ?? Localization.instance.Localize(chest.GetHoverName());
+            return SignLabel(chest) ?? Localization.instance.Localize(chest.GetHoverName());
+        }
+
+        // Returns only the text of a sign assigned to this container.
+        internal static string SignLabel(Container chest)
+        {
+            return ClosestSign(chest);
         }
 
         // Chooses a nearby sign only when this is its closest container.

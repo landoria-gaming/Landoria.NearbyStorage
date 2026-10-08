@@ -42,7 +42,7 @@ namespace Landoria.NearbyStorage
             {
                 if (Capacity(chest.GetInventory(), item) > 0) { chests.Add(chest); }
             }
-            chests.Sort((a, b) => NearbyStorageDestination.Compare(a, b, item, player));
+            NearbyStorageDestination.Sort(chests, item, player);
             return chests;
         }
 

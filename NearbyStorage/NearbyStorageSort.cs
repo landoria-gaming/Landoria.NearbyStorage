@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Landoria.NearbyStorage
 {
-    // Keeps items with a shared name word together within a category.
+    // Compares meaningful words from item names and game asset identifiers.
     internal static class NearbyStorageSort
     {
+        private static readonly Regex IdentifierWordPattern = new Regex(
+            @"[A-Z][a-z0-9]*|[a-z0-9]+", RegexOptions.Compiled);
+
         // Treats names sharing a meaningful word as one item family.
         internal static bool Similar(string left, string right)
         {
@@ -16,6 +20,31 @@ namespace Landoria.NearbyStorage
                 if (words.Contains(word)) { return true; }
             }
             return false;
+        }
+
+        // Finds meaningful words shared by two game asset names.
+        internal static bool SharesIdentifierWord(string left, string right)
+        {
+            if (string.IsNullOrEmpty(left) || string.IsNullOrEmpty(right))
+            {
+                return false;
+            }
+            var words = new HashSet<string>(IdentifierWords(left));
+            foreach (string word in IdentifierWords(right))
+            {
+                if (words.Contains(word)) { return true; }
+            }
+            return false;
+        }
+
+        // Splits stable game asset names into comparable words.
+        private static IEnumerable<string> IdentifierWords(string identifier)
+        {
+            foreach (Match match in IdentifierWordPattern.Matches(identifier ?? ""))
+            {
+                string word = Normalize(match.Value.ToLowerInvariant());
+                if (word.Length >= 4) { yield return word; }
+            }
         }
 
         // Finds the nearest name when the clicked item is absent from storage.
