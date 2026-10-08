@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -145,11 +146,11 @@ namespace Landoria.NearbyStorage
                 !items.Exists(item => item.Key == _dragKey);
             bool categoryHasItems = _category >= 0 && items.Exists(item =>
                 NearbyStorageCategory.For(item.Sample) == _category);
-            string filter = _filter == null ? "" : _filter.text.Trim();
+            string filter = NormalizeFilterText(_filter == null ? "" : _filter.text.Trim());
             bool[] occupied = new bool[NearbyStorageCategory.French.Length];
             foreach (NearbyStorageItem item in items)
             {
-                if (item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0)
+                if (!MatchesFilter(item.Name, filter))
                 {
                     continue;
                 }
@@ -159,7 +160,7 @@ namespace Landoria.NearbyStorage
             items.RemoveAll(item =>
                 (_category >= 0 && (!unmatchedDrag || categoryHasItems) &&
                     NearbyStorageCategory.For(item.Sample) != _category) ||
-                item.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) < 0);
+                !MatchesFilter(item.Name, filter));
             NearbyStorageSort.Sort(items);
             string fingerprint = Fingerprint(items);
             if (!_dirtyView && fingerprint == _fingerprint) { return; }
@@ -167,6 +168,32 @@ namespace Landoria.NearbyStorage
             _dirtyView = false;
             HideTooltip();
             DrawCards(items);
+        }
+
+        // Matches item names without distinguishing case or accents.
+        private static bool MatchesFilter(string name, string filter)
+        {
+            if (filter.Length == 0) { return true; }
+            return NormalizeFilterText(name).IndexOf(filter, StringComparison.Ordinal) >= 0;
+        }
+
+        // Removes combining marks and folds Turkish dotless i for search.
+        private static string NormalizeFilterText(string value)
+        {
+            string decomposed = value.Normalize(NormalizationForm.FormD);
+            var result = new StringBuilder(decomposed.Length);
+            foreach (char character in decomposed)
+            {
+                UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(character);
+                if (category == UnicodeCategory.NonSpacingMark ||
+                    category == UnicodeCategory.SpacingCombiningMark ||
+                    category == UnicodeCategory.EnclosingMark)
+                {
+                    continue;
+                }
+                result.Append(char.ToUpperInvariant(character == '\u0131' ? 'i' : character));
+            }
+            return result.ToString();
         }
 
         // Dims categories with no matching nearby items.

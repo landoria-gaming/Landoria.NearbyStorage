@@ -11,8 +11,8 @@ The panel hides while a container is open. Ground drops do not appear in its ite
 A sign within 4 m names the closest container only.
 When storing an item, a container already holding the same item wins. Next come
 containers holding items that share asset words, a crafting station, or a processing
-machine; then containers holding items with similar names. A sign sharing a word
-with the item's name comes next, followed by containers holding the same category.
+machine; then containers holding items with similar names, followed by containers
+holding the same category.
 Within the same priority, more matching items win, then the container nearest to you.
 
 ## Settings
