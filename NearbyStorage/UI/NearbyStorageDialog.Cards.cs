@@ -133,6 +133,7 @@ namespace Landoria.NearbyStorage
                 quality.alignment = nativeQuality.alignment;
                 MatchIconRect(nativeQuality.rectTransform, quality.rectTransform, slot);
             }
+            DrawNoTeleportMarker(card, item, element, slot);
             if (item.m_shared.m_itemType != ItemDrop.ItemData.ItemType.Consumable ||
                 item.m_shared.m_food <= 0f && item.m_shared.m_foodStamina <= 0f &&
                 item.m_shared.m_foodEitr <= 0f || element.m_food == null) { return; }
@@ -142,6 +143,20 @@ namespace Landoria.NearbyStorage
             MatchIconRect(element.m_food.rectTransform, marker, slot);
             food.color = FoodColor(item);
             food.raycastTarget = false;
+        }
+
+        // Copies Valheim's non-teleportable marker and its slot position.
+        private static void DrawNoTeleportMarker(RectTransform card, ItemDrop.ItemData item,
+            InventoryElement element, RectTransform slot)
+        {
+            if (item.m_shared.m_teleportable || ZoneSystem.instance == null ||
+                ZoneSystem.instance.GetGlobalKey(GlobalKeys.TeleportAll) ||
+                element.m_noteleport == null) { return; }
+            RectTransform marker = Rect("NoTeleport", card, Vector2.zero);
+            Image image = marker.gameObject.AddComponent<Image>();
+            CopyImage(element.m_noteleport, image);
+            MatchIconRect(element.m_noteleport.rectTransform, marker, slot);
+            image.raycastTarget = false;
         }
 
         // Uses the same food colors and thresholds as InventoryGrid.

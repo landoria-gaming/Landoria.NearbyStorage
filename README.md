@@ -4,17 +4,28 @@ See and use items in nearby containers without opening them one by one. Nearby S
 
 ## Nearby Storage panel
 
-- Press **Tab** to open your inventory. Nearby Storage appears below it when accessible containers nearby contain items. Each container has its own item stacks. Choose a category or use the search field. Drop an inventory or Nearby Storage item onto an occupied slot to store it in that slot's container. Nearby Storage items move directly between containers. A dropped stack must fit completely or an error appears. Ctrl-click stores an inventory stack only when exactly one nearby container already holds the same item and quality and has room for the whole stack; otherwise an error appears.
-- Right-click a nearby consumable to use it. Left Alt + click a Nearby Storage item to ping its container and close the inventory.
+- Press **Tab** to open your inventory. Nearby Storage appears below it when accessible nearby containers contain items.
+- **Ctrl-click** an inventory stack to store it when exactly one nearby container already holds the same item and quality and has room for the whole stack. Otherwise, an error appears.
+- Drop an item onto an occupied Nearby Storage slot to move it into the same container.
+- Choose a category or use the search field to find items.
 
-## Nearby supplies shortcut
+## Craft from Nearby Storage
 
-- Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory, nearby containers, and, where applicable, ground drops. **Shift + Left Alt** works with Valheim's multicraft amount.
+- Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory, nearby containers, and, where applicable, ground drops.
+- Hold **Alt** and **Shift** together to use nearby supplies when crafting multiple items at once.
 
 ## Renaming containers
 
-- Press **Shift + E** while looking at a wooden, reinforced, or personal chest or a barrel to give it a name if you can open it. Nearby Storage shows that name when it differs from the default container name.
-- Press **Alt + E** while looking at one of these containers to include or exclude it from Nearby Storage for your character. Containers are included by default.
+- Press **Shift + E** while looking at a wooden, reinforced, or personal chest or a barrel to give it a name if you can open it.
+
+## Including or excluding containers
+
+- Press **Alt + E** while looking at a wooden, reinforced, or personal chest or a barrel to include or exclude it from Nearby Storage for your character.
+- Excluded containers are also ignored when crafting, building, refueling, and feeding machines. Containers are included by default.
+
+## Ping a container
+
+- **Alt + click** a Nearby Storage item to ping its container.
 
 ## Settings
 
