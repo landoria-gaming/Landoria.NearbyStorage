@@ -26,6 +26,7 @@ namespace Landoria.NearbyStorage
                 {
                     Chat.instance.SendPing(chest.transform.position);
                     eventData.Use();
+                    InventoryGui.instance?.Hide();
                 }
                 return;
             }

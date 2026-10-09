@@ -26,11 +26,6 @@ namespace Landoria.NearbyStorage
                     items[i].Key == _nearbyDragKey);
             }
             int rows = Mathf.Max(4, (items.Count + columns - 1) / columns);
-            for (int i = items.Count; i < rows * columns; i++)
-            {
-                CreateCardBackground("Empty slot", i % columns, i / columns, step)
-                    .gameObject.AddComponent<NearbyStorageDragCancel>();
-            }
             _cards.sizeDelta = new Vector2(0f, GridTopPadding + rows * step);
             ScrollToDraggedItem(items, columns, step);
         }

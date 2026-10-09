@@ -104,31 +104,21 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Draws an icon, container name and distance, and right-aligned amount.
+        // Draws the source container's icon and name.
         private static void CreateSourceRow(NearbyStorageSource source, int index)
         {
             float width = TooltipWidth - 20f;
             RectTransform row = Rect("Container", _tooltipSources,
                 new Vector2(width, SourceRowHeight - 2f));
             row.anchoredPosition = new Vector2(0f, -index * SourceRowHeight);
-            Image background = row.gameObject.AddComponent<Image>();
-            background.color = new Color(0f, 0f, 0f, 0.30f);
-            background.raycastTarget = false;
             AddSourceIcon(row, source.Chest);
-            Vector3 delta = source.Chest.transform.position -
-                Player.m_localPlayer.transform.position;
-            int metres = Mathf.RoundToInt(new Vector2(delta.x, delta.z).magnitude);
             TextMeshProUGUI name = Label("Container name", row,
-                $"{StorageLabel.ShortLabel(source.Chest)} ({metres} m)", 16f,
-                new Vector2(42f, -5f), new Vector2(width - 104f, 25f));
+                StorageLabel.ShortLabel(source.Chest), 16f,
+                new Vector2(42f, -5f), new Vector2(width - 50f, 25f));
             StyleTooltipText(name, "Text");
             name.alignment = TextAlignmentOptions.MidlineLeft;
             name.textWrappingMode = TextWrappingModes.NoWrap;
             name.overflowMode = TextOverflowModes.Ellipsis;
-            TextMeshProUGUI amount = Label("Amount", row, source.Count.ToString("N0"), 16f,
-                new Vector2(width - 61f, -5f), new Vector2(54f, 25f));
-            StyleTooltipText(amount, "Text");
-            amount.alignment = TextAlignmentOptions.MidlineRight;
         }
 
         // Takes the build icon of a chest, wagon, or boat when available.

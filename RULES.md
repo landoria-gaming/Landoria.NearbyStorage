@@ -13,8 +13,9 @@
 
 - Open the inventory with Tab to show the panel when accessible nearby containers contain items.
 - The same item in two containers appears as two separate cards. Stacks of the same item in one container are combined into one displayed count.
-- Hover over a card for 0.5 seconds to see its item tooltip, source container, quantity, and distance.
-- Right-click a card to send a Valheim ping at the position of its source container.
+- Empty slots are hidden; only cards containing items appear.
+- Hover over a card for 0.5 seconds to see its item tooltip and source container.
+- Right-click a card to send a Valheim ping at the position of its source container and close the inventory.
 - The panel refreshes its contents about every 0.5 seconds and refreshes immediately after supported interactions.
 
 ## Search and categories
