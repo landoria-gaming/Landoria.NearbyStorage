@@ -18,17 +18,17 @@ namespace Landoria.NearbyStorage
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (!NearbyStorageTransfer.TryDropInPanel())
+                if (!NearbyStorageTransfer.TryDropInPanel(Item))
                 {
                     NearbyStorageTransfer.Select(Item);
                 }
             }
         }
 
-        // Accepts an inventory drag over any nearby item.
+        // Accepts a player or nearby drag over this item's container.
         public void OnDrop(PointerEventData eventData)
         {
-            if (NearbyStorageTransfer.TryDropInPanel()) { eventData.Use(); }
+            if (NearbyStorageTransfer.TryDropInPanel(Item)) { eventData.Use(); }
         }
 
         // Highlights immediately and schedules the tooltip after a pause.

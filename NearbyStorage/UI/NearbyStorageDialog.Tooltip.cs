@@ -9,7 +9,7 @@ namespace Landoria.NearbyStorage
     {
         private const float TooltipWidth = 340f;
         private const float SourceRowHeight = 36f;
-        private const float TooltipDelay = 1f;
+        private const float TooltipDelay = 0.5f;
         private static TextMeshProUGUI _tooltipTitle;
         private static TextMeshProUGUI _tooltipDescription;
         private static RectTransform _tooltipSources;
@@ -44,7 +44,7 @@ namespace Landoria.NearbyStorage
             if (_tooltip != null) { _tooltip.gameObject.SetActive(false); }
         }
 
-        // Shows the item one second after the pointer enters its card.
+        // Shows the item half a second after the pointer enters its card.
         private static void UpdateTooltipHover()
         {
             if (_hoverItem == null || _tooltip == null) { return; }

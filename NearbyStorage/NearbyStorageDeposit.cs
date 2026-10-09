@@ -5,19 +5,23 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Moves a selected inventory stack into the best nearby containers.
+    // Moves a selected player or nearby stack into eligible nearby containers.
     internal static class NearbyStorageDeposit
     {
         private static readonly HashSet<Container> Expired = new HashSet<Container>();
         private static Container _pending;
         private static ItemDrop.ItemData _item;
         private static Player _player;
+        private static Container _sourceChest;
+        private static Vector2i _sourcePosition;
+        private static string _sourceKey;
         private static int _remaining;
         private static int _moved;
         internal static bool Running { get; private set; }
 
-        // Starts the same transfer for Ctrl-click and inventory drag-and-drop.
-        internal static bool TryStart(ItemDrop.ItemData item, int amount, bool clearDrag)
+        // Starts a transfer, optionally using the container under the drop.
+        internal static bool TryStart(ItemDrop.ItemData item, int amount, bool clearDrag,
+            NearbyStorageItem target = null)
         {
             Player player = Player.m_localPlayer;
             if (Running || player == null ||
@@ -27,39 +31,66 @@ namespace Landoria.NearbyStorage
                 return false;
             }
             NearbyStorageDialog.FocusInventoryItem(item);
-            List<Container> chests = Candidates(item, player);
+            List<Container> chests = Candidates(item, player, target, null);
             if (chests.Count == 0) { return false; }
             if (clearDrag) { NearbyStorageTransfer.ClearPlayerDrag(); }
-            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests));
+            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, null));
             return true;
         }
 
-        // Ranks every eligible container that can accept the selected item.
-        private static List<Container> Candidates(ItemDrop.ItemData item, Player player)
+        // Starts a direct transfer from the chest holding a dragged nearby stack.
+        internal static bool TryMove(Container source, ItemDrop.ItemData item, int amount,
+            NearbyStorageItem target)
+        {
+            Player player = Player.m_localPlayer;
+            if (Running || player == null || source == null || item?.m_dropPrefab == null ||
+                amount <= 0 || !source.GetInventory().ContainsItem(item) ||
+                !StorageLocator.Eligible(source, player, StorageLocator.CurrentContainer(),
+                    Plugin.Instance.Settings.Radius.Value)) { return false; }
+            List<Container> chests = Candidates(item, player, target, source);
+            if (chests.Count == 0 || !NearbyStorageTransfer.CancelNearbyDrag()) { return false; }
+            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, source));
+            return true;
+        }
+
+        // Chooses the targeted container, or ranks all containers for Ctrl-click.
+        private static List<Container> Candidates(ItemDrop.ItemData item, Player player,
+            NearbyStorageItem target, Container source)
         {
             var chests = new List<Container>();
             foreach (Container chest in StorageLocator.Nearby(player))
             {
-                if (Capacity(chest.GetInventory(), item) > 0) { chests.Add(chest); }
+                if (chest != source && Capacity(chest.GetInventory(), item) > 0)
+                {
+                    chests.Add(chest);
+                }
             }
-            NearbyStorageDestination.Sort(chests, item, player);
+            if (target != null)
+            {
+                Container preferred = target.Sources.Count > 0 ? target.Sources[0].Chest : null;
+                chests.RemoveAll(chest => chest != preferred);
+            }
+            else { NearbyStorageDestination.Sort(chests, item, player); }
             return chests;
         }
 
         // Requests each chest through Valheim's normal ownership handshake.
         private static IEnumerator Run(ItemDrop.ItemData item, Player player, int amount,
-            List<Container> chests)
+            List<Container> chests, Container source)
         {
             Running = true;
             _item = item;
             _player = player;
+            _sourceChest = source;
+            _sourcePosition = item.m_gridPos;
+            _sourceKey = source == null ? null : NearbyStorageItemKey.For(item, source);
             _remaining = Mathf.Min(amount, item.m_stack);
             _moved = 0;
             try
             {
                 foreach (Container chest in chests)
                 {
-                    if (_remaining <= 0 || !player.GetInventory().ContainsItem(item)) { break; }
+                    if (_remaining <= 0 || SourceItem() == null) { break; }
                     if (!StorageLocator.Eligible(chest, player, StorageLocator.CurrentContainer(),
                         Plugin.Instance.Settings.Radius.Value)) { continue; }
                     yield return RequestChest(chest);
@@ -67,10 +98,12 @@ namespace Landoria.NearbyStorage
             }
             finally
             {
-                if (_moved > 0) { NearbyStorageDialog.FocusInventoryItem(item); }
+                if (_moved > 0 && source == null) { NearbyStorageDialog.FocusInventoryItem(item); }
                 _pending = null;
                 _item = null;
                 _player = null;
+                _sourceChest = null;
+                _sourceKey = null;
                 _remaining = 0;
                 Running = false;
             }
@@ -107,27 +140,46 @@ namespace Landoria.NearbyStorage
             return false;
         }
 
-        // Copies only what fits, then removes the accepted amount from the player.
+        // Finds the dragged stack again after a container inventory reload.
+        private static ItemDrop.ItemData SourceItem()
+        {
+            if (_sourceChest == null)
+            {
+                return _player.GetInventory().ContainsItem(_item) ? _item : null;
+            }
+            ItemDrop.ItemData current = _sourceChest.GetInventory().GetItemAt(
+                _sourcePosition.x, _sourcePosition.y);
+            return current != null && NearbyStorageItemKey.For(current, _sourceChest) == _sourceKey
+                ? current : null;
+        }
+
+        // Copies only what fits, then removes the accepted amount from its source.
         private static void Store(Container chest)
         {
-            Inventory source = _player.GetInventory();
-            if (!source.ContainsItem(_item) || _remaining <= 0) { return; }
+            if (_sourceChest != null && !StorageLocator.TryClaimAndLoad(_sourceChest, _player))
+            {
+                return;
+            }
+            Inventory source = _sourceChest == null ? _player.GetInventory() :
+                _sourceChest.GetInventory();
+            ItemDrop.ItemData item = SourceItem();
+            if (item == null || _remaining <= 0) { return; }
             Inventory destination = chest.GetInventory();
-            int amount = Mathf.Min(_remaining, _item.m_stack, Capacity(destination, _item));
+            int amount = Mathf.Min(_remaining, item.m_stack, Capacity(destination, item));
             if (amount <= 0) { return; }
-            ItemDrop.ItemData copy = _item.Clone();
+            ItemDrop.ItemData copy = item.Clone();
             copy.m_stack = amount;
             copy.m_equipped = false;
             int before = destination.NrOfItemsIncludingStacks();
             destination.AddItem(copy);
             int moved = destination.NrOfItemsIncludingStacks() - before;
             if (moved <= 0) { return; }
-            if (moved == _item.m_stack && _player.IsItemEquiped(_item))
+            if (_sourceChest == null && moved == item.m_stack && _player.IsItemEquiped(item))
             {
-                _player.RemoveEquipAction(_item);
-                _player.UnequipItem(_item);
+                _player.RemoveEquipAction(item);
+                _player.UnequipItem(item);
             }
-            source.RemoveItem(_item, moved);
+            source.RemoveItem(item, moved);
             _remaining -= moved;
             _moved += moved;
             InventoryGui gui = InventoryGui.instance;
@@ -156,6 +208,8 @@ namespace Landoria.NearbyStorage
             _pending = null;
             _item = null;
             _player = null;
+            _sourceChest = null;
+            _sourceKey = null;
             _remaining = 0;
             _moved = 0;
             Expired.Clear();

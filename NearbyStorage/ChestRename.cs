@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using HarmonyLib;
 using Splatform;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Landoria.NearbyStorage
         private const int NameLimit = 30;
         private static readonly int NameKey = "Landoria.NearbyStorage.ChestName".GetStableHashCode();
         private static readonly int AuthorKey = "Landoria.NearbyStorage.ChestNameAuthor".GetStableHashCode();
+        private static readonly MethodInfo CheckOpenAccess = AccessTools.Method(
+            typeof(Container), "CheckAccess", new[] { typeof(long) });
         private readonly Container _chest;
 
         // Keeps the selected chest for the text input callback.
@@ -55,8 +58,8 @@ namespace Landoria.NearbyStorage
         private static bool Interact(Container __instance, bool hold, bool alt, ref bool __result)
         {
             if (!IsTarget(__instance) || hold || !alt) { return true; }
+            if (!CanAccess(__instance, true)) { return true; }
             __result = true;
-            if (!CanAccess(__instance, true)) { return false; }
             if (!PlatformManager.DistributionPlatform.PrivilegeProvider
                 .CheckPrivilege(Privilege.ViewUserGeneratedContent).IsGranted())
             {
@@ -76,16 +79,16 @@ namespace Landoria.NearbyStorage
                 prefab == "piece_chest_private" || prefab == "piece_chest_barrel";
         }
 
-        // Applies the same ward and chest privacy checks as the vanilla interaction.
+        // Checks the ward and the exact private access rule used to open the chest.
         private static bool CanAccess(Container chest, bool flash)
         {
             if (chest.m_checkGuardStone &&
                 !PrivateArea.CheckAccess(chest.transform.position, 0f, flash)) { return false; }
-            if (chest.m_privacy == Container.PrivacySetting.Public) { return true; }
-            if (chest.m_privacy == Container.PrivacySetting.Group) { return false; }
-            Piece piece = chest.GetComponent<Piece>();
-            return piece != null && Game.instance != null &&
-                piece.GetCreator() == Game.instance.GetPlayerProfile().GetPlayerID();
+            PlayerProfile profile = Game.instance?.GetPlayerProfile();
+            ZNetView view = StorageLocator.View(chest);
+            return profile != null && view != null && view.IsValid() &&
+                CheckOpenAccess != null && (bool)CheckOpenAccess.Invoke(chest,
+                    new object[] { profile.GetPlayerID() });
         }
 
         // Reads and filters a saved chest name before showing it to the player.

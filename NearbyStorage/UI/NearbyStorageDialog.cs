@@ -14,7 +14,6 @@ namespace Landoria.NearbyStorage
         private static RectTransform _cards;
         private static RectTransform _categoryContent;
         private static RectTransform _tooltip;
-        private static RectTransform _dragCancelOverlay;
         private static TMP_InputField _filter;
         private static InventoryGui _gui;
         private static float _nextRefresh;
@@ -107,10 +106,6 @@ namespace Landoria.NearbyStorage
         // Keeps nearby items clickable while placing the split dialog in front.
         private static void UpdateVisibleDialog(InventoryGui gui)
         {
-            if (_dragCancelOverlay != null)
-            {
-                _dragCancelOverlay.gameObject.SetActive(_nearbyDragKey != null);
-            }
             int inventoryIndex = gui.m_inventoryRoot.GetSiblingIndex();
             int dialogIndex = _root.GetSiblingIndex();
             bool splitOpen = gui.m_splitDialog?.IsActive == true;
@@ -143,7 +138,8 @@ namespace Landoria.NearbyStorage
             List<NearbyStorageItem> items = NearbyStorageCatalog.Read(Player.m_localPlayer);
             _hasNearbyItems = items.Count > 0;
             bool unmatchedDrag = _dragKey != null &&
-                !items.Exists(item => item.Key == _dragKey);
+                !items.Exists(item => item.Key.StartsWith(_dragKey + "|",
+                    StringComparison.Ordinal));
             bool categoryHasItems = _category >= 0 && items.Exists(item =>
                 NearbyStorageCategory.For(item.Sample) == _category);
             string filter = NormalizeFilterText(_filter == null ? "" : _filter.text.Trim());
@@ -266,7 +262,6 @@ namespace Landoria.NearbyStorage
             _categoryContent = null;
             _tooltip = null;
             _hoverItem = null;
-            _dragCancelOverlay = null;
             _tooltipTitle = null;
             _tooltipDescription = null;
             _tooltipSources = null;

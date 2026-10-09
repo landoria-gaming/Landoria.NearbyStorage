@@ -27,7 +27,7 @@ namespace Landoria.NearbyStorage
             background.color = new Color(0.17f, 0.12f, 0.13f, 0.96f);
             StylePanel(background);
             background.raycastTarget = true;
-            _root.gameObject.AddComponent<NearbyStoragePanelDrop>();
+            _root.gameObject.AddComponent<NearbyStorageDragCancel>();
             _root.SetSiblingIndex(gui.m_inventoryRoot.GetSiblingIndex() + 1);
             TextMeshProUGUI title = Label("Title", _root, "Nearby Storage", 32f,
                 new Vector2(10f, -16f), new Vector2(570f, 35f));
@@ -41,7 +41,6 @@ namespace Landoria.NearbyStorage
             CreateCategories();
             CreateGrid();
             CreateTooltip();
-            CreateDragCancelOverlay();
             Position();
             RefreshSoon();
         }
@@ -196,20 +195,6 @@ namespace Landoria.NearbyStorage
             scroll.scrollSensitivity = 640f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
             CreateScrollbar(scroll);
-        }
-
-        // Captures a second click anywhere on the nearby storage panel during a nearby drag.
-        private static void CreateDragCancelOverlay()
-        {
-            _dragCancelOverlay = Rect("Cancel nearby drag", _root, Vector2.zero);
-            _dragCancelOverlay.anchorMin = Vector2.zero;
-            _dragCancelOverlay.anchorMax = Vector2.one;
-            _dragCancelOverlay.offsetMin = Vector2.zero;
-            _dragCancelOverlay.offsetMax = Vector2.zero;
-            Image image = _dragCancelOverlay.gameObject.AddComponent<Image>();
-            image.color = Color.clear;
-            _dragCancelOverlay.gameObject.AddComponent<NearbyStorageDragCancel>();
-            _dragCancelOverlay.gameObject.SetActive(false);
         }
 
         // Adds a visible vertical scrollbar beside the item grid.

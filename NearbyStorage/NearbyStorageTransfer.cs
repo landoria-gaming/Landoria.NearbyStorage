@@ -52,22 +52,24 @@ namespace Landoria.NearbyStorage
         }
 
         // Cancels a nearby drag without moving anything from its source container.
-        internal static void CancelNearbyDrag()
+        internal static bool CancelNearbyDrag()
         {
-            if (DraggedNearbyItemKey() == null || SetupDrag == null) { return; }
+            if (DraggedNearbyItemKey() == null || SetupDrag == null) { return false; }
             SetupDrag.Invoke(InventoryGui.instance, new object[] { null, null, 1 });
             _trackedInventory = null;
             _trackedItem = null;
             _trackedChest = null;
             NearbyStorageDialog.RefreshSoon();
+            return true;
         }
 
-        // Sends an inventory drag to the same transfer used by Ctrl-click.
-        internal static bool TryDropInPanel()
+        // Sends an inventory or nearby drag to the selected storage slot.
+        internal static bool TryDropInPanel(NearbyStorageItem target)
         {
             Player player = Player.m_localPlayer;
             InventoryGui gui = InventoryGui.instance;
-            if (player == null || gui == null || player.IsTeleporting() ||
+            if (target == null || target.Sources.Count == 0 ||
+                player == null || gui == null || player.IsTeleporting() ||
                 NearbyStorageDeposit.Running ||
                 Plugin.Instance == null || SetupDrag == null)
             {
@@ -75,13 +77,22 @@ namespace Landoria.NearbyStorage
             }
             ItemDrop.ItemData item = DragItem?.GetValue(gui) as ItemDrop.ItemData;
             Inventory source = DragInventory?.GetValue(gui) as Inventory;
-            if (source != player.GetInventory() || item?.m_dropPrefab == null ||
-                !source.ContainsItem(item))
+            if (item?.m_dropPrefab == null || source == null || !source.ContainsItem(item))
             {
                 return false;
             }
             int amount = (int)(DragAmount?.GetValue(gui) ?? item.m_stack);
-            return NearbyStorageDeposit.TryStart(item, amount, true);
+            if (source == player.GetInventory())
+            {
+                return NearbyStorageDeposit.TryStart(item, amount, true, target);
+            }
+            if (!IsTracked(source, item)) { return false; }
+            if (target != null && target.Sources.Count > 0 &&
+                target.Sources[0].Chest == _trackedChest)
+            {
+                return CancelNearbyDrag();
+            }
+            return NearbyStorageDeposit.TryMove(_trackedChest, item, amount, target);
         }
 
         // Releases the inventory drag after a destination has been selected.
