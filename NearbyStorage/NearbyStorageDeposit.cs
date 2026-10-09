@@ -17,7 +17,26 @@ namespace Landoria.NearbyStorage
         private static string _sourceKey;
         private static int _remaining;
         private static int _moved;
+        private static bool _autoDeposit;
+        private static bool _targetedDeposit;
         internal static bool Running { get; private set; }
+
+        // Starts Ctrl-click only when one matching chest can accept the whole stack.
+        internal static bool TryStartAuto(ItemDrop.ItemData item)
+        {
+            Player player = Player.m_localPlayer;
+            if (Running || player == null || item?.m_dropPrefab == null ||
+                !player.GetInventory().ContainsItem(item)) { return false; }
+            List<Container> matches = MatchingChests(item, player);
+            if (matches.Count != 1 || Capacity(matches[0].GetInventory(), item) < item.m_stack)
+            {
+                ShowAutoError(matches.Count);
+                return false;
+            }
+            NearbyStorageDialog.FocusInventoryItem(item);
+            Plugin.Instance.StartCoroutine(Run(item, player, item.m_stack, matches, null, true, false));
+            return true;
+        }
 
         // Starts a transfer, optionally using the container under the drop.
         internal static bool TryStart(ItemDrop.ItemData item, int amount, bool clearDrag,
@@ -30,11 +49,13 @@ namespace Landoria.NearbyStorage
             {
                 return false;
             }
+            if (!TargetHasRoom(target, item, amount, player)) { return false; }
             NearbyStorageDialog.FocusInventoryItem(item);
             List<Container> chests = Candidates(item, player, target, null);
             if (chests.Count == 0) { return false; }
             if (clearDrag) { NearbyStorageTransfer.ClearPlayerDrag(); }
-            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, null));
+            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, null,
+                false, target != null));
             return true;
         }
 
@@ -47,13 +68,67 @@ namespace Landoria.NearbyStorage
                 amount <= 0 || !source.GetInventory().ContainsItem(item) ||
                 !StorageLocator.Eligible(source, player, StorageLocator.CurrentContainer(),
                     Plugin.Instance.Settings.Radius.Value)) { return false; }
+            if (!TargetHasRoom(target, item, amount, player)) { return false; }
             List<Container> chests = Candidates(item, player, target, source);
             if (chests.Count == 0 || !NearbyStorageTransfer.CancelNearbyDrag()) { return false; }
-            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, source));
+            Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, source,
+                false, target != null));
             return true;
         }
 
-        // Chooses the targeted container, or ranks all containers for Ctrl-click.
+        // Rejects a targeted drop when its container cannot hold the full amount.
+        private static bool TargetHasRoom(NearbyStorageItem target, ItemDrop.ItemData item,
+            int amount, Player player)
+        {
+            if (target == null) { return true; }
+            Container chest = target.Sources.Count > 0 ? target.Sources[0].Chest : null;
+            if (chest == null || !StorageLocator.Eligible(chest, player,
+                StorageLocator.CurrentContainer(), Plugin.Instance.Settings.Radius.Value))
+            {
+                return false;
+            }
+            if (Capacity(chest.GetInventory(), item) >= Mathf.Min(amount, item.m_stack))
+            {
+                return true;
+            }
+            ShowAutoError(1);
+            return false;
+        }
+
+        // Finds every eligible chest that already holds this item and quality.
+        private static List<Container> MatchingChests(ItemDrop.ItemData item, Player player)
+        {
+            var matches = new List<Container>();
+            string key = NearbyStorageItemKey.For(item);
+            foreach (Container chest in StorageLocator.Nearby(player))
+            {
+                foreach (ItemDrop.ItemData stored in chest.GetInventory().GetAllItems())
+                {
+                    if (stored == null || stored.m_stack <= 0 ||
+                        NearbyStorageItemKey.For(stored) != key) { continue; }
+                    matches.Add(chest);
+                    break;
+                }
+            }
+            return matches;
+        }
+
+        // Explains why an automatic or targeted deposit cannot proceed.
+        private static void ShowAutoError(int matches)
+        {
+            bool french = Localization.instance?.GetSelectedLanguage() == "French";
+            string message = matches < 0 ? (french ?
+                "Impossible de ranger cet objet dans le conteneur." :
+                "Could not store this item in the container.") : matches == 0 ? (french ?
+                "Aucun conteneur proche ne contient cet objet." :
+                "No nearby container holds this item.") : matches > 1 ? (french ?
+                "Plusieurs conteneurs proches contiennent cet objet." :
+                "Multiple nearby containers hold this item.") : (french ?
+                "Le conteneur est plein." : "The container is full.");
+            MessageHud.instance?.ShowMessage(MessageHud.MessageType.Center, message);
+        }
+
+        // Chooses the targeted container or eligible storage destinations.
         private static List<Container> Candidates(ItemDrop.ItemData item, Player player,
             NearbyStorageItem target, Container source)
         {
@@ -76,9 +151,11 @@ namespace Landoria.NearbyStorage
 
         // Requests each chest through Valheim's normal ownership handshake.
         private static IEnumerator Run(ItemDrop.ItemData item, Player player, int amount,
-            List<Container> chests, Container source)
+            List<Container> chests, Container source, bool autoDeposit, bool targetedDeposit)
         {
             Running = true;
+            _autoDeposit = autoDeposit;
+            _targetedDeposit = targetedDeposit;
             _item = item;
             _player = player;
             _sourceChest = source;
@@ -98,6 +175,7 @@ namespace Landoria.NearbyStorage
             }
             finally
             {
+                if (_autoDeposit && _moved == 0) { ShowAutoError(-1); }
                 if (_moved > 0 && source == null) { NearbyStorageDialog.FocusInventoryItem(item); }
                 _pending = null;
                 _item = null;
@@ -105,6 +183,8 @@ namespace Landoria.NearbyStorage
                 _sourceChest = null;
                 _sourceKey = null;
                 _remaining = 0;
+                _autoDeposit = false;
+                _targetedDeposit = false;
                 Running = false;
             }
         }
@@ -165,6 +245,12 @@ namespace Landoria.NearbyStorage
             ItemDrop.ItemData item = SourceItem();
             if (item == null || _remaining <= 0) { return; }
             Inventory destination = chest.GetInventory();
+            if (_autoDeposit && !CanAutoDeposit(item, chest, destination)) { return; }
+            if (_targetedDeposit && Capacity(destination, item) < _remaining)
+            {
+                ShowAutoError(1);
+                return;
+            }
             int amount = Mathf.Min(_remaining, item.m_stack, Capacity(destination, item));
             if (amount <= 0) { return; }
             ItemDrop.ItemData copy = item.Clone();
@@ -189,6 +275,15 @@ namespace Landoria.NearbyStorage
             InventoryGui gui = InventoryGui.instance;
             if (gui != null) { gui.m_moveItemEffects.Create(gui.transform.position, Quaternion.identity); }
             NearbyStorageDialog.RefreshSoon();
+        }
+
+        // Rechecks the sole matching chest and full-stack capacity after ownership.
+        private static bool CanAutoDeposit(ItemDrop.ItemData item, Container chest,
+            Inventory destination)
+        {
+            List<Container> matches = MatchingChests(item, _player);
+            return matches.Count == 1 && matches[0] == chest &&
+                Capacity(destination, item) >= _remaining;
         }
 
         // Counts free slots and compatible partial stacks.
@@ -216,6 +311,8 @@ namespace Landoria.NearbyStorage
             _sourceKey = null;
             _remaining = 0;
             _moved = 0;
+            _autoDeposit = false;
+            _targetedDeposit = false;
             Expired.Clear();
             Running = false;
         }

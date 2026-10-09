@@ -27,7 +27,7 @@ namespace Landoria.NearbyStorage
                 return true;
             }
 
-            NearbyStorageDeposit.TryStart(item, item.m_stack, false);
+            NearbyStorageDeposit.TryStartAuto(item);
 
             return false;
         }

@@ -4,7 +4,8 @@ See and use items in nearby containers without opening them one by one. Nearby S
 
 ## Nearby Storage panel
 
-- Press **Tab** to open your inventory. Nearby Storage appears below it when accessible containers nearby contain items. Each container has its own item stacks. Choose a category or use the search field. Drop an inventory or Nearby Storage item onto an occupied slot to store it in that slot's container. Nearby Storage items move directly between containers. Ctrl-click stores inventory items automatically.
+- Press **Tab** to open your inventory. Nearby Storage appears below it when accessible containers nearby contain items. Each container has its own item stacks. Choose a category or use the search field. Drop an inventory or Nearby Storage item onto an occupied slot to store it in that slot's container. Nearby Storage items move directly between containers. A dropped stack must fit completely or an error appears. Ctrl-click stores an inventory stack only when exactly one nearby container already holds the same item and quality and has room for the whole stack; otherwise an error appears.
+- Right-click a Nearby Storage item to ping its container and close the inventory.
 
 ## Nearby supplies shortcut
 
