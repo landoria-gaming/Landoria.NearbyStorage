@@ -182,6 +182,10 @@ namespace Landoria.NearbyStorage
             source.RemoveItem(item, moved);
             _remaining -= moved;
             _moved += moved;
+            if (_sourceChest == null)
+            {
+                NearbyStorageDialog.ShowDeposit(item, moved, chest);
+            }
             InventoryGui gui = InventoryGui.instance;
             if (gui != null) { gui.m_moveItemEffects.Create(gui.transform.position, Quaternion.identity); }
             NearbyStorageDialog.RefreshSoon();

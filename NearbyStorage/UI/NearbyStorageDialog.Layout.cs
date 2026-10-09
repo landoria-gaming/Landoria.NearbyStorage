@@ -57,6 +57,7 @@ namespace Landoria.NearbyStorage
             _root.localPosition = bottomLeft + new Vector3(0f, -8f, 0f);
             _root.sizeDelta = new Vector2(bottomRight.x - bottomLeft.x,
                 HeaderHeight + 10f + GridTopPadding + 4f * SlotStep());
+            PositionDepositNotices(corners[2]);
         }
 
         // Adds the localized free-text item filter.

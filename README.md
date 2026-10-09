@@ -1,6 +1,6 @@
 # Nearby Storage
 
-See and use items in nearby containers without opening them one by one. Nearby Storage also lets you craft, build, refuel, and feed machines using nearby supplies.
+See and use items in nearby containers without opening them one by one. Nearby Storage also lets you name chests and craft, build, refuel, and feed machines using nearby supplies.
 
 ## Nearby Storage panel
 
@@ -26,8 +26,6 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 ## Screenshot
 
 ![Nearby Storage panel open alongside the Valheim inventory and crafting menu](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/refs/heads/main/Assets/screenshot.jpg)
-
-See [RULES.md](RULES.md) for the detailed interaction rules.
 
 ## Contact
 

@@ -66,6 +66,7 @@ namespace Landoria.NearbyStorage
                 RefreshSoon();
             }
             Position();
+            UpdateDepositNotices();
             UpdateDragFocus();
             if (Time.unscaledTime >= _nextRefresh) { Refresh(); }
             _root.gameObject.SetActive(_hasNearbyItems);
@@ -98,7 +99,9 @@ namespace Landoria.NearbyStorage
             string nearbyDragKey = NearbyStorageTransfer.DraggedNearbyItemKey();
             if (_nearbyDragKey != nearbyDragKey)
             {
+                SetHeldCardAppearance(_nearbyDragKey, false);
                 _nearbyDragKey = nearbyDragKey;
+                SetHeldCardAppearance(_nearbyDragKey, true);
                 RefreshSoon();
             }
         }
@@ -135,6 +138,7 @@ namespace Landoria.NearbyStorage
         {
             _nextRefresh = Time.unscaledTime + 0.5f;
             if (_cards == null || Player.m_localPlayer == null) { return; }
+            if (NearbyStorageTransfer.DraggedNearbyItemKey() != null) { return; }
             List<NearbyStorageItem> items = NearbyStorageCatalog.Read(Player.m_localPlayer);
             _hasNearbyItems = items.Count > 0;
             bool unmatchedDrag = _dragKey != null &&
@@ -261,6 +265,8 @@ namespace Landoria.NearbyStorage
             _cards = null;
             _categoryContent = null;
             _tooltip = null;
+            DepositNotices.Clear();
+            _depositNoticeOrigin = Vector2.zero;
             _hoverItem = null;
             _tooltipTitle = null;
             _tooltipDescription = null;

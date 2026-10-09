@@ -105,6 +105,16 @@ namespace Landoria.NearbyStorage
             }
         }
 
+        // Tints the existing card while its stack is held without rebuilding the grid.
+        private static void SetHeldCardAppearance(string key, bool held)
+        {
+            if (key == null || _cards == null) { return; }
+            Image icon = _cards.Find(key)?.Find("Icon")?.GetComponent<Image>();
+            if (icon == null) { return; }
+            icon.color = held ? new Color(0.65f, 0.65f, 0.65f, icon.color.a) :
+                new Color(1f, 1f, 1f, icon.color.a);
+        }
+
         // Copies the vanilla quality label and food marker into the nearby slot.
         private static void DrawItemMarkers(RectTransform card, ItemDrop.ItemData item)
         {

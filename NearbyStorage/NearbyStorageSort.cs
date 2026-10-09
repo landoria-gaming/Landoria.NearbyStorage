@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -20,6 +21,36 @@ namespace Landoria.NearbyStorage
                 if (words.Contains(word)) { return true; }
             }
             return false;
+        }
+
+        // Counts shared name words without distinguishing case or accents.
+        internal static int SharedNameWordCount(string left, string right)
+        {
+            var words = new HashSet<string>();
+            foreach (string word in Words(left)) { words.Add(FoldAccents(word)); }
+            int count = 0;
+            foreach (string word in Words(right))
+            {
+                if (words.Remove(FoldAccents(word))) { count++; }
+            }
+            return count;
+        }
+
+        private static string FoldAccents(string word)
+        {
+            string decomposed = word.Normalize(NormalizationForm.FormD);
+            var result = new StringBuilder(decomposed.Length);
+            foreach (char character in decomposed)
+            {
+                UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(character);
+                if (category != UnicodeCategory.NonSpacingMark &&
+                    category != UnicodeCategory.SpacingCombiningMark &&
+                    category != UnicodeCategory.EnclosingMark)
+                {
+                    result.Append(character == '\u0131' ? 'i' : character);
+                }
+            }
+            return result.ToString();
         }
 
         // Finds meaningful words shared by two game asset names.

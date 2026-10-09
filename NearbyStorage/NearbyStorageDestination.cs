@@ -31,7 +31,7 @@ namespace Landoria.NearbyStorage
             return aDistance.CompareTo(bDistance);
         }
 
-        // Scores identical stacks, item family, names, and category.
+        // Scores identical stacks, custom container names, item family, and category.
         private static void Score(Container chest, ItemDrop.ItemData selected,
             out int level, out int count)
         {
@@ -39,9 +39,16 @@ namespace Landoria.NearbyStorage
             int selectedCategory = NearbyStorageCategory.For(selected);
             CountContents(chest, selected, name, selectedCategory,
                 out int identical, out int family, out int similar, out int category);
-            level = identical > 0 ? 4 : family > 0 ? 3 : similar > 0 ? 2 :
+            string customName = ChestRename.ExplicitName(chest);
+            int itemNameWords = customName == null ? 0 :
+                NearbyStorageSort.SharedNameWordCount(customName, name);
+            int categoryWords = customName == null ? 0 :
+                NearbyStorageSort.SharedNameWordCount(customName,
+                    NearbyStorageCategory.Label(selectedCategory));
+            int named = itemNameWords > 0 ? 100 + itemNameWords : categoryWords;
+            level = identical > 0 ? 5 : named > 0 ? 4 : family > 0 ? 3 : similar > 0 ? 2 :
                 category > 0 ? 1 : 0;
-            count = level == 4 ? identical : level == 3 ? family :
+            count = level == 5 ? identical : level == 4 ? named : level == 3 ? family :
                 level == 2 ? similar : category;
         }
 
