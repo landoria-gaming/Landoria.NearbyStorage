@@ -5,6 +5,7 @@ See and use items in nearby containers without opening them one by one. Nearby S
 ## How to use it
 
 - Press **Tab** to open your inventory. Nearby Storage appears below it when accessible containers nearby contain items. Choose a category or use the search field. To store items, click an inventory item then drop it into the Nearby Storage, or use Ctrl-click.
+- Press **Shift + E** while looking at a wooden, reinforced, or personal chest or a barrel to give it a name. Nearby Storage prefers that name over a nearby sign when it differs from the default container name.
 - Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory, nearby containers, and, where applicable, ground drops. **Shift + Left Alt** works with Valheim's multicraft amount.
 
 ## Settings

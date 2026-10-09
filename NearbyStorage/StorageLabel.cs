@@ -2,15 +2,16 @@ using UnityEngine;
 
 namespace Landoria.NearbyStorage
 {
-    // Names a container by an assigned sign or its localized type.
+    // Names a container by its custom name, assigned sign, or localized type.
     internal static class StorageLabel
     {
         private const float SignRangeSquared = 16f;
 
-        // Returns the nearest sign assigned to this container.
+        // Prefers an explicit chest name before a nearby sign or its default type.
         internal static string ShortLabel(Container chest)
         {
-            return SignLabel(chest) ?? Localization.instance.Localize(chest.GetHoverName());
+            return ChestRename.ExplicitName(chest) ?? SignLabel(chest) ??
+                Localization.instance.Localize(chest.GetHoverName());
         }
 
         // Returns only the text of a sign assigned to this container.
