@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,6 +19,12 @@ namespace Landoria.NearbyStorage
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
+                if (NearbyStorageTransfer.UseConsumable(Item)) { eventData.Use(); }
+                return;
+            }
+            if (eventData.button == PointerEventData.InputButton.Left &&
+                ZInput.GetKey(KeyCode.LeftAlt))
+            {
                 Container chest = Item?.Sources.Count > 0 ? Item.Sources[0].Chest : null;
                 Player player = Player.m_localPlayer;
                 if (chest != null && player != null && Chat.instance != null &&
@@ -26,7 +33,7 @@ namespace Landoria.NearbyStorage
                 {
                     Chat.instance.SendPing(chest.transform.position);
                     eventData.Use();
-                    InventoryGui.instance?.Hide();
+                    Plugin.Instance.StartCoroutine(CloseAfterPing());
                 }
                 return;
             }
@@ -37,6 +44,14 @@ namespace Landoria.NearbyStorage
                     NearbyStorageTransfer.Select(Item);
                 }
             }
+        }
+
+        // Keeps the inventory open until the ping click ends and half a second passes.
+        private static IEnumerator CloseAfterPing()
+        {
+            yield return new WaitForSecondsRealtime(0.5f);
+            while (ZInput.GetMouseButton(0)) { yield return null; }
+            if (InventoryGui.IsVisible()) { InventoryGui.instance?.Hide(); }
         }
 
         // Accepts a player or nearby drag over this item's container.

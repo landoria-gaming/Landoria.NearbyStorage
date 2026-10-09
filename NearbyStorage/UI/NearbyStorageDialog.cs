@@ -266,6 +266,7 @@ namespace Landoria.NearbyStorage
             _categoryContent = null;
             _tooltip = null;
             DepositNotices.Clear();
+            PendingDepositNotices.Clear();
             _depositNoticeOrigin = Vector2.zero;
             _hoverItem = null;
             _tooltipTitle = null;

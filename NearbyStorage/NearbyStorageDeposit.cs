@@ -38,9 +38,9 @@ namespace Landoria.NearbyStorage
             return true;
         }
 
-        // Starts a transfer, optionally using the container under the drop.
+        // Starts a transfer into the container under the drop.
         internal static bool TryStart(ItemDrop.ItemData item, int amount, bool clearDrag,
-            NearbyStorageItem target = null)
+            NearbyStorageItem target)
         {
             Player player = Player.m_localPlayer;
             if (Running || player == null ||
@@ -55,7 +55,7 @@ namespace Landoria.NearbyStorage
             if (chests.Count == 0) { return false; }
             if (clearDrag) { NearbyStorageTransfer.ClearPlayerDrag(); }
             Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, null,
-                false, target != null));
+                false, true));
             return true;
         }
 
@@ -72,7 +72,7 @@ namespace Landoria.NearbyStorage
             List<Container> chests = Candidates(item, player, target, source);
             if (chests.Count == 0 || !NearbyStorageTransfer.CancelNearbyDrag()) { return false; }
             Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, source,
-                false, target != null));
+                false, true));
             return true;
         }
 
@@ -80,7 +80,7 @@ namespace Landoria.NearbyStorage
         private static bool TargetHasRoom(NearbyStorageItem target, ItemDrop.ItemData item,
             int amount, Player player)
         {
-            if (target == null) { return true; }
+            if (target == null) { return false; }
             Container chest = target.Sources.Count > 0 ? target.Sources[0].Chest : null;
             if (chest == null || !StorageLocator.Eligible(chest, player,
                 StorageLocator.CurrentContainer(), Plugin.Instance.Settings.Radius.Value))
@@ -128,24 +128,22 @@ namespace Landoria.NearbyStorage
             MessageHud.instance?.ShowMessage(MessageHud.MessageType.Center, message);
         }
 
-        // Chooses the targeted container or eligible storage destinations.
+        // Keeps only the eligible container under the drop.
         private static List<Container> Candidates(ItemDrop.ItemData item, Player player,
             NearbyStorageItem target, Container source)
         {
             var chests = new List<Container>();
+            if (target == null || target.Sources.Count == 0) { return chests; }
+            Container preferred = target.Sources[0].Chest;
             foreach (Container chest in StorageLocator.Nearby(player))
             {
-                if (chest != source && Capacity(chest.GetInventory(), item) > 0)
+                if (chest == preferred && chest != source &&
+                    Capacity(chest.GetInventory(), item) > 0)
                 {
                     chests.Add(chest);
+                    break;
                 }
             }
-            if (target != null)
-            {
-                Container preferred = target.Sources.Count > 0 ? target.Sources[0].Chest : null;
-                chests.RemoveAll(chest => chest != preferred);
-            }
-            else { NearbyStorageDestination.Sort(chests, item, player); }
             return chests;
         }
 

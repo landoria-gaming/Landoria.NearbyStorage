@@ -111,6 +111,32 @@ namespace Landoria.NearbyStorage
                     StorageLocator.CurrentContainer(), Plugin.Instance.Settings.Radius.Value);
         }
 
+        // Uses one real nearby consumable through Valheim's inventory action.
+        internal static bool UseConsumable(NearbyStorageItem entry)
+        {
+            Player player = Player.m_localPlayer;
+            if (entry?.Sample?.m_shared?.m_itemType !=
+                ItemDrop.ItemData.ItemType.Consumable || player == null ||
+                player.IsTeleporting() || NearbyStorageDeposit.Running)
+            {
+                return false;
+            }
+            foreach (NearbyStorageSource source in entry.Sources)
+            {
+                if (source.Chest == null || !StorageLocator.TryClaimAndLoad(source.Chest, player))
+                {
+                    continue;
+                }
+                Inventory inventory = source.Chest.GetInventory();
+                ItemDrop.ItemData item = FindStack(inventory, source.Chest, entry.Key, false);
+                if (item == null) { continue; }
+                player.UseItem(inventory, item, fromInventoryGui: true);
+                NearbyStorageDialog.RefreshSoon();
+                return true;
+            }
+            return false;
+        }
+
         // Applies the same click modifiers as a container grid to one real stack.
         internal static void Select(NearbyStorageItem entry)
         {

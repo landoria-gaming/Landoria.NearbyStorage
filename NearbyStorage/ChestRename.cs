@@ -39,6 +39,7 @@ namespace Landoria.NearbyStorage
             {
                 __result += Localization.instance.Localize(
                     "\n[<color=yellow><b>$KEY_AltPlace + $KEY_Use</b></color>] $hud_rename");
+                __result += ChestInclusion.HoverText(__instance);
             }
         }
 
@@ -57,7 +58,12 @@ namespace Landoria.NearbyStorage
         [HarmonyPrefix]
         private static bool Interact(Container __instance, bool hold, bool alt, ref bool __result)
         {
-            if (!IsTarget(__instance) || hold || !alt) { return true; }
+            if (!IsTarget(__instance)) { return true; }
+            if (ChestInclusion.HandleInteract(__instance, hold, alt, ref __result))
+            {
+                return false;
+            }
+            if (hold || !alt) { return true; }
             if (!CanAccess(__instance, true)) { return true; }
             __result = true;
             if (!PlatformManager.DistributionPlatform.PrivilegeProvider
@@ -72,7 +78,7 @@ namespace Landoria.NearbyStorage
         }
 
         // Limits the feature to the requested buildable containers.
-        private static bool IsTarget(Container chest)
+        internal static bool IsTarget(Container chest)
         {
             string prefab = Utils.GetPrefabName(chest.gameObject);
             return prefab == "piece_chest_wood" || prefab == "piece_chest" ||
@@ -80,7 +86,7 @@ namespace Landoria.NearbyStorage
         }
 
         // Checks the ward and the exact private access rule used to open the chest.
-        private static bool CanAccess(Container chest, bool flash)
+        internal static bool CanAccess(Container chest, bool flash)
         {
             if (chest.m_checkGuardStone &&
                 !PrivateArea.CheckAccess(chest.transform.position, 0f, flash)) { return false; }

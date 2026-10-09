@@ -5,7 +5,7 @@ See and use items in nearby containers without opening them one by one. Nearby S
 ## Nearby Storage panel
 
 - Press **Tab** to open your inventory. Nearby Storage appears below it when accessible containers nearby contain items. Each container has its own item stacks. Choose a category or use the search field. Drop an inventory or Nearby Storage item onto an occupied slot to store it in that slot's container. Nearby Storage items move directly between containers. A dropped stack must fit completely or an error appears. Ctrl-click stores an inventory stack only when exactly one nearby container already holds the same item and quality and has room for the whole stack; otherwise an error appears.
-- Right-click a Nearby Storage item to ping its container and close the inventory.
+- Right-click a nearby consumable to use it. Left Alt + click a Nearby Storage item to ping its container and close the inventory.
 
 ## Nearby supplies shortcut
 
@@ -14,6 +14,7 @@ See and use items in nearby containers without opening them one by one. Nearby S
 ## Renaming containers
 
 - Press **Shift + E** while looking at a wooden, reinforced, or personal chest or a barrel to give it a name if you can open it. Nearby Storage shows that name when it differs from the default container name.
+- Press **Alt + E** while looking at one of these containers to include or exclude it from Nearby Storage for your character. Containers are included by default.
 
 ## Settings
 

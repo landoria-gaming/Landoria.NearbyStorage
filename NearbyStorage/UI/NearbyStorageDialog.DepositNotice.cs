@@ -13,6 +13,9 @@ namespace Landoria.NearbyStorage
         private const int MaxDepositNotices = 3;
         private static readonly List<NearbyStorageDepositNotice> DepositNotices =
             new List<NearbyStorageDepositNotice>();
+        private static readonly Queue<(Sprite ItemIcon, string Count, Sprite ChestIcon,
+            string ChestName)> PendingDepositNotices =
+            new Queue<(Sprite, string, Sprite, string)>();
         private static Vector2 _depositNoticeOrigin;
 
         // Keeps the first row beside the inventory and stacks later rows below it.
@@ -34,24 +37,34 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Adds one row for the amount accepted by this container.
+        // Queues a snapshot of each confirmed deposit in arrival order.
         internal static void ShowDeposit(ItemDrop.ItemData item, int amount, Container chest)
         {
             if (_root == null || item == null || chest == null) { return; }
-            if (DepositNotices.Count >= MaxDepositNotices)
-            {
-                UnityEngine.Object.Destroy(DepositNotices[0].Root.gameObject);
-                DepositNotices.RemoveAt(0);
-            }
-            NearbyStorageDepositNotice notice = CreateDepositNotice();
-            notice.ItemIcon.sprite = item.GetIcon();
-            notice.Count.text = amount > 1 ? amount.ToString("N0") : "";
             Piece piece = chest.GetComponent<Piece>() ?? chest.GetComponentInParent<Piece>();
-            notice.ChestIcon.sprite = piece?.m_icon ?? ZNetScene.instance?.
+            Sprite chestIcon = piece?.m_icon ?? ZNetScene.instance?.
                 GetPrefab("piece_chest_wood")?.GetComponent<Piece>()?.m_icon;
-            notice.ChestName.text = StorageLabel.ShortLabel(chest);
-            notice.Until = Time.unscaledTime + DepositNoticeHold + DepositNoticeFade;
-            DepositNotices.Add(notice);
+            PendingDepositNotices.Enqueue((item.GetIcon(),
+                amount > 1 ? amount.ToString("N0") : "", chestIcon,
+                StorageLabel.ShortLabel(chest)));
+            FillDepositNotices();
+        }
+
+        // Displays queued deposits when one of the three visible slots is free.
+        private static void FillDepositNotices()
+        {
+            while (_root != null && DepositNotices.Count < MaxDepositNotices &&
+                PendingDepositNotices.Count > 0)
+            {
+                var pending = PendingDepositNotices.Dequeue();
+                NearbyStorageDepositNotice notice = CreateDepositNotice();
+                notice.ItemIcon.sprite = pending.ItemIcon;
+                notice.Count.text = pending.Count;
+                notice.ChestIcon.sprite = pending.ChestIcon;
+                notice.ChestName.text = pending.ChestName;
+                notice.Until = Time.unscaledTime + DepositNoticeHold + DepositNoticeFade;
+                DepositNotices.Add(notice);
+            }
             ArrangeDepositNotices();
         }
 
@@ -119,6 +132,7 @@ namespace Landoria.NearbyStorage
                 UnityEngine.Object.Destroy(notice.Root.gameObject);
                 DepositNotices.RemoveAt(i);
             }
+            FillDepositNotices();
         }
     }
 }

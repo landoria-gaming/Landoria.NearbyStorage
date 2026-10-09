@@ -59,7 +59,8 @@ namespace Landoria.NearbyStorage
         // Checks player construction, range, access, ward, and use state.
         internal static bool Eligible(Container chest, Player player, Container current, float radius)
         {
-            if (chest == null || player == null || IsExcluded(chest))
+            if (chest == null || player == null || IsExcluded(chest) ||
+                !ChestInclusion.IsIncluded(chest))
             {
                 return false;
             }
