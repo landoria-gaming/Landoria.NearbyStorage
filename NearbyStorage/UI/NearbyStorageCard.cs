@@ -16,6 +16,19 @@ namespace Landoria.NearbyStorage
         // Matches Valheim's inventory slots by acting when the mouse is pressed.
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                Container chest = Item?.Sources.Count > 0 ? Item.Sources[0].Chest : null;
+                Player player = Player.m_localPlayer;
+                if (chest != null && player != null && Chat.instance != null &&
+                    Plugin.Instance != null && StorageLocator.Eligible(chest, player,
+                        StorageLocator.CurrentContainer(), Plugin.Instance.Settings.Radius.Value))
+                {
+                    Chat.instance.SendPing(chest.transform.position);
+                    eventData.Use();
+                }
+                return;
+            }
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 if (!NearbyStorageTransfer.TryDropInPanel(Item))

@@ -168,29 +168,9 @@ namespace Landoria.NearbyStorage
                 {
                     return false;
                 }
-
-                if (step.Chest != null && Plugin.Instance.Settings.KeepOneIngredientPerChest.Value &&
-                    step.Inventory.CountItems(step.Name, -1, false) - PlannedForName(step) < 1)
-                {
-                    return false;
-                }
             }
 
             return true;
-        }
-
-        // Counts all withdrawals of one item type from the same chest.
-        private int PlannedForName(Withdrawal step)
-        {
-            int total = 0;
-            foreach (Withdrawal other in Withdrawals)
-            {
-                if (other.Inventory == step.Inventory && other.Name == step.Name)
-                {
-                    total += other.Amount;
-                }
-            }
-            return total;
         }
 
         // Counts every planned withdrawal from one ground drop.

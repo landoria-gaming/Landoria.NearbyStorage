@@ -56,7 +56,7 @@ namespace Landoria.NearbyStorage
             return result;
         }
 
-        // Checks the container type, range, access, ward, and use state.
+        // Checks player construction, range, access, ward, and use state.
         internal static bool Eligible(Container chest, Player player, Container current, float radius)
         {
             if (chest == null || player == null || IsExcluded(chest))
@@ -73,6 +73,13 @@ namespace Landoria.NearbyStorage
 
             ZNetView view = View(chest);
             if (view == null || !view.IsValid() || view.GetZDO() == null)
+            {
+                return false;
+            }
+
+            // Ship and cart storage lives on a child, while its Piece belongs to the root.
+            Piece piece = view.GetComponent<Piece>();
+            if (piece == null || piece.GetCreator() == 0L)
             {
                 return false;
             }

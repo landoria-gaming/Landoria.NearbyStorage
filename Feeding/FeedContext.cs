@@ -40,7 +40,7 @@ namespace Landoria.NearbyStorage
                     }
 
                     ItemDrop.ItemData item = source.GetItem(name);
-                    if (StorageSupply.CanWithdrawOne(source, item))
+                    if (item != null)
                     {
                         return item;
                     }
@@ -78,10 +78,10 @@ namespace Landoria.NearbyStorage
             return FindStored(inventory, source =>
             {
                 ItemDrop.ItemData item = source.GetAmmoItem(ammoType, prefab);
-                if (StorageSupply.CanWithdrawOne(source, item)) { return item; }
+                if (item != null) { return item; }
                 foreach (ItemDrop.ItemData candidate in source.GetAllItems())
                 {
-                    if (matches(candidate) && StorageSupply.CanWithdrawOne(source, candidate))
+                    if (matches(candidate))
                     {
                         return candidate;
                     }
@@ -115,7 +115,7 @@ namespace Landoria.NearbyStorage
                 ItemDrop.ItemData item = FindStored(inventory, source =>
                 {
                     ItemDrop.ItemData candidate = source.GetItem(name);
-                    return StorageSupply.CanWithdrawOne(source, candidate) ? candidate : null;
+                    return candidate;
                 },
                     candidate => candidate.m_shared.m_name == name);
                 if (item != null)
@@ -162,7 +162,7 @@ namespace Landoria.NearbyStorage
 
             ZNetView view = StorageLocator.View(_chest);
             if (view == null || !view.IsOwner() || !_chest.GetInventory().ContainsItem(_item) ||
-                !StorageSupply.CanWithdrawOne(_chest.GetInventory(), _item))
+                _item.m_stack <= 0)
             {
                 return false;
             }

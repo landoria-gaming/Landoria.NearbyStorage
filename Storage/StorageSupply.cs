@@ -33,13 +33,13 @@ namespace Landoria.NearbyStorage
             foreach (Container chest in _chests)
             {
                 ItemDrop.ItemData candidate = selectChest(chest.GetInventory());
-                if (!CanWithdrawOne(chest.GetInventory(), candidate) ||
+                if (candidate == null ||
                     !StorageLocator.TryClaimAndLoad(chest, _player))
                 {
                     continue;
                 }
                 ItemDrop.ItemData item = selectChest(chest.GetInventory());
-                if (CanWithdrawOne(chest.GetInventory(), item))
+                if (item != null)
                 {
                     return new Withdrawal
                     {
@@ -53,13 +53,6 @@ namespace Landoria.NearbyStorage
                 }
             }
             return null;
-        }
-
-        // Keeps the last item of each type in a chest when configured.
-        internal static bool CanWithdrawOne(Inventory inventory, ItemDrop.ItemData item)
-        {
-            return item != null && (!Plugin.Instance.Settings.KeepOneIngredientPerChest.Value ||
-                inventory.CountItems(item.m_shared.m_name, -1, false) > 1);
         }
 
         // Claims the first matching ground drop.
@@ -92,10 +85,10 @@ namespace Landoria.NearbyStorage
         // Counts available items of one quality after existing plan reservations.
         internal int Available(CraftPlan plan, string name, int quality)
         {
-            int total = AvailableInventory(plan, _carried, null, name, quality);
+            int total = AvailableInventory(plan, _carried, name, quality);
             foreach (Container chest in _chests)
             {
-                total += AvailableInventory(plan, chest.GetInventory(), chest, name, quality);
+                total += AvailableInventory(plan, chest.GetInventory(), name, quality);
             }
             foreach (ItemDrop drop in _drops)
             {
@@ -138,25 +131,18 @@ namespace Landoria.NearbyStorage
             return need;
         }
 
-        // Counts unreserved inventory items and leaves one of each chest item.
-        internal static int AvailableInventory(CraftPlan plan, Inventory inventory, Container chest,
+        // Counts unreserved inventory items.
+        internal static int AvailableInventory(CraftPlan plan, Inventory inventory,
             string name, int quality)
         {
             int count = inventory.CountItems(name, quality);
-            int plannedForName = 0;
             if (plan != null)
             {
                 foreach (Withdrawal step in plan.Withdrawals)
                 {
                     if (step.Inventory != inventory || step.Name != name) { continue; }
-                    plannedForName += step.Amount;
                     if (quality < 0 || step.Quality == quality) { count -= step.Amount; }
                 }
-            }
-            if (chest != null && Plugin.Instance.Settings.KeepOneIngredientPerChest.Value)
-            {
-                count = Math.Min(count,
-                    inventory.CountItems(name, -1, false) - plannedForName - 1);
             }
             return Math.Max(0, count);
         }
@@ -182,7 +168,7 @@ namespace Landoria.NearbyStorage
         private static int AllocateInventory(CraftPlan plan, Inventory inventory, Container chest,
             string name, int quality, int need)
         {
-            int take = Math.Min(need, AvailableInventory(plan, inventory, chest, name, quality));
+            int take = Math.Min(need, AvailableInventory(plan, inventory, name, quality));
             if (take > 0)
             {
                 plan.Withdrawals.Add(new Withdrawal
