@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace Landoria.NearbyStorage
 {
-    // Borrows one input item from nearby storage or a ground drop.
+    // Borrows one input item from nearby storage.
     internal static class FeedContext
     {
         private static Player _player;
         private static Container _chest;
-        private static ItemDrop _drop;
         private static ItemDrop.ItemData _item;
 
         // Starts a context for an eligible local interaction.
@@ -46,7 +45,7 @@ namespace Landoria.NearbyStorage
                     }
                 }
                 return null;
-            }, candidate => candidates.Contains(candidate.m_shared.m_name));
+            });
         }
 
         // Finds an input listed by a station's item conversions.
@@ -87,7 +86,7 @@ namespace Landoria.NearbyStorage
                     }
                 }
                 return null;
-            }, matches);
+            });
         }
 
         // Selects the highest-priority carried or stored item.
@@ -116,8 +115,7 @@ namespace Landoria.NearbyStorage
                 {
                     ItemDrop.ItemData candidate = source.GetItem(name);
                     return candidate;
-                },
-                    candidate => candidate.m_shared.m_name == name);
+                });
                 if (item != null)
                 {
                     return item;
@@ -145,14 +143,9 @@ namespace Landoria.NearbyStorage
             return false;
         }
 
-        // Removes the selected item from its chest or ground drop.
+        // Removes the selected item from its chest.
         internal static bool Withdraw(int amount)
         {
-            if (_drop != null)
-            {
-                return amount == 1 && GroundSource.RemoveOne(_drop, _player, _item);
-            }
-
             if (_chest == null || _item == null || amount != 1 ||
                 !StorageLocator.Eligible(_chest, _player, StorageLocator.CurrentContainer(),
                     Plugin.Instance.Settings.Radius.Value))
@@ -175,28 +168,25 @@ namespace Landoria.NearbyStorage
         {
             _player = null;
             _chest = null;
-            _drop = null;
             _item = null;
         }
 
-        // Selects one accessible chest or ground item for the active interaction.
+        // Selects one accessible chest item for the active interaction.
         private static ItemDrop.ItemData FindStored(Inventory inventory,
-            Func<Inventory, ItemDrop.ItemData> selectChest,
-            Func<ItemDrop.ItemData, bool> matchesGround)
+            Func<Inventory, ItemDrop.ItemData> selectChest)
         {
             if (_player == null || inventory != _player.GetInventory())
             {
                 return null;
             }
 
-            Withdrawal source = new StorageSupply(_player).FindStored(selectChest, matchesGround);
+            Withdrawal source = new StorageSupply(_player).FindStored(selectChest);
             if (source == null)
             {
                 return null;
             }
 
             _chest = source.Chest;
-            _drop = source.Drop;
             _item = source.SelectedItem;
             return _item;
         }

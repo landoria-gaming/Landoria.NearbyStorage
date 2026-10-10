@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 namespace Landoria.NearbyStorage
 {
-    // Allocates ingredients from the player, nearby chests, and ground drops.
+    // Allocates ingredients from the player and nearby chests.
     internal sealed class StorageSupply
     {
         private readonly Player _player;
         private readonly Inventory _carried;
         private readonly List<Container> _chests;
-        private readonly List<ItemDrop> _drops;
 
         // Captures the sources near one player for a single plan or display update.
         internal StorageSupply(Player player)
@@ -17,18 +16,10 @@ namespace Landoria.NearbyStorage
             _player = player;
             _carried = player.GetInventory();
             _chests = StorageLocator.Nearby(player);
-            _drops = GroundSource.Nearby(player);
         }
 
-        // Finds one matching stored item, checking chests before ground drops.
-        internal Withdrawal FindStored(Func<Inventory, ItemDrop.ItemData> selectChest,
-            Func<ItemDrop.ItemData, bool> matchesGround)
-        {
-            return FindChest(selectChest) ?? FindGround(matchesGround);
-        }
-
-        // Claims the first chest with a matching item.
-        private Withdrawal FindChest(Func<Inventory, ItemDrop.ItemData> selectChest)
+        // Finds one matching item in nearby chests.
+        internal Withdrawal FindStored(Func<Inventory, ItemDrop.ItemData> selectChest)
         {
             foreach (Container chest in _chests)
             {
@@ -55,33 +46,6 @@ namespace Landoria.NearbyStorage
             return null;
         }
 
-        // Claims the first matching ground drop.
-        private Withdrawal FindGround(Func<ItemDrop.ItemData, bool> matchesGround)
-        {
-            foreach (ItemDrop drop in _drops)
-            {
-                ItemDrop.ItemData item = drop.m_itemData;
-                if (item == null || !matchesGround(item) ||
-                    !GroundSource.TryClaim(drop, _player, item, 1))
-                {
-                    continue;
-                }
-                if (matchesGround(drop.m_itemData))
-                {
-                    return new Withdrawal
-                    {
-                        Drop = drop,
-                        GroundItem = drop.m_itemData,
-                        SelectedItem = drop.m_itemData,
-                        Name = item.m_shared.m_name,
-                        Quality = item.m_quality,
-                        Amount = 1
-                    };
-                }
-            }
-            return null;
-        }
-
         // Counts available items of one quality after existing plan reservations.
         internal int Available(CraftPlan plan, string name, int quality)
         {
@@ -90,25 +54,16 @@ namespace Landoria.NearbyStorage
             {
                 total += AvailableInventory(plan, chest.GetInventory(), name, quality);
             }
-            foreach (ItemDrop drop in _drops)
-            {
-                total += AvailableGround(plan, drop, name, quality);
-            }
             return total;
         }
 
-        // Reserves one quality from the player, chests, then ground drops.
+        // Reserves one quality from the player, then nearby chests.
         internal int Allocate(CraftPlan plan, string name, int quality, int need)
         {
             need = AllocateInventory(plan, _carried, null, name, quality, need);
             foreach (Container chest in _chests)
             {
                 need = AllocateInventory(plan, chest.GetInventory(), chest, name, quality, need);
-                if (need == 0) { return 0; }
-            }
-            foreach (ItemDrop drop in _drops)
-            {
-                need = AllocateGround(plan, drop, name, quality, need);
                 if (need == 0) { return 0; }
             }
             return need;
@@ -121,11 +76,6 @@ namespace Landoria.NearbyStorage
             foreach (Container chest in _chests)
             {
                 need = AllocateInventoryQualities(plan, chest.GetInventory(), chest, name, need);
-                if (need == 0) { return 0; }
-            }
-            foreach (ItemDrop drop in _drops)
-            {
-                need = AllocateGround(plan, drop, name, drop.m_itemData.m_quality, need);
                 if (need == 0) { return 0; }
             }
             return need;
@@ -142,23 +92,6 @@ namespace Landoria.NearbyStorage
                 {
                     if (step.Inventory != inventory || step.Name != name) { continue; }
                     if (quality < 0 || step.Quality == quality) { count -= step.Amount; }
-                }
-            }
-            return Math.Max(0, count);
-        }
-
-        // Counts unreserved items in one ground drop.
-        private static int AvailableGround(CraftPlan plan, ItemDrop drop, string name, int quality)
-        {
-            ItemDrop.ItemData item = drop.m_itemData;
-            if (item == null || item.m_shared.m_name != name ||
-                (quality >= 0 && item.m_quality != quality)) { return 0; }
-            int count = item.m_stack;
-            if (plan != null)
-            {
-                foreach (Withdrawal step in plan.Withdrawals)
-                {
-                    if (step.Drop == drop) { count -= step.Amount; }
                 }
             }
             return Math.Max(0, count);
@@ -197,25 +130,6 @@ namespace Landoria.NearbyStorage
                 need = AllocateInventory(plan, inventory, chest, name, quality, need);
             }
             return need;
-        }
-
-        // Reserves items from one matching ground drop without moving it yet.
-        private static int AllocateGround(CraftPlan plan, ItemDrop drop, string name,
-            int quality, int need)
-        {
-            int take = Math.Min(need, AvailableGround(plan, drop, name, quality));
-            if (take > 0)
-            {
-                plan.Withdrawals.Add(new Withdrawal
-                {
-                    Drop = drop,
-                    GroundItem = drop.m_itemData,
-                    Name = name,
-                    Quality = quality,
-                    Amount = take
-                });
-            }
-            return need - take;
         }
     }
 }

@@ -11,7 +11,7 @@ See and use items in nearby containers without opening them one by one. Nearby S
 
 ## Craft from Nearby Storage
 
-- Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory, nearby containers, and, where applicable, ground drops.
+- Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory and nearby containers.
 - Hold **Alt** and **Shift** together to use nearby supplies when crafting multiple items at once.
 
 ## Renaming containers
@@ -21,7 +21,7 @@ See and use items in nearby containers without opening them one by one. Nearby S
 ## Including or excluding containers
 
 - Press **Alt + E** while looking at a wooden, reinforced, or personal chest or a barrel to include or exclude it from Nearby Storage for your character.
-- Excluded containers are also ignored when crafting, building, refueling, and feeding machines. Containers are included by default.
+- Excluded containers are also ignored when crafting, building, refueling, and feeding machines. The default inclusion state is configurable; Alt + E saves either choice explicitly for the character.
 
 ## Ping a container
 
@@ -33,7 +33,8 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 
 | Setting | Default | Description |
 | --- | --- | --- |
-| `SearchRadius` | `60` | Search radius around the player for nearby storage and ground items, from 10 to 100 metres. |
+| `SearchRadius` | `60` | Search radius around the player for nearby storage, from 10 to 100 metres. |
+| `IncludeChestsByDefault` | `true` | Include chests without an individual inclusion choice. Set to `false` to exclude them by default. |
 | `NearbyStorageShortcut` | `Left Alt` | Hold to use nearby supplies while crafting, building, refueling, or feeding. |
 
 ## Screenshot

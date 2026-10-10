@@ -2,13 +2,11 @@ using System.Collections.Generic;
 
 namespace Landoria.NearbyStorage
 {
-    // Supplies one vanilla refuel interaction from nearby storage or ground items.
+    // Supplies one vanilla refuel interaction from nearby storage.
     internal static class RefuelContext
     {
         private static Player _player;
         private static Container _chest;
-        private static ItemDrop _drop;
-        private static ItemDrop.ItemData _groundItem;
         private static string _fuel;
 
         // Starts a context for an eligible local interaction.
@@ -37,7 +35,7 @@ namespace Landoria.NearbyStorage
                     if (item != null) { return item; }
                 }
                 return null;
-            }, item => names.Contains(item.m_shared.m_name));
+            });
             if (source == null)
             {
                 return;
@@ -45,8 +43,6 @@ namespace Landoria.NearbyStorage
 
             _player = player;
             _chest = source.Chest;
-            _drop = source.Drop;
-            _groundItem = source.GroundItem;
             _fuel = source.Name;
         }
 
@@ -86,14 +82,9 @@ namespace Landoria.NearbyStorage
             return _player != null && inventory == _player.GetInventory() && name == _fuel;
         }
 
-        // Removes one unit from the selected chest or ground drop.
+        // Removes one unit from the selected chest.
         internal static bool Withdraw()
         {
-            if (_drop != null)
-            {
-                return GroundSource.RemoveOne(_drop, _player, _groundItem);
-            }
-
             if (_chest == null || _player == null ||
                 !StorageLocator.Eligible(_chest, _player, StorageLocator.CurrentContainer(),
                     Plugin.Instance.Settings.Radius.Value))
@@ -116,8 +107,6 @@ namespace Landoria.NearbyStorage
         {
             _player = null;
             _chest = null;
-            _drop = null;
-            _groundItem = null;
             _fuel = null;
         }
 

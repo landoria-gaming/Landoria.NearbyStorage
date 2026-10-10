@@ -93,11 +93,6 @@ namespace Landoria.NearbyStorage
                     continue;
                 }
 
-                if (step.Drop != null)
-                {
-                    return step.GroundItem;
-                }
-
                 foreach (ItemDrop.ItemData item in step.Inventory.GetAllItems())
                 {
                     if (item.m_shared.m_name == name && item.m_quality == quality)
@@ -118,17 +113,12 @@ namespace Landoria.NearbyStorage
                  (station != null && station.m_upgrader == requirement.m_upgraderResource));
         }
 
-        // Claims only the chests and ground drops needed by this action.
+        // Claims only the chests needed by this action.
         internal bool ClaimSources(Player player)
         {
             foreach (Withdrawal step in Withdrawals)
             {
                 if (step.Chest != null && !StorageLocator.TryClaimAndLoad(step.Chest, player))
-                {
-                    return false;
-                }
-                if (step.Drop != null && !GroundSource.TryClaim(step.Drop, player,
-                    step.GroundItem, PlannedForDrop(step)))
                 {
                     return false;
                 }
@@ -142,13 +132,6 @@ namespace Landoria.NearbyStorage
         {
             foreach (Withdrawal step in Withdrawals)
             {
-                if (step.Drop != null)
-                {
-                    if (!GroundSource.TryClaim(step.Drop, player, step.GroundItem,
-                        PlannedForDrop(step))) { return false; }
-                    continue;
-                }
-
                 if (step.Chest != null && !StorageLocator.Eligible(step.Chest, player,
                     StorageLocator.CurrentContainer(), Plugin.Instance.Settings.Radius.Value))
                 {
@@ -173,34 +156,12 @@ namespace Landoria.NearbyStorage
             return true;
         }
 
-        // Counts every planned withdrawal from one ground drop.
-        private int PlannedForDrop(Withdrawal step)
-        {
-            int total = 0;
-            foreach (Withdrawal other in Withdrawals)
-            {
-                if (other.Drop == step.Drop) { total += other.Amount; }
-            }
-            return total;
-        }
-
         // Removes the committed amounts after vanilla creates the result.
         internal void Consume()
         {
             foreach (Withdrawal step in Withdrawals)
             {
-                if (step.Drop == null)
-                {
-                    step.Inventory.RemoveItem(step.Name, step.Amount, step.Quality);
-                }
-                else
-                {
-                    for (int i = 0; i < step.Amount; i++)
-                    {
-                        if (!GroundSource.RemoveOne(step.Drop, Player.m_localPlayer,
-                            step.GroundItem)) { break; }
-                    }
-                }
+                step.Inventory.RemoveItem(step.Name, step.Amount, step.Quality);
             }
         }
 
@@ -209,8 +170,7 @@ namespace Landoria.NearbyStorage
         {
             foreach (Withdrawal step in Withdrawals)
             {
-                if (step.Drop != null ? step.GroundItem.m_cheated :
-                    step.Inventory.ItemCheated(step.Name, step.Quality))
+                if (step.Inventory.ItemCheated(step.Name, step.Quality))
                 {
                     return true;
                 }

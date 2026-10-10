@@ -6,14 +6,21 @@ namespace Landoria.NearbyStorage
     // Toggles whether a supported chest contributes to nearby storage.
     internal static class ChestInclusion
     {
-        // Defaults every chest to included for the local character.
+        // Resolves a chest's saved choice before applying the configured default.
         internal static bool IsIncluded(Container chest)
         {
             ZNetView view = StorageLocator.View(chest);
             Player player = Player.m_localPlayer;
-            return player == null || view == null || !view.IsValid() ||
-                view.GetZDO() == null || ZNet.instance == null ||
-                !player.m_customData.ContainsKey(ChestKey(view));
+            bool defaultIncluded = Plugin.Instance?.Settings?.IncludeChestsByDefault.Value ?? true;
+            if (player == null || view == null || !view.IsValid() ||
+                view.GetZDO() == null || ZNet.instance == null)
+            {
+                return defaultIncluded;
+            }
+
+            if (player.m_customData.ContainsKey(ChestKey(view))) { return false; }
+            if (player.m_customData.ContainsKey(IncludedKey(view))) { return true; }
+            return defaultIncluded;
         }
 
         // Identifies a chest in one world within the character's saved data.
@@ -24,6 +31,12 @@ namespace Landoria.NearbyStorage
             return "Landoria.NearbyStorage.Excluded.v2:" + ZNet.instance.GetWorldUID() +
                 ":" + data.GetPrefab() + ":" + FloatBits(position.x) + ":" +
                 FloatBits(position.y) + ":" + FloatBits(position.z);
+        }
+
+        // Identifies a chest explicitly included by this character.
+        private static string IncludedKey(ZNetView view)
+        {
+            return ChestKey(view).Replace(".Excluded.v2:", ".Included.v1:");
         }
 
         // Keeps exact saved coordinates independent of the selected language.
@@ -66,9 +79,9 @@ namespace Landoria.NearbyStorage
             if (player == null || view == null || !view.IsValid() ||
                 view.GetZDO() == null || ZNet.instance == null) { return; }
             bool included = !IsIncluded(chest);
-            string key = ChestKey(view);
-            if (included) { player.m_customData.Remove(key); }
-            else { player.m_customData[key] = "1"; }
+            player.m_customData.Remove(ChestKey(view));
+            player.m_customData.Remove(IncludedKey(view));
+            player.m_customData[included ? IncludedKey(view) : ChestKey(view)] = "1";
             bool french = Localization.instance.GetSelectedLanguage() == "French";
             string message = included ?
                 (french ? "Nearby Storage : inclus" : "Nearby Storage: Included") :
