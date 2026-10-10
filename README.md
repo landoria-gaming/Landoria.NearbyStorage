@@ -7,7 +7,10 @@ See and use items in nearby containers without opening them one by one. Nearby S
 - Press **Tab** to open your inventory. Nearby Storage appears below it when accessible nearby containers contain items.
 - **Ctrl-click** an inventory stack to store it when exactly one nearby container already holds the same item and quality and has room for the whole stack. Otherwise, an error appears.
 - Drop an item onto an occupied Nearby Storage slot to move it into the same container.
-- Choose a category or use the search field to find items.
+- Choose **All** to see every item, select another category, or search by item or category name. Opening the inventory selects **All**, clears the search field, and focuses it.
+- Materials are split into **Raw Materials** and **Materials**. Material outputs from recipes and processors, such as smelted ingots, appear under **Materials**.
+- Placeable feasts, including Swamp Dweller's Delight, appear under **Food**.
+- Ingredients cooked on stations that require a fire, including raw fish, appear under **Raw Meat**.
 
 ## Craft from Nearby Storage
 
@@ -35,6 +38,7 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 | --- | --- | --- |
 | `SearchRadius` | `60` | Search radius around the player for nearby storage, from 10 to 100 metres. |
 | `IncludeChestsByDefault` | `true` | Include chests without an individual inclusion choice. Set to `false` to exclude them by default. |
+| `SeparateStacksByContainer` | `true` | Show matching stackable items separately for each container. Set to `false` to show one combined stack with each container listed in its tooltip. |
 | `NearbyStorageShortcut` | `Left Alt` | Hold to use nearby supplies while crafting, building, refueling, or feeding. |
 
 ## Screenshot

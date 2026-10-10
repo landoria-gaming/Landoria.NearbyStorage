@@ -20,19 +20,19 @@ namespace Landoria.NearbyStorage
             listBackground.raycastTarget = false;
             list.gameObject.AddComponent<RectMask2D>();
             _categoryContent = Rect("Category content", list,
-                new Vector2(164f, NearbyStorageCategory.French.Length * CategoryRowHeight));
+                new Vector2(164f, (NearbyStorageCategory.French.Length + 1) * CategoryRowHeight));
             ScrollRect scroll = list.gameObject.AddComponent<ScrollRect>();
             scroll.viewport = list;
             scroll.content = _categoryContent;
             scroll.horizontal = false;
             scroll.scrollSensitivity = 100f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            for (int i = 0; i < NearbyStorageCategory.French.Length; i++)
+            for (int i = -1; i < NearbyStorageCategory.French.Length; i++)
             {
                 int index = i;
                 RectTransform row = Rect("Category " + i, _categoryContent,
                     new Vector2(164f, CategoryRowHeight));
-                row.anchoredPosition = new Vector2(0f, -i * CategoryRowHeight);
+                row.anchoredPosition = new Vector2(0f, -(i + 1) * CategoryRowHeight);
                 Image image = row.gameObject.AddComponent<Image>();
                 image.color = Color.clear;
                 RectTransform selected = Rect("Selected", row, Vector2.zero);
@@ -85,8 +85,8 @@ namespace Landoria.NearbyStorage
                 _filter.SetTextWithoutNotify("");
             }
             _category = index;
-            _scrollCategoryToSelection = index >= 0;
-            for (int i = 0; i < NearbyStorageCategory.French.Length; i++)
+            _scrollCategoryToSelection = true;
+            for (int i = -1; i < NearbyStorageCategory.French.Length; i++)
             {
                 SetCategoryHover(i, false);
             }
@@ -107,7 +107,7 @@ namespace Landoria.NearbyStorage
         // Keeps an automatically selected category visible after rows are reordered.
         private static void ScrollToSelectedCategory()
         {
-            if (!_scrollCategoryToSelection || _category < 0 || _categoryContent == null)
+            if (!_scrollCategoryToSelection || _categoryContent == null)
             {
                 return;
             }

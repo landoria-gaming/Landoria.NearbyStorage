@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 namespace Landoria.NearbyStorage
 {
-    // Builds separate item entries for each accessible nearby container.
+    // Builds item entries from accessible nearby containers.
     internal static class NearbyStorageCatalog
     {
-        // Combines stacks within a container, but keeps containers and unique items apart.
+        // Combines matching stacks according to the configured display mode.
         internal static List<NearbyStorageItem> Read(Player player)
         {
             var byKey = new Dictionary<string, NearbyStorageItem>();

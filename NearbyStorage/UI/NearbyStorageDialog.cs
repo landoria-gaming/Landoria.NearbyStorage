@@ -21,11 +21,11 @@ namespace Landoria.NearbyStorage
         private static string _fingerprint;
         private static bool _dirtyView = true;
         private static bool _hasNearbyItems;
+        private static bool _wasPanelAvailable;
         private static string _dragKey;
         private static string _scrollToDragKey;
         private static string _scrollToSimilarName;
         private static bool _scrollCategoryToSelection;
-        private static bool _selectFirstCategory = true;
         private static string _nearbyDragKey;
 
         internal static bool FilterFocused => _root != null && _root.gameObject.activeInHierarchy &&
@@ -49,6 +49,7 @@ namespace Landoria.NearbyStorage
             if (gui == null || Player.m_localPlayer == null || !InventoryGui.IsVisible() ||
                 StorageLocator.CurrentContainer() != null)
             {
+                _wasPanelAvailable = false;
                 if (_root != null) { _root.gameObject.SetActive(false); }
                 HideTooltip();
                 _nextRefresh = 0f;
@@ -59,17 +60,24 @@ namespace Landoria.NearbyStorage
                 Dispose();
                 Create(gui);
             }
-            if (!_root.gameObject.activeSelf && _filter != null &&
-                !string.IsNullOrEmpty(_filter.text))
+            bool opening = !_wasPanelAvailable;
+            if (opening)
             {
-                _filter.SetTextWithoutNotify("");
-                RefreshSoon();
+                _filter?.SetTextWithoutNotify("");
+                SelectCategory(-1);
+                _categoryContent.anchoredPosition = Vector2.zero;
             }
+            _wasPanelAvailable = true;
             Position();
             UpdateDepositNotices();
             UpdateDragFocus();
             if (Time.unscaledTime >= _nextRefresh) { Refresh(); }
             _root.gameObject.SetActive(_hasNearbyItems);
+            if (opening && _hasNearbyItems && _filter != null)
+            {
+                _filter.Select();
+                _filter.ActivateInputField();
+            }
             if (_hasNearbyItems) { UpdateVisibleDialog(gui); }
         }
 
@@ -142,15 +150,15 @@ namespace Landoria.NearbyStorage
             List<NearbyStorageItem> items = NearbyStorageCatalog.Read(Player.m_localPlayer);
             _hasNearbyItems = items.Count > 0;
             bool unmatchedDrag = _dragKey != null &&
-                !items.Exists(item => item.Key.StartsWith(_dragKey + "|",
-                    StringComparison.Ordinal));
+                !items.Exists(item => item.Key == _dragKey ||
+                    item.Key.StartsWith(_dragKey + "|", StringComparison.Ordinal));
             bool categoryHasItems = _category >= 0 && items.Exists(item =>
                 NearbyStorageCategory.For(item.Sample) == _category);
             string filter = NormalizeFilterText(_filter == null ? "" : _filter.text.Trim());
             bool[] occupied = new bool[NearbyStorageCategory.French.Length];
             foreach (NearbyStorageItem item in items)
             {
-                if (!MatchesFilter(item.Name, filter))
+                if (!MatchesFilter(item, filter))
                 {
                     continue;
                 }
@@ -160,7 +168,7 @@ namespace Landoria.NearbyStorage
             items.RemoveAll(item =>
                 (_category >= 0 && (!unmatchedDrag || categoryHasItems) &&
                     NearbyStorageCategory.For(item.Sample) != _category) ||
-                !MatchesFilter(item.Name, filter));
+                !MatchesFilter(item, filter));
             NearbyStorageSort.Sort(items);
             string fingerprint = Fingerprint(items);
             if (!_dirtyView && fingerprint == _fingerprint) { return; }
@@ -170,11 +178,14 @@ namespace Landoria.NearbyStorage
             DrawCards(items);
         }
 
-        // Matches item names without distinguishing case or accents.
-        private static bool MatchesFilter(string name, string filter)
+        // Matches an item name or category without distinguishing case or accents.
+        private static bool MatchesFilter(NearbyStorageItem item, string filter)
         {
             if (filter.Length == 0) { return true; }
-            return NormalizeFilterText(name).IndexOf(filter, StringComparison.Ordinal) >= 0;
+            return NormalizeFilterText(item.Name).IndexOf(filter, StringComparison.Ordinal) >= 0 ||
+                NormalizeFilterText(NearbyStorageCategory.Label(
+                    NearbyStorageCategory.For(item.Sample))).IndexOf(
+                        filter, StringComparison.Ordinal) >= 0;
         }
 
         // Removes combining marks and folds Turkish dotless i for search.
@@ -209,6 +220,7 @@ namespace Landoria.NearbyStorage
                 return string.Compare(NearbyStorageCategory.Label(a),
                     NearbyStorageCategory.Label(b), StringComparison.CurrentCultureIgnoreCase);
             });
+            order.Insert(0, -1);
             for (int position = 0; position < order.Count; position++)
             {
                 RectTransform row = list.Find("Category " + order[position]) as RectTransform;
@@ -216,14 +228,6 @@ namespace Landoria.NearbyStorage
                 {
                     row.anchoredPosition = new Vector2(0f, -position * CategoryRowHeight);
                 }
-            }
-            if (_selectFirstCategory && order.Count > 0 && occupied[order[0]])
-            {
-                _category = order[0];
-                _categoryContent.anchoredPosition = Vector2.zero;
-                _scrollCategoryToSelection = false;
-                _selectFirstCategory = false;
-                for (int i = 0; i < occupied.Length; i++) { SetCategoryHover(i, false); }
             }
             for (int i = 0; i < occupied.Length; i++)
             {
@@ -277,11 +281,11 @@ namespace Landoria.NearbyStorage
             _fingerprint = null;
             _dirtyView = true;
             _hasNearbyItems = false;
+            _wasPanelAvailable = false;
             _dragKey = null;
             _scrollToDragKey = null;
             _scrollToSimilarName = null;
             _scrollCategoryToSelection = false;
-            _selectFirstCategory = true;
             _nearbyDragKey = null;
         }
     }

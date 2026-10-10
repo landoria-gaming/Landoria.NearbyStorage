@@ -10,7 +10,7 @@ namespace Landoria.NearbyStorage
     [HarmonyPatch]
     internal sealed class ChestRename : TextReceiver
     {
-        private const int NameLimit = 30;
+        private const int NameLimit = 60;
         private static readonly int NameKey = "Landoria.NearbyStorage.ChestName".GetStableHashCode();
         private static readonly int AuthorKey = "Landoria.NearbyStorage.ChestNameAuthor".GetStableHashCode();
         private static readonly MethodInfo CheckOpenAccess = AccessTools.Method(

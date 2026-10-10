@@ -10,6 +10,7 @@ namespace Landoria.NearbyStorage
         private const float DefaultRadius = 60f;
         internal ConfigEntry<float> Radius { get; }
         internal ConfigEntry<bool> IncludeChestsByDefault { get; }
+        internal ConfigEntry<bool> SeparateStacksByContainer { get; }
         internal ConfigEntry<KeyboardShortcut> NearbyStorageShortcut { get; }
 
         // Binds the search radius in meters.
@@ -20,6 +21,8 @@ namespace Landoria.NearbyStorage
                     new AcceptableValueRange<float>(10f, 100f)));
             IncludeChestsByDefault = config.Bind("General", "IncludeChestsByDefault", true,
                 "Whether chests without an individual inclusion choice are included in Nearby Storage.");
+            SeparateStacksByContainer = config.Bind("General", "SeparateStacksByContainer", true,
+                "Show matching items in different containers as separate stacks.");
             NearbyStorageShortcut = config.Bind("Controls", "NearbyStorageShortcut",
                 new KeyboardShortcut(KeyCode.LeftAlt),
                 "Hold this shortcut to use nearby storage while crafting, building, refueling, or feeding.");
@@ -34,6 +37,7 @@ namespace Landoria.NearbyStorage
             {
                 Radius.Value = DefaultRadius;
                 IncludeChestsByDefault.Value = true;
+                SeparateStacksByContainer.Value = true;
                 NearbyStorageShortcut.Value = new KeyboardShortcut(KeyCode.LeftAlt);
             }
             finally

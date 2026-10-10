@@ -104,7 +104,7 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Draws the source container's icon and name.
+        // Draws the source container and its count when stacks are combined.
         private static void CreateSourceRow(NearbyStorageSource source, int index)
         {
             float width = TooltipWidth - 20f;
@@ -112,9 +112,24 @@ namespace Landoria.NearbyStorage
                 new Vector2(width, SourceRowHeight - 2f));
             row.anchoredPosition = new Vector2(0f, -index * SourceRowHeight);
             AddSourceIcon(row, source.Chest);
+            bool showCount = Plugin.Instance?.Settings?.SeparateStacksByContainer.Value == false;
+            float nameWidth = width - 50f;
+            if (showCount)
+            {
+                TextMeshProUGUI count = Label("Container count", row,
+                    source.Count.ToString("N0"), 16f, Vector2.zero, Vector2.zero);
+                StyleTooltipText(count, "Text");
+                count.alignment = TextAlignmentOptions.MidlineRight;
+                count.textWrappingMode = TextWrappingModes.NoWrap;
+                float countWidth = Mathf.Ceil(count.GetPreferredValues(count.text).x) + 4f;
+                float countLeft = width - 10f - countWidth;
+                count.rectTransform.anchoredPosition = new Vector2(countLeft, -5f);
+                count.rectTransform.sizeDelta = new Vector2(countWidth, 25f);
+                nameWidth = countLeft - 62f;
+            }
             TextMeshProUGUI name = Label("Container name", row,
                 StorageLabel.ShortLabel(source.Chest), 16f,
-                new Vector2(42f, -5f), new Vector2(width - 50f, 25f));
+                new Vector2(42f, -5f), new Vector2(nameWidth, 25f));
             StyleTooltipText(name, "Text");
             name.alignment = TextAlignmentOptions.MidlineLeft;
             name.textWrappingMode = TextWrappingModes.NoWrap;

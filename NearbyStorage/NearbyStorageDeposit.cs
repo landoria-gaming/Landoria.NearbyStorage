@@ -49,9 +49,9 @@ namespace Landoria.NearbyStorage
             {
                 return false;
             }
-            if (!TargetHasRoom(target, item, amount, player)) { return false; }
+            if (!TargetHasRoom(target, item, amount, player, null)) { return false; }
             NearbyStorageDialog.FocusInventoryItem(item);
-            List<Container> chests = Candidates(item, player, target, null);
+            List<Container> chests = Candidates(item, amount, player, target, null);
             if (chests.Count == 0) { return false; }
             if (clearDrag) { NearbyStorageTransfer.ClearPlayerDrag(); }
             Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, null,
@@ -68,8 +68,8 @@ namespace Landoria.NearbyStorage
                 amount <= 0 || !source.GetInventory().ContainsItem(item) ||
                 !StorageLocator.Eligible(source, player, StorageLocator.CurrentContainer(),
                     Plugin.Instance.Settings.Radius.Value)) { return false; }
-            if (!TargetHasRoom(target, item, amount, player)) { return false; }
-            List<Container> chests = Candidates(item, player, target, source);
+            if (!TargetHasRoom(target, item, amount, player, source)) { return false; }
+            List<Container> chests = Candidates(item, amount, player, target, source);
             if (chests.Count == 0 || !NearbyStorageTransfer.CancelNearbyDrag()) { return false; }
             Plugin.Instance.StartCoroutine(Run(item, player, amount, chests, source,
                 false, true));
@@ -78,21 +78,30 @@ namespace Landoria.NearbyStorage
 
         // Rejects a targeted drop when its container cannot hold the full amount.
         private static bool TargetHasRoom(NearbyStorageItem target, ItemDrop.ItemData item,
-            int amount, Player player)
+            int amount, Player player, Container source)
         {
             if (target == null) { return false; }
-            Container chest = target.Sources.Count > 0 ? target.Sources[0].Chest : null;
-            if (chest == null || !StorageLocator.Eligible(chest, player,
-                StorageLocator.CurrentContainer(), Plugin.Instance.Settings.Radius.Value))
-            {
-                return false;
-            }
-            if (Capacity(chest.GetInventory(), item) >= Mathf.Min(amount, item.m_stack))
-            {
-                return true;
-            }
+            if (TargetChest(target, item, amount, player, source) != null) { return true; }
             ShowAutoError(1);
             return false;
+        }
+
+        // Chooses a contributing chest that can accept the complete dragged amount.
+        private static Container TargetChest(NearbyStorageItem target, ItemDrop.ItemData item,
+            int amount, Player player, Container source)
+        {
+            foreach (NearbyStorageSource entry in target.Sources)
+            {
+                Container chest = entry.Chest;
+                if (chest == null || chest == source ||
+                    !StorageLocator.Eligible(chest, player, StorageLocator.CurrentContainer(),
+                        Plugin.Instance.Settings.Radius.Value)) { continue; }
+                if (Capacity(chest.GetInventory(), item) >= Mathf.Min(amount, item.m_stack))
+                {
+                    return chest;
+                }
+            }
+            return null;
         }
 
         // Finds every eligible chest that already holds this item and quality.
@@ -129,12 +138,12 @@ namespace Landoria.NearbyStorage
         }
 
         // Keeps only the eligible container under the drop.
-        private static List<Container> Candidates(ItemDrop.ItemData item, Player player,
+        private static List<Container> Candidates(ItemDrop.ItemData item, int amount, Player player,
             NearbyStorageItem target, Container source)
         {
             var chests = new List<Container>();
             if (target == null || target.Sources.Count == 0) { return chests; }
-            Container preferred = target.Sources[0].Chest;
+            Container preferred = TargetChest(target, item, amount, player, source);
             foreach (Container chest in StorageLocator.Nearby(player))
             {
                 if (chest == preferred && chest != source &&
@@ -158,7 +167,7 @@ namespace Landoria.NearbyStorage
             _player = player;
             _sourceChest = source;
             _sourcePosition = item.m_gridPos;
-            _sourceKey = source == null ? null : NearbyStorageItemKey.For(item, source);
+            _sourceKey = source == null ? null : NearbyStorageItemKey.ForStored(item, source);
             _remaining = Mathf.Min(amount, item.m_stack);
             _moved = 0;
             try
@@ -227,7 +236,7 @@ namespace Landoria.NearbyStorage
             }
             ItemDrop.ItemData current = _sourceChest.GetInventory().GetItemAt(
                 _sourcePosition.x, _sourcePosition.y);
-            return current != null && NearbyStorageItemKey.For(current, _sourceChest) == _sourceKey
+            return current != null && NearbyStorageItemKey.ForStored(current, _sourceChest) == _sourceKey
                 ? current : null;
         }
 

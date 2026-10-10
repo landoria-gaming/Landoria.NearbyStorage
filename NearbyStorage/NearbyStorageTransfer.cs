@@ -87,11 +87,6 @@ namespace Landoria.NearbyStorage
                 return NearbyStorageDeposit.TryStart(item, amount, true, target);
             }
             if (!IsTracked(source, item)) { return false; }
-            if (target != null && target.Sources.Count > 0 &&
-                target.Sources[0].Chest == _trackedChest)
-            {
-                return CancelNearbyDrag();
-            }
             return NearbyStorageDeposit.TryMove(_trackedChest, item, amount, target);
         }
 
