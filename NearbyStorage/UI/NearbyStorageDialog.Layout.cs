@@ -29,7 +29,7 @@ namespace Landoria.NearbyStorage
             background.raycastTarget = true;
             _root.gameObject.AddComponent<NearbyStorageDragCancel>();
             _root.SetSiblingIndex(gui.m_inventoryRoot.GetSiblingIndex() + 1);
-            TextMeshProUGUI title = Label("Title", _root, ModText.Get("Title"), 32f,
+            TextMeshProUGUI title = Label("Title", _root, ModText.ModName, 32f,
                 new Vector2(10f, -16f), new Vector2(570f, 35f));
             title.font = gui.m_containerName.font;
             title.fontSharedMaterial = gui.m_containerName.fontSharedMaterial;

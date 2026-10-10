@@ -6,6 +6,7 @@ namespace Landoria.NearbyStorage
     // Reads embedded English and French text for the selected Valheim language.
     internal static class ModText
     {
+        internal const string ModName = "Nearby Storage";
         private static readonly ResourceManager English = new ResourceManager(
             "Landoria.NearbyStorage.Resources.UI", typeof(ModText).Assembly);
         private static readonly ResourceManager French = new ResourceManager(

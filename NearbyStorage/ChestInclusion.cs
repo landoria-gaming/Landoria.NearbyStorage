@@ -49,7 +49,9 @@ namespace Landoria.NearbyStorage
         internal static string HoverText(Container chest)
         {
             bool included = IsIncluded(chest);
-            string status = ModText.Get(included ? "ChestIncluded" : "ChestExcluded");
+            string status = string.Format(
+                ModText.Get(included ? "ChestIncluded" : "ChestExcluded"),
+                ModText.ModName);
             if (!included) { status = "<color=#FFFFFF80>" + status + "</color>"; }
             return Localization.instance.Localize(
                 "\n[<color=yellow><b>Alt + $KEY_Use</b></color>] ") + status;
@@ -79,7 +81,9 @@ namespace Landoria.NearbyStorage
             player.m_customData.Remove(ChestKey(view));
             player.m_customData.Remove(IncludedKey(view));
             player.m_customData[included ? IncludedKey(view) : ChestKey(view)] = "1";
-            string message = ModText.Get(included ? "ChestIncluded" : "ChestExcluded");
+            string message = string.Format(
+                ModText.Get(included ? "ChestIncluded" : "ChestExcluded"),
+                ModText.ModName);
             MessageHud.instance?.ShowMessage(MessageHud.MessageType.Center, message);
             NearbyStorageDialog.RefreshSoon();
         }

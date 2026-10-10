@@ -9,3 +9,5 @@
 - English is the default language in the `.resx` files without language suffixes in `Resources/`.
 - Every added or changed English string must be translated in each corresponding language file in `Resources/` in the same change.
 - Use the relevant Markdown documentation and code as context when translating strings.
+- Keep the mod name `Nearby Storage` in code, outside translation resources.
+- Keep translations marked as accepted in `.resx` comments unchanged while their English source value is unchanged.

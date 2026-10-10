@@ -19,7 +19,7 @@
     <value>Vêtements</value>
   </data>
   <data name="CategoryCookedFood" xml:space="preserve">
-    <value>Aliments cuisinés</value>
+    <value>Plats cuisinés</value>
   </data>
   <data name="CategoryCookedMeat" xml:space="preserve">
     <value>Viande cuite</value>
@@ -71,6 +71,7 @@
   </data>
   <data name="CategoryValuables" xml:space="preserve">
     <value>Précieux</value>
+    <comment>Accepted translation. Keep while the English value is "Valuables".</comment>
   </data>
   <data name="CategoryWeapons" xml:space="preserve">
     <value>Armes</value>
@@ -85,7 +86,7 @@
     <value>Équipement</value>
   </data>
   <data name="FamilyFoodAndDrinks" xml:space="preserve">
-    <value>Cuisine et boissons</value>
+    <value>Nourriture et boissons</value>
   </data>
   <data name="FamilyResources" xml:space="preserve">
     <value>Ressources</value>
