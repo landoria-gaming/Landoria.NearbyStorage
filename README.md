@@ -43,10 +43,10 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 | `AutomaticItemDistribution` | `true` | Distribute Ctrl-clicked items among nearby containers. Prefer the same item, a custom name matching the category, a custom name matching its broad family, the most items in its category, the most items in its broad family, an empty container, then any free space. Names match words longer than three letters, ignoring case and accents. |
 | `NearbyStorageShortcut` | `Alt` | Hold to use nearby supplies while crafting, building, refueling, or feeding. |
 
+## Preview
+
+![Nearby Storage in Valheim](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/ad279bd89d9ed6ae92f2dfa76952582ae06d065c/Assets/NearbyStorage.gif)
+
 ## Contact
 
 Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.NearbyStorage/issues).
-
-## Preview
-
-![Nearby Storage in Valheim](Assets/NearbyStorage.gif)

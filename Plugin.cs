@@ -10,7 +10,7 @@ namespace Landoria.NearbyStorage
     {
         private const string PluginGuid = "Landoria.NearbyStorage";
         private const string PluginName = "Nearby Storage";
-        private const string PluginVersion = "1.0.4";
+        private const string PluginVersion = "1.0.5";
 
         internal static Plugin Instance { get; private set; }
         internal ModConfigFile Settings { get; private set; }

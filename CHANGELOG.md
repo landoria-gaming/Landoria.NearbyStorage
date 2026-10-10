@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Updated readme
+
 ## 1.0.4
 
 - Add the `AutomaticItemDistribution` setting.
