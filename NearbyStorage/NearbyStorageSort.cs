@@ -40,9 +40,7 @@ namespace Landoria.NearbyStorage
         // Sorts items by their localized names with a stable key for ties.
         internal static void Sort(List<NearbyStorageItem> items)
         {
-            bool french = Localization.instance != null &&
-                Localization.instance.GetSelectedLanguage() == "French";
-            CompareInfo comparison = CultureInfo.GetCultureInfo(french ? "fr-FR" : "en-US").CompareInfo;
+            CompareInfo comparison = ModText.Comparison();
             items.Sort((a, b) => Compare(a, b, comparison));
         }
 

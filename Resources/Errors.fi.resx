@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Säiliö on täynnä.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Useissa lähellä olevissa säilöissä on tämä kohde.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Mikään lähellä oleva säiliö ei sisällä tätä tuotetta.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Tätä tuotetta ei voitu säilyttää säilössä.</value>
+  </data>
+</root>

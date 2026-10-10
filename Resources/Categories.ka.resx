@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>აქსესუარები</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>ყველა</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>ჯავშანი</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>ისრები</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob ბომბები</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>ტანსაცმელი</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>მოხარშული საკვები</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>მზა ხორცი</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>დღესასწაულები</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>ფეიერვერკი</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>თევზაობა</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>ტყავი და ბეწვი</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>სხვადასხვა</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>მადნები და ლითონები</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>წამლები</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>უმი საკვები</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>ნედლეული</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>უმი ხორცი</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>თესლი</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>ფარები</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>ქვა</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>ხელსაწყოები</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>ჯილდოები</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>ფასეულობები</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>იარაღი</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>მორი</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>ბრძოლა და აქტივობები</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>აღჭურვილობა</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>საკვები და სასმელები</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>რესურსები</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>სპეციალური ნივთები</value>
+  </data>
+</root>

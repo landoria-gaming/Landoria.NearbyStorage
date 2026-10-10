@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Αξεσουάρ</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Όλα</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>πανοπλία</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>βέλη</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob Bombs</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Ρούχα</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Μαγειρευτό φαγητό</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Μαγειρεμένο κρέας</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Γιορτές</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>πυροτεχνήματα</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Ψάρεμα</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Δορές και γούνες</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Διάφορα</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Μεταλλεύματα και Μέταλλα</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Φίλτρα</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Ωμά τρόφιμα</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Πρώτες Ύλες</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Ωμό κρέας</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Σπόροι</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Ασπίδες</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Πέτρα</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Εργαλεία</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Τρόπαια</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Πολύτιμα αντικείμενα</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Όπλα</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Ξύλο</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Μάχη και Δραστηριότητες</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Εξοπλισμός</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Τρόφιμα και Ποτά</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Πόροι</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Ειδικά είδη</value>
+  </data>
+</root>

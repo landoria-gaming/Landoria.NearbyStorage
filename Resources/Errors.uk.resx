@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Ємність повна.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Кілька контейнерів поблизу містять цей предмет.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Жоден контейнер поблизу не містить цей предмет.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Не вдалося зберегти цей предмет у контейнері.</value>
+  </data>
+</root>

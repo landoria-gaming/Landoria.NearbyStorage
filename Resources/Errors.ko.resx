@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>컨테이너가 가득 찼습니다.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>근처에 있는 여러 개의 컨테이너에 이 항목이 들어 있습니다.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>근처에 이 항목을 담는 컨테이너가 없습니다.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>이 항목을 컨테이너에 저장할 수 없습니다.</value>
+  </data>
+</root>

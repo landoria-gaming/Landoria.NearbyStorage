@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Tillbehör</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Alla</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Rustning</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>pilar</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blobbomber</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Kläder</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Tillagad mat</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Tillrett kött</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Festmåltider</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Fyrverkerier</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Fiske</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Hudar och pälsar</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Diverse</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Malmer och metaller</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Potions</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Rå mat</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Råvaror</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Rått kött</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Frön</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Sköldar</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Sten</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Verktyg</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Troféer</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Värdesaker</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Vapen</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Trä</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Strid och aktiviteter</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Utrustning</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Mat och dryck</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Resurser</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Specialartiklar</value>
+  </data>
+</root>

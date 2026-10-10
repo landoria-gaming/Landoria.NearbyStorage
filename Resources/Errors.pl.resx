@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Pojemnik jest pełny.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Ten przedmiot znajduje się w wielu pobliskich pojemnikach.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Żaden pobliski pojemnik nie mieści tego przedmiotu.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Nie udało się umieścić tego przedmiotu w pojemniku.</value>
+  </data>
+</root>

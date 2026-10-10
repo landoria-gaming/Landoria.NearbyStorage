@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Контејнер је пун.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Више оближњих контејнера садржи ову ставку.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Ниједан контејнер у близини не садржи ову ставку.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Није могуће сачувати ову ставку у контејнеру.</value>
+  </data>
+</root>

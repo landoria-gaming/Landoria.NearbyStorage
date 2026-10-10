@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>付属品</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>鎧</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>矢</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>スライム爆弾</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>衣類</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>調理済み食品</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>焼肉</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>ごちそう</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>花火</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>釣り</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>皮と毛皮</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>鉱石と金属</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>ポーション</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>ローフード</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>原材料</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>生肉</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>種子</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>盾</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>石</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>ツール</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>トロフィー</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>貴重品</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>武器</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>木</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>戦闘とアクティビティ</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>設備</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>食べ物と飲み物</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>リソース</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>スペシャルアイテム</value>
+  </data>
+</root>

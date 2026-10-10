@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>De container is vol.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Meerdere containers in de buurt bevatten dit item.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Er is geen container in de buurt die dit item bevat.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Kan dit item niet in de container opslaan.</value>
+  </data>
+</root>

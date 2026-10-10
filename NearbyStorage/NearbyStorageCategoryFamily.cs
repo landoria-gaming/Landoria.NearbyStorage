@@ -22,13 +22,14 @@ namespace Landoria.NearbyStorage
             return ByCategory[category];
         }
 
-        // Returns the French and English names for a category's family.
+        // Returns the selected, English, and French names for a category's family.
         internal static IEnumerable<string> Names(int category)
         {
             int family = For(category);
             string key = FamilyKeys[family];
-            yield return ModText.CategoryText(key, true);
-            yield return ModText.CategoryText(key, false);
+            yield return ModText.CategoryText(key, ModText.SelectedLanguage);
+            yield return ModText.CategoryText(key, "English");
+            yield return ModText.CategoryText(key, "French");
         }
     }
 }

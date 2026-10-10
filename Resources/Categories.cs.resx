@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Příslušenství</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>všechny</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Brnění</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>šípy</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blobové bomby</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Oblečení</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Vařené jídlo</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Pečené maso</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Hostiny</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>ohňostroje</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Rybaření</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Kůže a kožešiny</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Různé</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Rudy a kovy</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Lektvary</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Syrové jídlo</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Suroviny</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Syrové maso</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Semena</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Štíty</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Kámen</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Nástroje</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofeje</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Cennosti</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Zbraně</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Dřevo</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Boj a aktivity</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Vybavení</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Jídlo a pití</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Zdroje</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Speciální položky</value>
+  </data>
+</root>

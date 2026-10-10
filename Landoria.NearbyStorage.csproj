@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Resources\UI.fr.resx;Resources\Categories.fr.resx;Resources\Errors.fr.resx">
+    <EmbeddedResource Update="Resources\*.resx">
       <WithCulture>false</WithCulture>
     </EmbeddedResource>
   </ItemGroup>

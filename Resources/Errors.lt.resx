@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Talpykla pilna.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Šį elementą laiko keli netoliese esantys konteineriai.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Jokiame netoliese esančiame konteineryje nėra šio elemento.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Nepavyko laikyti šio elemento konteineryje.</value>
+  </data>
+</root>

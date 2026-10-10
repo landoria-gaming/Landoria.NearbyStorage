@@ -67,7 +67,7 @@ namespace Landoria.NearbyStorage
                 if (index != 12) { order[next++] = index; }
             }
             order[next] = 12;
-            CompareInfo comparison = CultureInfo.GetCultureInfo(ModText.IsFrench ? "fr-FR" : "en-US").CompareInfo;
+            CompareInfo comparison = ModText.Comparison();
             Array.Sort(order, 1, ModText.CategoryCount - 1, Comparer<int>.Create((left, right) =>
                 comparison.Compare(Label(left), Label(right),
                     CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace)));
@@ -79,9 +79,9 @@ namespace Landoria.NearbyStorage
         {
             if (index == -1)
             {
-                return ModText.CategoryText("CategoryAll", ModText.IsFrench);
+                return ModText.CategoryText("CategoryAll", ModText.SelectedLanguage);
             }
-            return ModText.Category(index, ModText.IsFrench);
+            return ModText.Category(index, ModText.SelectedLanguage);
         }
 
         // Assigns every item type to one category.

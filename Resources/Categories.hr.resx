@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Pribor</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>sve</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>oklop</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>strelice</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob bombe</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Odjeća</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Kuhana hrana</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Skuhano meso</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Gozbe</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Vatromet</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>pecanje</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Kože i krzno</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Razno</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Rude i metali</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Napitci</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Sirova hrana</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Sirovine</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Sirovo meso</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>sjemenke</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Štitovi</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Kamen</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Alati</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofeji</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Dragocjenosti</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Oružje</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Drvo</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Borba i aktivnosti</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Oprema</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Hrana i piće</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Resursi</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Posebne stavke</value>
+  </data>
+</root>

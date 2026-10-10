@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Kiegészítők</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Mind</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Páncél</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>nyílvessző</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob Bombs</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Ruházat</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Főtt étel</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Sült hús</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Lakomák</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Tűzijáték</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Horgászat</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Bőrök és szőrmék</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Vegyes</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Ércek és fémek</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Főzetek</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Nyers élelmiszer</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Nyersanyagok</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Nyers hús</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Magok</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Pajzsok</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Kődarab</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Eszközök</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trófeák</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Értékek</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Fegyverek</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Fa</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Harc és tevékenységek</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Berendezés</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Ételek és italok</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Erőforrások</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Különleges tételek</value>
+  </data>
+</root>

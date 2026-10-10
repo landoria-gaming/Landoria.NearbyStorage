@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Priedai</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Visi</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Šarvai</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>strėlės</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob Bombs</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Drabužiai</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Virtas maistas</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Kepta mėsa</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Puotos</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Fejerverkai</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Žvejyba</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Kailiai ir kailiai</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Įvairūs</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Rūdos ir metalai</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Potions</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Žalias maistas</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Žaliavos</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Žalia mėsa</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Sėklos</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Skydai</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Akmuo</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Įrankiai</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofėjai</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Vertybės</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Ginklai</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Mediena</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Kova ir veikla</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Įranga</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Maistas ir gėrimai</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Ištekliai</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Specialūs daiktai</value>
+  </data>
+</root>

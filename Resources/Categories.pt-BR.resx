@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Acessórios</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Tudo</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Armadura</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>flechas</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Bombas de bolha</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Roupas</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Comida Cozida</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Carne cozida</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Banquetes</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Fogos de artifício</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Pescaria</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Couros e Peles</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Diversos</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Minérios e Metais</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Poções</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Alimentos Crus</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Matérias-Primas</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Carne crua</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Sementes</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Escudos</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Pedra</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Ferramentas</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Troféus</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Objetos de valor</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Armas</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Madeira</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Combate e Atividades</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Equipamento</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Alimentos e Bebidas</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Recursos</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Itens Especiais</value>
+  </data>
+</root>

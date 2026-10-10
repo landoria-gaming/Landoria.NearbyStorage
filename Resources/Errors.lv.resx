@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Konteiners ir pilns.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Šis vienums atrodas vairākos tuvumā esošos konteineros.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Nevienā tuvumā esošajā konteinerā šis vienums nav ievietots.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Šo vienumu nevarēja uzglabāt konteinerā.</value>
+  </data>
+</root>

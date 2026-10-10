@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>ภาชนะเต็มแล้ว</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>ตู้คอนเทนเนอร์ใกล้เคียงหลายตู้เก็บรายการนี้ไว้</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>ไม่มีคอนเทนเนอร์ใกล้เคียงที่เก็บรายการนี้</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>ไม่สามารถจัดเก็บรายการนี้ในคอนเทนเนอร์ได้</value>
+  </data>
+</root>

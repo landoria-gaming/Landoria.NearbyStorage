@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>सहायक उपकरण</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>सब</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>कवच</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>तीर</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>बूँद बम</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>वस्त्र</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>पका हुआ भोजन</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>पका हुआ मांस</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>दावतें</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>आतिशबाज़ी</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>मछली पकड़ना</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>खाल और फर</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>विविध</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>अयस्क एवं धातु</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>औषधि</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>कच्चा भोजन</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>कच्चा माल</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>कच्चा मांस</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>बीज</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>ढालें</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>पत्थर</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>उपकरण</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>ट्राफियां</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>मूल्यवान वस्तुएँ</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>हथियार</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>लकड़ी</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>युद्ध और गतिविधियाँ</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>उपकरण</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>भोजन और पेय</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>संसाधन</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>विशेष वस्तुएँ</value>
+  </data>
+</root>

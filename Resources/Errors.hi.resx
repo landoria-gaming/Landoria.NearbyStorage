@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>कंटेनर भरा हुआ है.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>आस-पास के कई कंटेनरों में यह वस्तु रखी हुई है।</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>आस-पास के किसी भी कंटेनर में यह वस्तु नहीं है।</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>इस आइटम को कंटेनर में संग्रहीत नहीं किया जा सका.</value>
+  </data>
+</root>

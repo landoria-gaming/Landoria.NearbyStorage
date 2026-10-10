@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Tarvikkeet</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Kaikki</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Panssari</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>nuolia</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob Bombs</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Vaatteet</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Keitetty Ruoka</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Kypsennettyä lihaa</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Juhla-ateriat</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>ilotulitus</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Kalastus</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Nahat ja turkikset</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Sekalaista</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Malmit ja metallit</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>juomat</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Raaka ruoka</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Raaka-aineet</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Raakaa lihaa</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Siemenet</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Kilvet</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Kivi</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Työkalut</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofeet</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Arvoesineet</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Aseet</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Puuta</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Taistelu ja toiminta</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Laitteet</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Ruoka ja juomat</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Resurssit</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Erikoistuotteet</value>
+  </data>
+</root>

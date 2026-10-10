@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Аксесуари</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Усе</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Броня</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>стріли</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Бомби з бульбаків</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Одяг</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>приготована їжа</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Смажене м’ясо</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Наїдки</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Феєрверк</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Риболовля</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Шкури та хутра</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Різне</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Руди і метали</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Зілля</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Сирої їжі</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Сировина</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Сире м’ясо</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Насіння</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Щити</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Камінь</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Інструменти</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Трофеї</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>цінні речі</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Зброя</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Деревина</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Бойові дії та дії</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Обладнання</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Їжа та напої</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Ресурси</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Спеціальні предмети</value>
+  </data>
+</root>

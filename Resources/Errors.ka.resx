@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>კონტეინერი სავსეა.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>რამდენიმე ახლომდებარე კონტეინერი ინახავს ამ ნივთს.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>არცერთი ახლომდებარე კონტეინერი არ შეიცავს ამ ელემენტს.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>ამ ნივთის კონტეინერში შენახვა ვერ მოხერხდა.</value>
+  </data>
+</root>

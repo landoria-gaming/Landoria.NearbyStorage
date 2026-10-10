@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Accessoires</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Allemaal</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Harnas</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>pijlen</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob-bommen</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Kleding</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Gekookt voedsel</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Gekookt vlees</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Feesten</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Vuurwerk</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Vissen</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Huiden en bont</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Diversen</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Ertsen en metalen</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Drankjes</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Rauw voedsel</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Grondstoffen</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Rauw vlees</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Zaden</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Schilden</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Steen</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Gereedschap</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofeeën</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Waardevolle spullen</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Wapens</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Hout</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Gevechten en activiteiten</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Uitrusting</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Eten en drinken</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Hulpbronnen</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Speciale artikelen</value>
+  </data>
+</root>

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Accesorii</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Toate</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Armură</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>săgeți</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Bombe blob</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Îmbrăcăminte</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Mâncare gătită</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Carne gătită</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Festinuri</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Artificii</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Pescuit</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Piei și blănuri</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Diverse</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Minereuri și metale</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Poțiuni</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Alimente crude</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Materii Prime</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Carne crudă</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Semințe</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Scuturi</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Piatră</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Instrumente</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofee</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Obiecte de valoare</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Arme</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Lemn</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Luptă și activități</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Echipamente</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Mâncare și băuturi</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Resurse</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Articole speciale</value>
+  </data>
+</root>

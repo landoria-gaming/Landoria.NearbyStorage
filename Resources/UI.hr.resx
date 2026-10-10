@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="ChestExcluded" xml:space="preserve">
+    <value>{0}: isključeno</value>
+  </data>
+  <data name="ChestIncluded" xml:space="preserve">
+    <value>{0}: uključeno</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>FILTRIRATI</value>
+  </data>
+</root>

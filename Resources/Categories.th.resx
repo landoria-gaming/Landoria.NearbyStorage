@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>อุปกรณ์เสริม</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>ทั้งหมด</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>ชุดเกราะ</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>ลูกศร</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>หยดระเบิด</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>เสื้อผ้า</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>อาหารปรุงสุก</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>เนื้อสุก</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>งานเลี้ยง</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>ดอกไม้ไฟ</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>ตกปลา</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>หนังสัตว์และขนสัตว์</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>เบ็ดเตล็ด</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>แร่และโลหะ</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>ยา</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>อาหารดิบ</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>วัตถุดิบ</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>เนื้อดิบ</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>เมล็ดพืช</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>โล่</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>หิน</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>เครื่องมือ</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>ถ้วยรางวัล</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>ของมีค่า</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>อาวุธ</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>ไม้</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>การต่อสู้และกิจกรรม</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>อุปกรณ์</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>อาหารและเครื่องดื่ม</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>ทรัพยากร</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>รายการพิเศษ</value>
+  </data>
+</root>

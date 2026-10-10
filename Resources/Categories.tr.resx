@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Aksesuarlar</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Tümü</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Zırh</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>ok</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob bombaları</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Giyim</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Pişmiş Yiyecek</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Pişmiş et</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Ziyafetler</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>havai fişek</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Balıkçılık</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Postlar ve Kürkler</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Çeşitli</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Cevherler ve Metaller</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>İksirler</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Çiğ Gıda</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Hammaddeler</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Çiğ et</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Tohumlar</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Kalkanlar</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Taş</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Araçlar</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Av Ganimetleri</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Değerli eşyalar</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Silahlar</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Odun</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Mücadele ve Faaliyetler</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Ekipman</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Yiyecek ve İçecekler</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Kaynaklar</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Özel Ürünler</value>
+  </data>
+</root>

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>액세서리</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>전체</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>갑옷</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>화살</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>블롭 폭탄</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>의류</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>조리된 음식</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>요리한 고기</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>잔치</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>불꽃놀이</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>낚시</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>가죽 및 모피</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>기타</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>광석 및 금속</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>물약</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>생식</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>원자재</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>날고기</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>씨앗</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>방패</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>돌</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>도구</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>트로피</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>귀중품</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>무기</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>나무</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>전투 및 활동</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>장비</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>음식과 음료</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>자원</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>특별 아이템</value>
+  </data>
+</root>

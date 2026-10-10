@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>A tartály megtelt.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Több közeli tároló tárolja ezt az elemet.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Egyetlen közeli tároló sem tárolja ezt az elemet.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Ez az elem nem tárolható a tárolóban.</value>
+  </data>
+</root>

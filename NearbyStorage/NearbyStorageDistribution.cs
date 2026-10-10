@@ -16,8 +16,10 @@ namespace Landoria.NearbyStorage
             string itemName = item.m_dropPrefab.name;
             int category = NearbyStorageCategory.For(item);
             int family = NearbyStorageCategoryFamily.For(category);
-            var categoryWords = new HashSet<string>(Words(ModText.Category(category, true)));
-            categoryWords.UnionWith(Words(ModText.Category(category, false)));
+            var categoryWords = new HashSet<string>(Words(
+                ModText.Category(category, ModText.SelectedLanguage)));
+            categoryWords.UnionWith(Words(ModText.Category(category, "English")));
+            categoryWords.UnionWith(Words(ModText.Category(category, "French")));
             var familyWords = new HashSet<string>();
             foreach (string name in NearbyStorageCategoryFamily.Names(category))
             {
@@ -102,7 +104,7 @@ namespace Landoria.NearbyStorage
             return false;
         }
 
-        // Matches complete meaningful words from a custom name and either category language.
+        // Matches complete category words in a custom container name.
         private static bool NameMatches(Container chest, HashSet<string> categoryWords)
         {
             string name = ChestRename.ExplicitName(chest);
@@ -123,10 +125,17 @@ namespace Landoria.NearbyStorage
                 UnicodeCategory category = CharUnicodeInfo.GetUnicodeCategory(character);
                 if (category == UnicodeCategory.NonSpacingMark) { continue; }
                 if (char.IsLetter(character)) { word.Append(char.ToUpperInvariant(character)); continue; }
-                if (word.Length > 3) { yield return word.ToString(); }
+                if (IsMeaningfulWord(word)) { yield return word.ToString(); }
                 word.Clear();
             }
-            if (word.Length > 3) { yield return word.ToString(); }
+            if (IsMeaningfulWord(word)) { yield return word.ToString(); }
+        }
+
+        // Allows shorter words in scripts that do not use Latin-style spacing.
+        private static bool IsMeaningfulWord(StringBuilder word)
+        {
+            return word.Length > 3 || word.Length >= 2 &&
+                CharUnicodeInfo.GetUnicodeCategory(word[0]) == UnicodeCategory.OtherLetter;
         }
     }
 }

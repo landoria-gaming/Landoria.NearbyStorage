@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="ChestExcluded" xml:space="preserve">
+    <value>{0}: neįtraukta</value>
+  </data>
+  <data name="ChestIncluded" xml:space="preserve">
+    <value>{0}: įtraukta</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>FILTRAS</value>
+  </data>
+</root>

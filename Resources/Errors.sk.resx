@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Nádoba je plná.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Túto položku obsahuje viacero kontajnerov v okolí.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Túto položku neobsahuje žiadny kontajner v okolí.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Túto položku nebolo možné uložiť do kontajnera.</value>
+  </data>
+</root>

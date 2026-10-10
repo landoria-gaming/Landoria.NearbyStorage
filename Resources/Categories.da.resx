@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Tilbehør</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Rustning</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>pile</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob bomber</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Tøj</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Tilberedt mad</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Ristet kød</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Festmåltider</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Fyrværkeri</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Fiskeri</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Huder og Pelse</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Diverse</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Malm og metaller</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Potions</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Rå mad</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Råvarer</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Råt kød</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Frø</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Skjolde</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Sten</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Værktøjer</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Trofæer</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Værdigenstande</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Våben</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Træ</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Kamp og aktiviteter</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Udstyr</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Mad og drikkevarer</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Ressourcer</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Særlige genstande</value>
+  </data>
+</root>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Контейнерът е пълен.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Множество близки контейнери съдържат този артикул.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Нито един контейнер наблизо не съдържа този артикул.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Не може да се съхрани този елемент в контейнера.</value>
+  </data>
+</root>

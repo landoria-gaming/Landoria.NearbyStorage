@@ -2,6 +2,10 @@
 
 See and use items in nearby chests without opening them one by one. Nearby Storage also lets you name chests and craft, build, refuel, and feed machines using nearby items in chests.
 
+## Languages
+
+The mod follows Valheim's selected language. Its text is translated for every language in the game's current localization table except Abenaki, which falls back to English. The mod name stays `Nearby Storage` in every language. New translations are machine-assisted drafts and welcome review by native speakers.
+
 ## Nearby Storage panel
 
 - Press **Tab** to open your inventory. Nearby Storage appears below it when accessible nearby containers contain items.

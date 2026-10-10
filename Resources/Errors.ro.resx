@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="DepositFull" xml:space="preserve">
+    <value>Recipientul este plin.</value>
+  </data>
+  <data name="DepositMultipleContainers" xml:space="preserve">
+    <value>Mai multe containere din apropiere dețin acest articol.</value>
+  </data>
+  <data name="DepositNoContainer" xml:space="preserve">
+    <value>Niciun container din apropiere nu deține acest articol.</value>
+  </data>
+  <data name="DepositUnavailable" xml:space="preserve">
+    <value>Acest articol nu a putut fi depozitat în container.</value>
+  </data>
+</root>

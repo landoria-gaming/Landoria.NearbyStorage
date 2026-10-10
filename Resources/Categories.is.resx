@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <data name="CategoryAccessories" xml:space="preserve">
+    <value>Aukabúnaður</value>
+  </data>
+  <data name="CategoryAll" xml:space="preserve">
+    <value>Allt</value>
+  </data>
+  <data name="CategoryArmor" xml:space="preserve">
+    <value>Brynja</value>
+  </data>
+  <data name="CategoryArrows" xml:space="preserve">
+    <value>örvar</value>
+  </data>
+  <data name="CategoryBlobBombs" xml:space="preserve">
+    <value>Blob sprengjur</value>
+  </data>
+  <data name="CategoryClothing" xml:space="preserve">
+    <value>Fatnaður</value>
+  </data>
+  <data name="CategoryCookedFood" xml:space="preserve">
+    <value>Eldaður matur</value>
+  </data>
+  <data name="CategoryCookedMeat" xml:space="preserve">
+    <value>Eldað kjöt</value>
+  </data>
+  <data name="CategoryFeasts" xml:space="preserve">
+    <value>Blót</value>
+  </data>
+  <data name="CategoryFireworks" xml:space="preserve">
+    <value>Flugeldar</value>
+  </data>
+  <data name="CategoryFishing" xml:space="preserve">
+    <value>Fiskveiðihæfni</value>
+  </data>
+  <data name="CategoryHidesAndFurs" xml:space="preserve">
+    <value>Húðar og skinn</value>
+  </data>
+  <data name="CategoryMiscellaneous" xml:space="preserve">
+    <value>Ýmislegt</value>
+  </data>
+  <data name="CategoryOresAndMetals" xml:space="preserve">
+    <value>Málmgrýti og málmar</value>
+  </data>
+  <data name="CategoryPotions" xml:space="preserve">
+    <value>Drykkir</value>
+  </data>
+  <data name="CategoryRawFood" xml:space="preserve">
+    <value>Raw Food</value>
+  </data>
+  <data name="CategoryRawMaterials" xml:space="preserve">
+    <value>Hráefni</value>
+  </data>
+  <data name="CategoryRawMeat" xml:space="preserve">
+    <value>Hrátt kjöt</value>
+  </data>
+  <data name="CategorySeeds" xml:space="preserve">
+    <value>Fræ</value>
+  </data>
+  <data name="CategoryShields" xml:space="preserve">
+    <value>Skyldir</value>
+  </data>
+  <data name="CategoryStone" xml:space="preserve">
+    <value>Steinn</value>
+  </data>
+  <data name="CategoryTools" xml:space="preserve">
+    <value>Verkfæri</value>
+  </data>
+  <data name="CategoryTrophies" xml:space="preserve">
+    <value>Veiðigripir</value>
+  </data>
+  <data name="CategoryValuables" xml:space="preserve">
+    <value>Verðmæti</value>
+  </data>
+  <data name="CategoryWeapons" xml:space="preserve">
+    <value>Vopn</value>
+  </data>
+  <data name="CategoryWood" xml:space="preserve">
+    <value>Viður</value>
+  </data>
+  <data name="FamilyCombatAndActivities" xml:space="preserve">
+    <value>Bardagi og athafnir</value>
+  </data>
+  <data name="FamilyEquipment" xml:space="preserve">
+    <value>Búnaður</value>
+  </data>
+  <data name="FamilyFoodAndDrinks" xml:space="preserve">
+    <value>Matur og drykkir</value>
+  </data>
+  <data name="FamilyResources" xml:space="preserve">
+    <value>Auðlindir</value>
+  </data>
+  <data name="FamilySpecialItems" xml:space="preserve">
+    <value>Sérstök atriði</value>
+  </data>
+</root>
