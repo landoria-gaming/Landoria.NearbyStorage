@@ -11,7 +11,7 @@ See and use items in nearby chests without opening them one by one. Nearby Stora
 
 ## Item classification
 
-- See the [category list](CATEGORIES.md) for what each category contains.
+- See the [category list](https://github.com/landoria-gaming/Landoria.NearbyStorage/blob/main/CATEGORIES.md) for what each category contains.
 
 ## Craft from Nearby Storage
 
