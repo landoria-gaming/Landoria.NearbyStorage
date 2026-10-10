@@ -5,16 +5,17 @@ See and use items in nearby containers without opening them one by one. Nearby S
 ## Nearby Storage panel
 
 - Press **Tab** to open your inventory. Nearby Storage appears below it when accessible nearby containers contain items.
-- **Ctrl-click** an inventory stack to store it when exactly one nearby container already holds the same item and quality and has room for the whole stack. Otherwise, an error appears.
+- **Ctrl-click** an inventory stack to store it. With `AutomaticItemDistribution` enabled, the mod distributes it across eligible containers. When disabled, exactly one nearby container must already hold the same item and quality and have room for the whole stack; otherwise, an error appears.
 - Drop an item onto an occupied Nearby Storage slot to move it into the same container.
-- Choose **All** to see every item, select another category, or search by item or category name. Opening the inventory selects **All**, clears the search field, and focuses it.
+- With `AutomaticItemDistribution` enabled, drop an item onto an empty Nearby Storage slot to distribute it like Ctrl-click.
+
+## Item classification
+
 - See the [category list](CATEGORIES.md) for what each category contains.
-- Foods made through recipes or cooking stations appear under **Cooked Food**; unprepared edible foods such as berries, carrots, onions, and mushrooms appear under **Raw Food**. Feast food and its placement item appear under **Feasts**.
-- Non-fish ingredients cooked on stations that require a fire appear under **Raw Meat**; their cooked outputs appear under **Cooked Meat**. Fish appear under **Fishing**.
 
 ## Craft from Nearby Storage
 
-- Hold **Left Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory and nearby containers.
+- Hold **Alt** while crafting, building, refueling, or feeding a machine to use supplies from your inventory and nearby containers.
 - Hold **Alt** and **Shift** together to use nearby supplies when crafting multiple items at once.
 
 ## Renaming containers
@@ -38,8 +39,9 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 | --- | --- | --- |
 | `SearchRadius` | `60` | Search radius around the player for nearby storage, from 10 to 100 metres. |
 | `IncludeChestsByDefault` | `true` | Include chests without an individual inclusion choice. Set to `false` to exclude them by default. |
-| `SeparateStacksByContainer` | `true` | Show matching stackable items separately for each container. Set to `false` to show one combined stack with each container listed in its tooltip. |
-| `NearbyStorageShortcut` | `Left Alt` | Hold to use nearby supplies while crafting, building, refueling, or feeding. |
+| `SeparateStacksByContainer` | `true` | Show matching stackable items separately for each container, so you can move a stack from one container to another. Set to `false` to show one combined stack with each container listed in its tooltip. |
+| `AutomaticItemDistribution` | `true` | Distribute Ctrl-clicked items among nearby containers. Prefer the same item, a custom name matching the category, a custom name matching its broad family, the most items in its category, the most items in its broad family, an empty container, then any free space. Names match words longer than three letters, ignoring case and accents. |
+| `NearbyStorageShortcut` | `Alt` | Hold to use nearby supplies while crafting, building, refueling, or feeding. |
 
 ## Screenshot
 

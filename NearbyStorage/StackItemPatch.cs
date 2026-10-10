@@ -14,8 +14,11 @@ namespace Landoria.NearbyStorage
             ItemDrop.ItemData item, InventoryGrid.Modifier mod)
         {
             Player player = Player.m_localPlayer;
-            bool storageControlClick = NearbyStorageDialog.IsOpen &&
-                mod == InventoryGrid.Modifier.Move &&
+            bool automatic = Plugin.Instance?.Settings?.AutomaticItemDistribution.Value == true;
+            bool storageAvailable = NearbyStorageDialog.IsOpen ||
+                (automatic && player != null && StorageLocator.CurrentContainer() == null &&
+                 StorageLocator.Nearby(player).Count > 0);
+            bool storageControlClick = storageAvailable && mod == InventoryGrid.Modifier.Move &&
                 (ZInput.GetKey(UnityEngine.KeyCode.LeftControl) ||
                  ZInput.GetKey(UnityEngine.KeyCode.RightControl));
             if (item?.m_shared == null ||

@@ -18,6 +18,7 @@ namespace Landoria.NearbyStorage
         private static int _remaining;
         private static int _moved;
         private static bool _autoDeposit;
+        private static bool _distributeDeposit;
         private static bool _targetedDeposit;
         internal static bool Running { get; private set; }
 
@@ -27,6 +28,11 @@ namespace Landoria.NearbyStorage
             Player player = Player.m_localPlayer;
             if (Running || player == null || item?.m_dropPrefab == null ||
                 !player.GetInventory().ContainsItem(item)) { return false; }
+            bool distribute = Plugin.Instance.Settings.AutomaticItemDistribution.Value;
+            if (distribute)
+            {
+                return TryStartDistributed(item, item.m_stack, null, false);
+            }
             List<Container> matches = MatchingChests(item, player);
             bool hasMatchingChest = matches.Count > 0;
             matches.RemoveAll(chest => Capacity(chest.GetInventory(), item) < item.m_stack);
@@ -37,6 +43,30 @@ namespace Landoria.NearbyStorage
             }
             NearbyStorageDialog.FocusInventoryItem(item);
             Plugin.Instance.StartCoroutine(Run(item, player, item.m_stack, matches, null, true, false));
+            return true;
+        }
+
+        // Distributes a dragged amount using the same priorities as Ctrl-click.
+        internal static bool TryStartDistributed(ItemDrop.ItemData item, int amount,
+            Container source, bool clearDrag)
+        {
+            Player player = Player.m_localPlayer;
+            if (Running || player == null || item?.m_dropPrefab == null || amount <= 0 ||
+                Plugin.Instance?.Settings?.AutomaticItemDistribution.Value != true ||
+                !(source == null ? player.GetInventory() : source.GetInventory()).ContainsItem(item))
+            {
+                return false;
+            }
+            List<Container> candidates = NearbyStorageDistribution.Candidates(item, player, source);
+            if (candidates.Count == 0) { ShowAutoError(1); return false; }
+            if (clearDrag && source != null && !NearbyStorageTransfer.CancelNearbyDrag())
+            {
+                return false;
+            }
+            if (clearDrag && source == null) { NearbyStorageTransfer.ClearPlayerDrag(); }
+            if (source == null) { NearbyStorageDialog.FocusInventoryItem(item); }
+            Plugin.Instance.StartCoroutine(Run(item, player, amount, candidates,
+                source, true, false, true));
             return true;
         }
 
@@ -160,10 +190,12 @@ namespace Landoria.NearbyStorage
 
         // Requests each chest through Valheim's normal ownership handshake.
         private static IEnumerator Run(ItemDrop.ItemData item, Player player, int amount,
-            List<Container> chests, Container source, bool autoDeposit, bool targetedDeposit)
+            List<Container> chests, Container source, bool autoDeposit, bool targetedDeposit,
+            bool distributeDeposit = false)
         {
             Running = true;
             _autoDeposit = autoDeposit;
+            _distributeDeposit = distributeDeposit;
             _targetedDeposit = targetedDeposit;
             _item = item;
             _player = player;
@@ -184,7 +216,8 @@ namespace Landoria.NearbyStorage
             }
             finally
             {
-                if (_autoDeposit && _moved == 0) { ShowAutoError(-1); }
+                if (_distributeDeposit && _remaining > 0) { ShowAutoError(1); }
+                else if (_autoDeposit && _moved == 0) { ShowAutoError(-1); }
                 if (_moved > 0 && source == null) { NearbyStorageDialog.FocusInventoryItem(item); }
                 _pending = null;
                 _item = null;
@@ -193,6 +226,7 @@ namespace Landoria.NearbyStorage
                 _sourceKey = null;
                 _remaining = 0;
                 _autoDeposit = false;
+                _distributeDeposit = false;
                 _targetedDeposit = false;
                 Running = false;
             }
@@ -254,7 +288,8 @@ namespace Landoria.NearbyStorage
             ItemDrop.ItemData item = SourceItem();
             if (item == null || _remaining <= 0) { return; }
             Inventory destination = chest.GetInventory();
-            if (_autoDeposit && !CanAutoDeposit(item, chest, destination)) { return; }
+            if (_autoDeposit && !_distributeDeposit &&
+                !CanAutoDeposit(item, chest, destination)) { return; }
             if (_targetedDeposit && Capacity(destination, item) < _remaining)
             {
                 ShowAutoError(1);
@@ -322,6 +357,7 @@ namespace Landoria.NearbyStorage
             _remaining = 0;
             _moved = 0;
             _autoDeposit = false;
+            _distributeDeposit = false;
             _targetedDeposit = false;
             Expired.Clear();
             Running = false;

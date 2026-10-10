@@ -68,7 +68,7 @@ namespace Landoria.NearbyStorage
         {
             Player player = Player.m_localPlayer;
             InventoryGui gui = InventoryGui.instance;
-            if (target == null || target.Sources.Count == 0 ||
+            if (target != null && target.Sources.Count == 0 ||
                 player == null || gui == null || player.IsTeleporting() ||
                 NearbyStorageDeposit.Running ||
                 Plugin.Instance == null || SetupDrag == null)
@@ -82,6 +82,12 @@ namespace Landoria.NearbyStorage
                 return false;
             }
             int amount = (int)(DragAmount?.GetValue(gui) ?? item.m_stack);
+            if (target == null)
+            {
+                if (source != player.GetInventory() && !IsTracked(source, item)) { return false; }
+                return NearbyStorageDeposit.TryStartDistributed(item, amount,
+                    source == player.GetInventory() ? null : _trackedChest, true);
+            }
             if (source == player.GetInventory())
             {
                 return NearbyStorageDeposit.TryStart(item, amount, true, target);

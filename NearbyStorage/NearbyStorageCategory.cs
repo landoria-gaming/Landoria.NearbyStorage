@@ -128,6 +128,12 @@ namespace Landoria.NearbyStorage
             {
                 return 1;
             }
+            if (item.m_dropPrefab != null &&
+                (item.m_dropPrefab.name.StartsWith("MeadBase", StringComparison.Ordinal) ||
+                item.m_dropPrefab.name == "BarleyWineBase"))
+            {
+                return 3;
+            }
             if (item.m_dropPrefab != null && WoodItems.Contains(item.m_dropPrefab.name))
             {
                 return 17;

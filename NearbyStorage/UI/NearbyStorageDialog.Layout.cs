@@ -183,6 +183,7 @@ namespace Landoria.NearbyStorage
             viewport.offsetMax = new Vector2(-34f, -HeaderHeight);
             Image background = viewport.gameObject.AddComponent<Image>();
             background.color = Color.clear;
+            viewport.gameObject.AddComponent<NearbyStorageEmptyDropTarget>();
             viewport.gameObject.AddComponent<RectMask2D>();
             _cards = Rect("Items", viewport, Vector2.zero);
             _cards.anchorMin = new Vector2(0f, 1f);
