@@ -19,17 +19,18 @@ namespace Landoria.NearbyStorage
             listBackground.color = new Color(0f, 0f, 0f, 0.72f);
             listBackground.raycastTarget = false;
             list.gameObject.AddComponent<RectMask2D>();
+            int[] order = NearbyStorageCategory.DisplayOrder();
             _categoryContent = Rect("Category content", list,
-                new Vector2(164f, NearbyStorageCategory.DisplayOrder.Length * CategoryRowHeight));
+                new Vector2(164f, order.Length * CategoryRowHeight));
             ScrollRect scroll = list.gameObject.AddComponent<ScrollRect>();
             scroll.viewport = list;
             scroll.content = _categoryContent;
             scroll.horizontal = false;
             scroll.scrollSensitivity = 100f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            for (int position = 0; position < NearbyStorageCategory.DisplayOrder.Length; position++)
+            for (int position = 0; position < order.Length; position++)
             {
-                int index = NearbyStorageCategory.DisplayOrder[position];
+                int index = order[position];
                 RectTransform row = Rect("Category " + index, _categoryContent,
                     new Vector2(164f, CategoryRowHeight));
                 row.anchoredPosition = new Vector2(0f, -position * CategoryRowHeight);
@@ -102,6 +103,38 @@ namespace Landoria.NearbyStorage
             row.GetComponent<Image>().color = hovered && index != _category ?
                 new Color(0.45f, 0.44f, 0.44f, 0.9f) :
                 Color.clear;
+        }
+
+        // Hides empty categories and packs visible rows without gaps.
+        private static void UpdateCategoryVisibility(bool[] occupied)
+        {
+            if (_categoryContent == null) { return; }
+            if (_category >= 0 && !occupied[_category] && _dragKey == null)
+            {
+                int previous = _category;
+                _category = -1;
+                _scrollCategoryToSelection = true;
+                SetCategoryHover(previous, false);
+                SetCategoryHover(-1, false);
+            }
+            int visible = 0;
+            foreach (int index in NearbyStorageCategory.DisplayOrder())
+            {
+                RectTransform row = _categoryContent.Find("Category " + index) as RectTransform;
+                if (row == null) { continue; }
+                bool show = index == -1 || occupied[index];
+                row.gameObject.SetActive(show);
+                if (!show) { continue; }
+                row.anchoredPosition = new Vector2(0f, -visible * CategoryRowHeight);
+                visible++;
+            }
+            _categoryContent.sizeDelta = new Vector2(164f, visible * CategoryRowHeight);
+            ScrollToSelectedCategory();
+            RectTransform viewport = _categoryContent.parent as RectTransform;
+            if (viewport == null) { return; }
+            float maxOffset = Mathf.Max(0f, _categoryContent.rect.height - viewport.rect.height);
+            _categoryContent.anchoredPosition = new Vector2(0f,
+                Mathf.Clamp(_categoryContent.anchoredPosition.y, 0f, maxOffset));
         }
 
         // Keeps the selected category visible in the fixed order.

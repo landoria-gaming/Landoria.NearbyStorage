@@ -164,7 +164,7 @@ namespace Landoria.NearbyStorage
                 }
                 occupied[NearbyStorageCategory.For(item.Sample)] = true;
             }
-            UpdateCategoryOpacity(occupied);
+            UpdateCategoryVisibility(occupied);
             items.RemoveAll(item =>
                 (_category >= 0 && (!unmatchedDrag || categoryHasItems) &&
                     NearbyStorageCategory.For(item.Sample) != _category) ||
@@ -205,23 +205,6 @@ namespace Landoria.NearbyStorage
                 result.Append(char.ToUpperInvariant(character == '\u0131' ? 'i' : character));
             }
             return result.ToString();
-        }
-
-        // Dims categories with no matching nearby items.
-        private static void UpdateCategoryOpacity(bool[] occupied)
-        {
-            Transform list = _categoryContent;
-            if (list == null) { return; }
-            for (int i = 0; i < occupied.Length; i++)
-            {
-                TextMeshProUGUI label = list.Find("Category " + i)?.Find("Text")?
-                    .GetComponent<TextMeshProUGUI>();
-                if (label == null) { continue; }
-                Color color = label.color;
-                color.a = occupied[i] ? 1f : 0.4f;
-                label.color = color;
-            }
-            ScrollToSelectedCategory();
         }
 
         // Tracks visible quantities and source locations to avoid redraw flicker.

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Landoria.NearbyStorage
 {
-    // Groups nearby item cards by meaningful words in their names.
+    // Sorts nearby item cards and finds related names when focusing an item.
     internal static class NearbyStorageSort
     {
         // Finds the nearest name when the clicked item is absent from storage.
@@ -36,50 +37,22 @@ namespace Landoria.NearbyStorage
             return bestScore > 0 ? bestIndex : -1;
         }
 
+        // Sorts items by their localized names with a stable key for ties.
         internal static void Sort(List<NearbyStorageItem> items)
         {
-            var frequency = new Dictionary<string, int>();
-            foreach (NearbyStorageItem item in items)
-            {
-                foreach (string word in Words(item.Name))
-                {
-                    frequency[word] = frequency.TryGetValue(word, out int count) ? count + 1 : 1;
-                }
-            }
-            var groups = new Dictionary<string, string>();
-            foreach (NearbyStorageItem item in items)
-            {
-                groups[item.Key] = GroupKey(item.Name, frequency);
-            }
-            items.Sort((a, b) => Compare(a, b, groups));
+            bool french = Localization.instance != null &&
+                Localization.instance.GetSelectedLanguage() == "French";
+            CompareInfo comparison = CultureInfo.GetCultureInfo(french ? "fr-FR" : "en-US").CompareInfo;
+            items.Sort((a, b) => Compare(a, b, comparison));
         }
 
-        private static int Compare(NearbyStorageItem a, NearbyStorageItem b,
-            Dictionary<string, string> groups)
+        // Compares displayed names before using item keys to break ties.
+        private static int Compare(NearbyStorageItem a, NearbyStorageItem b, CompareInfo comparison)
         {
             if (a.Key == b.Key) { return 0; }
-            int group = string.Compare(groups[a.Key], groups[b.Key],
-                StringComparison.CurrentCultureIgnoreCase);
-            if (group != 0) { return group; }
-            int name = string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase);
+            int name = comparison.Compare(a.Name, b.Name,
+                CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace);
             return name != 0 ? name : string.CompareOrdinal(a.Key, b.Key);
-        }
-
-        // Prefers the most common meaningful word shared by nearby item names.
-        private static string GroupKey(string name, Dictionary<string, int> frequency)
-        {
-            string best = null;
-            int bestCount = 1;
-            foreach (string word in Words(name))
-            {
-                int count = frequency[word];
-                if (count > bestCount)
-                {
-                    best = word;
-                    bestCount = count;
-                }
-            }
-            return best ?? name.ToLowerInvariant();
         }
 
         // Ignores short linking words while retaining accents and item names.

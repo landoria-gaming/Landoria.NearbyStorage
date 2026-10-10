@@ -8,9 +8,9 @@ See and use items in nearby containers without opening them one by one. Nearby S
 - **Ctrl-click** an inventory stack to store it when exactly one nearby container already holds the same item and quality and has room for the whole stack. Otherwise, an error appears.
 - Drop an item onto an occupied Nearby Storage slot to move it into the same container.
 - Choose **All** to see every item, select another category, or search by item or category name. Opening the inventory selects **All**, clears the search field, and focuses it.
-- Materials are split into **Raw Materials** and **Materials**. Material outputs from recipes and processors, such as smelted ingots, appear under **Materials**.
+- See the [category list](CATEGORIES.md) for what each category contains.
 - Foods made through recipes or cooking stations appear under **Cooked Food**; unprepared edible foods such as berries, carrots, onions, and mushrooms appear under **Raw Food**. Feast food and its placement item appear under **Feasts**.
-- Ingredients cooked on stations that require a fire, including raw fish, appear under **Raw Meat**; their cooked outputs appear under **Cooked Meat**.
+- Non-fish ingredients cooked on stations that require a fire appear under **Raw Meat**; their cooked outputs appear under **Cooked Meat**. Fish appear under **Fishing**.
 
 ## Craft from Nearby Storage
 

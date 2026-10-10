@@ -28,9 +28,11 @@ namespace Landoria.NearbyStorage
             if (Running || player == null || item?.m_dropPrefab == null ||
                 !player.GetInventory().ContainsItem(item)) { return false; }
             List<Container> matches = MatchingChests(item, player);
-            if (matches.Count != 1 || Capacity(matches[0].GetInventory(), item) < item.m_stack)
+            bool hasMatchingChest = matches.Count > 0;
+            matches.RemoveAll(chest => Capacity(chest.GetInventory(), item) < item.m_stack);
+            if (matches.Count != 1)
             {
-                ShowAutoError(matches.Count);
+                ShowAutoError(matches.Count == 0 && hasMatchingChest ? 1 : matches.Count);
                 return false;
             }
             NearbyStorageDialog.FocusInventoryItem(item);
@@ -284,11 +286,12 @@ namespace Landoria.NearbyStorage
             NearbyStorageDialog.RefreshSoon();
         }
 
-        // Rechecks the sole matching chest and full-stack capacity after ownership.
+        // Rechecks that only the selected matching chest can hold the whole stack.
         private static bool CanAutoDeposit(ItemDrop.ItemData item, Container chest,
             Inventory destination)
         {
             List<Container> matches = MatchingChests(item, _player);
+            matches.RemoveAll(candidate => Capacity(candidate.GetInventory(), item) < _remaining);
             return matches.Count == 1 && matches[0] == chest &&
                 Capacity(destination, item) >= _remaining;
         }
