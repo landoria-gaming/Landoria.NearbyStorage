@@ -212,23 +212,6 @@ namespace Landoria.NearbyStorage
         {
             Transform list = _categoryContent;
             if (list == null) { return; }
-            var order = new List<int>(occupied.Length);
-            for (int i = 0; i < occupied.Length; i++) { order.Add(i); }
-            order.Sort((a, b) =>
-            {
-                if (occupied[a] != occupied[b]) { return occupied[a] ? -1 : 1; }
-                return string.Compare(NearbyStorageCategory.Label(a),
-                    NearbyStorageCategory.Label(b), StringComparison.CurrentCultureIgnoreCase);
-            });
-            order.Insert(0, -1);
-            for (int position = 0; position < order.Count; position++)
-            {
-                RectTransform row = list.Find("Category " + order[position]) as RectTransform;
-                if (row != null)
-                {
-                    row.anchoredPosition = new Vector2(0f, -position * CategoryRowHeight);
-                }
-            }
             for (int i = 0; i < occupied.Length; i++)
             {
                 TextMeshProUGUI label = list.Find("Category " + i)?.Find("Text")?

@@ -9,20 +9,28 @@ namespace Landoria.NearbyStorage
     {
         private static readonly HashSet<string> CraftedMaterials =
             new HashSet<string>(StringComparer.Ordinal);
+        private static readonly HashSet<string> PreparedFoods =
+            new HashSet<string>(StringComparer.Ordinal);
+        private static readonly HashSet<string> FeastItems =
+            new HashSet<string>(StringComparer.Ordinal);
         private static readonly HashSet<string> FireCookingInputs =
+            new HashSet<string>(StringComparer.Ordinal);
+        private static readonly HashSet<string> FireCookingOutputs =
             new HashSet<string>(StringComparer.Ordinal);
         private static ObjectDB _cachedDb;
         private static ZNetScene _cachedScene;
         private static int _recipeCount;
         private static int _prefabCount;
-        internal static readonly string[] French = { "Matières premières", "Précieux", "Nourriture",
+        internal static readonly string[] French = { "Matières premières", "Précieux", "Aliments cuisinés",
             "Boissons", "Armes", "Boucliers", "Armures", "Accessoires",
             "Outils", "Munitions", "Poissons", "Trophées", "Divers", "Matériaux",
-            "Viande crue" };
-        internal static readonly string[] English = { "Raw Materials", "Valuables", "Food",
+            "Viande crue", "Aliments crus", "Festins", "Viande cuite" };
+        internal static readonly string[] English = { "Raw Materials", "Valuables", "Cooked Food",
             "Drinks", "Weapons", "Shields", "Armor", "Accessories", "Tools",
             "Ammunition", "Fish", "Trophies", "Miscellaneous", "Materials",
-            "Raw Meat" };
+            "Raw Meat", "Raw Food", "Feasts", "Cooked Meat" };
+        internal static readonly int[] DisplayOrder = { -1, 0, 13, 15, 2, 14, 17, 10, 16,
+            3, 4, 6, 5, 9, 8, 7, 11, 12, 1 };
 
         // Returns the label for the active Valheim language.
         internal static string Label(int index)
@@ -46,22 +54,21 @@ namespace Landoria.NearbyStorage
             if (item.m_dropPrefab != null)
             {
                 RefreshMaterialSources();
+                if (FeastItems.Contains(item.m_dropPrefab.name)) { return 16; }
                 if (FireCookingInputs.Contains(item.m_dropPrefab.name)) { return 14; }
+                if (FireCookingOutputs.Contains(item.m_dropPrefab.name)) { return 17; }
             }
             switch (item.m_shared.m_itemType)
             {
                 case ItemDrop.ItemData.ItemType.Material:
-                    if (item.m_dropPrefab != null &&
-                        item.m_dropPrefab.name.StartsWith("Feast", StringComparison.Ordinal) &&
-                        item.m_dropPrefab.name.EndsWith("_Material", StringComparison.Ordinal))
-                    {
-                        return 2;
-                    }
                     RefreshMaterialSources();
                     return item.m_dropPrefab != null &&
                         CraftedMaterials.Contains(item.m_dropPrefab.name) ? 13 : 0;
                 case ItemDrop.ItemData.ItemType.Consumable:
-                    return item.m_shared.m_isDrink ? 3 : 2;
+                    if (item.m_shared.m_isDrink) { return 3; }
+                    RefreshMaterialSources();
+                    return item.m_dropPrefab != null &&
+                        PreparedFoods.Contains(item.m_dropPrefab.name) ? 2 : 15;
                 case ItemDrop.ItemData.ItemType.OneHandedWeapon:
                 case ItemDrop.ItemData.ItemType.TwoHandedWeapon:
                 case ItemDrop.ItemData.ItemType.TwoHandedWeaponLeft:
@@ -98,10 +105,14 @@ namespace Landoria.NearbyStorage
             _recipeCount = recipes;
             _prefabCount = prefabs;
             CraftedMaterials.Clear();
+            PreparedFoods.Clear();
+            FeastItems.Clear();
             FireCookingInputs.Clear();
+            FireCookingOutputs.Clear();
             AddRecipeOutputs(db);
             AddConversionOutputs(scene);
-            AddFireCookingInputs(scene);
+            AddCookingStationItems(scene);
+            AddFeastItems(scene);
         }
 
         // Adds material items produced by crafting recipes.
@@ -111,10 +122,15 @@ namespace Landoria.NearbyStorage
             foreach (Recipe recipe in db.m_recipes)
             {
                 ItemDrop output = recipe?.m_item;
-                if (output != null && output.m_itemData.m_shared.m_itemType ==
-                    ItemDrop.ItemData.ItemType.Material)
+                if (output == null) { continue; }
+                if (output.m_itemData.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Material)
                 {
                     CraftedMaterials.Add(output.gameObject.name);
+                }
+                else if (output.m_itemData.m_shared.m_itemType ==
+                    ItemDrop.ItemData.ItemType.Consumable)
+                {
+                    PreparedFoods.Add(output.gameObject.name);
                 }
             }
         }
@@ -139,19 +155,57 @@ namespace Landoria.NearbyStorage
             }
         }
 
-        // Finds inputs for stations that cook over a fire.
-        private static void AddFireCookingInputs(ZNetScene scene)
+        // Finds food outputs and inputs cooked over a fire.
+        private static void AddCookingStationItems(ZNetScene scene)
         {
             if (scene == null) { return; }
             foreach (GameObject prefab in scene.m_prefabs)
             {
                 CookingStation station = prefab == null ? null :
                     prefab.GetComponent<CookingStation>();
-                if (station == null || !station.m_requireFire) { continue; }
+                if (station == null) { continue; }
                 foreach (CookingStation.ItemConversion conversion in station.m_conversion)
                 {
                     ItemDrop input = conversion?.m_from;
-                    if (input != null) { FireCookingInputs.Add(input.gameObject.name); }
+                    ItemDrop output = conversion?.m_to;
+                    if (station.m_requireFire && input != null)
+                    {
+                        FireCookingInputs.Add(input.gameObject.name);
+                        if (output != null)
+                        {
+                            FireCookingOutputs.Add(output.gameObject.name);
+                        }
+                    }
+                    if (output != null && output.m_itemData.m_shared.m_itemType ==
+                        ItemDrop.ItemData.ItemType.Consumable)
+                    {
+                        PreparedFoods.Add(output.gameObject.name);
+                    }
+                }
+            }
+        }
+
+        // Groups feast food and its matching placement item.
+        private static void AddFeastItems(ZNetScene scene)
+        {
+            if (scene == null) { return; }
+            foreach (GameObject prefab in scene.m_prefabs)
+            {
+                Feast feast = prefab == null ? null : prefab.GetComponent<Feast>();
+                if (feast == null) { continue; }
+                ItemDrop food = feast.m_foodItem ?? prefab.GetComponent<ItemDrop>();
+                if (food == null) { continue; }
+                FeastItems.Add(food.gameObject.name);
+                Piece piece = prefab.GetComponent<Piece>();
+                if (piece == null) { continue; }
+                foreach (Piece.Requirement requirement in piece.m_resources)
+                {
+                    ItemDrop material = requirement?.m_resItem;
+                    if (material != null && material.m_itemData.m_shared.m_name ==
+                        food.m_itemData.m_shared.m_name)
+                    {
+                        FeastItems.Add(material.gameObject.name);
+                    }
                 }
             }
         }

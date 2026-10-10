@@ -20,19 +20,19 @@ namespace Landoria.NearbyStorage
             listBackground.raycastTarget = false;
             list.gameObject.AddComponent<RectMask2D>();
             _categoryContent = Rect("Category content", list,
-                new Vector2(164f, (NearbyStorageCategory.French.Length + 1) * CategoryRowHeight));
+                new Vector2(164f, NearbyStorageCategory.DisplayOrder.Length * CategoryRowHeight));
             ScrollRect scroll = list.gameObject.AddComponent<ScrollRect>();
             scroll.viewport = list;
             scroll.content = _categoryContent;
             scroll.horizontal = false;
             scroll.scrollSensitivity = 100f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            for (int i = -1; i < NearbyStorageCategory.French.Length; i++)
+            for (int position = 0; position < NearbyStorageCategory.DisplayOrder.Length; position++)
             {
-                int index = i;
-                RectTransform row = Rect("Category " + i, _categoryContent,
+                int index = NearbyStorageCategory.DisplayOrder[position];
+                RectTransform row = Rect("Category " + index, _categoryContent,
                     new Vector2(164f, CategoryRowHeight));
-                row.anchoredPosition = new Vector2(0f, -(i + 1) * CategoryRowHeight);
+                row.anchoredPosition = new Vector2(0f, -position * CategoryRowHeight);
                 Image image = row.gameObject.AddComponent<Image>();
                 image.color = Color.clear;
                 RectTransform selected = Rect("Selected", row, Vector2.zero);
@@ -40,7 +40,7 @@ namespace Landoria.NearbyStorage
                 selected.anchorMax = Vector2.one;
                 selected.offsetMin = selected.offsetMax = Vector2.zero;
                 StyleCategorySelection(selected.gameObject.AddComponent<Image>());
-                TextMeshProUGUI text = Label("Text", row, NearbyStorageCategory.Label(i), 14f,
+                TextMeshProUGUI text = Label("Text", row, NearbyStorageCategory.Label(index), 14f,
                     new Vector2(5f, -3f), new Vector2(158f, 22f));
                 StyleCategoryText(text);
                 Button button = row.gameObject.AddComponent<Button>();
@@ -104,7 +104,7 @@ namespace Landoria.NearbyStorage
                 Color.clear;
         }
 
-        // Keeps an automatically selected category visible after rows are reordered.
+        // Keeps the selected category visible in the fixed order.
         private static void ScrollToSelectedCategory()
         {
             if (!_scrollCategoryToSelection || _categoryContent == null)
