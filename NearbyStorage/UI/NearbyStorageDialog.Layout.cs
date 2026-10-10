@@ -29,7 +29,7 @@ namespace Landoria.NearbyStorage
             background.raycastTarget = true;
             _root.gameObject.AddComponent<NearbyStorageDragCancel>();
             _root.SetSiblingIndex(gui.m_inventoryRoot.GetSiblingIndex() + 1);
-            TextMeshProUGUI title = Label("Title", _root, "Nearby Storage", 32f,
+            TextMeshProUGUI title = Label("Title", _root, ModText.Get("Title"), 32f,
                 new Vector2(10f, -16f), new Vector2(570f, 35f));
             title.font = gui.m_containerName.font;
             title.fontSharedMaterial = gui.m_containerName.fontSharedMaterial;
@@ -78,7 +78,7 @@ namespace Landoria.NearbyStorage
                 _filter.SetTextWithoutNotify("");
                 if (_filter.placeholder is TMP_Text hint)
                 {
-                    hint.text = IsFrench() ? "FILTRE" : "FILTER";
+                    hint.text = ModText.Get("Filter");
                 }
                 _filter.onValueChanged.AddListener(OnFilterChanged);
                 HideFilterShortcutBadge(clone);
@@ -144,7 +144,7 @@ namespace Landoria.NearbyStorage
             value.alignment = TextAlignmentOptions.MidlineLeft;
             value.raycastTarget = true;
             _filter.textComponent = value;
-            TextMeshProUGUI hint = Label("Hint", textArea, IsFrench() ? "FILTRE" : "FILTER",
+            TextMeshProUGUI hint = Label("Hint", textArea, ModText.Get("Filter"),
                 15f, new Vector2(7f, -4f), new Vector2(146f, 24f));
             StretchFilterText(hint.rectTransform);
             StyleFilterHint(hint);
@@ -263,11 +263,5 @@ namespace Landoria.NearbyStorage
             return label;
         }
 
-        // Tests whether the current game's language is French.
-        private static bool IsFrench()
-        {
-            return Localization.instance != null &&
-                Localization.instance.GetSelectedLanguage() == "French";
-        }
     }
 }

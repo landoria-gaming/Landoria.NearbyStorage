@@ -48,11 +48,8 @@ namespace Landoria.NearbyStorage
         // Shows the inclusion shortcut on supported chests.
         internal static string HoverText(Container chest)
         {
-            bool french = Localization.instance.GetSelectedLanguage() == "French";
             bool included = IsIncluded(chest);
-            string status = included ?
-                (french ? "Nearby Storage : inclus" : "Nearby Storage: Included") :
-                (french ? "Nearby Storage : exclu" : "Nearby Storage: Excluded");
+            string status = ModText.Get(included ? "ChestIncluded" : "ChestExcluded");
             if (!included) { status = "<color=#FFFFFF80>" + status + "</color>"; }
             return Localization.instance.Localize(
                 "\n[<color=yellow><b>Alt + $KEY_Use</b></color>] ") + status;
@@ -82,10 +79,7 @@ namespace Landoria.NearbyStorage
             player.m_customData.Remove(ChestKey(view));
             player.m_customData.Remove(IncludedKey(view));
             player.m_customData[included ? IncludedKey(view) : ChestKey(view)] = "1";
-            bool french = Localization.instance.GetSelectedLanguage() == "French";
-            string message = included ?
-                (french ? "Nearby Storage : inclus" : "Nearby Storage: Included") :
-                (french ? "Nearby Storage : exclu" : "Nearby Storage: Excluded");
+            string message = ModText.Get(included ? "ChestIncluded" : "ChestExcluded");
             MessageHud.instance?.ShowMessage(MessageHud.MessageType.Center, message);
             NearbyStorageDialog.RefreshSoon();
         }

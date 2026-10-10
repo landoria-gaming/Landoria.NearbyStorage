@@ -157,15 +157,10 @@ namespace Landoria.NearbyStorage
         // Explains why an automatic or targeted deposit cannot proceed.
         private static void ShowAutoError(int matches)
         {
-            bool french = Localization.instance?.GetSelectedLanguage() == "French";
-            string message = matches < 0 ? (french ?
-                "Impossible de ranger cet objet dans le conteneur." :
-                "Could not store this item in the container.") : matches == 0 ? (french ?
-                "Aucun conteneur proche ne contient cet objet." :
-                "No nearby container holds this item.") : matches > 1 ? (french ?
-                "Plusieurs conteneurs proches contiennent cet objet." :
-                "Multiple nearby containers hold this item.") : (french ?
-                "Le conteneur est plein." : "The container is full.");
+            string key = matches < 0 ? "DepositUnavailable" : matches == 0 ?
+                "DepositNoContainer" : matches > 1 ? "DepositMultipleContainers" :
+                "DepositFull";
+            string message = ModText.Error(key);
             MessageHud.instance?.ShowMessage(MessageHud.MessageType.Center, message);
         }
 

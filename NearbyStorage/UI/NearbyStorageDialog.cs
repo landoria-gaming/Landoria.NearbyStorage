@@ -155,7 +155,7 @@ namespace Landoria.NearbyStorage
             bool categoryHasItems = _category >= 0 && items.Exists(item =>
                 NearbyStorageCategory.For(item.Sample) == _category);
             string filter = NormalizeFilterText(_filter == null ? "" : _filter.text.Trim());
-            bool[] occupied = new bool[NearbyStorageCategory.French.Length];
+            bool[] occupied = new bool[ModText.CategoryCount];
             foreach (NearbyStorageItem item in items)
             {
                 if (!MatchesFilter(item, filter))

@@ -87,7 +87,7 @@ namespace Landoria.NearbyStorage
             }
             _category = index;
             _scrollCategoryToSelection = true;
-            for (int i = -1; i < NearbyStorageCategory.French.Length; i++)
+            for (int i = -1; i < ModText.CategoryCount; i++)
             {
                 SetCategoryHover(i, false);
             }

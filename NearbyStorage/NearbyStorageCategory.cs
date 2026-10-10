@@ -56,34 +56,19 @@ namespace Landoria.NearbyStorage
         private static ZNetScene _cachedScene;
         private static int _recipeCount;
         private static int _prefabCount;
-        internal static readonly string[] French = { "Matières premières", "Précieux", "Aliments cuisinés",
-            "Potions", "Armes", "Boucliers", "Armures", "Accessoires",
-            "Outils", "Flèches", "Pêche", "Trophées", "Divers",
-            "Viande crue", "Aliments crus", "Festins", "Viande cuite", "Bois",
-            "Peaux et fourrures", "Pierre", "Feux d'artifice", "Graines",
-            "Minerais et métaux", "Bombes de blobs", "Vêtements" };
-        internal static readonly string[] English = { "Raw Materials", "Valuables", "Cooked Food",
-            "Potions", "Weapons", "Shields", "Armor", "Accessories", "Tools",
-            "Arrows", "Fishing", "Trophies", "Miscellaneous",
-            "Raw Meat", "Raw Food", "Feasts", "Cooked Meat", "Wood",
-            "Hides and Furs", "Stone", "Fireworks", "Seeds", "Ores and Metals",
-            "Blob Bombs", "Clothing" };
-
         // Sorts category labels in the selected language, with All first and Miscellaneous last.
         internal static int[] DisplayOrder()
         {
-            int[] order = new int[French.Length + 1];
+            int[] order = new int[ModText.CategoryCount + 1];
             order[0] = -1;
             int next = 1;
-            for (int index = 0; index < French.Length; index++)
+            for (int index = 0; index < ModText.CategoryCount; index++)
             {
                 if (index != 12) { order[next++] = index; }
             }
             order[next] = 12;
-            bool french = Localization.instance != null &&
-                Localization.instance.GetSelectedLanguage() == "French";
-            CompareInfo comparison = CultureInfo.GetCultureInfo(french ? "fr-FR" : "en-US").CompareInfo;
-            Array.Sort(order, 1, French.Length - 1, Comparer<int>.Create((left, right) =>
+            CompareInfo comparison = CultureInfo.GetCultureInfo(ModText.IsFrench ? "fr-FR" : "en-US").CompareInfo;
+            Array.Sort(order, 1, ModText.CategoryCount - 1, Comparer<int>.Create((left, right) =>
                 comparison.Compare(Label(left), Label(right),
                     CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace)));
             return order;
@@ -94,11 +79,9 @@ namespace Landoria.NearbyStorage
         {
             if (index == -1)
             {
-                return Localization.instance != null &&
-                    Localization.instance.GetSelectedLanguage() == "French" ? "Tout" : "All";
+                return ModText.CategoryText("CategoryAll", ModText.IsFrench);
             }
-            return Localization.instance != null && Localization.instance.GetSelectedLanguage() == "French" ?
-                French[index] : English[index];
+            return ModText.Category(index, ModText.IsFrench);
         }
 
         // Assigns every item type to one category.

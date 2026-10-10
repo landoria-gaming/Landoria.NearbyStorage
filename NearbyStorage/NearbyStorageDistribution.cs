@@ -16,8 +16,8 @@ namespace Landoria.NearbyStorage
             string itemName = item.m_dropPrefab.name;
             int category = NearbyStorageCategory.For(item);
             int family = NearbyStorageCategoryFamily.For(category);
-            var categoryWords = new HashSet<string>(Words(NearbyStorageCategory.French[category]));
-            categoryWords.UnionWith(Words(NearbyStorageCategory.English[category]));
+            var categoryWords = new HashSet<string>(Words(ModText.Category(category, true)));
+            categoryWords.UnionWith(Words(ModText.Category(category, false)));
             var familyWords = new HashSet<string>();
             foreach (string name in NearbyStorageCategoryFamily.Names(category))
             {
