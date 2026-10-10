@@ -1,6 +1,6 @@
 # Nearby Storage
 
-See and use items in nearby containers without opening them one by one. Nearby Storage also lets you name chests and craft, build, refuel, and feed machines using nearby supplies.
+See and use items in nearby chests without opening them one by one. Nearby Storage also lets you name chests and craft, build, refuel, and feed machines using nearby items in chests.
 
 ## Nearby Storage panel
 
