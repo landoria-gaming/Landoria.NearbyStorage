@@ -1,34 +1,34 @@
 # Nearby Storage categories
 
-Category names below match the French interface. Empty categories are hidden in the panel. The list is alphabetical, with **Divers** last.
+The category list uses the English interface names; section headings use the French names. Empty categories are hidden in the panel. The list is alphabetical, with **Miscellaneous** last.
 
 ## Category list
 
-- Accessoires
-- Aliments crus
-- Aliments cuisinés
-- Armes
-- Armures
-- Bois
-- Bombes de blobs
-- Boucliers
-- Festins
-- Feux d'artifice
-- Flèches
-- Graines
-- Matières premières
-- Minerais et métaux
-- Outils
-- Peaux et fourrures
-- Pêche
-- Pierre
+- Accessories
+- Armor
+- Arrows
+- Blob Bombs
+- Clothing
+- Cooked Food
+- Cooked Meat
+- Feasts
+- Fireworks
+- Fishing
+- Hides and Furs
+- Ores and Metals
 - Potions
-- Précieux
-- Trophées
-- Vêtements
-- Viande crue
-- Viande cuite
-- Divers
+- Raw Food
+- Raw Materials
+- Raw Meat
+- Seeds
+- Shields
+- Stone
+- Tools
+- Trophies
+- Valuables
+- Weapons
+- Wood
+- Miscellaneous
 
 ## Accessoires
 

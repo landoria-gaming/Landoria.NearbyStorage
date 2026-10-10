@@ -26,7 +26,7 @@ namespace Landoria.NearbyStorage
             scroll.viewport = list;
             scroll.content = _categoryContent;
             scroll.horizontal = false;
-            scroll.scrollSensitivity = 100f;
+            scroll.scrollSensitivity = 300f;
             scroll.movementType = ScrollRect.MovementType.Clamped;
             for (int position = 0; position < order.Length; position++)
             {
