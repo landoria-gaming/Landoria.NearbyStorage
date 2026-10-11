@@ -76,7 +76,7 @@ namespace Landoria.NearbyStorage
             scroll.content = content;
             scroll.horizontal = false;
             scroll.movementType = ScrollRect.MovementType.Clamped;
-            scroll.scrollSensitivity = 400f;
+            scroll.scrollSensitivity = 800f;
             CreateScrollbar(root, scroll);
             _menu = root.gameObject;
             PopulateMenu();

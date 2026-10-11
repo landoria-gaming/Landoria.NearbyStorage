@@ -54,3 +54,7 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 ## Contact
 
 Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.NearbyStorage/issues).
+
+## Renaming preview
+
+![Renaming a container with category suggestions](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/main/Assets/renaming.gif)
