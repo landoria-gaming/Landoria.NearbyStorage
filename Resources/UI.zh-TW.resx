@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>分類</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>在箱子名稱中加入分類。自動存放時，符合的物品會優先放進這裡。</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>範例</value>
+  </data>
 </root>

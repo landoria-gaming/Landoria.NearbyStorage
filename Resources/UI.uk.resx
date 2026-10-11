@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Категорії</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Додай категорії до назви скрині. Відповідні предмети потраплять сюди насамперед під час автоматичного зберігання.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Напр.</value>
+  </data>
 </root>

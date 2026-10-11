@@ -16,10 +16,7 @@ namespace Landoria.NearbyStorage
             string itemName = item.m_dropPrefab.name;
             int category = NearbyStorageCategory.For(item);
             int family = NearbyStorageCategoryFamily.For(category);
-            var categoryWords = new HashSet<string>(Words(
-                ModText.Category(category, ModText.SelectedLanguage)));
-            categoryWords.UnionWith(Words(ModText.Category(category, "English")));
-            categoryWords.UnionWith(Words(ModText.Category(category, "French")));
+            HashSet<string> categoryWords = CategoryWords(category);
             var familyWords = new HashSet<string>();
             foreach (string name in NearbyStorageCategoryFamily.Names(category))
             {
@@ -46,6 +43,29 @@ namespace Landoria.NearbyStorage
             chests.RemoveAll(chest => !tiers.ContainsKey(chest));
             chests.Sort((left, right) => Compare(left, right, tiers, scores, familyScores, player));
             return chests;
+        }
+
+        // Combines visible category labels with hidden aliases for matching.
+        private static HashSet<string> CategoryWords(int category)
+        {
+            var words = new HashSet<string>();
+            foreach (string language in new[] { ModText.SelectedLanguage, "English", "French" })
+            {
+                words.UnionWith(Words(ModText.Category(category, language)));
+                AddCategoryAliases(words, category, language);
+            }
+            return words;
+        }
+
+        // Adds search-only alias words from one translation entry.
+        private static void AddCategoryAliases(HashSet<string> words, int category,
+            string language)
+        {
+            string aliases = ModText.CategoryAliases(category, language);
+            foreach (string alias in aliases.Split('|'))
+            {
+                words.UnionWith(Words(alias));
+            }
         }
 
         // Breaks category and family ties by quantity, then player distance.

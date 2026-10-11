@@ -93,4 +93,7 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>특별 아이템</value>
   </data>
+  <data name="CategoryStoneAliases" xml:space="preserve">
+    <value>돌덩이</value>
+  </data>
 </root>

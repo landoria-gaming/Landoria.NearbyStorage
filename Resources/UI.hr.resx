@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategorije</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Dodaj kategorije nazivu škrinje. Odgovarajući predmeti prvo idu ovamo pri automatskom spremanju.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Npr.</value>
+  </data>
 </root>

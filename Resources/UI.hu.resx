@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategóriák</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Adj kategóriákat a láda nevéhez. Az egyező tárgyak automatikus tároláskor először ide kerülnek.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Pl.</value>
+  </data>
 </root>

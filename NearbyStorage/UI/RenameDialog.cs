@@ -22,6 +22,8 @@ namespace Landoria.NearbyStorage
         private static TextInput _owner;
         private static GameObject _menu;
         private static GameObject _menuBlocker;
+        private static RectTransform _categoryHelp;
+        private static TextMeshProUGUI _categoryHelpText;
         internal static bool IsOpen => _owner != null && _panel != null &&
             _owner.m_panel == _panel && _panel.activeInHierarchy;
 
@@ -34,8 +36,13 @@ namespace Landoria.NearbyStorage
             bool ours = sign is ChestRename;
             if (ours && _panel == null) { Create(__instance); }
             if (_panel == null) { return; }
-            if (ours) { SetCategoryButtonText(); }
+            if (ours)
+            {
+                SetCategoryButtonText();
+                SetInputExample();
+            }
             HideMenu();
+            HideCategoryHelp();
             if (__instance.m_panel.activeSelf) { __instance.Hide(); }
             __instance.m_panel = ours ? _panel : _originalPanel;
             __instance.m_topic = ours ? _topic : _originalTopic;
@@ -54,6 +61,8 @@ namespace Landoria.NearbyStorage
             _input = null;
             _menu = null;
             _menuBlocker = null;
+            _categoryHelp = null;
+            _categoryHelpText = null;
         }
 
         // Clones the panel and locates matching controls inside the copy.
@@ -108,6 +117,7 @@ namespace Landoria.NearbyStorage
             Button button = copy.GetComponent<Button>();
             button.onClick = new Button.ButtonClickedEvent();
             button.onClick.AddListener(ToggleMenu);
+            copy.AddComponent<CategoryButtonHover>();
             StyleButtonText(copy);
             foreach (Button action in panel.GetComponentsInChildren<Button>(true))
             {
@@ -126,6 +136,7 @@ namespace Landoria.NearbyStorage
             layout.ignoreLayout = true;
             copy.SetActive(true);
             CreateMenu(panel, more);
+            CreateCategoryHelp(panel, more);
         }
 
         // Adds breathing room above and below the input field.
@@ -219,6 +230,16 @@ namespace Landoria.NearbyStorage
                 text.resizeTextForBestFit = true;
                 text.resizeTextMinSize = 14;
             }
+        }
+
+        // Shows a localized category example while the name field is empty.
+        private static void SetInputExample()
+        {
+            if (!(_input.placeholder is TMP_Text placeholder)) { return; }
+            string language = ModText.SelectedLanguage;
+            string wood = ModText.CategoryText("CategoryWood", language);
+            string stone = ModText.CategoryText("CategoryStone", language);
+            placeholder.text = ModText.Get("ExamplePrefix") + ": " + wood + ", " + stone;
         }
     }
 }

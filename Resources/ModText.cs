@@ -70,6 +70,20 @@ namespace Landoria.NearbyStorage
             return CategoryText(CategoryKeys[index], language);
         }
 
+        // Returns hidden search aliases for a category in one language.
+        internal static string CategoryAliases(int index, string language)
+        {
+            string name = "Landoria.NearbyStorage.Resources.Categories";
+            string key = CategoryKeys[index] + "Aliases";
+            string english = Manager(name).GetString(key, CultureInfo.InvariantCulture);
+            if (!LanguageCodes.TryGetValue(language, out string code))
+            {
+                return english ?? "";
+            }
+            return Manager(name + "." + code).GetString(key, CultureInfo.InvariantCulture)
+                ?? english ?? "";
+        }
+
         // Returns a category or family label in a named Valheim language.
         internal static string CategoryText(string key, string language)
         {

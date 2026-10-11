@@ -93,4 +93,7 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Ειδικά είδη</value>
   </data>
+  <data name="CategoryStoneAliases" xml:space="preserve">
+    <value>Πέτρες</value>
+  </data>
 </root>

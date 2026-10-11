@@ -18,6 +18,7 @@ namespace Landoria.NearbyStorage
         private static void ToggleMenu()
         {
             if (_menu == null) { return; }
+            HideCategoryHelp();
             if (_menuLanguage != ModText.SelectedLanguage) { PopulateMenu(); }
             bool open = !_menu.activeSelf;
             _menuBlocker.SetActive(open);

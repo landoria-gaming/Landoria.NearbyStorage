@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategorie</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Dodaj kategorie do nazwy skrzyni. Pasujące przedmioty trafią tu najpierw podczas automatycznego składowania.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Np.</value>
+  </data>
 </root>

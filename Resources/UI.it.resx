@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Categorie</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Aggiungi categorie al nome del forziere. Gli oggetti corrispondenti vengono riposti qui per primi con il deposito automatico.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Es.</value>
+  </data>
 </root>

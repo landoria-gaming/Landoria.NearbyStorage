@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Categorieën</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Voeg categorieën toe aan de kistnaam. Passende voorwerpen gaan hier als eerste naartoe bij automatisch opbergen.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Bijv.</value>
+  </data>
 </root>

@@ -93,4 +93,7 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Speciální položky</value>
   </data>
+  <data name="CategoryStoneAliases" xml:space="preserve">
+    <value>Kameny</value>
+  </data>
 </root>

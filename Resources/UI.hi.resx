@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>श्रेणियाँ</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>संदूक के नाम में श्रेणियाँ जोड़ें। अपने आप सामान रखते समय मेल खाने वाली वस्तुएँ पहले यहाँ जाएँगी।</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>उदा.</value>
+  </data>
 </root>

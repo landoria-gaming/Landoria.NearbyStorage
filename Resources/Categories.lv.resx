@@ -93,4 +93,7 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Īpašas preces</value>
   </data>
+  <data name="CategoryStoneAliases" xml:space="preserve">
+    <value>Akmeņi</value>
+  </data>
 </root>

@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Categorii</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Adaugă categorii în numele cufărului. Obiectele potrivite ajung aici mai întâi la depozitarea automată.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Ex.</value>
+  </data>
 </root>

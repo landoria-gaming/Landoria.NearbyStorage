@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategórie</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Pridaj kategórie do názvu truhlice. Zodpovedajúce predmety sa sem pri automatickom ukladaní presunú prednostne.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Napr.</value>
+  </data>
 </root>

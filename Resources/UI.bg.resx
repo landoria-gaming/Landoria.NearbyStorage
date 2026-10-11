@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Категории</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Добави категории към името на сандъка. Подходящите предмети се прибират първо тук при автоматично прибиране.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Пр</value>
+  </data>
 </root>

@@ -93,4 +93,7 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>รายการพิเศษ</value>
   </data>
+  <data name="CategoryStoneAliases" xml:space="preserve">
+    <value>ก้อนหิน</value>
+  </data>
 </root>

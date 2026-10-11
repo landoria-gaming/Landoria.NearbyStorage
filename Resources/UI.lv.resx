@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategorijas</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Pievieno kategorijas lādes nosaukumam. Automātiski glabājot, atbilstošie priekšmeti vispirms nonāks šeit.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Piem.</value>
+  </data>
 </root>

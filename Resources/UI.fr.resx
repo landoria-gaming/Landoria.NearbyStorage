@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Catégories</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Ajoute des catégories au nom du coffre. Les objets correspondants y vont en priorité lors du rangement automatique.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Ex</value>
+  </data>
 </root>

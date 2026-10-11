@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategorier</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Føj kategorier til kistens navn. Passende genstande lægges her først ved automatisk opbevaring.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>F.eks.</value>
+  </data>
 </root>

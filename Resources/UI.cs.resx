@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategorie</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Přidej k názvu truhly kategorie. Odpovídající předměty se sem při automatickém ukládání přesunou přednostně.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Např.</value>
+  </data>
 </root>

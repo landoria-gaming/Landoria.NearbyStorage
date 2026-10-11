@@ -93,4 +93,7 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Særlige genstande</value>
   </data>
+  <data name="CategoryStoneAliases" xml:space="preserve">
+    <value>Sten</value>
+  </data>
 </root>

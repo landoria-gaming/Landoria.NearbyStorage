@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Add categories to the chest name. Matching items go here first during automatic storage.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Ex</value>
+  </data>
 </root>

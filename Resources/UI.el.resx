@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Κατηγορίες</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Πρόσθεσε κατηγορίες στο όνομα του σεντουκιού. Τα αντίστοιχα αντικείμενα μπαίνουν εδώ πρώτα κατά την αυτόματη αποθήκευση.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Π.χ.</value>
+  </data>
 </root>

@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>კატეგორიები</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>სკივრის სახელს დაამატე კატეგორიები. ავტომატური შენახვისას შესაბამისი ნივთები ჯერ აქ მოხვდება.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>მაგ.</value>
+  </data>
 </root>

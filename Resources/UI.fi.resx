@@ -12,4 +12,10 @@
   <data name="ItemCategories" xml:space="preserve">
     <value>Kategoriat</value>
   </data>
+  <data name="CategoryButtonHelp" xml:space="preserve">
+    <value>Lisää kategorioita arkun nimeen. Vastaavat esineet siirtyvät tänne ensin automaattisessa varastoinnissa.</value>
+  </data>
+  <data name="ExamplePrefix" xml:space="preserve">
+    <value>Esim.</value>
+  </data>
 </root>
