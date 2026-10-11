@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.6
+
+- Added a category picker to the chest rename dialog.
+- Localized the interface in 35 languages.
+
 ## 1.0.5
 
 - Updated readme
