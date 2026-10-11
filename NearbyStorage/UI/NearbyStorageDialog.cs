@@ -16,6 +16,7 @@ namespace Landoria.NearbyStorage
         private static RectTransform _tooltip;
         private static TMP_InputField _filter;
         private static InventoryGui _gui;
+        private static string _uiLanguage;
         private static float _nextRefresh;
         private static int _category;
         private static string _fingerprint;
@@ -55,7 +56,8 @@ namespace Landoria.NearbyStorage
                 _nextRefresh = 0f;
                 return;
             }
-            if (_root == null || _gui != gui)
+            if (_root == null || _gui != gui ||
+                _uiLanguage != ModText.SelectedLanguage)
             {
                 Dispose();
                 Create(gui);
@@ -244,6 +246,7 @@ namespace Landoria.NearbyStorage
             _tooltipSources = null;
             _filter = null;
             _gui = null;
+            _uiLanguage = null;
             _fingerprint = null;
             _dirtyView = true;
             _hasNearbyItems = false;

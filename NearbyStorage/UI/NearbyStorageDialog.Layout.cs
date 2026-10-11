@@ -16,6 +16,7 @@ namespace Landoria.NearbyStorage
         private static void Create(InventoryGui gui)
         {
             _gui = gui;
+            _uiLanguage = ModText.SelectedLanguage;
             _category = -1;
             Transform parent = gui.m_inventoryRoot.parent != null ?
                 gui.m_inventoryRoot.parent : gui.transform;
