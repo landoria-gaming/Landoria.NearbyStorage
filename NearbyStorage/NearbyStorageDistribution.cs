@@ -45,7 +45,7 @@ namespace Landoria.NearbyStorage
         private static HashSet<string> CategoryWords(int category)
         {
             var words = new HashSet<string>();
-            foreach (string language in new[] { ModText.SelectedLanguage, "English", "French" })
+            foreach (string language in new[] { ModText.SelectedLanguage, "English" })
             {
                 words.UnionWith(Words(ModText.Category(category, language)));
                 AddAliases(words, ModText.CategoryAliases(category, language));
@@ -57,7 +57,7 @@ namespace Landoria.NearbyStorage
         private static HashSet<string> FamilyWords(int family)
         {
             var words = new HashSet<string>();
-            foreach (string language in new[] { ModText.SelectedLanguage, "English", "French" })
+            foreach (string language in new[] { ModText.SelectedLanguage, "English" })
             {
                 words.UnionWith(Words(NearbyStorageCategoryFamily.Label(family, language)));
                 AddAliases(words, NearbyStorageCategoryFamily.Aliases(family, language));
