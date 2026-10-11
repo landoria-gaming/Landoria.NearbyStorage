@@ -24,7 +24,8 @@ The mod follows Valheim's selected language. Its text is translated for every la
 
 ## Renaming containers
 
-- Press **Shift + E** while looking at a wooden, reinforced, or personal chest or a barrel to give it a name if you can open it.
+- Press **Shift + E** while looking at a wooden, reinforced, or personal chest, a barrel, an item stand, or an armor stand to give it a name when you have access.
+- On item stands, **Shift + E** opens renaming instead of changing the displayed item's orientation.
 
 ## Including or excluding containers
 
