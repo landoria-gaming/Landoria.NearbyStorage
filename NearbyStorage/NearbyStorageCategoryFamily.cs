@@ -24,6 +24,18 @@ namespace Landoria.NearbyStorage
             return ModText.CategoryText(FamilyKeys[family], ModText.SelectedLanguage);
         }
 
+        // Returns a family label in a requested game language.
+        internal static string Label(int family, string language)
+        {
+            return ModText.CategoryText(FamilyKeys[family], language);
+        }
+
+        // Returns hidden search aliases for a family in one language.
+        internal static string Aliases(int family, string language)
+        {
+            return ModText.Aliases(FamilyKeys[family], language);
+        }
+
         // Returns the family assigned to a category.
         internal static int For(int category)
         {

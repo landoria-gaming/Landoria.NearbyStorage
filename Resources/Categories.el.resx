@@ -93,7 +93,61 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Ειδικά είδη</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Πρώτη Ύλη</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Πολύτιμο αντικείμενο</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Φίλτρο</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Όπλο</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Ασπίδα</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>πανοπλίες</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Εργαλείο</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>βέλος</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Τρόπαιο</value>
+  </data>
+  <data name="CategoryRawFoodAliases" xml:space="preserve">
+    <value>Ωμό τρόφιμο</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Γιορτή</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Δορά και γούνα</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Πέτρες</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>πυροτέχνημα</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Σπόρος</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Μετάλλευμα και Μέταλλο</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Τρόφιμο και Ποτό</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Μάχη και Δραστηριότητα</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Ειδικό είδος</value>
   </data>
 </root>

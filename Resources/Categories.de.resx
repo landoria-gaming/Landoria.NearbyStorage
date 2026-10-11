@@ -93,7 +93,58 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Sonderposten</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Rohstoff</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Wertsache</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Zaubertrank</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Waffe</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Schild</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Rüstungen</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Werkzeug</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>Pfeil</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trophäe</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Festmahl</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Haut und Pelz</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Steine</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Feuerwerke</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Erz und Metall</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Schleimling-Bombe</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Essen und Getränk</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Kampf und Aktivität</value>
   </data>
 </root>

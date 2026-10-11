@@ -93,7 +93,67 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Articoli speciali</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Materia prima</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Oggetto di valore</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Pozione</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Arma</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Scudo</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Armature</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Accessorio</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Strumento</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>freccia</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofeo</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Banchetto</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Pelle e pelliccia</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Pietre</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Fuoco d'artificio</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Seme</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Minerale e metallo</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Bomba a blob</value>
+  </data>
+  <data name="FamilyEquipmentAliases" xml:space="preserve">
+    <value>Attrezzature</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Risorsa</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Cibo e bevanda</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Articolo speciale</value>
   </data>
 </root>

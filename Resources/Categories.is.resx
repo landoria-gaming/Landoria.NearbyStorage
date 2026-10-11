@@ -93,7 +93,43 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Sérstök atriði</value>
   </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Drykkur</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Brynjur</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>ör</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Veiðigripur</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Húð og skinn</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Steinar</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Flugeldur</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Málmgrýti og málmur</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob sprengja</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Auðlind</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Matur og drykkur</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Bardagi og athöfn</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Sérstakt atriði</value>
   </data>
 </root>

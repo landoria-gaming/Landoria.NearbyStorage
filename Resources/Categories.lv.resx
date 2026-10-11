@@ -93,7 +93,61 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Īpašas preces</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Izejviela</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Vērtslieta</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Ierocis</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Vairogs</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Bruņa</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Piederums</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Rīks</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>bulta</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofeja</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Āda un kažokāda</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Akmeņi</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Sēkla</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Rūda un metāls</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Lāses bumba</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Resurss</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Ēdiens un dzēriens</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Cīņa un aktivitāte</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Īpaša prece</value>
   </data>
 </root>

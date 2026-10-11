@@ -93,7 +93,55 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Особые предметы</value>
   </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Ценность</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Зелье</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Щит</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Брони</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Аксессуар</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Инструмент</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>стрела</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Пир</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Шкура и мех</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Камни</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Фейерверки</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Семя</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Руда и металл</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Бомба из сгустней</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ресурс</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Еда и напиток</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Особый предмет</value>
   </data>
 </root>

@@ -93,7 +93,64 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Erikoistuotteet</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Raaka-aine</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Arvoesine</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>juoma</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Ase</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Kilpi</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Panssarit</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Tarvike</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Työkalu</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>nuoli</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofee</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Juhla-ateria</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Nahka ja turkis</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Kivet</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>ilotulitukset</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Siemen</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Malmi ja metalli</value>
+  </data>
+  <data name="FamilyEquipmentAliases" xml:space="preserve">
+    <value>Laite</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Resurssi</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Ruoka ja juoma</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Erikoistuote</value>
   </data>
 </root>

@@ -93,7 +93,70 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Articole speciale</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Materie Primă</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Obiect de valoare</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Poțiune</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Armă</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Scut</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Armuri</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Accesoriu</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Instrument</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>săgeată</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofeu</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Festin</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Piele și blană</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Pietre</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Artificiu</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Sămânță</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Minereu și metal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Bombă blob</value>
+  </data>
+  <data name="FamilyEquipmentAliases" xml:space="preserve">
+    <value>Echipament</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Resursă</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Mâncare și băutură</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Luptă și activitate</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Articol special</value>
   </data>
 </root>

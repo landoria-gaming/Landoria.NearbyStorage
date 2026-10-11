@@ -93,7 +93,64 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Przedmioty specjalne</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Surowiec</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Kosztowność</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Mikstura</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Tarcza</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Zbroje</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Akcesorium</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Narzędzie</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>strzała</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofeum</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Uczta</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Skóra i futro</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Kamienie</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Fajerwerk</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Nasiono</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Ruda i metal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Bomba z flegmy</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Zasób</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Jedzenie i napój</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Walka i aktywności</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Przedmiot specjalny</value>
   </data>
 </root>

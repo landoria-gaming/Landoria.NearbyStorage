@@ -93,7 +93,52 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Специјални предмети</value>
   </data>
-  <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>Камење</value>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Сировина</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Драгоценост</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Напитак</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Штит</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Оклопи</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Алат</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>Стрелица</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofej</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>гозба</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Кожа и крзно</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Семена</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Руда и метал</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ресурс</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Храна и пића</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Борба и активност</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Специјалан предмет</value>
   </data>
 </root>

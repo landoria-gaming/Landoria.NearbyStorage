@@ -93,7 +93,61 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Специјални артикли</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Суровина</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Вредност</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Напивка</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Штит</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Оклопи</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Додаток</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Алатка</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>Стрелка</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Трофеи</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Празник</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Кожа и крзно</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Камења</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Семе</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Руда и метал</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Блоб бомба</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ресурс</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Храна и пијалок</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Борба и активност</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Специјален артикл</value>
   </data>
 </root>

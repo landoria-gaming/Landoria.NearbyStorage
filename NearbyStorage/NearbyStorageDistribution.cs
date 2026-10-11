@@ -17,11 +17,7 @@ namespace Landoria.NearbyStorage
             int category = NearbyStorageCategory.For(item);
             int family = NearbyStorageCategoryFamily.For(category);
             HashSet<string> categoryWords = CategoryWords(category);
-            var familyWords = new HashSet<string>();
-            foreach (string name in NearbyStorageCategoryFamily.Names(category))
-            {
-                familyWords.UnionWith(Words(name));
-            }
+            HashSet<string> familyWords = FamilyWords(family);
             var scores = new Dictionary<Container, int>();
             var familyScores = new Dictionary<Container, int>();
             var tiers = new Dictionary<Container, int>();
@@ -52,16 +48,26 @@ namespace Landoria.NearbyStorage
             foreach (string language in new[] { ModText.SelectedLanguage, "English", "French" })
             {
                 words.UnionWith(Words(ModText.Category(category, language)));
-                AddCategoryAliases(words, category, language);
+                AddAliases(words, ModText.CategoryAliases(category, language));
             }
             return words;
         }
 
-        // Adds search-only alias words from one translation entry.
-        private static void AddCategoryAliases(HashSet<string> words, int category,
-            string language)
+        // Combines visible family labels with hidden aliases for matching.
+        private static HashSet<string> FamilyWords(int family)
         {
-            string aliases = ModText.CategoryAliases(category, language);
+            var words = new HashSet<string>();
+            foreach (string language in new[] { ModText.SelectedLanguage, "English", "French" })
+            {
+                words.UnionWith(Words(NearbyStorageCategoryFamily.Label(family, language)));
+                AddAliases(words, NearbyStorageCategoryFamily.Aliases(family, language));
+            }
+            return words;
+        }
+
+        // Adds search-only alias words from a translated resource value.
+        private static void AddAliases(HashSet<string> words, string aliases)
+        {
             foreach (string alias in aliases.Split('|'))
             {
                 words.UnionWith(Words(alias));

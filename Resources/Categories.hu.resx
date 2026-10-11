@@ -93,7 +93,61 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Különleges tételek</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Nyersanyag</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Érték</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Főzet</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Fegyver</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Pajzs</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Páncélok</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Kiegészítő</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Eszköz</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>nyílvesszők</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trófea</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Lakoma</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Bőr és szőrme</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>Kődarabok|Kövek</value>
+    <value>Kődarabok</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Mag</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Érc és fém</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Erőforrás</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Étel és ital</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Harc és tevékenység</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Különleges tétel</value>
   </data>
 </root>

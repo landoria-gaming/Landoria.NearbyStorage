@@ -93,7 +93,58 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Speciale artikelen</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Grondstof</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Waardevol spul</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Drankje</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Wapen</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Schild</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Harnassen</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Accessoire</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>pijl</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofee</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Feest</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Huid en bont</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Stenen</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Zaad</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Erts en metaal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob-bom</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Hulpbron</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Gevecht en activiteit</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Speciaal artikel</value>
   </data>
 </root>

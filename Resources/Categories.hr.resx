@@ -93,7 +93,61 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Posebne stavke</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Sirovina</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Dragocjenost</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Napitak</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Štit</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>oklopi</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Alat</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>strelica</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofej</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Gozba</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Koža i krzno</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>Kamenje</value>
+    <value>Kameni</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Vatrometi</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>sjemenka</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Ruda i metal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob bomba</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Resurs</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Hrana i pića</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Borba i aktivnost</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Posebna stavka</value>
   </data>
 </root>

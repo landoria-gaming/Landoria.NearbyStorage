@@ -93,7 +93,43 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Spesielle gjenstander</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Råvare</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Verdisak</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>pil</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofe</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Festmåltider</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Hud og pelsverk</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Steiner</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Malm og metall</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob-bombe</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ressurs</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Kamp og aktivitet</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Spesiell gjenstand</value>
   </data>
 </root>

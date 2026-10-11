@@ -93,7 +93,55 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Specialartiklar</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Råvara</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Värdesak</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Sköld</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Rustningar</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>pil</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofé</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Festmåltid</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Hud och päls</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Stenar</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Fyrverkeri</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Frö</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Malm och metall</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blobbomb</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Resurs</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Strid och aktivitet</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Specialartikel</value>
   </data>
 </root>

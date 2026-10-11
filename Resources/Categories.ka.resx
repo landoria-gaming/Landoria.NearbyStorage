@@ -93,7 +93,58 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>სპეციალური ნივთები</value>
   </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>ფასეულობა</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>წამალი</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>ფარი</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>ჯავშნები</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>აქსესუარი</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>ხელსაწყო</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>ისარი</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>ჯილდო</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>დღესასწაული</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>ქვები</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>ფეიერვერკები</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>თესლები</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>მადანი და ლითონი</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob ბომბი</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>რესურსი</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>საკვები და სასმელი</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>ბრძოლა და აქტივობა</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>სპეციალური ნივთი</value>
   </data>
 </root>

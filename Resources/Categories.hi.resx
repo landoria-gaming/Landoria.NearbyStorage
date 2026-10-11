@@ -93,7 +93,19 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>विशेष वस्तुएँ</value>
   </data>
-  <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>पत्थर</value>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>मूल्यवान वस्तु</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>औषधियाँ</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>ट्राफी</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>युद्ध और गतिविधि</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>विशेष वस्तु</value>
   </data>
 </root>

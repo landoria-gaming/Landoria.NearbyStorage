@@ -93,7 +93,67 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Specialūs daiktai</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Žaliava</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Vertybė</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Ginklas</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Skydas</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Šarvas</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Priedas</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Įrankis</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>strėlė</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofėjus</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Puota</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Kailis</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Akmenys</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Fejerverkas</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Sėkla</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Rūda ir metalas</value>
+  </data>
+  <data name="CategoryClothingAliases" xml:space="preserve">
+    <value>Drabužis</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Išteklius</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Maistas ir gėrimas</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Kova ir veiklos</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Specialus daiktas</value>
   </data>
 </root>

@@ -93,7 +93,46 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Særlige genstande</value>
   </data>
-  <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>Sten</value>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Råvare</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Værdigenstand</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Værktøj</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>pil</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofæ</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Festmåltid</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Hud og Pels</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Malm og metal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob bombe</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Mad og drikkevare</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Kamp og aktivitet</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Særlig genstand</value>
   </data>
 </root>

@@ -93,7 +93,49 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Спеціальні предмети</value>
   </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>цінна річ</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Щит</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Броні</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Аксесуар</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Інструмент</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>стріла</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Трофей</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Шкура та хутро</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Камені</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Феєрверки</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Руда і метал</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Бомба з бульбаків</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ресурс</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Їжа та напій</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Спеціальний предмет</value>
   </data>
 </root>

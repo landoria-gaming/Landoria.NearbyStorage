@@ -95,6 +95,81 @@
     <value>Objets spéciaux</value>
   </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>Pierres|Roches</value>
+    <value>Pierres</value>
+  </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Matière première</value>
+  </data>
+  <data name="CategoryCookedFoodAliases" xml:space="preserve">
+    <value>Plat cuisiné</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Arme</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Bouclier</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Armure</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Accessoire</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Outil</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>Flèche</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trophée</value>
+  </data>
+  <data name="CategoryRawMeatAliases" xml:space="preserve">
+    <value>Viandes crues</value>
+  </data>
+  <data name="CategoryRawFoodAliases" xml:space="preserve">
+    <value>Aliment cru</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Festin</value>
+  </data>
+  <data name="CategoryCookedMeatAliases" xml:space="preserve">
+    <value>Viandes cuites</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Peau et fourrure</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Feu d'artifice</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Graine</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Minerai et métal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Bombe de blob</value>
+  </data>
+  <data name="CategoryClothingAliases" xml:space="preserve">
+    <value>Vêtement</value>
+  </data>
+  <data name="FamilyEquipmentAliases" xml:space="preserve">
+    <value>Équipements</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ressource</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Nourriture et boisson</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Combat et activité</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Objet spécial</value>
   </data>
 </root>

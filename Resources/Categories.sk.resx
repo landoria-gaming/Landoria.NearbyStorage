@@ -93,7 +93,61 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Špeciálne položky</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Surovina</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Cennosť</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Elixír</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Zbraň</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Štít</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Nástroj</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>šípka</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trofej</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Sviatok</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Koža a kožušina</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Kamene</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Ohňostroj</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Semeno</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Ruda a kov</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob bomba</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Zdroj</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Jedlo a nápoj</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Boj a aktivita</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Špeciálna položka</value>
   </data>
 </root>

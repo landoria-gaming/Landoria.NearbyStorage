@@ -93,7 +93,64 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Специални предмети</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Суровина</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Ценност</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>отвара</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>оръжие</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Щит</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Брони</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Аксесоар</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Инструмент</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>стрела</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Пир</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Кожа</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Камъни</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Фойерверк</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>семе</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Руда</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob бомба</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Ресурс</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Храна и напитка</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Битка и дейност</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Специален предмет</value>
   </data>
 </root>

@@ -93,7 +93,67 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>Özel Ürünler</value>
   </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Hammadde</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Değerli eşya</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>İksir</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Silah</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Kalkan</value>
+  </data>
+  <data name="CategoryArmorAliases" xml:space="preserve">
+    <value>Zırhlar</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Aksesuar</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Araç</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>oklar</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Av Ganimeti</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Ziyafet</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Post ve Kürk</value>
+  </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
     <value>Taşlar</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>havai fişekler</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Tohum</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Cevher ve Metal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob bombası</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Kaynak</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Yiyecek ve İçecek</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Mücadele ve Faaliyet</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Özel Ürün</value>
   </data>
 </root>

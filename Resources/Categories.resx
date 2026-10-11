@@ -94,6 +94,63 @@
     <value>Special Items</value>
   </data>
   <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>Stones|Rocks</value>
+    <value>Stones</value>
+  </data>
+  <data name="CategoryRawMaterialsAliases" xml:space="preserve">
+    <value>Raw Material</value>
+  </data>
+  <data name="CategoryValuablesAliases" xml:space="preserve">
+    <value>Valuable</value>
+  </data>
+  <data name="CategoryPotionsAliases" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+  <data name="CategoryWeaponsAliases" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+  <data name="CategoryShieldsAliases" xml:space="preserve">
+    <value>Shield</value>
+  </data>
+  <data name="CategoryAccessoriesAliases" xml:space="preserve">
+    <value>Accessory</value>
+  </data>
+  <data name="CategoryToolsAliases" xml:space="preserve">
+    <value>Tool</value>
+  </data>
+  <data name="CategoryArrowsAliases" xml:space="preserve">
+    <value>Arrow</value>
+  </data>
+  <data name="CategoryTrophiesAliases" xml:space="preserve">
+    <value>Trophy</value>
+  </data>
+  <data name="CategoryFeastsAliases" xml:space="preserve">
+    <value>Feast</value>
+  </data>
+  <data name="CategoryHidesAndFursAliases" xml:space="preserve">
+    <value>Hide and Fur</value>
+  </data>
+  <data name="CategoryFireworksAliases" xml:space="preserve">
+    <value>Firework</value>
+  </data>
+  <data name="CategorySeedsAliases" xml:space="preserve">
+    <value>Seed</value>
+  </data>
+  <data name="CategoryOresAndMetalsAliases" xml:space="preserve">
+    <value>Ore and Metal</value>
+  </data>
+  <data name="CategoryBlobBombsAliases" xml:space="preserve">
+    <value>Blob Bomb</value>
+  </data>
+  <data name="FamilyResourcesAliases" xml:space="preserve">
+    <value>Resource</value>
+  </data>
+  <data name="FamilyFoodAndDrinksAliases" xml:space="preserve">
+    <value>Food and Drink</value>
+  </data>
+  <data name="FamilyCombatAndActivitiesAliases" xml:space="preserve">
+    <value>Combat and Activity</value>
+  </data>
+  <data name="FamilySpecialItemsAliases" xml:space="preserve">
+    <value>Special Item</value>
   </data>
 </root>

@@ -73,8 +73,14 @@ namespace Landoria.NearbyStorage
         // Returns hidden search aliases for a category in one language.
         internal static string CategoryAliases(int index, string language)
         {
+            return Aliases(CategoryKeys[index], language);
+        }
+
+        // Returns hidden aliases for any category or family resource key.
+        internal static string Aliases(string resourceKey, string language)
+        {
             string name = "Landoria.NearbyStorage.Resources.Categories";
-            string key = CategoryKeys[index] + "Aliases";
+            string key = resourceKey + "Aliases";
             string english = Manager(name).GetString(key, CultureInfo.InvariantCulture);
             if (!LanguageCodes.TryGetValue(language, out string code))
             {

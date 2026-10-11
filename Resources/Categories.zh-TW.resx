@@ -93,7 +93,4 @@
   <data name="FamilySpecialItems" xml:space="preserve">
     <value>特殊物品</value>
   </data>
-  <data name="CategoryStoneAliases" xml:space="preserve">
-    <value>石塊</value>
-  </data>
 </root>
