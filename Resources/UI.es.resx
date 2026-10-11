@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>Ej.</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Objetos cercanos</value>
+  </data>
 </root>

@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>Пр</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Предмети наблизо</value>
+  </data>
 </root>

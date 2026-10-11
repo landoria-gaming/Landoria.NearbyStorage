@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>Pvz.</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Netoliese esantys daiktai</value>
+  </data>
 </root>

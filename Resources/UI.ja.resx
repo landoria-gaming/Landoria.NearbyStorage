@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>例</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>近くのアイテム</value>
+  </data>
 </root>

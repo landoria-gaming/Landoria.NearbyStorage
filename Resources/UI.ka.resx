@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>მაგ.</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>ახლომდებარე ნივთები</value>
+  </data>
 </root>

@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>उदा.</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>आस-पास की वस्तुएँ</value>
+  </data>
 </root>

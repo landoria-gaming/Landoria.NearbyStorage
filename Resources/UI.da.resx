@@ -18,4 +18,7 @@
   <data name="ExamplePrefix" xml:space="preserve">
     <value>F.eks.</value>
   </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Genstande i nærheden</value>
+  </data>
 </root>

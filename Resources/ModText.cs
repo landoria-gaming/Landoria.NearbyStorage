@@ -8,7 +8,8 @@ namespace Landoria.NearbyStorage
     // Reads embedded translations for the selected Valheim language.
     internal static class ModText
     {
-        internal const string ModName = "Nearby Storage";
+        // Returns the localized name shown in the panel and chest hints.
+        internal static string ModName => Get("ModName");
         private static readonly Dictionary<string, string> LanguageCodes =
             new Dictionary<string, string>(StringComparer.Ordinal)
         {
