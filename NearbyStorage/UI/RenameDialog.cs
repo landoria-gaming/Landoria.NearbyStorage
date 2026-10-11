@@ -31,7 +31,7 @@ namespace Landoria.NearbyStorage
         private static void RequestText(TextInput __instance, TextReceiver sign)
         {
             if (_owner != __instance) { Reset(__instance); }
-            bool ours = sign is ChestRename || sign is StandRename;
+            bool ours = sign is ChestRename;
             if (ours && _panel == null) { Create(__instance); }
             if (_panel == null) { return; }
             if (ours) { SetCategoryButtonText(); }
