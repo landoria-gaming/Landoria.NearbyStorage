@@ -51,10 +51,8 @@ Settings are stored in `Landoria.NearbyStorage.cfg` and reload while the game is
 
 ![Nearby Storage in Valheim](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/ad279bd89d9ed6ae92f2dfa76952582ae06d065c/Assets/NearbyStorage.gif)
 
+![Renaming a container with category suggestions](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/main/Assets/renaming.gif)
+
 ## Contact
 
 Report bugs through [GitHub Issues](https://github.com/landoria-gaming/Landoria.NearbyStorage/issues).
-
-## Renaming preview
-
-![Renaming a container with category suggestions](https://raw.githubusercontent.com/landoria-gaming/Landoria.NearbyStorage/main/Assets/renaming.gif)
