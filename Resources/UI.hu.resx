@@ -9,4 +9,7 @@
   <data name="Filter" xml:space="preserve">
     <value>SZŰRÉS</value>
   </data>
+  <data name="ItemCategories" xml:space="preserve">
+    <value>Kategóriák</value>
+  </data>
 </root>

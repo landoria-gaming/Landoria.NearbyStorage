@@ -9,4 +9,7 @@
   <data name="Filter" xml:space="preserve">
     <value>SUODATIN</value>
   </data>
+  <data name="ItemCategories" xml:space="preserve">
+    <value>Kategoriat</value>
+  </data>
 </root>

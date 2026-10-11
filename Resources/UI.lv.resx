@@ -9,4 +9,7 @@
   <data name="Filter" xml:space="preserve">
     <value>FILTRA</value>
   </data>
+  <data name="ItemCategories" xml:space="preserve">
+    <value>Kategorijas</value>
+  </data>
 </root>

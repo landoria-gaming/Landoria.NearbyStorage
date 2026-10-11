@@ -16,6 +16,14 @@ namespace Landoria.NearbyStorage
             "FamilyCombatAndActivities", "FamilySpecialItems"
         };
 
+        internal static int Count => FamilyKeys.Length;
+
+        // Returns a family label in the active game language.
+        internal static string Label(int family)
+        {
+            return ModText.CategoryText(FamilyKeys[family], ModText.SelectedLanguage);
+        }
+
         // Returns the family assigned to a category.
         internal static int For(int category)
         {
